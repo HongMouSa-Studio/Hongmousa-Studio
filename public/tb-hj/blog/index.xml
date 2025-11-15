@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blogs on 芳芼莎工作室 HongMouSa Studio</title>
+    <link>http://localhost:1313/tb-hj/blog/</link>
+    <description>Recent content in Blogs on 芳芼莎工作室 HongMouSa Studio</description>
+    <generator>Hugo</generator>
+    <language>tb-hj</language>
+    <atom:link href="http://localhost:1313/tb-hj/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>http://localhost:1313/tb-hj/blog/%E5%8D%9C%E5%AF%AB%E7%9C%81/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tb-hj/blog/%E5%8D%9C%E5%AF%AB%E7%9C%81/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

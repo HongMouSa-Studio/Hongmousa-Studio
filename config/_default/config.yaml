@@ -1,0 +1,35 @@
+baseURL: "http://localhost:1313/"
+languageCode: "tb-poj"
+title: "芳芼莎工作室 HongMouSa Studio"
+theme: "roadster"   # Ē-tàng ōaⁿ ka-tī kah-ì ê chú-tê-miâ
+defaultContentLanguage: "tb-poj"
+enableRobotsTXT: true
+pagination.pagerSize: 10
+
+# Hugo iōng-lâi chhú-lí CSS、JS (Iōng-lâi phòe-ha̍p Tailwind)
+assetDir: "assets"
+staticDir: ["static"]
+
+# Mô͘-pán soàn-jiám siat-tēng
+markup:
+  goldmark:
+    renderer:
+      unsafe: true               # Ún-chún HTML (Lī-piān siá Blog)
+  tableOfContents:
+    startLevel: 2
+    endLevel: 4
+
+languages:
+  tb-poj:
+    languageName: "Tâi-bûn (Pe̍h-ōe-jī)"
+    contentDir: "content/tb-poj"
+    weight: 1
+  tb-hj:
+    languageName: "台文（漢字）"
+    contentDir: "content/tb-hj"
+    weight: 2
+  en:
+    languageName: "English"
+    contentDir: "content/en"
+    weight: 3
+
