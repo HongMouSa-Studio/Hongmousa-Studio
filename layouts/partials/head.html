@@ -1,0 +1,20 @@
+<!-- CUSTOM HEAD ACTIVE -->
+
+{{- partial "meta.html" . -}}
+
+<!-- 原本主題的 CSS -->
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/v2-styles.css">
+
+<!-- Google Fonts -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+<!-- Custom CSS -->
+{{- if .Site.Params.custom_css }}
+  {{- range .Site.Params.custom_css }}
+    <link rel="stylesheet" href="{{ . | relURL }}">
+  {{- end }}
+{{- end }}
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500&family=Noto+Serif+TC:wght@400;700&display=swap" rel="stylesheet">

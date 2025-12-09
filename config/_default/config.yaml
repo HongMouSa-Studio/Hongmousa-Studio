@@ -6,8 +6,9 @@ defaultContentLanguage: "tb-poj"
 enableRobotsTXT: true
 pagination.pagerSize: 10
 
-# params
-customCS: ["css/main.css"]
+params:
+  custom_css:
+    - "css/custom.css"
 
 # Hugo iōng-lâi chhú-lí CSS、JS (Iōng-lâi phòe-ha̍p Tailwind)
 assetDir: "assets"
