@@ -1,7 +1,6 @@
 baseURL: "http://localhost:1313/"
 languageCode: "tb-poj"
 title: "芳芼莎工作室 HongMouSa Studio"
-theme: ""   # Ē-tàng ōaⁿ ka-tī kah-ì ê chú-tê-miâ
 defaultContentLanguage: "tb-poj"
 enableRobotsTXT: true
 pagination.pagerSize: 10
