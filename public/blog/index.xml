@@ -6,13 +6,14 @@
     <description>Recent content in Blogs on 芳芼莎工作室 HongMouSa Studio</description>
     <generator>Hugo</generator>
     <language>tb-poj</language>
+    <lastBuildDate>Fri, 07 Nov 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/blog/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title></title>
+      <title>Hello World</title>
       <link>http://localhost:1313/blog/beh-si%C3%A1-si%C3%A1%E2%81%BF/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 07 Nov 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/blog/beh-si%C3%A1-si%C3%A1%E2%81%BF/</guid>
-      <description></description>
+      <description>&lt;p&gt;Tâi-bûn POJ&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

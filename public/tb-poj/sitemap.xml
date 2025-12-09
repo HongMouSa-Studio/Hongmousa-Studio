@@ -2,26 +2,8 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="tb-hj"
-                href="http://localhost:1313/tb-hj/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="http://localhost:1313/en/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="tb-poj"
-                href="http://localhost:1313/"
-                />
-  </url><url>
-    <loc>http://localhost:1313/blog/beh-si%C3%A1-si%C3%A1%E2%81%BF/</loc>
-  </url><url>
     <loc>http://localhost:1313/blog/</loc>
+    <lastmod>2025-11-07T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="tb-hj"
@@ -36,6 +18,27 @@
                 rel="alternate"
                 hreflang="tb-poj"
                 href="http://localhost:1313/blog/"
+                />
+  </url><url>
+    <loc>http://localhost:1313/blog/beh-si%C3%A1-si%C3%A1%E2%81%BF/</loc>
+    <lastmod>2025-11-07T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/</loc>
+    <lastmod>2025-11-07T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="tb-hj"
+                href="http://localhost:1313/tb-hj/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://localhost:1313/en/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="tb-poj"
+                href="http://localhost:1313/"
                 />
   </url><url>
     <loc>http://localhost:1313/categories/</loc>

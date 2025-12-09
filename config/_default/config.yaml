@@ -1,10 +1,13 @@
 baseURL: "http://localhost:1313/"
 languageCode: "tb-poj"
 title: "芳芼莎工作室 HongMouSa Studio"
-theme: "roadster"   # Ē-tàng ōaⁿ ka-tī kah-ì ê chú-tê-miâ
+theme: ""   # Ē-tàng ōaⁿ ka-tī kah-ì ê chú-tê-miâ
 defaultContentLanguage: "tb-poj"
 enableRobotsTXT: true
 pagination.pagerSize: 10
+
+# params
+customCS: ["css/main.css"]
 
 # Hugo iōng-lâi chhú-lí CSS、JS (Iōng-lâi phòe-ha̍p Tailwind)
 assetDir: "assets"
