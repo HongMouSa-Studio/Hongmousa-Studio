@@ -9,15 +9,14 @@ params:
   custom_css:
     - "css/custom.css"
 
-# Hugo iōng-lâi chhú-lí CSS、JS (Iōng-lâi phòe-ha̍p Tailwind)
+# CSS / JS settings (Tailwind)
 assetDir: "assets"
 staticDir: ["static"]
 
-# Mô͘-pán soàn-jiám siat-tēng
 markup:
   goldmark:
     renderer:
-      unsafe: true               # Ún-chún HTML (Lī-piān siá Blog)
+      unsafe: true               # Enable HTML in Markdown (Blog)
   tableOfContents:
     startLevel: 2
     endLevel: 4
@@ -25,14 +24,14 @@ markup:
 languages:
   tb-poj:
     languageName: "Tâi-bûn (Pe̍h-ōe-jī)"
-    contentDir: "content/tb-poj"
+    contentDir: "tb-poj"
     weight: 1
   tb-hj:
     languageName: "台文（漢字）"
-    contentDir: "content/tb-hj"
+    contentDir: "tb-hj"
     weight: 2
   en:
     languageName: "English"
-    contentDir: "content/en"
+    contentDir: "en"
     weight: 3
 
