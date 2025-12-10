@@ -1,0 +1,3 @@
+.hero-gradient-text {
+  @apply bg-gradient-to-r from-indigo-500 to-pink-500 text-transparent bg-clip-text;
+}

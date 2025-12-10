@@ -1,16 +1,15 @@
-<!-- CUSTOM HEAD ACTIVE -->
+<title>{{ .Title }}</title>
 
-{{- partial "meta.html" . -}}
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- Google Fonts -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+{{ with .Description }}
+<meta name="description" content="{{ . }}">
+{{ end }}
 
-<!-- Custom CSS -->
-{{- if .Site.Params.custom_css }}
-  {{- range .Site.Params.custom_css }}
-    <link rel="stylesheet" href="{{ . | relURL }}">
-  {{- end }}
-{{- end }}
+{{/* 1. Tailwind main stylesheet */}}
+{{ $styles := resources.Get "css/tailwind.css" | postCSS }}
+<link rel="stylesheet" href="{{ $styles.RelPermalink }}">
 
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500&family=Noto+Serif+TC:wght@400;700&display=swap" rel="stylesheet">
+{{/* 2. Custom CSS MUST come after Tailwind */}}
+<link rel="stylesheet" href="{{ "css/custom.css" | relURL }}">
+

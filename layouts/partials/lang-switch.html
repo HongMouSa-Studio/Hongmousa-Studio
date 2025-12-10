@@ -1,0 +1,14 @@
+<div class="relative group">
+<button class="px-3 py-1 rounded-md border hover:bg-gray-100 dark:hover:bg-gray-800">
+🌐 {{ .Site.Language.Lang | upper }}
+</button>
+
+
+<div class="absolute right-0 mt-2 w-28 bg-white dark:bg-gray-800 border rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition">
+{{ range .Site.Languages }}
+<a href="/{{ .Lang }}/" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
+{{ .LanguageName }}
+</a>
+{{ end }}
+</div>
+</div>

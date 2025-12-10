@@ -1,0 +1,25 @@
+<script>
+(function() {
+  // Nā í-keng ū cookie, to̍h bián redirect (pī-bián ta̍k pái lóng thiàu)
+  if (document.cookie.includes("preferred_lang=")) {
+    return;
+  }
+
+  // Bô cookie ê lâng-kheh ē chiàu hē-thóng gí-giân khiâ
+  const userLang = (navigator.language || navigator.userLanguage).toLowerCase();
+
+  const isChinese = userLang.startsWith("zh");
+  const isJapanese = userLang.startsWith("ja");
+
+  // Phòaⁿ-toàn ài chhōa khì tó 1 ê gí-giân
+  if (isChinese || isJapanese) {
+    if (!window.location.pathname.startsWith("/tb-hj/")) {
+      window.location.replace("/tb-hj/");
+    }
+  } else {
+    if (!window.location.pathname.startsWith("/en/")) {
+      window.location.replace("/en/");
+    }
+  }
+})();
+</script>

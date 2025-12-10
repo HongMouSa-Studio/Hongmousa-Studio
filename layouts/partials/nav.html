@@ -1,3 +1,13 @@
-<nav> ... </nav>
+<nav>
+  <a href="{{ "/" | relLangURL }}">Home</a>
+  <a href="{{ "blog/" | relLangURL }}">Blog</a>
+</nav>
 
-<a href="{{ "/blog/" | relURL }}">Blog</a>
+<nav class="flex items-center space-x-6">
+<a href="/" class="hover:text-indigo-600">{{ i18n "nav_home" }}</a>
+<a href="/about/" class="hover:text-indigo-600">{{ i18n "nav_about" }}</a>
+<a href="/blog/" class="hover:text-indigo-600">{{ i18n "nav_blog" }}</a>
+
+
+{{ partial "lang-switch.html" . }}
+</nav>

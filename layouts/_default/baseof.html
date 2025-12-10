@@ -1,15 +1,41 @@
 <!DOCTYPE html>
-<html lang="tb-poj">
-  <head>
-    <meta charset="utf-8">
-    <title>{{ .Title }}</title>
+<html lang="{{ .Site.Language.Lang }}">
+<head>
+  <meta charset="utf-8">
+  <title>{{ .Title }}</title>
 
-    <link rel="stylesheet" href="{{ "css/custom.css" | relURL }}"> 
-  </head>
+  {{ partial "head.html" . }}
 
-  <body>
-    {{ partial "nav.html" . }}
+  {{ $styles := resources.Get "css/tailwind.css" | postCSS }}
+  <link rel="stylesheet" href="{{ $styles.Permalink }}">
+</head>
+
+<body>
+  {{ partial "header.html" . }}
+  {{ partial "hero.html" . }}
+  {{ partial "nav.html" . }}
+
+  <main>
     {{ block "main" . }}{{ end }}
-    {{ partial "footer.html" . }}
-  </body>
+  </main>
+
+  {{ partial "footer.html" . }}
+
+  {{ partial "lang-redirect.html" . }}
+
+  <script>
+    (function() {
+      const cookie = document.cookie
+        .split('; ')
+        .find(row => row.startsWith('preferred_lang='));
+
+      if (cookie) {
+        const lang = cookie.split('=')[1];
+        if (!window.location.pathname.startsWith("/" + lang + "/")) {
+          window.location.replace("/" + lang + "/");
+        }
+      }
+    })();
+  </script>
+</body>
 </html>

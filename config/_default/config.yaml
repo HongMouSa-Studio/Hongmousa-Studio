@@ -1,8 +1,11 @@
 baseURL: "http://localhost:1313/"
 languageCode: "tb-poj"
-title: "芳芼莎工作室 HongMouSa Studio"
+title: "Hong-mô͘-sa Kang-chok-sek"
 defaultContentLanguage: "tb-poj"
+defaultContentLanguageInSubdir: true      # Hián-sī ī-siat gí-giân ê phiau-thâu
+enableInlineShortcodes: true
 enableRobotsTXT: true
+cleanDestinationDir: true     #Hugo tī build chìn-chêng chū-tōng chheng public
 pagination.pagerSize: 10
 
 params:
@@ -12,6 +15,15 @@ params:
 # CSS / JS settings (Tailwind)
 assetDir: "assets"
 staticDir: ["static"]
+
+# PostCSS lō͘-kèng (Tailwind)
+build:
+  writeStats: true
+  postCSS:
+    use:
+      - postcss
+    includePaths:
+      - "node_modules"
 
 markup:
   goldmark:
@@ -24,14 +36,25 @@ markup:
 languages:
   tb-poj:
     languageName: "Tâi-bûn (Pe̍h-ōe-jī)"
-    contentDir: "tb-poj"
     weight: 1
+    contentDir: "content/tb-poj"
+    title: "Hong-mô͘-sa Kang-chok-sek"
+    params:
+      intro: "Ta̍k-ke hó! Hoan-gêng lâi kàu Hong-mô͘-sa Kang-chok-sek"
+
   tb-hj:
     languageName: "台文（漢字）"
-    contentDir: "tb-hj"
     weight: 2
+    contentDir: "content/tb-hj"
+    title: "芳芼莎工作室"
+    params:
+      intro: "大家好！歡迎來到芳芼莎工作室"
+
   en:
     languageName: "English"
-    contentDir: "en"
     weight: 3
+    contentDir: "content/en"
+    title: "HongMouSa Studio"
+    params:
+      intro: "Welcome to HongMouSa Studio!"
 
