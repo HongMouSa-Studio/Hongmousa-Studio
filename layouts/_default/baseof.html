@@ -25,17 +25,25 @@
 
   <script>
     (function() {
+      // Nā sī localhost：1313, to̍h mài chò redirect (Pī-bián loop)
+      if (location.host.includes("localhost")) return;
+      
       const cookie = document.cookie
-        .split('; ')
-        .find(row => row.startsWith('preferred_lang='));
+        .split("; ")
+        .find(row => row.startsWith("preferred_lang="));
 
-      if (cookie) {
-        const lang = cookie.split('=')[1];
-        if (!window.location.pathname.startsWith("/" + lang + "/")) {
-          window.location.replace("/" + lang + "/");
-        }
+      if (!cookie) return;
+
+      const lang = cookie.split("=")[1];
+
+      // Cloudflare Pages su-iàu iōng siong-tùi lō͘-kèng chhú-lí
+      const desiredPath = "/" + lang + "/";
+
+      if (!location.pathname.startsWith(desiredPath)) {
+        location.href = desiredPath;
       }
-    })();
-  </script>
+})();
+</script>
+      
 </body>
 </html>
