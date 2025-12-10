@@ -1,15 +1,28 @@
-<title>{{ .Title }}</title>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ if .Title }}{{ .Title }} | {{ site.Title }}{{ else }}{{ site.Title }}{{ end }}</title>
 
-{{ with .Description }}
-<meta name="description" content="{{ . }}">
-{{ end }}
+  {{ with .Description }}
+    <meta name="description" content="{{ . }}">
+  {{ end }}
 
-{{/* 1. Tailwind main stylesheet */}}
-{{ $styles := resources.Get "css/tailwind.css" | postCSS }}
-<link rel="stylesheet" href="{{ $styles.RelPermalink }}">
+  {{/* --- Tailwind CSS --- */}}
+  {{ $styles := resources.Get "css/tailwind.css" | postCSS | fingerprint }}
+  <link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}" />
 
-{{/* 2. Custom CSS MUST come after Tailwind */}}
-<link rel="stylesheet" href="{{ "css/custom.css" | relURL }}">
+  {{/* --- Custom CSS (site overrides) --- */}}
+  <link rel="stylesheet" href="{{ "css/custom.css" | absURL }}">
 
+  {{/* --- Canonical URL --- */}}
+  <link rel="canonical" href="{{ .Permalink | absURL }}" />
+
+  {{/* --- Basic OpenGraph SEO --- */}}
+  <meta property="og:title" content="{{ .Title }}">
+  {{ with .Description }}
+    <meta property="og:description" content="{{ . }}">
+  {{ end }}
+  <meta property="og:url" content="{{ .Permalink | absURL }}">
+  <meta property="og:type" content="website">
+</head>

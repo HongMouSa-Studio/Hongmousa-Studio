@@ -1,0 +1,24 @@
+tb-poj:
+    languageName: "Tâi-bûn (Pe̍h-ōe-jī)"
+    weight: 1
+    contentDir: "content/tb-poj"
+    title: "Hong-mô͘-sa Kang-chok-sek"
+    params:
+      intro: "Ta̍k-ke hó! Hoan-gêng lâi kàu Hong-mô͘-sa Kang-chok-sek"
+
+tb-hj:
+    languageName: "台文（漢字）"
+    weight: 2
+    contentDir: "content/tb-hj"
+    title: "芳芼莎工作室"
+    params:
+      intro: "大家好！歡迎來到芳芼莎工作室"
+
+en:
+    languageName: "English"
+    weight: 3
+    contentDir: "content/en"
+    title: "HongMouSa Studio"
+    params:
+      intro: "Welcome to HongMouSa Studio!"
+

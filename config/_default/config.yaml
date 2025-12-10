@@ -1,16 +1,39 @@
-baseURL: "https://hongmousa-studio.pages.dev/"
+baseURL: "/"
 languageCode: "tb-poj"
 title: "Hong-mô͘-sa Kang-chok-sek"
+
+# Ī-siat gí-giân
 defaultContentLanguage: "tb-poj"
 defaultContentLanguageInSubdir: true      # Hián-sī ī-siat gí-giân ê phiau-thâu
 
-# Hugo ē tī Cloudflare Pages chū-tōng production config
-environment: "production"
+# Siong-tùi URL (pī-bián localhost)
+# Cloudflare Pages ài iōng absolute URL (absURL)
+relativeURLs: false
+canonifyURLs: true
+
+# Sitemap siat-tēng
+sitemap:
+  changefreq: "monthly"
+  priority: 0.5
+  filename: "sitemap.xml"
+
+privacy:
+  googleAnalytics:
+    anonymizeIP: true
+
+# Kái-siān Hugo su-chhut
+disableKinds:
+  - taxonomy
+
+# Asset koán-sòaⁿ
+minify:
+  enabled: true
 
 enableInlineShortcodes: true
 enableRobotsTXT: true
 cleanDestinationDir: true     #Hugo tī build chìn-chêng chū-tōng chheng public
-pagination.pagerSize: 10
+pagination:
+  pagerSize: 10
 
 params:
   custom_css:
@@ -22,7 +45,7 @@ staticDir: ["static"]
 
 # PostCSS lō͘-kèng (Tailwind)
 build:
-  writeStats: true
+  writeStats: false
   postCSS:
     use:
       - postcss
@@ -36,29 +59,3 @@ markup:
   tableOfContents:
     startLevel: 2
     endLevel: 4
-
-languages:
-  tb-poj:
-    languageName: "Tâi-bûn (Pe̍h-ōe-jī)"
-    weight: 1
-    contentDir: "content/tb-poj"
-    title: "Hong-mô͘-sa Kang-chok-sek"
-    params:
-      intro: "Ta̍k-ke hó! Hoan-gêng lâi kàu Hong-mô͘-sa Kang-chok-sek"
-
-  tb-hj:
-    languageName: "台文（漢字）"
-    weight: 2
-    contentDir: "content/tb-hj"
-    title: "芳芼莎工作室"
-    params:
-      intro: "大家好！歡迎來到芳芼莎工作室"
-
-  en:
-    languageName: "English"
-    weight: 3
-    contentDir: "content/en"
-    title: "HongMouSa Studio"
-    params:
-      intro: "Welcome to HongMouSa Studio!"
-

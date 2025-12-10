@@ -1,36 +1,42 @@
 <script>
 (function () {
-  // Pún-tē khai-hoat khoân-kéng kim-iōng redirect
-  if (location.host.includes("localhost")) return;
+  // Chit tōaⁿ kan-na hū-chek tī production chū-tōng/cookie redirect, m̄-kú kan-na ē tùi "sìn-jīm ê domain" tōng-chok.
+  // Kā beh tī production bīn-téng chiap-siū ê redirect ê domain khē ji̍p pe̍h-miâ-toaⁿ:
+  const allowedHosts = [
+    "hongmousa-studio.pages.dev",
+    "www.hongmousa-studio.pages.dev" // Nā ū su-iàu
+  ];
+  
+  // Localhost → Mài redirect
+  if (location.hostname === "localhost") return;
 
-  // cookie gí-giân
-  const cookie = document.cookie
-    .split("; ")
-    .find(r => r.startsWith("preferred_lang="));
+  // Production domain ì-gōa → Mài redirect
+  if (!allowedHosts.includes(location.hostname)) return;
 
-  // Nā lâng-kheh bat siat-tēng--kòe to̍h tòe cookie
+  // Kiám-cha cookie
+  const cookie = document.cookie.split("; ").find(r => r.startsWith("preferred_lang="));
+ 
   if (cookie) {
     const lang = cookie.split("=")[1];
     const desired = "/" + lang + "/";
 
-    if (!location.pathname.startsWith(desired)) {
-      location.href = desired;
+    // Kan-na redirect root pages (pī-bián kan-jiáu lāi-ia̍h)
+    if (location.pathname === "/" || location.pathname === "") {
+      if (!location.pathname.startsWith(desired)) {
+        location.href = desired;
+      }
     }
-    return; // cookie í-keng chhú-lí soah
+    return;
   }
 
-  // Chū-tōng chhiâu gí-hē (Ah-bōe siat-tēng cookie chiah ē iōng)
+  // Bô cookie → auto-detect
   const userLang = (navigator.language || "").toLowerCase();
-
-  let autoLang = "en";
-
-  if (userLang.startsWith("zh") || userLang.startsWith("ja")) {
-    autoLang = "tb-hj"; // Tiong-bûn/Ji̍t-bûn → TB-HJ
-  }
-
+  const autoLang = (userLang.startsWith("zh") || userLang.startsWith("ja")) ? "tb-hj" : "en";
+  
   const target = "/" + autoLang + "/";
 
-  if (!location.pathname.startsWith(target)) {
+  // Kan-na tī siú-ia̍h chù-tiōng thiàu (pī-bián phò-hāi lāi-ia̍h)
+  if (location.pathname === "/" || location.pathname === "") {
     location.href = target;
   }
 })();

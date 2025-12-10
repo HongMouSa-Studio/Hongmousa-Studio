@@ -1,2 +1,4 @@
 baseURL: "http://localhost:1313/"
 environment: "development"
+relativeURLs: false
+canonifyURLs: false

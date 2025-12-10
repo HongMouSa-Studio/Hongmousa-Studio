@@ -1,0 +1,4 @@
+baseURL: "https://hongmousa-studio.pages.dev/"
+environment: "production"
+relativeURLs: false
+canonifyURLs: true
