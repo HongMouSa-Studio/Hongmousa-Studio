@@ -1,23 +1,9 @@
-<!DOCTYPE html>
-<html lang="{{ .Site.Language.Lang }}">
-<head>
-  <meta charset="utf-8">
-  <title>{{ .Title }}</title>
+{{ partial "header.html" . }}
+{{ partial "hero.html" . }}
 
-  {{ partial "head.html" . }}
-</head>
+<main>
+  {{ block "main" . }}{{ end }}
+</main>
 
-<body>
-  {{ partial "header.html" . }}
-  {{ partial "hero.html" . }}
-  {{ partial "nav.html" . }}
-
-  <main>
-    {{ block "main" . }}{{ end }}
-  </main>
-
-  {{ partial "footer.html" . }}
-
-  {{ partial "lang-redirect.html" . }}
-</body>
-</html>
+{{ partial "footer.html" . }}
+{{ partial "lang-redirect.html" . }}

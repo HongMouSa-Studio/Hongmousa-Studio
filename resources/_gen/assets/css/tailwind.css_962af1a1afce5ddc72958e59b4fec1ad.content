@@ -538,6 +538,9 @@ video {
 .mb-6 {
   margin-bottom: 1.5rem;
 }
+.ml-6 {
+  margin-left: 1.5rem;
+}
 .mt-2 {
   margin-top: 0.5rem;
 }
@@ -561,6 +564,9 @@ video {
 }
 .justify-between {
   justify-content: space-between;
+}
+.gap-3 {
+  gap: 0.75rem;
 }
 .space-x-6 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
@@ -668,9 +674,6 @@ video {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-.underline {
-  text-decoration-line: underline;
 }
 .opacity-0 {
   opacity: 0;

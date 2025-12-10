@@ -1,21 +1,26 @@
-<header class="site-header">
-  <nav class="language-switcher">
-    {{ range .Page.AllTranslations }}       
-      {{ if eq .Lang $.Site.Language.Lang }}
-        <strong>{{ .Language.LanguageName }}</strong>
-      {{ else }}
-      <a class="lang-link" data-lang="{{ .Lang }}" href="{{ .RelPermalink }}">
-          {{ .Language.LanguageName }}
-      {{ end }}
-    {{ end }}
-  </nav>
-</header>
-
 <header class="border-b bg-white/80 backdrop-blur dark:bg-gray-900/80 sticky top-0 z-50">
-<div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-<a href="/" class="font-bold text-xl">MySite</a>
-{{ partial "nav.html" . }}
-</div>
+  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+
+    <!-- Logo -->
+    <a href="/" class="font-bold text-xl">MySite</a>
+
+    <!-- Main navigation -->
+    {{ partial "nav.html" . }}
+
+    <!-- Language switcher -->
+    <nav class="language-switcher flex gap-3 ml-6">
+      {{ range .Page.AllTranslations }}
+        {{ if eq .Lang $.Site.Language.Lang }}
+          <strong>{{ .Language.LanguageName }}</strong>
+        {{ else }}
+          <a class="lang-link" data-lang="{{ .Lang }}" href="{{ .RelPermalink }}">
+            {{ .Language.LanguageName }}
+          </a>
+        {{ end }}
+      {{ end }}
+    </nav>
+
+  </div>
 </header>
 
 <script>
@@ -23,16 +28,9 @@ document.addEventListener("DOMContentLoaded", function () {
   document.querySelectorAll(".lang-link").forEach(function (el) {
     el.addEventListener("click", function () {
       const lang = el.dataset.lang;
-      // Khiām lâng-kheh ê gí-giân kì-tî (180 kang ū hāu)
-      document.cookie = "preferred_lang=" + lang + ";path=/;max-age=" + 60*60*24*180;
+      document.cookie =
+        "preferred_lang=" + lang + ";path=/;max-age=" + 60 * 60 * 24 * 180;
     });
   });
 });
 </script>
-
-
-<style>
-  .main-nav { display: flex; gap: 1.5rem; padding: 1rem; }
-  .lang-switcher { list-style: none; display: flex; gap: 0.75rem; margin: 0; padding: 0; }
-  .lang-switcher a.active { font-weight: bold; text-decoration: underline; }
-</style>
