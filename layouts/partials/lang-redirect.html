@@ -1,25 +1,37 @@
 <script>
-(function() {
-  // Nā í-keng ū cookie, to̍h bián redirect (pī-bián ta̍k pái lóng thiàu)
-  if (document.cookie.includes("preferred_lang=")) {
-    return;
+(function () {
+  // Pún-tē khai-hoat khoân-kéng kim-iōng redirect
+  if (location.host.includes("localhost")) return;
+
+  // cookie gí-giân
+  const cookie = document.cookie
+    .split("; ")
+    .find(r => r.startsWith("preferred_lang="));
+
+  // Nā lâng-kheh bat siat-tēng--kòe to̍h tòe cookie
+  if (cookie) {
+    const lang = cookie.split("=")[1];
+    const desired = "/" + lang + "/";
+
+    if (!location.pathname.startsWith(desired)) {
+      location.href = desired;
+    }
+    return; // cookie í-keng chhú-lí soah
   }
 
-  // Bô cookie ê lâng-kheh ē chiàu hē-thóng gí-giân khiâ
-  const userLang = (navigator.language || navigator.userLanguage).toLowerCase();
+  // Chū-tōng chhiâu gí-hē (Ah-bōe siat-tēng cookie chiah ē iōng)
+  const userLang = (navigator.language || "").toLowerCase();
 
-  const isChinese = userLang.startsWith("zh");
-  const isJapanese = userLang.startsWith("ja");
+  let autoLang = "en";
 
-  // Phòaⁿ-toàn ài chhōa khì tó 1 ê gí-giân
-  if (isChinese || isJapanese) {
-    if (!window.location.pathname.startsWith("/tb-hj/")) {
-      window.location.replace("/tb-hj/");
-    }
-  } else {
-    if (!window.location.pathname.startsWith("/en/")) {
-      window.location.replace("/en/");
-    }
+  if (userLang.startsWith("zh") || userLang.startsWith("ja")) {
+    autoLang = "tb-hj"; // Tiong-bûn/Ji̍t-bûn → TB-HJ
+  }
+
+  const target = "/" + autoLang + "/";
+
+  if (!location.pathname.startsWith(target)) {
+    location.href = target;
   }
 })();
 </script>

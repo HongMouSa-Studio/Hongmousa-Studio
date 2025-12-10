@@ -3,6 +3,10 @@ languageCode: "tb-poj"
 title: "Hong-mô͘-sa Kang-chok-sek"
 defaultContentLanguage: "tb-poj"
 defaultContentLanguageInSubdir: true      # Hián-sī ī-siat gí-giân ê phiau-thâu
+
+# Hugo ē tī Cloudflare Pages chū-tōng production config
+environment: "production"
+
 enableInlineShortcodes: true
 enableRobotsTXT: true
 cleanDestinationDir: true     #Hugo tī build chìn-chêng chū-tōng chheng public
