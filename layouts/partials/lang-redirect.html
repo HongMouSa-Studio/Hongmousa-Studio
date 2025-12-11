@@ -30,8 +30,10 @@
   }
 
   // Bô cookie → auto-detect
-  const userLang = (navigator.language || "").toLowerCase();
-  const autoLang = (userLang.startsWith("zh") || userLang.startsWith("ja")) ? "tb-hj" : "en";
+  const userLang = navigator.language.toLowerCase();
+  const autoLang = (userLang.startsWith("zh") || userLang.startsWith("ja"))
+    ? "tb-hj"
+    : "en";
   
   const target = "/" + autoLang + "/";
 

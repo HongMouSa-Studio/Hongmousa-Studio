@@ -1,9 +1,24 @@
-{{ partial "header.html" . }}
-{{ partial "hero.html" . }}
+<!DOCTYPE html>
+<html lang="{{ .Site.Language.Lang }}">
+  <head>
+    <!-- lang-redirect khē tiàm head a̍h-sī header chìn-chêng ē-tàng khah chá chip-hêng -->
+    {{ partial "lang-redirect.html" . }}  
+    {{ partial "head.html" . }}
+  </head>
 
-<main>
-  {{ block "main" . }}{{ end }}
-</main>
+  <body>
+    <!-- Accessibility skip link (Bô-chiòng-gāi siat-tēng) -->
+    <a class="sr-only" href="#main">
+      Skip to main
+    </a>
 
-{{ partial "footer.html" . }}
-{{ partial "lang-redirect.html" . }}
+    {{ partial "header.html" . }}
+    {{ partial "hero.html" . }}
+    
+    <main id="main" role="main">
+      {{ block "main" . }}{{ end }}
+    </main>
+
+    {{ partial "footer.html" . }}
+  </body>
+</html>

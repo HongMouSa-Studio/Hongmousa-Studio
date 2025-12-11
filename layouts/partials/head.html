@@ -1,28 +1,30 @@
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>{{ if .Title }}{{ .Title }} | {{ site.Title }}{{ else }}{{ site.Title }}{{ end }}</title>
+<title>{{ if .Title }}{{ .Title }} | {{ end }}{{ .Site.Title }}</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  {{ with .Description }}
-    <meta name="description" content="{{ . }}">
-  {{ end }}
+{{ with .Description }}
+<meta name="description" content="{{ . }}">
+{{ end }}
 
-  {{/* --- Tailwind CSS --- */}}
-  {{ $styles := resources.Get "css/tailwind.css" | postCSS | fingerprint }}
-  <link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}" />
+{{/* --- Tailwind CSS --- */}}
+{{/* $styles := resources.Get "css/tailwind.css" | postCSS | fingerprint }}
+<link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}" /> */}}
 
-  {{/* --- Custom CSS (site overrides) --- */}}
-  <link rel="stylesheet" href="{{ "css/custom.css" | absURL }}">
 
-  {{/* --- Canonical URL --- */}}
-  <link rel="canonical" href="{{ .Permalink | absURL }}" />
+{{/* --- Main CSS (site overrides) --- */}}
+<link rel="stylesheet" href="/css/gemini.css">
 
-  {{/* --- Basic OpenGraph SEO --- */}}
-  <meta property="og:title" content="{{ .Title }}">
-  {{ with .Description }}
-    <meta property="og:description" content="{{ . }}">
-  {{ end }}
-  <meta property="og:url" content="{{ .Permalink | absURL }}">
-  <meta property="og:type" content="website">
-</head>
+<!-- Favicon（如有） -->
+<link rel="icon" type="image/png" href="/img/favicon.png" />
+
+{{/* --- Canonical URL --- */}}
+<link rel="canonical" href="{{ .Permalink | absURL }}" />
+
+{{/* --- Basic OpenGraph SEO --- */}}
+<meta property="og:title" content="{{ .Title }}">
+{{ with .Description }}
+<meta property="og:description" content="{{ . }}">
+{{ end }}
+<meta property="og:url" content="{{ .Permalink | absURL }}">
+<meta property="og:type" content="website">
