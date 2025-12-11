@@ -72,6 +72,8 @@ header {
   align-items: center;
 }
 
+/* --- LOGO --- */
+
 .logo {
   font-size: 1.5rem;
   font-weight: bold;
@@ -83,6 +85,17 @@ header {
 .logo img {
   height: 75px; /* LOGO ê koân-tō͘ */
   width: auto;
+}
+
+/* Menu */
+.main-nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.main-nav a:hover {
+  color: var(--accent-green);
 }
 
 /* --- Tō-lám-lia̍t (Navigation) --- */
@@ -102,7 +115,17 @@ nav a:hover {
   color: var(--accent-green);
 }
 
-/* --- 3. Chú-sī-kak (Hero Section) --- */
+/* Language switcher */
+.lang-switcher {
+  display: flex;
+  gap: 10px;
+}
+
+.current-lang {
+  font-weight: bold;
+}
+
+/* --- Chú-ia̍h-pâi-pián (Hero Section) --- */
 .hero {
   text-align: center;
   padding: 80px 20px;
@@ -142,7 +165,7 @@ nav a:hover {
   transform: translateY(-2px);
 }
 
-/* --- 4. Chok-phín-chiám (Portfolio Grid) --- */
+/* --- Chok-phín-chi̍p (Portfolio Grid) --- */
 .portfolio {
   padding: 40px 5%;
   max-width: 1200px;
@@ -206,7 +229,7 @@ nav a:hover {
   color: #777;
 }
 
-/* --- 5. Kài-siāu & Liân-lo̍k (Footer-ish) --- */
+/* --- Kài-siāu & Liân-lo̍k--- */
 .about-contact {
   background-color: #fff;
   padding: 60px 20px;
@@ -226,21 +249,24 @@ nav a:hover {
   font-weight: bold;
 }
 
+/* --- Footer --- */
+
 footer {
   text-align: center;
   padding: 20px;
+  margin-top: 50px;
   font-size: 0.8rem;
   color: #888;
 }
 
-/* --- RWD (Siu-ki pán) --- */
+/* --- RWD(Responsive Web Design) --- */
 @media (max-width: 768px) {
   .hero h1 {
     font-size: 2rem;
   }
   .grid {
     grid-template-columns: 1fr;
-  } /* Siu-ki piàn 1 pâi */
+  } /* Chhiú-ki-á piàn 1 pâi */
 }
 
 /* Screen-reader only link (for accessibility) */
