@@ -1,11 +1,17 @@
-<header class="top-header">
-  <div class="header-inner">
+<header class="floating-header">
+  <div class="nav-container">
 
-    <!-- Logo -->
-    <a href="/" class="logo">
+    <!-- Logo + Site Title -->
+    <a href="{{ "/" | relLangURL }}" class="logo-block">
       <img src="/img/HongMouSa Logo.png" alt="HongMouSa Studio" />
-      HongMouSa Studio
+
+      <div class="site-title">
+        <div class="line-1">Hong-mô͘-sa Kang-chok-sek</div>
+        <div class="line-2">芳芼莎工作室</div>
+        <div class="line-3">HongMouSa Studio</div>
+      </div>
     </a>
+
 
     <!-- Main navigation (Tō-lám-lia̍t) -->
     {{ partial "nav.html" . }}

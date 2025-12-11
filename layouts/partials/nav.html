@@ -1,15 +1,9 @@
-<nav class="flex items-center space-x-6">
-
-  <a href="{{ "/" | relLangURL }}" class="hover:text-indigo-600">
-    {{ i18n "nav_home" }}
-  </a>
-
-  <a href="{{ "about/" | relLangURL }}" class="hover:text-indigo-600">
-    {{ i18n "nav_about" }}
-  </a>
-
-  <a href="{{ "blog/" | relLangURL }}" class="hover:text-indigo-600">
-    {{ i18n "nav_blog" }}
-  </a>
-
+<nav class="main-nav" aria-label="Main Menu">
+  <ul>
+    <li><a href="{{ "/" | relLangURL }}">{{ i18n "nav_home" }}</a></li>
+    <li><a href="{{ "portfolio/" | relLangURL }}">{{ i18n "nav_portfolio" }}</a></li>
+    <li><a href="{{ "blog/" | relLangURL }}">{{ i18n "nav_blog" }}</a></li>
+    <li><a href="{{ "about/" | relLangURL }}">{{ i18n "nav_about" }}</a></li>
+    <li><a href="{{ "contact/" | relLangURL }}">{{ i18n "nav_contact" }}</a></li>
+  </ul>
 </nav>

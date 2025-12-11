@@ -27,7 +27,8 @@ a {
   color: inherit;
 }
 
-/* --- Accessibility (Bô-chiòng-gāi) --- */
+/* Screen-reader only link (for accessibility) */
+/* Bô-chiòng-gāi-tàng siat-tēng (WCAG 2.2). Hong-piān keyboard(Tab)/JAWS/NVDA téng-téng ê iōng-hō͘ */
 .sr-only {
   position: absolute !important;
   width: 1px;
@@ -72,47 +73,123 @@ header {
   align-items: center;
 }
 
-/* --- LOGO --- */
-
-.logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto; /* Kui ê header khē tiŏng */
+  padding: 0 20px; /* 2 pêng lâu ūi, pī-bián chhiat tio̍h piⁿ--a */
 }
 
-.logo img {
-  height: 75px; /* LOGO ê koân-tō͘ */
+/* Floating Header */
+.floating-header {
+  background-color: transparent;
+  position: sticky;
+  top: 20px;
+  z-index: 1000;
+  padding: 0 20px;
+}
+
+/* --- LOGO --- */
+
+.logo-block {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Logo kap jī ê kū-lī */
+  text-decoration: none;
+  color: inherit;
+}
+
+.logo-block img {
+  height: 80px; /* LOGO ê koân-tō͘ */
   width: auto;
 }
 
-/* Menu */
+/* LOGO piⁿ ê jī, ta̍k chōa kāng khoah */
+.site-title {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+/* LOGO piⁿ ê jī, tiâu-chéng jī-thé */
+.line-1,
+.line-2,
+.line-3 {
+  text-align: left;
+  white-space: nowrap; /* Mài ōaⁿ chōa */
+}
+
+.line-1 {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.line-2 {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.line-3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+/* Pau chò kiat-kò͘-hòa HTML liáu pìⁿ bô-hāu */
+.logo-text {
+  margin-top: 6px;
+  line-height: 1.2;
+}
+
+/* Pau chò kiat-kò͘-hòa HTML liáu pìⁿ bô-hāu */
+.logo-text > div {
+  white-space: nowrap; /* Kò͘-tēng bē ōaⁿ chōa */
+}
+
+/* Menu (Navigation) */
 .main-nav ul {
   list-style: none;
   display: flex;
-  gap: 20px;
+  gap: 2rem;
 }
 
-.main-nav a:hover {
-  color: var(--accent-green);
+.main-nav a {
+  font-weight: 500; /* Jī ka chho͘ (m̄-sī chho͘-thé) */
+  font-size: 1rem;
+  position: relative;
+  transition: color 0.3s ease; /* Niau-chhí-á hover sek-chúi chiām-piàn */
 }
 
-/* --- Tō-lám-lia̍t (Navigation) --- */
+.main-nav a:hover::after {
+  width: 100%;
+}
 
-nav ul {
-  list-style: none;
+/* Underline hover */
+.main-nav a::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 1px;
+  bottom: -5px;
+  left: 0;
+  background-color: #7cbb00;
+  transition: width 0.3s ease;
+}
+
+.nav-container {
+  max-width: 1150px;
+  margin: 0 auto;
+
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  border-radius: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.07);
+
+  padding: 1rem 2rem;
   display: flex;
-  gap: 20px;
-}
-
-nav a {
-  font-weight: 500;
-  transition: color 0.3s;
-}
-
-nav a:hover {
-  color: var(--accent-green);
+  justify-content: space-between;
+  align-items: center;
 }
 
 /* Language switcher */
@@ -267,29 +344,4 @@ footer {
   .grid {
     grid-template-columns: 1fr;
   } /* Chhiú-ki-á piàn 1 pâi */
-}
-
-/* Screen-reader only link (for accessibility) */
-/* Bô-chiòng-gāi-tàng siat-tēng (WCAG 2.2). Hong-piān keyboard(Tab)/JAWS/NVDA téng-téng ê iōng-hō͘ */
-.sr-only {
-  position: absolute !important;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-.sr-only:focus,
-.sr-only:active {
-  position: static !important;
-  width: auto;
-  height: auto;
-  margin: 0;
-  overflow: visible;
-  clip: auto;
-  white-space: normal;
 }

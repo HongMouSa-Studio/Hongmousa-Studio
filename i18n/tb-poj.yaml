@@ -1,7 +1,10 @@
-hero_title: "Iōng Hugo + Tailwind khí bāng-chām"
-hero_description: "Kan-tan koh chi-chhî to-gí-giân Hero Section，iû Hugo khu-tōng í Tailwind CSS khí-chō."
-hero_cta: "Khai-sí sú-iōng"
-
-nav_home: "Siú-ia̍h"
-nav_about: "Koan-î phín-pâi"
+nav_home: "Thâu-ia̍h"
+nav_portfolio: "Chok-phín"
 nav_blog: "Bûn-chiuⁿ"
+nav_about: "Iân-kò͘"
+nav_contact: "Liân-lo̍k"
+
+hero_title_1: "Goán chhòng-chok"
+hero_title_2: "sò͘-ūi thé-giām"
+hero_subtitle: "Iōng-sim siat-kè ū bô-chiòng-gāi ê hiān-tāi súi-bāng."
+view_projects: "Khòaⁿ chok-phín"

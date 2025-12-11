@@ -1,7 +1,10 @@
-hero_title: "Build Faster with Hugo + Tailwind"
-hero_description: "A clean, multilingual hero section powered by Hugo and fully customized with Tailwind CSS."
-hero_cta: "Get Started"
-
 nav_home: "Home"
-nav_about: "About"
+nav_portfolio: "Portfolio"
 nav_blog: "Blog"
+nav_about: "About us"
+nav_contact: "Contact us"
+
+hero_title_1: "We create"
+hero_title_2: "digital experiences"
+hero_subtitle: "Designing modern, accessible web experiences with care."
+view_projects: "View Projects"
