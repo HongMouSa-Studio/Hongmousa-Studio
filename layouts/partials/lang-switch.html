@@ -1,59 +1,61 @@
-<div class="group" style="position: relative; display: inline-block;">
+<div class="group lang-switcher-inline">
   
   <!-- Button -->
-    <button style="
-    padding: 6px 12px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    background: white;
-    cursor: pointer;
-  ">
+  <button class="lang-button">
     🌐 {{ .Site.Language.Lang | upper }}
   </button>
 
   <!-- Dropdown -->
-  <div class="lang-dropdown" style="
-    position: absolute; 
-    right: 0; 
-    margin-top: 8px; 
-    width: 155px; 
-    background: white; 
-    border: 1px solid #ccc; 
-    border-radius: 8px; 
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    opacity: 0;
-    visibility: hidden;
-    transition: 0.2s; 
-  ">
+  <div class="lang-dropdown">
 
+    {{ $cur := .Page.RelPermalink }}
+    {{ $fromPrefix := printf "/%s/" .Site.Language.Lang }}
+    
     {{ range .Site.Languages }}
-      <a href="/{{ .Lang }}/"
-         onclick="document.cookie='preferred_lang={{ .Lang }};path=/;max-age=31536000';"
-         style="display:block; 
-            padding:8px 12px; 
-            text-decoration:none; 
-            color:#333;"
-         onmouseover="this.style.background='#f0f0f0'"
-         onmouseout="this.style.background='transparent'">
-        {{ .LanguageName }}
-      </a>
+      {{ $targetPrefix := printf "/%s/" .Lang }}
+      {{ if in $cur $fromPrefix }}
+        <a href="{{ replace $cur $fromPrefix $targetPrefix }}"
+           onclick="document.cookie='preferred_lang={{ .Lang }};path=/;max-age=31536000';">
+          {{ .LanguageName }}
+        </a>
+      {{ else }}
+        <a href="/{{ .Lang }}/"
+           onclick="document.cookie='preferred_lang={{ .Lang }};path=/;max-age=31536000';">
+          {{ .LanguageName }}
+        </a>
+      {{ end }}
     {{ end }}
   </div>
 </div>
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-  const group = document.querySelector('.group');
-  const dropdown = document.querySelector('.lang-dropdown');
+  const group = document.querySelector('.lang-switcher-inline');
+  const button = group.querySelector('.lang-button');
+  const dropdown = group.querySelector('.lang-dropdown');
 
-  group.addEventListener('mouseover', () => {
-    dropdown.style.opacity = '1';
-    dropdown.style.visibility = 'visible';
+  group.addEventListener('mouseenter', () => {
+    dropdown.classList.add("show");
   });
 
-  group.addEventListener('mouseout', () => {
-    dropdown.style.opacity = '0';
-    dropdown.style.visibility = 'hidden';
+  group.addEventListener('mouseleave', () => {
+    dropdown.classList.remove("show");
+  });
+
+    // keyboard accessibility: toggle with Enter/Space
+  button.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      const isOpen = dropdown.style.visibility === 'visible';
+      if (isOpen) {
+        dropdown.style.opacity = '0'; dropdown.style.visibility = 'hidden';
+        button.setAttribute('aria-expanded', 'false');
+      } else {
+        dropdown.style.opacity = '1'; dropdown.style.visibility = 'visible';
+        button.setAttribute('aria-expanded', 'true');
+        dropdown.querySelector('a')?.focus();
+      }
+    }
   });
 });
 </script>

@@ -3,7 +3,7 @@
 
     <!-- Logo + Site Title -->
     <a href="{{ "/" | relLangURL }}" class="logo-block">
-      <img src="/img/HongMouSa Logo.png" alt="HongMouSa Studio" />
+      <img src="/img/HongMouSa Logo.png" alt="HongMouSa Studio Logo" />
 
       <div class="site-title">
         <div class="line-1">Hong-mô͘-sa Kang-chok-sek</div>
@@ -13,23 +13,31 @@
     </a>
 
 
-    <!-- Main navigation (Tō-lám-lia̍t) -->
+    <!-- Desktop Navigation -->
     {{ partial "nav.html" . }}
 
-    <!-- Language switcher -->
-    {{ partial "lang-switch.html" . }}
-
+    <!-- Language Switcher (desktop only) -->
+    <div class="lang-desktop">
+      {{ partial "lang-switch.html" . }}
+    </div>
+    
+    <!-- Hamburger (mobile only) -->
+    <div class="menu-toggle">☰</div>
+  </div>
+  
+  <!-- Mobile dropdown menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    {{ partial "nav-mobile.html" . }}
+    
+    <div class="lang-mobile">
+      {{ partial "lang-switch.html" . }}
+    </div>
   </div>
 </header>
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-  document.querySelectorAll(".lang-link").forEach(function (el) {
-    el.addEventListener("click", function () {
-      const lang = el.dataset.lang;
-      document.cookie =
-        "preferred_lang=" + lang + ";path=/;max-age=" + 60 * 60 * 24 * 180;
-    });
-  });
+document.querySelector(".menu-toggle")
+  .addEventListener("click", function () {
+    document.getElementById("mobileMenu").classList.toggle("active");
 });
 </script>
