@@ -1,17 +1,19 @@
-<header class="floating-header">
+<header class="header">
+  
   <div class="nav-container">
 
     <!-- Logo + Site Title -->
     <a href="{{ "/" | relLangURL }}" class="logo-block">
-      <img src="/img/HongMouSa Logo.png" alt="HongMouSa Studio Logo" />
-
+      <div>
+        <img src="/img/HongMouSa Logo.png" alt="HongMouSa Studio Logo" />
+      </div>
+    
       <div class="site-title">
-        <div class="line-1">Hong-mô͘-sa Kang-chok-sek</div>
-        <div class="line-2">芳芼莎工作室</div>
-        <div class="line-3">HongMouSa Studio</div>
+        <div class="site-title-l1">Hong-mô͘-sa Kang-chok-sek</div>
+        <div class="site-title-l2">芳芼莎工作室</div>
+        <div class="site-title-l3">HongMouSa Studio</div>
       </div>
     </a>
-
 
     <!-- Desktop Navigation -->
     {{ partial "nav.html" . }}
@@ -25,10 +27,14 @@
     <div class="menu-toggle">☰</div>
   </div>
   
-  <!-- Mobile dropdown menu -->
-  <div class="mobile-menu" id="mobileMenu">
-    {{ partial "nav-mobile.html" . }}
+  <!-- Mobile Hamburger dropdown -->
+  <div id="menuMobile" class="menu-mobile">
     
+    <nav class="nav-mobile">
+      {{ partial "nav-mobile.html" . }}
+    </nav>
+
+    <!-- mobile language -->
     <div class="lang-mobile">
       {{ partial "lang-switch.html" . }}
     </div>
@@ -36,8 +42,29 @@
 </header>
 
 <script>
-document.querySelector(".menu-toggle")
-  .addEventListener("click", function () {
-    document.getElementById("mobileMenu").classList.toggle("active");
+document.addEventListener('DOMContentLoaded', function () {
+  const btn = document.querySelector('.menu-toggle');
+  const menu = document.getElementById('menuMobile');
+
+  if (!btn || !menu) return;
+
+  // accessibility
+  btn.setAttribute('aria-controls', 'menuMobile');
+  btn.setAttribute('aria-expanded', 'false');
+  btn.setAttribute('role', 'button');
+
+  btn.addEventListener('click', function (e) {
+    const isOpen = menu.classList.toggle('show');
+    btn.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  // close when clicking outside
+  document.addEventListener('click', function (e) {
+    if (!menu.classList.contains('show')) return;
+    if (menu.contains(e.target) || btn.contains(e.target)) return;
+    menu.classList.remove('show');
+    btn.setAttribute('aria-expanded', 'false');
+  });
 });
 </script>
+
