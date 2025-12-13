@@ -328,6 +328,10 @@ header {
   filter: blur(40px);
 }
 
+.hero span {
+  color: var(--accent-green);
+}
+
 .hero h1 {
   font-size: 3.5rem;
   font-weight: 400;
@@ -341,37 +345,38 @@ header {
   font-style: italic;
 }
 
-.hero span {
-  color: var(--accent-green);
-}
-
 .hero p {
   font-size: 1.1rem;
-  color: #666;
+  color: var(--text-light);
+  max-width: 500px;
+  margin: 0 auto 3rem;
   margin-bottom: 30px;
 }
 
 /* ---------------------------------------------------
-    Chhi̍h-á (Buttons)
+    Buttons (Chhi̍h-á)
 -----------------------------------------------------*/
 .btn-main {
   display: inline-block;
-  background-color: var(--accent-green);
-  color: var(--text-light);
-  padding: 12px 30px;
-  border-radius: 50px;
-  font-weight: bold;
-  transition: transform 0.2s, background-color 0.3s;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: var(--text-main);
+  color: #fff;
+  padding: 12px 35px;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .btn-main:hover {
-  background-color: #5da000;
+  background-color: var(--accent-green);
   transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(124, 187, 0, 0.25);
 }
 
 /* ---------------------------------------------------
-    Chok-phín-chi̍p (Portfolio Grid)
+    Portfolio Grid (Glass Cards)
 -----------------------------------------------------*/
 .portfolio {
   padding: 40px 5%;
