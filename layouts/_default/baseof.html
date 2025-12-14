@@ -2,23 +2,38 @@
 <html lang="{{ .Site.Language.Lang }}">
   <head>
     <!-- lang-redirect khē tiàm head a̍h-sī header chìn-chêng ē-tàng khah chá chip-hêng -->
-    {{ partial "lang-redirect.html" . }}  
-    {{ partial "head.html" . }}
+    {{ partial "lang-redirect.html" . }} {{ partial "head.html" . }}
   </head>
 
   <body>
     <!-- Accessibility skip link (Bô-chiòng-gāi siat-tēng) -->
-    <a class="sr-only" href="#main">
-      Skip to main
-    </a>
+    <a class="sr-only" href="#main"> Skip to main </a>
 
+    <!-- 1. HEADER -->
     {{ partial "header.html" . }}
-    {{ partial "hero.html" . }}
-    
-    <main id="main" role="main">
-      {{ block "main" . }}{{ end }}
-    </main>
 
+    <!-- 2. HERO BANNER (Promotion) -->
+    {{ partial "hero.html" . }}
+
+    <main id="main" role="main">{{ block "main" . }}{{ end }}</main>
+
+    <!-- 3. PRODUCT GRID -->
+    {{ partial "products.html" . }}
+
+    <!-- 4. FOOTER -->
     {{ partial "footer.html" . }}
+
+    <!-- SNIPCART SCRIPT (Install Code) -->
+    <div
+      hidden
+      id="snipcart"
+      data-api-key="OTU4OWY1NjMtMTVkZS00ZmVhLWE0NWQtZGRjMDllNjU5YjQyNjM5MDEyNzQxNTg2MjA0Nzc4"
+      data-config-modal-style="side"
+    ></div>
+
+    <script
+      async
+      src="https://cdn.snipcart.com/themes/v3.4.1/default/snipcart.js"
+    ></script>
   </body>
 </html>

@@ -1,30 +1,47 @@
-
 <title>{{ if .Title }}{{ .Title }} | {{ end }}{{ .Site.Title }}</title>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 {{ with .Description }}
-<meta name="description" content="{{ . }}">
-{{ end }}
-
-{{/* --- Tailwind CSS --- */}}
-{{/* $styles := resources.Get "css/tailwind.css" | postCSS | fingerprint }}
-<link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}" /> */}}
-
-
-{{/* --- Main CSS (site overrides) --- */}}
-<link rel="stylesheet" href="/css/gemini.css">
+<meta name="description" content="{{ . }}" />
+{{ end }} {{/* --- Tailwind CSS --- */}} {{/* $styles := resources.Get
+"css/tailwind.css" | postCSS | fingerprint }}
+<link
+  rel="stylesheet"
+  href="{{ $styles.RelPermalink }}"
+  integrity="{{ $styles.Data.Integrity }}"
+/>
+*/}} {{/* --- Main CSS (site overrides) --- */}}
+<link rel="stylesheet" href="/css/gemini.css" />
 
 <!-- Favicon (Liû-lám-khì ia̍h-chhiam ê icon) -->
 <link rel="icon" type="image/png" href="/img/favicon.png" />
+
+<!-- FontAwesome (Icons) -->
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+/>
+
+<!-- Google Fonts: Noto Serif TC (Bûn-chheng) & Noto Sans TC -->
+<link
+  href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@400;700&display=swap"
+  rel="stylesheet"
+/>
+
+<!-- SNIPCART CSS (Kò͘-bu̍t-chhia Iūⁿ-sek) -->
+<link
+  rel="stylesheet"
+  href="https://cdn.snipcart.com/themes/v3.4.1/default/snipcart.css"
+/>
 
 {{/* --- Canonical URL --- */}}
 <link rel="canonical" href="{{ .Permalink | absURL }}" />
 
 {{/* --- Basic OpenGraph SEO --- */}}
-<meta property="og:title" content="{{ .Title }}">
+<meta property="og:title" content="{{ .Title }}" />
 {{ with .Description }}
-<meta property="og:description" content="{{ . }}">
+<meta property="og:description" content="{{ . }}" />
 {{ end }}
-<meta property="og:url" content="{{ .Permalink | absURL }}">
-<meta property="og:type" content="website">
+<meta property="og:url" content="{{ .Permalink | absURL }}" />
+<meta property="og:type" content="website" />
