@@ -402,19 +402,20 @@ header {
   color: var(--accent-green);
   font-weight: bold;
   letter-spacing: 0.1em;
-  font-size: 0.875rem;
+  font-size: 1rem;
   margin-bottom: 0.5rem;
 }
 
 .hero-text h1 {
   font-family: "Noto Serif TC", serif;
-  font-size: 3rem; /* Desktop size */
+  font-size: clamp(2.5rem, 5vw, 3rem); /*  Chū-tōng RWD hâm-sò͘ */
   color: var(--text-dark);
   line-height: 1.25;
   margin-bottom: 1.5rem;
 }
 
 .hero-text h1 span {
+  font-size: clamp(1rem, 2.5vw + 1rem, 1.75rem);
   font-style: italic;
   color: #9ca3af;
 }
@@ -684,10 +685,6 @@ footer {
   .product-grid {
     grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
-  }
-
-  .hero-text h1 {
-    font-size: 2.5rem;
   }
 }
 

@@ -1,5 +1,5 @@
 ---
-title: "貼文"
+title: "文章"
 cascade:
   type: "page"
 ---
