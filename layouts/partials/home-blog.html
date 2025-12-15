@@ -1,0 +1,32 @@
+<section class="home-blog">
+  <header class="blog-section-header">
+    <h2>Hong-mô͘-sa Kang-chok-sek</h2>
+    <p class="blog-section-subtitle">Tah-bûn · Blog 選文</p>
+  </header>
+
+  <ul class="blog-cards">
+    {{ range first 3 (where .Site.RegularPages "Section" "blog") }}
+      <li class="blog-card">
+        <a href="{{ .RelPermalink }}">
+          <article>
+            <h3 class="blog-card-title">{{ .Title }}</h3>
+
+            {{ with .Params.description }}
+              <p class="blog-card-desc">{{ . }}</p>
+            {{ end }}
+
+            <span class="blog-card-more">
+              閱讀文章 →
+            </span>
+          </article>
+        </a>
+      </li>
+    {{ end }}
+  </ul>
+
+  <div class="blog-section-action">
+    <a href="{{ "blog/" | relLangURL }}" class="blog-btn-main">
+      看全部文章 →
+    </a>
+  </div>
+</section>

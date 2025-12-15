@@ -1,5 +1,5 @@
 ---
-title: "Bûn-chiuⁿ"
+title: "Tah-bûn"
 cascade:
   type: "page"
 ---

@@ -15,12 +15,18 @@
     <!-- 2. HERO BANNER (Promotion) -->
     {{ partial "hero.html" . }}
 
-    <main id="main" role="main">{{ block "main" . }}{{ end }}</main>
-
     <!-- 3. PRODUCT GRID -->
     {{ partial "products.html" . }}
 
-    <!-- 4. FOOTER -->
+    <!-- 4. Blog Section -->
+    {{ partial "home-blog.html" . }}
+    <main id="main" role="main">{{ block "main" . }}{{ end }}</main>
+    <a href="{{ "blog/" | relLangURL }}" class="btn-main">
+  Tah-bûn → 
+</a>
+
+
+    <!-- 5. FOOTER -->
     {{ partial "footer.html" . }}
 
     <!-- SNIPCART SCRIPT (Install Code) -->

@@ -396,6 +396,7 @@ header {
   justify-content: center;
   padding: 4rem 0; /* Desktop padding */
   z-index: 10;
+  padding: 30px;
 }
 
 .hero-text span {

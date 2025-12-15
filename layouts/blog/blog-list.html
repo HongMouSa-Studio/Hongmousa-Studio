@@ -1,0 +1,25 @@
+{{/* Blog ê ia̍h-bīn */}}{{ define "main" }}
+
+<section class="blog-list">
+  <header>
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.description }}
+    <p class="intro">{{ . }}</p>
+    {{ end }}
+  </header>
+
+  <ul class="posts">
+    {{ range .Pages }}
+    <li>
+      <a href="{{ .RelPermalink }}">
+        <h2>{{ .Title }}</h2>
+        {{ with .Params.description }}
+        <p>{{ . }}</p>
+        {{ end }}
+      </a>
+    </li>
+    {{ end }}
+  </ul>
+</section>
+
+{{ end }}
