@@ -57,6 +57,13 @@ h3,
   letter-spacing: 0.05em;
 }
 
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 2rem; /* Desktop: 32px padding */
+}
+
 /* ---------------------------------------------------
     Screen-reader only link (for accessibility)
     Bô-chiòng-gāi-tàng siat-tēng (WCAG 2.2). Hong-piān keyboard(Tab)/ JAWS/NVDA téng-téng ê iōng-hō͘
@@ -267,6 +274,12 @@ header {
 /* ---------------------------------------------------
     hamburger toggle (desktop hidden)
 -----------------------------------------------------*/
+.mobile-menu-btn {
+  display: none; /* Desktop default: Hide */
+  font-size: 1.25rem;
+  color: #4b5563;
+}
+
 .menu-toggle {
   display: none; /* Desktop default: Hide */
   cursor: pointer;
@@ -328,7 +341,7 @@ header {
   transition: color 0.3s;
 }
 
-.hidden-on-mobile {
+.member-area {
   /* User icon for desktop */
   display: block;
 }
@@ -346,13 +359,18 @@ header {
 }
 
 /* ---------------------------------------------------
-    Hero Section (Chú-ia̍h-pâi-pián)
-    Tī siú-ia̍h siōng tōa, siōng bêng-hián hit khu
+    3. Hero Section (Chú-ia̍h　Pâi-pián)
 -----------------------------------------------------*/
 .hero {
-  text-align: center;
-  padding: 8rem 1rem 6rem;
-  position: relative;
+  margin-top: 3.5rem; /* Kap header chi-kan ê kū-lī */
+  background-color: var(--card-bg);
+  overflow: hidden;
+}
+
+.hero-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Desktop default: 2 columns */
+  min-height: 500px;
 }
 
 /* Chhù-bī ê pōe-kéng bâng-bōng (Blobs) */
@@ -372,76 +390,105 @@ header {
   filter: blur(40px);
 }
 
-.hero span {
-  color: var(--accent-green);
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4rem 0; /* Desktop padding */
+  z-index: 10;
 }
 
-.hero h1 {
-  font-size: 3.5rem;
-  font-weight: 400;
+.hero-text span {
+  color: var(--accent-green);
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+}
+
+.hero-text h1 {
+  font-family: "Noto Serif TC", serif;
+  font-size: 3rem; /* Desktop size */
+  color: var(--text-dark);
+  line-height: 1.25;
   margin-bottom: 1.5rem;
-  color: var(--text-main);
-  line-height: 1.3;
 }
 
-.hero h1 span {
-  color: var(--accent-green);
+.hero-text h1 span {
   font-style: italic;
+  color: #9ca3af;
 }
 
-.hero p {
-  font-size: 1.1rem;
-  color: var(--text-light);
-  max-width: 500px;
-  margin: 0 auto 3rem;
-  margin-bottom: 30px;
+.hero-text p {
+  color: #6b7280;
+  margin-bottom: 2rem;
+  max-width: 28rem;
 }
 
-/* ---------------------------------------------------
-    Buttons (Chhi̍h-á)
------------------------------------------------------*/
-.btn-main {
+/* Buttons (Chhi̍h-á) */
+.hero-shop-btn {
   display: inline-block;
-  background-color: var(--text-main);
-  color: #fff;
-  padding: 12px 35px;
-  border-radius: 30px;
+  background-color: var(--text-dark);
+  color: white;
+  padding: 0.75rem 2rem;
+  border-radius: 9999px;
+  width: fit-content; /*　chiàu jī-sò͘ chū-tōng tiâu-chéng */
   font-size: 0.9rem;
   font-weight: 500;
   letter-spacing: 1px;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  text-align: center;
 }
 
-.btn-main:hover {
+.hero-shop-btn:hover {
   background-color: var(--accent-green);
   transform: translateY(-2px);
   box-shadow: 0 10px 20px rgba(124, 187, 0, 0.25);
 }
 
-.mobile-menu-btn {
-  display: none; /* Desktop default: Hide */
-  font-size: 1.25rem;
-  color: #4b5563;
+.hero-img {
+  display: block; /* Desktop default: Show */
+  position: relative;
+}
+
+.hero-img img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.9;
 }
 
 /* ---------------------------------------------------
-    Products Grid (Glass Cards)
+    4. Product Grid (Glass Cards)
 -----------------------------------------------------*/
-.products {
-  padding: 40px 5%;
+.product-section {
+  padding: 4rem 0; /* Container handles horizontal padding */
   max-width: 1200px;
   margin: 0 auto;
 }
 
-.section-title {
+.product-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 2rem;
   font-size: 1.8rem;
   position: relative;
 }
 
-.section-title::after {
+.product-section-header h2 {
+  font-family: "Noto Serif TC", serif;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--text-dark);
+}
+
+.product-section-header::after {
   content: "";
   display: block;
   width: 60px;
@@ -450,48 +497,84 @@ header {
   margin: 10px auto 0;
 }
 
-.grid {
+/* Desktop: 4 Columns */
+.product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 25px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
 }
 
-/* ---------------------------------------------------
-    Cards
------------------------------------------------------*/
-.card {
+/* Product Card - UI details remain the same */
+.product-image-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  background-color: #f3f4f6;
+  aspect-ratio: 3 / 4;
+  margin-bottom: 0.75rem;
+  cursor: pointer;
+}
+
+.product-card {
   background: var(--card-bg);
   border-radius: 15px;
   overflow: hidden;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s;
   border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-}
-
-.card-img {
+.product-img {
   width: 100%;
-  height: 250px;
+  height: 100%;
   background-color: #ddd; /* Tāi-thè sek-chúi */
   object-fit: cover;
+  transition: transform 0.5s ease;
 }
 
-.card-info {
-  padding: 20px;
+.product-card:hover .product-img {
+  transform: scale(1.05);
 }
 
-.card-info h3 {
-  font-size: 1.2rem;
-  margin-bottom: 5px;
+.add-to-cart-btn {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  right: 1rem;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(5px);
+  color: var(--text-dark);
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transform: translateY(1rem);
+  transition: all 0.3s ease;
+  font-weight: 500;
+  font-size: 0.875rem;
+  border: none;
+  cursor: pointer;
 }
 
-.card-info p {
-  font-size: 0.9rem;
-  color: #777;
+.product-card:hover .add-to-cart-btn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.add-to-cart-btn:hover {
+  background-color: var(--accent-green);
+  color: white;
+}
+
+.product-price {
+  font-weight: bold;
+  color: var(--accent-green);
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.product-info {
+  padding: 1rem;
 }
 
 /* ---------------------------------------------------
@@ -520,21 +603,28 @@ header {
 }
 
 /* ---------------------------------------------------
-    Footer
+    5. Footer
 -----------------------------------------------------*/
 footer {
-  text-align: center;
-  padding: 20px;
-  margin-top: 50px;
-  font-size: 0.8rem;
-  color: #888;
+  background-color: var(--text-dark);
+  color: #d1d5db;
+  padding: 3rem 0;
+  font-size: 0.875rem;
 }
 
-/* ---------------------------------------------------
-    RWD(Responsive Web Design)
------------------------------------------------------*/
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Desktop default: 3 columns */
+  gap: 2rem;
+}
 
-/*--- Desktop: ≥ 1024px ---*/
+/* ================================================= */
+/* --- RWD Media Queries (Desktop First) --- */
+/* ================================================= */
+
+/* -------------------------
+   1. Desktop: ≥ 1024px
+---------------------------*/
 @media (min-width: 1024px) {
   /* Desktop hián-sī nav */
   .nav-links,
@@ -551,8 +641,14 @@ footer {
   }
 }
 
-/*--- Tablet: 768-1024px ---*/
-@media (max-width: 1024px) and (min-width: 768px) {
+/* -------------------------
+    2. Tablet: ≤ 1024px
+---------------------------*/
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 1.5rem; /* Tablet: 24px padding */
+  }
+
   .logo-block img {
     height: 65px;
   }
@@ -583,11 +679,23 @@ footer {
   .menu-mobile {
     display: none !important;
   }
+
+  /* Product Grid: 3 Columns */
+  .product-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .hero-text h1 {
+    font-size: 2.5rem;
+  }
 }
 
-/*--- Mobile: ≤ 768px ---*/
+/* -------------------------
+    3. Mobile: ≤ 768px
+---------------------------*/
 @media (max-width: 768px) {
-  header {
+  .header {
     position: fixed; /* static: Ē tòe teh ǹg ē-kha; sticky: Kò͘-tēng bē tín-tāng; fixed: Pí sticky chheng-khì m̄-kú ài siat body ê padding-top. */
     top: 0;
     left: 0;
@@ -620,14 +728,14 @@ footer {
   }
 
   .site-title {
-    font-size: 1rem;
+    font-size: 1.25rem; /* Mobile size */
   }
 
   /* Hide desktop nav */
   .nav-links,
   .main-nav,
   .lang-desktop {
-    display: none !important;
+    display: none !important; /* Mobile: Hide desktop navigation */
   }
 
   /* Hide desktop language */
@@ -635,9 +743,13 @@ footer {
     display: none !important;
   }
 
+  .member-area {
+    display: none; /* Mobile: Hide user icon */
+  }
+
   /* Show hamburger */
   .menu-toggle {
-    display: block;
+    display: block; /* Mobile: Show menu button */
     font-size: 1.8rem;
     cursor: pointer;
     color: #4b5563;
@@ -675,9 +787,49 @@ footer {
     position: relative;
   }
 
+  /* Body */
   body {
     padding-top: calc(
       72px + env(safe-area-inset-top)
     ); /* Chiàu header ê koân-tō͘ chò tiâu-chéng + iOS safe-area */
+  }
+
+  /* Hero Section */
+  .hero {
+    margin-top: 0rem;
+  }
+
+  .hero-content {
+    grid-template-columns: 1fr; /* Mobile: 1 column */
+    min-height: 400px;
+  }
+
+  .hero-text {
+    padding: 2.5rem 0;
+    order: 2; /* Text below image on small screens if image was shown */
+  }
+
+  .hero-img {
+    display: none; /* Mobile: Hide large background image */
+  }
+
+  /* Product Grid: 2 Columns */
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  /* Footer */
+  .footer-grid {
+    grid-template-columns: 1fr; /* Mobile: 1 column */
+  }
+
+  .footer h4 {
+    margin-bottom: 0.5rem;
+  }
+
+  /* Khòng-chè Snipcart Button ē-tàng chhi̍h */
+  .snipcart-add-item {
+    cursor: pointer;
   }
 }
