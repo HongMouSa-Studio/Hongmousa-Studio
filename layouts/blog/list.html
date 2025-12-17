@@ -1,0 +1,21 @@
+{{ define "main" }}
+<section class="blog-list">
+  <h1 class="section-title">{{ .Title }}</h1>
+
+  {{ with .Site.Taxonomies.tags }}
+  <div class="tag-filter">
+    <a href="{{ "/blog/" | relLangURL }}" class="tag">All</a>
+    {{ range $name, $_ := . }}
+      <a href="{{ (printf "/tags/%s/" $name) | relLangURL }}"
+         class="tag">
+        #{{ $name }}
+      </a>
+    {{ end }}
+  </div>
+  {{ end }}
+
+  <div class="blog-grid">
+    {{ range .Pages }} {{ partial "blog-card.html" . }} {{ end }}
+  </div>
+</section>
+{{ end }}

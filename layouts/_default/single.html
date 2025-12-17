@@ -1,0 +1,18 @@
+{{ define "main" }}
+
+<article class="blog-single">
+  <header class="blog-single-header">
+    <h1>{{ .Title }}</h1>
+    <time>{{ .Date.Format "2006-01-02" }}</time>
+  </header>
+
+  {{ with .Params.cover }}
+  <div class="blog-single-cover">
+    <img src="{{ . | relURL }}" alt="{{ $.Title }}" />
+  </div>
+  {{ end }}
+
+  <div class="blog-single-content">{{ .Content }}</div>
+</article>
+
+{{ end }}

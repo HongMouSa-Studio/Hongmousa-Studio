@@ -1,0 +1,19 @@
+<article class="blog-card">
+  <a href="{{ .RelPermalink }}" class="blog-card-link">
+    {{ with .Params.cover }}
+    <div class="blog-card-cover">
+      <img src="{{ . | relURL }}" alt="{{ $.Title }}" />
+    </div>
+    {{ end }}
+
+    <div class="blog-card-body">
+      <time class="blog-card-date"> {{ .Date.Format "2006-01-02" }} </time>
+
+      <h3 class="blog-card-title">{{ .Title }}</h3>
+
+      <p class="blog-card-excerpt">{{ .Summary | plainify | truncate 120 }}</p>
+
+      <span class="blog-card-cta"> {{ i18n "blog_card_more" }} → </span>
+    </div>
+  </a>
+</article>

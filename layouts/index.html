@@ -1,0 +1,14 @@
+{{ define "main" }}
+  <!-- 1. HERO BANNER (Promotion) -->
+  {{ partial "hero.html" . }}
+
+  <!-- 2. PRODUCT GRID -->
+  {{ partial "products.html" . }}
+
+  <!-- 3. Blog Section -->
+  {{ partial "home-blog.html" . }}
+  
+  <a href="{{ "blog/" | relLangURL }}" class="btn-main">
+
+  </a>
+{{ end }}

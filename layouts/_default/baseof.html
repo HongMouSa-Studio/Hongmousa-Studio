@@ -12,20 +12,13 @@
     <!-- 1. HEADER -->
     {{ partial "header.html" . }}
 
-    <!-- 2. HERO BANNER (Promotion) -->
-    {{ partial "hero.html" . }}
-
-    <!-- 3. PRODUCT GRID -->
-    {{ partial "products.html" . }}
-
-    <!-- 4. Blog Section -->
-    {{ partial "home-blog.html" . }}
-    <main id="main" role="main">{{ block "main" . }}{{ end }}</main>
-    <a href="{{ "blog/" | relLangURL }}" class="btn-main">
-  Tah-bûn → 
+    <!-- 2. List + Single -->
+    <main id="main">
+      {{ block "main" . }}{{ end }}
+    </main>
+  </body>
+    
 </a>
-
-
     <!-- 5. FOOTER -->
     {{ partial "footer.html" . }}
 

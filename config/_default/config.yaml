@@ -4,7 +4,7 @@ title: "Hong-mô͘-sa Kang-chok-sek"
 
 # Ī-siat gí-giân
 defaultContentLanguage: "tb-poj"
-defaultContentLanguageInSubdir: true      # Hián-sī ī-siat gí-giân ê phiau-thâu
+defaultContentLanguageInSubdir: true # Hián-sī ī-siat gí-giân ê phiau-thâu
 
 # Siong-tùi URL (pī-bián localhost)
 # Cloudflare Pages ài iōng absolute URL (absURL)
@@ -31,7 +31,7 @@ minify:
 
 enableInlineShortcodes: true
 enableRobotsTXT: true
-cleanDestinationDir: true     #Hugo tī build chìn-chêng chū-tōng chheng public
+cleanDestinationDir: true #Hugo tī build chìn-chêng chū-tōng chheng public
 pagination:
   pagerSize: 10
 
@@ -55,7 +55,10 @@ build:
 markup:
   goldmark:
     renderer:
-      unsafe: true               # Enable HTML in Markdown (Blog)
+      unsafe: true # Enable HTML in Markdown (Blog)
   tableOfContents:
     startLevel: 2
     endLevel: 4
+
+taxonomies:
+  tag: "tags"
