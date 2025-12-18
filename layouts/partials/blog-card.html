@@ -11,9 +11,11 @@
 
       <h3 class="blog-card-title">{{ .Title }}</h3>
 
-      <p class="blog-card-excerpt">{{ .Summary | plainify | truncate 120 }}</p>
+      <p class="blog-card-excerpt">{{ .Summary | plainify | truncate 100 }}</p>
 
-      <span class="blog-card-cta"> {{ i18n "blog_card_more" }} → </span>
+      <span class="blog-card-cta">
+        {{ i18n "blog_card_more" | default "Read more" }} →
+      </span>
     </div>
   </a>
 </article>

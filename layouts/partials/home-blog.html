@@ -1,7 +1,11 @@
 <section class="home-blog">
-  <h2 class="section-title">
-    Tah-bûn
-  </h2>
+  <div class="home-blog-inner">
+    <div class="section-header">
+      <h2 class="section-title">
+        {{ i18n "blog_section_title" | default "Blog" }} 
+      </h2>
+      <span class="section-sub">Bûn-chiuⁿ kap siāu-kài</span>
+    </div>
 
   <div class="blog-grid">
     {{ range first 3 (where .Site.RegularPages "Section" "blog") }}
@@ -11,7 +15,8 @@
 
   <div class="home-blog-more">
     <a href="{{ "blog/" | relLangURL }}" class="blog-btn-main">
-      {{ i18n "blog_btn_main" }} →
+      {{ i18n "blog_btn_main" | default "View all posts" }} →
     </a>
   </div>
+</div>
 </section>

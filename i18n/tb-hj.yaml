@@ -9,11 +9,14 @@ hero_title_2: "數位體驗"
 hero_subtitle: "用心設計無障礙 ê 現代網站體驗。"
 view_products: "來看覓"
 
-product_section_title: 上新產品
-product_name_1: Siu-lêng-chiá (Hunter)
-product_name_2: Thêng-hiō
-product_name_3: Classic Logo Tee
-product_name_4: Tâi-oân Tē-tô͘ Thiap-chóa
+product_section_title: "上新產品"
+product_name_1: "Siu-lêng-chiá (Hunter)"
+product_name_2: "Thêng-hiō"
+product_name_3: "Classic Logo Tee"
+product_name_4: "Tâi-oân Tē-tô͘ Thiap-chóa"
 
-blog_card_more: 閱讀文章
-blog_btn_main: 看全部文章
+blog_section_title: "文章"
+blog_card_more: "閱讀文章"
+blog_btn_main: "看全部文章"
+published_at: "發表日期："
+updated_at: "修改日期："

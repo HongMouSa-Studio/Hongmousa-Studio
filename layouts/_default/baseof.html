@@ -13,12 +13,8 @@
     {{ partial "header.html" . }}
 
     <!-- 2. List + Single -->
-    <main id="main">
-      {{ block "main" . }}{{ end }}
-    </main>
-  </body>
-    
-</a>
+    <main id="main">{{ block "main" . }}{{ end }}</main>
+
     <!-- 5. FOOTER -->
     {{ partial "footer.html" . }}
 

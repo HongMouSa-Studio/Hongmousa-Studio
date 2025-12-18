@@ -103,7 +103,8 @@ header {
   padding: 0 20px; /* 2 pêng kap piⁿ--a ê kū-lī */
   position: sticky;
   top: 20px;
-  z-index: 50;
+  z-index: 100;
+  pointer-events: auto;
 }
 
 /* container that holds logo/nav/toggles */
@@ -127,6 +128,7 @@ header {
   position: relative; /* important: menu-mobile absolute will be relative to header/nav */
   z-index: 50;
   flex-wrap: wrap; /* wrap: Jī bē ka-tī ōaⁿ chōa; nowrap: kui chōa kiông-chè kāng chōa */
+  pointer-events: auto;
 }
 
 /* ---------------------------------------------------
@@ -238,7 +240,7 @@ header {
   position: absolute;
   right: 0;
   margin-top: 8px;
-  width: 160px;
+  width: 165px;
   background: white;
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -465,38 +467,73 @@ header {
 }
 
 /* ---------------------------------------------------
-    4. Product Grid (Glass Cards)
+    4. Main (list + single)
 -----------------------------------------------------*/
-.product-section {
-  padding: 4rem 0; /* Container handles horizontal padding */
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.product-section-header {
+.section-header {
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: baseline; /* Jī bē cháu khì āu 1 chōa */
   text-align: center;
+  align-items: center;
   margin-bottom: 2rem;
   font-size: 1.8rem;
   position: relative;
+  max-width: 1200px;
+  margin: 0 auto 2.5rem;
+  padding: 0 1rem;
+  gap: 1.5rem;
 }
 
-.product-section-header h2 {
+.section-header h2 {
   font-family: "Noto Serif TC", serif;
   font-size: 1.5rem;
   font-weight: bold;
   color: var(--text-dark);
 }
 
-.product-section-header::after {
-  content: "";
-  display: block;
-  width: 60px;
-  height: 3px;
-  background-color: var(--accent-green);
-  margin: 10px auto 0;
+.section-header::after {
+  display: none;
+}
+
+.section-title {
+  font-family: "Noto Serif TC", serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--text-dark);
+  position: relative;
+}
+
+.section-title::before {
+  content: "▸";
+  color: var(--accent-green);
+  margin-right: 0.5rem;
+  font-weight: normal;
+}
+
+.section-sub {
+  color: #9ca3af; /* neutral gray */
+  opacity: 0.65;
+  font-size: 0.75rem;
+  position: relative;
+  top: -0.3em;
+  letter-spacing: 0.08em;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: color 0.25s ease;
+}
+
+.section-header:hover .section-sub {
+  color: var(--accent-green);
+}
+
+/* ---------------------------------------------------
+    5. Product Grid (Glass Cards)
+-----------------------------------------------------*/
+.product-section {
+  padding: 4rem 0; /* Container handles horizontal padding */
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 /* Desktop: 4 Columns */
@@ -580,23 +617,51 @@ header {
 }
 
 /* ---------------------------------------------------
-    5. Home Blog Section (Glass Cards)
+    6. Home Blog Section (Glass Cards)
 -----------------------------------------------------*/
 
 .home-blog {
   padding: 60px 5%;
 }
 
+.blog-list {
+  padding: 80px 5%;
+}
+
+.home-blog-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 /* Home blog grid */
 .blog-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 24px;
+  gap: 2rem;
 }
 
-/* Blog Card (Single card) */
+/* ===== Blog Card ===== */
+/* Cover image */
+.blog-card-cover {
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+  margin: 0;
+  object-fit: cover;
+  display: block;
+}
+
+.blog-card-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Single card */
 .blog-card {
   border-radius: 20px;
+  position: relative;
   background: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
@@ -613,53 +678,58 @@ header {
 
 .blog-card-link {
   display: block;
-  padding: 1.6rem;
+  height: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  -webkit-backdrop-filter: blur(14px);
+  transition: transform 0.35s ease, box-shadow 0.35s ease, background 0.35s ease;
 }
 
 /* Text */
 .blog-card-title {
-  font-size: 1.25rem;
-  margin-bottom: 0.6rem;
-  line-height: 1.35;
+  font-size: 1.15rem;
+  margin: 0.4rem 0 0.6rem;
+  line-height: 1.45;
+}
+
+/* Body */
+.blog-card-body {
+  padding: 1.4rem 1.5rem 1.6rem;
 }
 
 .blog-card-date {
   font-size: 0.85rem;
+  opacity: 0.65;
+  letter-spacing: 0.05em;
   color: var(--text-light);
   display: block;
   margin-bottom: 0.4rem;
 }
 
 .blog-card-excerpt {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: #555;
-  line-height: 1.6;
+  line-height: 1.7;
   margin-bottom: 1rem;
+  opacity: 0.85;
 }
 
 /* Read more */
 .blog-card-cta {
-  font-size: 0.9rem;
+  display: inline-block;
+  font-size: 0.85rem;
   font-weight: 600;
   color: var(--accent-green);
+  opacity: 0.7;
   align-self: flex-start;
+  margin-top: 0.9rem;
+  transition: opacity 0.25s ease;
 }
 
-/* Cover image */
-.blog-card-cover {
-  height: 160px;
-  overflow: hidden;
-}
-
-.blog-card-cover img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.blog-card-body {
-  padding: 1.4rem 1.6rem;
+.blog-card-link:hover .blog-card-cta {
+  opacity: 1;
 }
 
 /* CTA button */
@@ -684,27 +754,102 @@ header {
   font-size: 0.85rem;
 }
 
-/* Blog Single */
+/* ===== Blog Single ===== */
 .blog-single {
-  max-width: 720px;
+  max-width: 760px;
   margin: 0 auto;
-  padding: 80px 20px;
+  padding: 3rem 1.5rem 5rem;
+  position: relative;
+  z-index: 1;
 }
 
-.blog-single-header h1 {
-  font-size: 2.2rem;
-  margin-bottom: 0.4rem;
+.blog-single-header {
+  margin-bottom: 2.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.blog-single-title {
+  font-size: 2.1rem;
+  line-height: 1.35;
+  margin-bottom: 0.5rem;
+}
+
+.blog-single-date {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+
+  font-size: 0.85rem;
+  color: var(--text-light);
+}
+
+/* reading mode */
+.blog-single.reading-wide {
+  max-width: 920px;
+}
+
+.blog-single.reading-narrow {
+  max-width: 680px;
+}
+
+/* blog language switcher */
+.blog-lang-switch {
+  display: inline-flex;
+  gap: 0.4rem;
+  font-family: "Noto Sans TC", sans-serif;
+}
+
+.blog-lang-switch a {
+  padding: 2px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  font-size: 0.7rem;
+  opacity: 0.6;
+}
+
+.blog-lang-switch a.is-active {
+  opacity: 1;
+  background: rgba(124, 187, 0, 0.12);
+  border-color: var(--accent-green);
+  font-weight: 600;
 }
 
 .blog-single-cover img {
   width: 100%;
-  border-radius: 18px;
-  margin: 32px 0;
+  border-radius: 16px;
+  margin: 2rem 0;
 }
 
+/* Content typography */
 .blog-single-content {
-  line-height: 1.8;
-  font-size: 1.05rem;
+  font-size: 1rem;
+  line-height: 1.95; /* POJ / 漢字友善 */
+}
+
+.blog-single-content p {
+  margin: 1.2em 0;
+}
+
+.blog-single-content h2 {
+  font-size: 1.4rem;
+  margin: 3rem 0 1rem;
+}
+
+.blog-single-content h3 {
+  font-size: 1.15rem;
+  margin: 2.2rem 0 0.8rem;
+}
+
+.blog-single-content ul,
+.blog-single-content ol {
+  padding-left: 1.2rem;
+  margin: 1.2rem 0;
+}
+
+.blog-single-content li {
+  margin: 0.5rem 0;
 }
 
 /* ---------------------------------------------------
@@ -733,7 +878,7 @@ header {
 }
 
 /* ---------------------------------------------------
-    5. Footer
+    7. Footer
 -----------------------------------------------------*/
 footer {
   background-color: var(--text-dark);
@@ -759,10 +904,6 @@ footer {
   .nav-links,
   .main-nav {
     display: flex;
-  }
-
-  .menu-toggle {
-    display: none;
   }
 
   .menu-mobile {
@@ -801,12 +942,8 @@ footer {
     gap: 1.2rem;
   }
 
-  .menu-toggle {
-    display: none !important;
-  }
-
   .menu-mobile {
-    display: none !important;
+    display: none;
   }
 
   /* Product Grid: 3 Columns */
@@ -949,8 +1086,8 @@ footer {
     margin: 60px auto;
   }
 
-  .blog-card article {
-    padding: 20px;
+  .blog-card-body {
+    padding: 1.2rem 1.25rem;
   }
 
   /* Footer */

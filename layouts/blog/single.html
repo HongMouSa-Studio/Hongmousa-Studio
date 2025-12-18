@@ -1,6 +1,33 @@
 {{ define "main" }}
-<article class="blog-content">
-  <h1>{{ .Title }}</h1>
-  {{ .Content }}
+<article class="blog-single">
+  <header class="blog-single-header">
+    <h1 class="blog-single-title">{{ .Title }}</h1>
+
+    <div class="blog-single-date">
+      <time> {{ i18n "published_at" }}{{ .Date.Format "2006-01-02" }} </time>
+
+      {{ with .Lastmod }}
+      <span class="updated">
+        ｜{{ i18n "updated_at" }}{{ .Format "2006-01-02" }}
+      </span>
+      {{ end }}
+    </div>
+
+    {{ with .Translations }}
+    <nav class="blog-lang-switch">
+      {{ range . }}
+      <a href="{{ .RelPermalink }}">{{ .Language.LanguageName }}</a>
+      {{ end }}
+    </nav>
+    {{ end }}
+  </header>
+
+  {{ with .Params.cover }}
+  <div class="blog-single-cover">
+    <img src="{{ . | relURL }}" alt="{{ $.Title }}" />
+  </div>
+  {{ end }}
+
+  <div class="blog-single-content">{{ .Content }}</div>
 </article>
 {{ end }}

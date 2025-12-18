@@ -9,11 +9,14 @@ hero_title_2: "digital experiences"
 hero_subtitle: "Designing modern, accessible web experiences with care."
 view_products: "Shop Now"
 
-product_section_title: New Releases
-product_name_1: Siu-lêng-chiá (Hunter)
-product_name_2: Thêng-hiō
-product_name_3: Classic Logo Tee
-product_name_4: Tâi-oân Tē-tô͘ Thiap-chóa
+product_section_title: "New Releases"
+product_name_1: "Siu-lêng-chiá (Hunter)"
+product_name_2: "Thêng-hiō"
+product_name_3: "Classic Logo Tee"
+product_name_4: "Tâi-oân Tē-tô͘ Thiap-chóa"
 
-blog_card_more: Read more
-blog_btn_main: View all posts
+blog_section_title: "Blog"
+blog_card_more: "Read more"
+blog_btn_main: "View all posts"
+published_at: "Published at: "
+updated_at: "Updated at: "
