@@ -1,13 +1,44 @@
-<title>{{ if .Title }}{{ .Title }} | {{ end }}{{ .Site.Title }}</title>
+<!-- DEBUG: head.html loaded -->
+
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>{{ if .Title }}{{ .Title }} | {{ end }}{{ .Site.Title }}</title>
 
 {{ with .Description }}
 <meta name="description" content="{{ . }}" />
 {{ end }}
 
-<!-- Main CSS -->
-<link rel="stylesheet" href="/css/custom.css" />
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@500;700&display=swap"
+  rel="stylesheet"
+/>
+
+<!-- Hugo Pipes CSS (assets) -->
+{{/* Collect CSS */}} {{ $css := slice (resources.Get "css/base.css")
+(resources.Get "css/layout.css") (resources.Get "css/components.css")
+(resources.Get "css/blog.css") (resources.Get "css/blog-single.css") }} {{
+$bundle := $css | resources.Concat "css/main.css" }}
+
+<link rel="stylesheet" href="{{ $bundle.RelPermalink }}" />
+
+<!-- Main CSS ​(static) -->
+<!-- <link rel="stylesheet" href="/css/custom.css" /> -->
+
+<!-- Blog JS (reading mode / sliders etc.) -->
+{{ with resources.Get "js/blog.js" }} {{ if hugo.IsDevelopment }}
+<script src="{{ .RelPermalink }}" defer></script>
+{{ else }} {{ $js := . | minify | fingerprint }}
+<script
+  src="{{ $js.RelPermalink }}"
+  integrity="{{ $js.Data.Integrity }}"
+  crossorigin="anonymous"
+  defer
+></script>
+{{ end }} {{ end }}
 
 <!-- Favicon (Liû-lám-khì ia̍h-chhiam ê icon) -->
 <link rel="icon" type="image/png" href="/img/favicon.png" />
@@ -16,12 +47,6 @@
 <link
   rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-/>
-
-<!-- Google Fonts: Noto Serif TC (Bûn-chheng) & Noto Sans TC -->
-<link
-  href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@400;700&display=swap"
-  rel="stylesheet"
 />
 
 <!-- SNIPCART CSS (Kò͘-bu̍t-chhia Iūⁿ-sek) -->
