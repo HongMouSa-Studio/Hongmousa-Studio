@@ -1,6 +1,9 @@
 {{ define "main" }}
-<section class="blog-list">
-  <h1 class="section-title">{{ .Title }}</h1>
+<section class="blog-list container">
+  <header class="section-header">
+    <h2 class="section-title">Blog</h2>
+    <span class="section-sub">Writing / 記錄</span>
+  </header>
 
   <div class="blog-grid">
     {{ range .Pages }} {{ partial "blog-card.html" . }} {{ end }}

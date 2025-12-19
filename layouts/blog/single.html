@@ -1,33 +1,58 @@
-{{ define "main" }}
-<article class="blog-single">
-  <header class="blog-single-header">
-    <h1 class="blog-single-title">{{ .Title }}</h1>
+{{ define "main" }} 
+<article class="blog-single"> 
+  <header class="blog-single-header"> 
+    <h1 class="blog-single-title">{{ .Title }}</h1> 
 
-    <div class="blog-single-date">
-      <time> {{ i18n "published_at" }}{{ .Date.Format "2006-01-02" }} </time>
+    <div class="blog-single-meta"> 
+      <div class="blog-single-date"> 
+      <time> {{ i18n "published_at" }}{{ .Date.Format "2006-01-02" }} </time> 
 
       {{ with .Lastmod }}
-      <span class="updated">
-        ｜{{ i18n "updated_at" }}{{ .Format "2006-01-02" }}
-      </span>
-      {{ end }}
+       <span class="updated"> ｜{{ i18n "updated_at" }}{{ .Format "2006-01-02" }} </span>
+        {{ end }} 
+      </div> 
     </div>
+   </header> 
+   
+   <div class="blog-reading-controls">
+     <div class="reading-left"> 
+      <button class="toggle-reading" data-mode="wide"> 閱讀模式：寬 
+        <button class="font-smaller">A−</button>
+         <input 
+         type="range" 
+         min="0.9" 
+         max="1.4" 
+         step="0.05" 
+         value="1.05" 
+         class="font-slider" /> 
+         
+         <button class="font-larger">A+</button> 
+        </div> 
+        
+        <div class="reading-right"> 
+          <nav class="blog-lang-switch"> 
+            {{ range .AllTranslations }} 
+            <a
+             href="{{ .RelPermalink }}" 
+             class="{{ if eq .Lang $.Lang }}is-active{{ end }}" 
+             > 
+             {{ .Language.LanguageName }}
+             </a> 
+             {{ end }} 
+            </nav> 
+          </div> 
+        </div>
+        
+        {{ with .Params.cover }} 
+        <div class="blog-single-cover"> 
+          <img src="{{ . | relURL }}" alt="{{ $.Title }}" /> 
+        </div> 
+        {{ end }} 
+        
+        <div class="blog-single-content">{{ .Content }}
 
-    {{ with .Translations }}
-    <nav class="blog-lang-switch">
-      {{ range . }}
-      <a href="{{ .RelPermalink }}">{{ .Language.LanguageName }}</a>
+        </div> 
+      </article>
+      
+      <script src="/js/blog.js"></script> 
       {{ end }}
-    </nav>
-    {{ end }}
-  </header>
-
-  {{ with .Params.cover }}
-  <div class="blog-single-cover">
-    <img src="{{ . | relURL }}" alt="{{ $.Title }}" />
-  </div>
-  {{ end }}
-
-  <div class="blog-single-content">{{ .Content }}</div>
-</article>
-{{ end }}

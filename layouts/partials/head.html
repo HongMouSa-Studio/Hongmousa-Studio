@@ -4,15 +4,10 @@
 
 {{ with .Description }}
 <meta name="description" content="{{ . }}" />
-{{ end }} {{/* --- Tailwind CSS --- */}} {{/* $styles := resources.Get
-"css/tailwind.css" | postCSS | fingerprint }}
-<link
-  rel="stylesheet"
-  href="{{ $styles.RelPermalink }}"
-  integrity="{{ $styles.Data.Integrity }}"
-/>
-*/}} {{/* --- Main CSS (site overrides) --- */}}
-<link rel="stylesheet" href="/css/gemini.css" />
+{{ end }}
+
+<!-- Main CSS -->
+<link rel="stylesheet" href="/css/custom.css" />
 
 <!-- Favicon (Liû-lám-khì ia̍h-chhiam ê icon) -->
 <link rel="icon" type="image/png" href="/img/favicon.png" />
