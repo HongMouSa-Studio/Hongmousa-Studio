@@ -1,0 +1,26 @@
+/* -------------------------
+    Blog choan-iōng
+---------------------------*/
+.blog-lang-switch {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.blog-lang-switch a {
+  opacity: 0.5;
+  border: 1px solid transparent;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+}
+
+.blog-lang-switch a:hover {
+  opacity: 0.85;
+  border-color: var(--accent-green);
+}
+
+.blog-lang-switch a.is-active {
+  opacity: 1;
+  background: rgba(124, 187, 0, 0.15);
+  border-color: var(--accent-green);
+  font-weight: 600;
+}

@@ -18,11 +18,14 @@
 />
 
 <!-- Hugo Pipes CSS (assets) -->
-{{/* Collect CSS */}} {{ $css := slice (resources.Get "css/base.css")
-(resources.Get "css/layout.css") (resources.Get "css/components.css")
-(resources.Get "css/blog.css") (resources.Get "css/blog-single.css") }} {{
+{{/* Collect CSS */}} {{ $css := slice (resources.Get "css/00-settings.css")
+(resources.Get "css/01-reset.css") (resources.Get "css/02-base.css")
+(resources.Get "css/10-layout.css") (resources.Get "css/11-layout-blog.css")
+(resources.Get "css/20-components.css") (resources.Get
+"css/21-components-blog.css") (resources.Get "css/30-page-home.css")
+(resources.Get "css/31-page-blog-list.css") (resources.Get
+"css/32-page-blog-single.css") (resources.Get "css/99-utilities.css") }} {{
 $bundle := $css | resources.Concat "css/main.css" }}
-
 <link rel="stylesheet" href="{{ $bundle.RelPermalink }}" />
 
 <!-- Main CSS ​(static) -->

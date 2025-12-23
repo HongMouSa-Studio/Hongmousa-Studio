@@ -1,0 +1,53 @@
+/* --------------------
+    HTML Goân-sò͘-kip
+----------------------*/
+body {
+  font-family: var(--font-body); /* Lāi-bûn ēng Sans */
+  color: var(--text-main);
+
+  background: var(--bg-page);
+  background-attachment: fixed; /* kò͘-tēng pōe-kéng ōe-bīn */
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  line-height: 1.7; /* Ta̍k chōa lī khah hn̄g */
+  font-size: calc(1rem * var(--font-scale));
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.3;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ---------------------------------------------------
+    Screen-reader only link (for accessibility)
+    Bô-chiòng-gāi-tàng siat-tēng (WCAG 2.2). Hong-piān keyboard(Tab)/ JAWS/NVDA téng-téng ê iōng-hō͘
+-----------------------------------------------------*/
+.sr-only {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.sr-only:focus,
+.sr-only:active {
+  position: static !important;
+  width: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}

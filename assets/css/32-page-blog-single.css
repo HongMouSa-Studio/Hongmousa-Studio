@@ -1,0 +1,7 @@
+/* -------------------------
+    Reading mode core
+---------------------------*/
+.blog-single.reading-wide .blog-single-header,
+.blog-single.reading-wide .blog-single-content {
+  max-width: var(--article-wide);
+}
