@@ -2,15 +2,18 @@
     HTML Goân-sò͘-kip
 ----------------------*/
 body {
-  font-family: var(--font-body); /* Lāi-bûn ēng Sans */
+  font-family: var(--font-body);
+  /* Lāi-bûn ēng Sans */
   color: var(--text-main);
 
   background: var(--bg-page);
-  background-attachment: fixed; /* kò͘-tēng pōe-kéng ōe-bīn */
+  background-attachment: fixed;
+  /* kò͘-tēng pōe-kéng ōe-bīn */
   background-repeat: no-repeat;
   background-size: cover;
 
-  line-height: 1.7; /* Ta̍k chōa lī khah hn̄g */
+  line-height: 1.7;
+  /* Ta̍k chōa lī khah hn̄g */
   font-size: calc(1rem * var(--font-scale));
 }
 
@@ -50,4 +53,15 @@ a {
   overflow: visible;
   clip: auto;
   white-space: normal;
+}
+
+/* --------------------
+    Auth
+----------------------*/
+body.is-auth .login-only {
+  display: none
+}
+
+body:not(.is-auth) .auth-only {
+  display: none
 }

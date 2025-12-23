@@ -12,7 +12,10 @@
     <!-- 1. HEADER -->
     {{ partial "header.html" . }}
 
-    <!-- 2. List + Single -->
+    <!-- 2. AUTH -->
+    <script type="module" src="/js/auth.js"></script>
+
+    <!-- 3. List + Single -->
     <main id="main">{{ block "main" . }}{{ end }}</main>
 
     <!-- 5. FOOTER -->
