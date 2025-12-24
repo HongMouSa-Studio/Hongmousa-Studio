@@ -36,8 +36,8 @@ main {
 }
 
 .site-header .header-inner {
-  max-width: 95%;
-  /* Wider on desktop */
+  max-width: 98%;
+  /* Even wider to avoid feeling narrow */
   margin: 0 auto;
 
   background: rgba(255, 255, 255, 0.9);
@@ -574,8 +574,8 @@ footer {
   }
 
   .logo-block img {
-    height: 50px;
-    /* Adjust size for mobile center */
+    height: 65px;
+    /* Exact match with tablet size */
   }
 
   .site-title {
@@ -585,7 +585,7 @@ footer {
   /* Show hamburger */
   .menu-toggle {
     display: block;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     cursor: pointer;
     color: #4b5563;
     /* Remove order since we are using absolute center for logo */
@@ -595,11 +595,12 @@ footer {
 
   .header-inner {
     justify-content: space-between;
-    padding: 0.5rem 1rem !important;
+    padding: 0.8rem 1rem !important;
+    /* Increased vertical padding */
     position: relative;
     /* Context for absolute logo */
-    min-height: 60px;
-    /* Ensure height */
+    min-height: 70px;
+    /* Increased height */
   }
 
   /* Icons group styling adjustment for mobile */
