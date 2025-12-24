@@ -36,7 +36,8 @@ main {
 }
 
 .site-header .header-inner {
-  max-width: 1280px;
+  max-width: 95%;
+  /* Wider on desktop */
   margin: 0 auto;
 
   background: rgba(255, 255, 255, 0.9);
@@ -379,27 +380,35 @@ main {
   letter-spacing: 0.1em;
   font-size: 1rem;
   margin-bottom: 0.5rem;
+  /* Use Charis SIL for correct italics if needed, though this span looks like normal text */
 }
 
 .hero-text h1 {
-  font-family: "Noto Serif TC", serif;
+  font-family: "Charis SIL", "Noto Serif TC", serif;
+  /* Force Charis for main title to support tones */
   font-size: clamp(2.5rem, 5vw, 3rem);
   /*  Chū-tōng RWD hâm-sò͘ */
   color: var(--text-dark);
   line-height: 1.25;
   margin-bottom: 1.5rem;
+  font-feature-settings: "cv01", "ss01";
 }
 
 .hero-text h1 span {
-  font-size: clamp(1rem, 2.5vw + 1rem, 1.75rem);
+  font-family: "Charis SIL", serif;
+  /* Crucial for 7th tone italics */
   font-style: italic;
+  font-size: clamp(1rem, 2.5vw + 1rem, 1.75rem);
   color: #9ca3af;
+  font-feature-settings: "cv01", "ss01";
 }
 
 .hero-text p {
   color: #6b7280;
   margin-bottom: 2rem;
   max-width: 28rem;
+  font-family: "Charis SIL", "Gentium Plus", var(--font-body);
+  /* Ensure body text also supports o͘ */
 }
 
 /* Buttons (Chhi̍h-á) */
@@ -544,45 +553,60 @@ footer {
     /* Bô hûi-kak */
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.07);
 
+    /* Hide desktop nav & extra components */
+    .nav-links,
+    .main-nav,
+    .lang-desktop,
+    .member-area {
+      display: none !important;
+    }
+
     /* iOS safe-area */
     padding: calc(0.8rem + env(safe-area-inset-top)) 1rem 0.8rem;
   }
 
-  /* Logo */
+  /* Logo - Absolute Center for Mobile */
+  .logo-block {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+  }
+
   .logo-block img {
-    height: 65px;
+    height: 50px;
+    /* Adjust size for mobile center */
   }
 
   .site-title {
-    font-size: 1.25rem;
-    /* Mobile size */
-  }
-
-  /* Hide desktop nav */
-  .nav-links,
-  .main-nav,
-  .lang-desktop {
     display: none !important;
-    /* Mobile: Hide desktop navigation */
-  }
-
-  /* Hide desktop language */
-  .lang-desktop {
-    display: none !important;
-  }
-
-  .member-area {
-    display: none;
-    /* Mobile: Hide user icon */
   }
 
   /* Show hamburger */
   .menu-toggle {
     display: block;
-    /* Mobile: Show menu button */
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     cursor: pointer;
     color: #4b5563;
+    /* Remove order since we are using absolute center for logo */
+    z-index: 20;
+    /* Ensure clickable */
+  }
+
+  .header-inner {
+    justify-content: space-between;
+    padding: 0.5rem 1rem !important;
+    position: relative;
+    /* Context for absolute logo */
+    min-height: 60px;
+    /* Ensure height */
+  }
+
+  /* Icons group styling adjustment for mobile */
+  .icons-group {
+    gap: 0.8rem;
+    z-index: 20;
+    /* Ensure clickable */
   }
 
   /* mobile menu: full width, edge-to-edge, below header */
@@ -618,7 +642,7 @@ footer {
   }
 
   body {
-    padding-top: 120px;
+    padding-top: 80px;
     /* Fixed Header height compensation for ALL pages */
   }
 

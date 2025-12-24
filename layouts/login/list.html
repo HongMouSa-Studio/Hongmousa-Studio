@@ -9,33 +9,57 @@
   </header>
 
   <div class="auth-card">
+    
+    <!-- Google login (Primary) -->
+    <div class="auth-section">
+      <button id="google-login" class="google-btn">
+        <i class="fa-brands fa-google"></i>
+        Continue with Google
+      </button>
+    </div>
 
     <!-- OTP login -->
     <div class="auth-section">
-      <h3>Email OTP</h3>
-
-      <form id="otp-form">
-        <input
-          type="email"
-          id="otp-email"
-          placeholder="you@example.com"
-          required
-        />
-        <button type="submit">
+      
+      <!-- Step 1: Send Email -->
+      <div id="step-email">
+        <div class="form-group">
+          <label for="login-email" class="sr-only">Email address</label>
+          <input
+            type="email"
+            id="login-email"
+            class="form-control"
+            placeholder="name@example.com"
+            required
+          />
+        </div>
+        <button id="send-otp-btn" class="btn-main">
           Send login code
         </button>
-      </form>
+      </div>
 
-      <p id="otp-message" class="auth-message"></p>
+      <!-- Step 2: Verify OTP (Hidden by default) -->
+      <div id="step-otp" class="hidden">
+        <p style="margin-bottom: 1rem; font-size: 0.9rem; color: #666;">Check your email for the code.</p>
+        <div class="form-group">
+          <label for="login-otp" class="sr-only">Login Code</label>
+          <input
+            type="text"
+            id="login-otp"
+            class="form-control"
+            placeholder="123456"
+          />
+        </div>
+        <button id="verify-otp-btn" class="btn-main">
+          Verify & Login
+        </button>
+      </div>
+
+      <p id="otp-message" class="auth-message" style="margin-top: 1rem; color: var(--accent-green); font-size: 0.9rem;"></p>
     </div>
 
-    <div class="auth-divider">or</div>
-
-    <!-- Google login -->
-    <div class="auth-section">
-      <button id="google-login" class="google-btn">
-        Continue with Google
-      </button>
+    <div class="auth-divider" style="margin: 1.5rem 0; color: #999; font-size: 0.9rem;">
+      <span>or continue with email</span>
     </div>
 
   </div>

@@ -1,5 +1,6 @@
 /* debug/helper */
-.u-hidden {
+.u-hidden,
+.hidden {
   display: none !important;
 }
 

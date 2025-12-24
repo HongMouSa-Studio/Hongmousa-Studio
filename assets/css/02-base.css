@@ -18,10 +18,16 @@ body {
   background-size: cover;
 
   /* Fonts */
-  --font-body: "Inter", "Noto Sans TC", system-ui, sans-serif;
-  --font-heading: "Noto Serif TC", serif;
+  /* Châi-ēng "Charis SIL" ia̍h "Gentium Plus" tùi POJ hián-sī khah hó, 
+     nā bô chió-put-jî-kò ēng Noto Sans/Serif */
+  --font-body: "Charis SIL", "Gentium Plus", "Inter", "Noto Sans TC", system-ui, sans-serif;
+  --font-heading: "Charis SIL", "Noto Serif TC", serif;
   --font-ui: "Inter", "Noto Sans TC", sans-serif;
   --font-mono: "Menlo", monospace;
+
+  /* POJ Opentype Settings to fix diacritics */
+  font-feature-settings: "cv01", "ss01";
+  -webkit-font-smoothing: antialiased;
 
   /* Ta̍k chōa lī khah hn̄g */
   font-size: calc(1rem * var(--font-scale));

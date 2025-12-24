@@ -1,19 +1,38 @@
-<nav class="nav-mobile">
-  <ul>
-    <!-- <li><a href="{{ "/" | relLangURL }}">{{ i18n "nav_home" }}</a></li>-->
-    <li><a href="{{ "products/" | relLangURL }}">{{ i18n "nav_products" }}</a></li>
-    <li><a href="{{ "blog/" | relLangURL }}">{{ i18n "nav_blog" }}</a></li>
-    <li><a href="{{ "about/" | relLangURL }}">{{ i18n "nav_about" }}</a></li>
-    <li><a href="{{ "contact/" | relLangURL }}">{{ i18n "nav_contact" }}</a></li>
+<div class="nav-mobile-inner" style="padding: 1rem;">
+  <ul style="display: flex; flex-direction: column; gap: 0.5rem;">
+    <li><a href="{{ "products/" | relLangURL }}" class="mobile-nav-link">{{ i18n "nav_products" }}</a></li>
+    <li><a href="{{ "blog/" | relLangURL }}" class="mobile-nav-link">{{ i18n "nav_blog" }}</a></li>
+    <li><a href="{{ "about/" | relLangURL }}" class="mobile-nav-link">{{ i18n "nav_about" }}</a></li>
+    <li><a href="{{ "contact/" | relLangURL }}" class="mobile-nav-link">{{ i18n "nav_contact" }}</a></li>
   </ul>
 
-  <div class="lang-mobile">
-  {{ range .Site.Languages }}
-    {{ if eq .Lang $.Site.Language.Lang }}
-      <a href="{{ .Lang | relLangURL }}" class="current-lang">{{ .LanguageName }}</a>
-    {{ else }}
-      <a href="{{ .Lang | relLangURL }}">{{ .LanguageName }}</a>
-    {{ end }}
-  {{ end }}
+  <!-- Styled Mobile Language Switcher -->
+  <div class="lang-mobile-group" style="margin-top: 1.5rem; border-top: 1px solid #eee; padding-top: 1rem;">
+    <!-- Earth icon + Label -->
+    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.8rem; color: #888; padding-left: 0.5rem;">
+       <span>🌐</span>
+       <span style="font-size: 0.85rem;">Language</span>
+    </div>
+
+    <!-- Language Pills -->
+    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+      {{ range .Site.Languages }}
+        {{ $active := eq .Lang $.Site.Language.Lang }}
+        <!-- Manual URL construction to prevent relative path stacking issues -->
+        {{ $targetPath := printf "/%s/" .Lang }}
+        {{ if eq .Lang $.Site.Params.defaultContentLanguage }}
+           {{ if $.Site.Params.defaultContentLanguageInSubdir }}
+              {{ $targetPath = printf "/%s/" .Lang }}
+           {{ else }}
+              {{ $targetPath = "/" }}
+           {{ end }}
+        {{ end }}
+        
+        <a href="{{ $targetPath | absURL }}" class="lang-pill {{ if $active }}active{{ end }}" 
+           style="{{ if $active }}background: var(--text-dark); color: white;{{ else }}background: #f3f4f6; color: #333;{{ end }} padding: 6px 14px; border-radius: 99px; font-size: 0.9rem; text-decoration: none; transition: background 0.2s;">
+           {{ .LanguageName }}
+        </a>
+      {{ end }}
+    </div>
+  </div>
 </div>
-</nav>

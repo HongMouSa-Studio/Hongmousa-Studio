@@ -14,15 +14,18 @@ getSession().then(({ data }) => {
 
 
 document.getElementById('send-otp-btn')
-  ?.addEventListener('click', async () => {
+  ?.addEventListener('click', async (e) => {
+    e.preventDefault() // Prevent form submit refresh
     const email = emailInput.value.trim()
     if (!email) return alert('Enter email')
 
     const { error } = await sendOtp(email)
     if (error) return alert(error.message)
 
+    // Show step 2
     document.getElementById('step-email').classList.add('hidden')
     document.getElementById('step-otp').classList.remove('hidden')
+    document.getElementById('otp-message').textContent = "Login code sent! Please check your email inbox (and spam)."
   })
 
 document.getElementById('verify-otp-btn')

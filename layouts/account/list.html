@@ -1,12 +1,12 @@
 {{ define "main" }}
 <section class="account-page">
-  <div class="container" style="max-width: 800px; margin: 4rem auto;">
+  <div class="container" style="width: 100%; max-width: 800px; margin: 0 auto;">
     
-    <header class="section-header">
+    <header class="section-header" style="margin-top: 0;">
       <h2>{{ .Title }}</h2>
     </header>
 
-    <div class="account-content card" style="background: white; padding: 2rem; border-radius: 1rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+    <div class="account-content">
       {{ .Content }}
     </div>
 
