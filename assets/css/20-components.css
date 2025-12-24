@@ -201,6 +201,30 @@ body.is-auth .auth-only {
   gap: 2rem;
 }
 
+/* Tablet (e.g. iPad): 3 Columns */
+@media (max-width: 1024px) {
+  .product-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+/* Large Mobile: 2 Columns */
+@media (max-width: 768px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+}
+
+/* Small Mobile: 1 Column (optional, if card is too small) */
+@media (max-width: 480px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    /* Or 1fr if you prefer single column list style */
+  }
+}
+
 /* Product Card - UI details remain the same */
 .product-image-wrapper {
   position: relative;
