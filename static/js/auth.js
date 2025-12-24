@@ -1,5 +1,3 @@
-console.log('auth.js loaded')
-
 import { createClient } from 'https://esm.sh/@supabase/supabase-js'
 
 const supabase = createClient(
@@ -8,28 +6,54 @@ const supabase = createClient(
 )
 
 window.addEventListener('DOMContentLoaded', async () => {
+
   const loginBtn = document.getElementById('login-btn')
   const logoutBtn = document.getElementById('logout-btn')
+  const memberEmail = document.querySelector('.member-email')
+  const memberDropdown = document.querySelector('.member-dropdown')
+  const memberToggle = memberDropdown?.querySelector('.member-toggle')
 
-  // ===== login =====
+  /* ---------- login ---------- */
   loginBtn?.addEventListener('click', async () => {
     const email = prompt('Enter your email')
     if (!email) return
 
     const { error } = await supabase.auth.signInWithOtp({ email })
     if (error) alert(error.message)
-    else alert('Check your email!')
+    else alert('Check your email to log in!')
   })
 
-  // ===== logout =====
+  /* ---------- dropdown ---------- */
+  memberToggle?.addEventListener('click', (e) => {
+    e.stopPropagation()
+    memberDropdown.classList.toggle('open')
+  })
+
+  document.addEventListener('click', () => {
+    memberDropdown?.classList.remove('open')
+  })
+
+  /* ---------- logout ---------- */
   logoutBtn?.addEventListener('click', async () => {
     await supabase.auth.signOut()
-    location.reload()
+    document.body.classList.remove('is-auth')
   })
 
-  // ===== session =====
-  const { data: { session } } = await supabase.auth.getSession()
-  if (session) {
+  /* ---------- initial session ---------- */
+  const { data } = await supabase.auth.getSession()
+  if (data.session) {
     document.body.classList.add('is-auth')
+    memberEmail.textContent = data.session.user.email
   }
+
+  /* ---------- auth change ---------- */
+  supabase.auth.onAuthStateChange((_event, session) => {
+    if (session) {
+      document.body.classList.add('is-auth')
+      memberEmail.textContent = session.user.email
+    } else {
+      document.body.classList.remove('is-auth')
+      memberEmail.textContent = ''
+    }
+  })
 })

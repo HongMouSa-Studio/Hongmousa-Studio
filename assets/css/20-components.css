@@ -14,7 +14,8 @@ button {
 .section-header {
   display: flex;
   justify-content: space-between;
-  align-items: baseline; /* Jī bē cháu khì āu 1 chōa */
+  align-items: baseline;
+  /* Jī bē cháu khì āu 1 chōa */
   text-align: center;
   align-items: center;
   margin-bottom: 2rem;
@@ -54,7 +55,8 @@ button {
 }
 
 .section-sub {
-  color: #9ca3af; /* neutral gray */
+  color: #9ca3af;
+  /* neutral gray */
   opacity: 0.65;
   font-size: 0.75rem;
   position: relative;
@@ -69,11 +71,125 @@ button {
   color: var(--accent-green);
 }
 
-/* ---------------------------------------------------
-    5. Product Grid (Glass Cards)
------------------------------------------------------*/
+/* ------------------------------
+    Member dropdown (Auth)
+--------------------------------*/
+.member-dropdown {
+  position: relative;
+}
+
+.member-menu {
+  position: absolute;
+  top: 100%;
+  margin-top: 0.5rem;
+
+  /* Kò͘-tēng X */
+  left: 50%;
+  transform: translateX(-90%) translateY(-6px);
+
+  min-width: 20px;
+  max-width: calc(100vw - 2rem);
+
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 0.75rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.15s ease,
+    transform 0.15s ease;
+
+  z-index: 1000;
+}
+
+.member-menu-inner {
+  overflow: hidden;
+  border-radius: 0.75rem;
+}
+
+/* hover bridge */
+.member-menu::before {
+  content: "";
+  position: absolute;
+  top: -12px;
+  /* kiô ê koân-tō͘ */
+  left: -8px;
+  right: -8px;
+  height: 12px;
+  pointer-events: auto;
+}
+
+.member-dropdown:hover .member-menu,
+.member-dropdown:focus-within .member-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-90%) translateY(0);
+}
+
+.member-toggle {
+  background: none;
+  border: none;
+  padding: 0.4rem;
+  cursor: pointer;
+  font-size: 1.05rem;
+  border-radius: 0.5rem;
+}
+
+.member-toggle:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.member-info {
+  padding: 0.8rem 1rem;
+  font-size: 0.9rem;
+  border-bottom: 1px solid #eee;
+}
+
+.member-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.member-link {
+  display: block;
+  padding: 0.75rem 1rem;
+  text-decoration: none;
+  color: #333;
+  width: 100%;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+.member-link:hover {
+  background: #f7f7f7;
+}
+
+/* Auth state helpers */
+.login-only {
+  display: block;
+}
+
+.auth-only {
+  display: none;
+}
+
+body.is-auth .login-only {
+  display: none;
+}
+
+body.is-auth .auth-only {
+  display: block;
+}
+
+/* ------------------------------
+    Product Grid (Glass Cards)
+--------------------------------*/
 .product-section {
-  padding: 4rem 0; /* Container handles horizontal padding */
+  padding: 4rem 0;
+  /* Container handles horizontal padding */
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -107,7 +223,8 @@ button {
 .product-img {
   width: 100%;
   height: 100%;
-  background-color: #ddd; /* Tāi-thè sek-chúi */
+  background-color: #ddd;
+  /* Tāi-thè sek-chúi */
   object-fit: cover;
   transition: transform 0.5s ease;
 }

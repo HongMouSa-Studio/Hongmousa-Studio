@@ -54,14 +54,3 @@ a {
   clip: auto;
   white-space: normal;
 }
-
-/* --------------------
-    Auth
-----------------------*/
-body.is-auth .login-only {
-  display: none
-}
-
-body:not(.is-auth) .auth-only {
-  display: none
-}

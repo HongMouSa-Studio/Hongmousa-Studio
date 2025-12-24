@@ -27,28 +27,54 @@
     <div class="menu-toggle">☰</div>
 
     <!-- Icons (Search, User, Cart) -->
-            <div class="icons-group">
-                
-                <!-- Search -->
-                <button><i class="fa-solid fa-magnifying-glass"></i></button>
+    <div class="icons-group">
 
-                <!-- Auth (Login/Logout) -->
-                <button class="login-only" id="login-btn">Login</button>
+      <!-- Search -->
+      <button aria-label="Search">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
 
-                <div class="auth-only">
-                  <button id="logout-btn">Logout</button>
-                </div>
+      <!-- Auth (Member Dropdown) -->
+      <div class="member-dropdown">
 
-                <!-- Member Area (User) -->
-                <button class="member-area"><i class="fa-regular fa-user"></i></button>
-                
-                <!-- SNIPCART CHECKOUT BUTTON (Cart) -->
-                <button class="snipcart-checkout">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                    <!-- Kò͘-bu̍t-chhia sò͘-liōng -->
-                    <span class="snipcart-items-count cart-count">0</span>
-                </button>
+        <!-- Member icon (always visible) -->
+        <button class="member-toggle" aria-label="User menu">
+          <i class="fa-regular fa-user"></i>
+        </button>
+        
+        <!-- Dropdown menu -->
+        <div class="member-menu">
+          <div class="member-menu-inner">
+
+            <!-- Logged-in info -->
+            <div class="member-info auth-only">
+              <span class="member-email"></span>
             </div>
+
+            <ul class="member-links">
+              <!-- Not logged in -->
+              <li class="login-only"><a href="/login/" class="member-link">Login</a></li>
+              <li class="login-only"><a href="/register/" class="member-link">Register</a></li>
+
+              <!-- Logged in -->
+              <li class="auth-only">
+                <a href="/account/" class="member-link">My Account</a>
+              </li>
+              <li class="auth-only">
+                <button id="logout-btn" class="member-link">Logout</button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cart (Snipcart Checkout)-->
+      <button class="snipcart-checkout" aria-label="Cart">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <!-- Kò͘-bu̍t-chhia sò͘-liōng -->
+        <span class="snipcart-items-count cart-count">0</span>
+      </button>
+    </div>
   </div>
 
   
