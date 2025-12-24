@@ -36,8 +36,16 @@ document.getElementById('verify-otp-btn')
     window.location.href = '/account/'
   })
 
-document.getElementById('login-google-btn')
-  ?.addEventListener('click', loginWithGoogle)
+// Fix: HTML id is 'google-login', but JS was selecting 'login-google-btn'
+document.getElementById('google-login')
+  ?.addEventListener('click', async () => {
+    console.log('Google login clicked');
+    const { error } = await loginWithGoogle();
+    if (error) {
+      console.error('Google login error:', error);
+      alert('Google Login Error: ' + error.message);
+    }
+  })
 
 
 /*----- Hun-pia̍t Register kap Login -----*/
