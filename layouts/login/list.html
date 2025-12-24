@@ -1,9 +1,46 @@
 {{ define "main" }}
 <section class="auth-page">
-  <h1>{{ .Title }}</h1>
 
-  <div class="auth-box">
-    <p>Login / Register page is working ✅</p>
+  <header class="auth-header">
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.subtitle }}
+      <p class="auth-subtitle">{{ . }}</p>
+    {{ end }}
+  </header>
+
+  <div class="auth-card">
+
+    <!-- OTP login -->
+    <div class="auth-section">
+      <h3>Email OTP</h3>
+
+      <form id="otp-form">
+        <input
+          type="email"
+          id="otp-email"
+          placeholder="you@example.com"
+          required
+        />
+        <button type="submit">
+          Send login code
+        </button>
+      </form>
+
+      <p id="otp-message" class="auth-message"></p>
+    </div>
+
+    <div class="auth-divider">or</div>
+
+    <!-- Google login -->
+    <div class="auth-section">
+      <button id="google-login" class="google-btn">
+        Continue with Google
+      </button>
+    </div>
+
   </div>
 </section>
+
+<!-- Supabase auth -->
+<script type="module" src="/js/login.js"></script>
 {{ end }}

@@ -1,5 +1,0 @@
----
-title: "Register"
-layout: "login"
----
-
