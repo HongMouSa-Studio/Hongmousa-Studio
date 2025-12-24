@@ -618,7 +618,8 @@ footer {
   }
 
   body {
-    padding-top: var(--header-height);
+    padding-top: 120px;
+    /* Fixed Header height compensation for ALL pages */
   }
 
   /* Hero Section */
