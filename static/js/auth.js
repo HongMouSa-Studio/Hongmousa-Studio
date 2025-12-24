@@ -24,7 +24,13 @@ export async function loginWithGoogle() {
   return await supabase.auth.signInWithOAuth({
     provider: 'google',
     options: {
-      redirectTo: window.location.origin + '/account/'
+      // Determine language prefix from current URL
+      redirectTo: (function () {
+        const path = window.location.pathname;
+        const parts = path.split('/').filter(p => p);
+        const lang = (parts.length > 0 && ['tb-hj', 'tb-poj', 'en'].includes(parts[0])) ? '/' + parts[0] : '/tb-poj';
+        return window.location.origin + lang + '/account/';
+      })()
     }
   })
 }
