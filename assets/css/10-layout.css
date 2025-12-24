@@ -3,11 +3,9 @@
 ---------------------*/
 
 main {
-  max-width: var(--page-max);
+  max-width: 1200px;
   margin-inline: auto;
   padding: 1.5rem;
-
-  /* Sticky Footer */
   width: 100%;
   flex-grow: 1;
 }
@@ -17,9 +15,12 @@ main {
   top: 0.75rem;
   z-index: 1000;
 
+  width: 100%;
+  max-width: 1500px;
+  /* Wider than main (1200px) */
   margin: 0 auto;
-  padding: 0.5rem 0.5rem;
-  /* Reduced horizontal padding */
+  padding: 0 1rem;
+  /* Space from screen edges when window < 1500px */
 }
 
 .site-header a {
@@ -37,8 +38,6 @@ main {
 }
 
 .site-header .header-inner {
-  max-width: 100%;
-  margin: 0;
   width: 100%;
 
   background: rgba(255, 255, 255, 0.9);
