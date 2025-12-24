@@ -36,7 +36,7 @@ main {
 }
 
 .site-header .header-inner {
-  max-width: 98%;
+  max-width: 100%;
   /* Even wider to avoid feeling narrow */
   margin: 0 auto;
 
