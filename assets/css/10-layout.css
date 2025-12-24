@@ -18,7 +18,8 @@ main {
   z-index: 1000;
 
   margin: 0 auto;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0.5rem;
+  /* Reduced horizontal padding */
 }
 
 .site-header a {
@@ -37,8 +38,8 @@ main {
 
 .site-header .header-inner {
   max-width: 100%;
-  /* Even wider to avoid feeling narrow */
-  margin: 0 auto;
+  margin: 0;
+  width: 100%;
 
   background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(12px);
