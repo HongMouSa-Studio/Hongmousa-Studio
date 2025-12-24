@@ -4,6 +4,15 @@ import { sendOtp, verifyOtp, loginWithGoogle } from './auth.js'
 const emailInput = document.getElementById('login-email')
 const otpInput = document.getElementById('login-otp')
 
+// Auto-redirect if already logged in
+import { getSession } from './auth.js'
+getSession().then(({ data }) => {
+  if (data.session) {
+    window.location.href = '/account/'
+  }
+})
+
+
 document.getElementById('send-otp-btn')
   ?.addEventListener('click', async () => {
     const email = emailInput.value.trim()
