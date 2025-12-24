@@ -5,7 +5,7 @@
     {{ partial "lang-redirect.html" . }} {{ partial "head.html" . }}
   </head>
 
-  <body>
+  <body class="min-h-screen flex flex-col">
     <!-- Accessibility skip link (Bô-chiòng-gāi siat-tēng) -->
     <a class="sr-only" href="#main"> Skip to main </a>
 
@@ -16,7 +16,7 @@
     <script type="module" src="/js/auth.js"></script>
 
     <!-- 3. List + Single -->
-    <main id="main">{{ block "main" . }}{{ end }}</main>
+    <main id="main" class="flex-grow">{{ block "main" . }}{{ end }}</main>
 
     <!-- 5. FOOTER -->
     {{ partial "footer.html" . }}

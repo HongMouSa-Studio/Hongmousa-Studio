@@ -12,9 +12,13 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
 
-  line-height: 1.7;
   /* Ta̍k chōa lī khah hn̄g */
   font-size: calc(1rem * var(--font-scale));
+
+  /* Sticky Footer */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 h1,

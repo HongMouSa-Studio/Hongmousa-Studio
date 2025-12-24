@@ -6,6 +6,10 @@ main {
   max-width: var(--page-max);
   margin-inline: auto;
   padding: 1.5rem;
+
+  /* Sticky Footer */
+  width: 100%;
+  flex-grow: 1;
 }
 
 .site-header {
