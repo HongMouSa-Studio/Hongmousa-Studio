@@ -12,15 +12,15 @@ main {
 
 .site-header {
   position: sticky;
-  top: 0.75rem;
+  top: 1.5rem;
   z-index: 1000;
 
   width: 100%;
-  max-width: 1500px;
-  /* Wider than main (1200px) */
+  max-width: 1280px;
+  /* Slightly wider than main (1200px) */
   margin: 0 auto;
   padding: 0 1rem;
-  /* Space from screen edges when window < 1500px */
+  /* Space from screen edges when window < 1280px */
 }
 
 .site-header a {
