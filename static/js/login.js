@@ -4,11 +4,19 @@ import { sendOtp, verifyOtp, loginWithGoogle } from './auth.js'
 const emailInput = document.getElementById('login-email')
 const otpInput = document.getElementById('login-otp')
 
+/*----- Helper to get current language base path -----*/
+function getLangBase() {
+  const path = window.location.pathname;
+  const parts = path.split('/').filter(p => !!p);
+  const lang = (parts.length > 0 && ['tb-hj', 'tb-poj', 'en'].includes(parts[0])) ? parts[0] : 'tb-poj';
+  return '/' + lang;
+}
+
 // Auto-redirect if already logged in
 import { getSession } from './auth.js'
 getSession().then(({ data }) => {
   if (data.session) {
-    window.location.href = '/account/'
+    window.location.href = getLangBase() + '/account/'
   }
 })
 
@@ -25,7 +33,7 @@ document.getElementById('send-otp-btn')
     // Show step 2
     document.getElementById('step-email').classList.add('hidden')
     document.getElementById('step-otp').classList.remove('hidden')
-    document.getElementById('otp-message').textContent = "Login code sent! Please check your email inbox (and spam)."
+    document.getElementById('otp-message').textContent = "Login code sent! Please check your email inbox."
   })
 
 document.getElementById('verify-otp-btn')
@@ -36,26 +44,14 @@ document.getElementById('verify-otp-btn')
     const { error } = await verifyOtp(email, token)
     if (error) return alert(error.message)
 
-    window.location.href = '/account/'
+    window.location.href = getLangBase() + '/account/'
   })
 
-// Fix: HTML id is 'google-login', but JS was selecting 'login-google-btn'
+// Google Login
 document.getElementById('google-login')
   ?.addEventListener('click', async () => {
-    console.log('Google login clicked');
     const { error } = await loginWithGoogle();
     if (error) {
-      console.error('Google login error:', error);
       alert('Google Login Error: ' + error.message);
     }
   })
-
-
-/*----- Hun-pia̍t Register kap Login -----*/
-const isRegister = window.location.pathname.startsWith('/register')
-
-if (isRegister) {
-  // register flow (Í-āu chiah siá)
-} else {
-  // login flow
-}
