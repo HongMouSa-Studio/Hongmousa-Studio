@@ -821,13 +821,21 @@ body.is-auth .auth-only {
 }
 
 .address-item {
-  padding: 0.8rem;
+  padding: 1.2rem;
   background: #fdfdfd;
   border: 1px solid #f0f0f0;
-  border-radius: 0.8rem;
-  margin-bottom: 0.6rem;
-  font-size: 0.9rem;
+  border-radius: 1rem;
+  margin-bottom: 0.8rem;
+  font-size: 0.95rem;
   text-align: left;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.address-item:hover {
+  border-color: var(--accent-green);
+  background: #fff;
+  box-shadow: var(--shadow-soft);
 }
 
 .address-item .recipient {
@@ -839,7 +847,75 @@ body.is-auth .auth-only {
 
 .address-item .addr-text {
   display: block;
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.address-actions {
+  display: flex;
+  gap: 1.2rem;
+  border-top: 1px solid #f5f5f5;
+  padding-top: 0.8rem;
+}
+
+.address-actions button {
+  background: none;
+  border: none;
   font-size: 0.85rem;
   color: #666;
-  line-height: 1.4;
+  cursor: pointer;
+  padding: 0;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.address-actions button:hover {
+  color: var(--accent-green);
+  text-decoration: underline;
+}
+
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  transition: all 0.3s ease-out;
+}
+
+.modal-overlay.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.modal-card {
+  background: white;
+  padding: 2.5rem;
+  border-radius: 1.5rem;
+  width: 100%;
+  max-width: 450px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  transform: scale(1);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.modal-overlay.hidden .modal-card {
+  transform: scale(0.9) translateY(20px);
+}
+
+.modal-card h3 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  color: var(--text-dark);
 }

@@ -58,7 +58,7 @@ account_label_phone: "電話："
 account_label_contact_email: "聯絡電子批桶："
 
 account_section_address_book: "收件通訊錄"
-account_label_recipient_name: "收件名姓："
+account_label_recipient_name: "收件人："
 account_label_address: "收件地址："
 account_btn_edit: "修改資料"
 account_btn_save: "保存"
