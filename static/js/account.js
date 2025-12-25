@@ -24,6 +24,15 @@ const saveProfileBtn = document.getElementById('save-profile-btn')
 const cancelEditBtn = document.getElementById('cancel-edit-btn')
 const addAddressBtn = document.getElementById('add-address-btn')
 
+// Elements - Address Modal
+const addressModal = document.getElementById('address-modal')
+const addressIdInput = document.getElementById('edit-address-id')
+const addressNameInput = document.getElementById('address-name')
+const addressValInput = document.getElementById('address-val')
+const addressDefaultInput = document.getElementById('address-default')
+const saveAddressBtn = document.getElementById('save-address-btn')
+const closeAddressModalBtn = document.getElementById('close-address-modal')
+
 // 1. Listen for Auth State
 supabase.auth.onAuthStateChange(async (event, session) => {
   if (session) {
@@ -60,6 +69,13 @@ async function loadAccountData(userId) {
   }
 
   // Fetch Address Book
+  renderAddresses(userId)
+
+  // Fetch Orders
+  renderOrders(userId)
+}
+
+async function renderAddresses(userId) {
   const { data: addresses, error: aError } = await supabase
     .from('address_book')
     .select('*')
@@ -70,15 +86,31 @@ async function loadAccountData(userId) {
     if (addressEmpty) addressEmpty.classList.add('hidden')
     if (addressItemsContainer) {
       addressItemsContainer.innerHTML = addresses.map(item => `
-        <div class="address-item">
+        <div class="address-item" data-id="${item.id}">
             <span class="recipient">${item.recipient_name} ${item.is_default ? '<small>(預設)</small>' : ''}</span>
             <span class="addr-text">${item.address}</span>
+            <div class="address-actions">
+              <button class="edit-addr-btn" data-id="${item.id}">修改</button>
+              <button class="delete-addr-btn" data-id="${item.id}" style="color: #ef4444;">刪除</button>
+            </div>
         </div>
       `).join('')
-    }
-  }
 
-  // Fetch Orders
+      // Attach listeners
+      document.querySelectorAll('.edit-addr-btn').forEach(btn => {
+        btn.addEventListener('click', () => openAddressModal(addresses.find(a => a.id === btn.dataset.id)))
+      })
+      document.querySelectorAll('.delete-addr-btn').forEach(btn => {
+        btn.addEventListener('click', () => deleteAddress(btn.dataset.id))
+      })
+    }
+  } else {
+    if (addressEmpty) addressEmpty.classList.remove('hidden')
+    if (addressItemsContainer) addressItemsContainer.innerHTML = ''
+  }
+}
+
+async function renderOrders(userId) {
   const { data: orders, error: oError } = await supabase
     .from('orders')
     .select('*')
@@ -133,7 +165,7 @@ cancelEditBtn?.addEventListener('click', () => {
 })
 
 saveProfileBtn?.addEventListener('click', async () => {
-  const user = (await supabase.auth.getUser()).data.user
+  const { data: { user } } = await supabase.auth.getUser()
   if (!user) return
 
   const newName = editNameInput.value
@@ -158,11 +190,76 @@ saveProfileBtn?.addEventListener('click', async () => {
     profileView.classList.remove('hidden')
     profileEdit.classList.add('hidden')
   } else {
-    alert('Error updating profile: ' + error.message)
+    alert('Error: ' + error.message)
   }
 })
 
-// 4. Address Book Actions
-addAddressBtn?.addEventListener('click', () => {
-  alert('Address Book Management coming soon! 我哋將會支援新增、修改同刪除多個收件地址。')
+// 4. Address Book Logic
+function openAddressModal(address = null) {
+  if (address) {
+    addressIdInput.value = address.id
+    addressNameInput.value = address.recipient_name
+    addressValInput.value = address.address
+    addressDefaultInput.checked = address.is_default
+  } else {
+    addressIdInput.value = ''
+    addressNameInput.value = ''
+    addressValInput.value = ''
+    addressDefaultInput.checked = false
+  }
+  addressModal.classList.remove('hidden')
+}
+
+closeAddressModalBtn.addEventListener('click', () => {
+  addressModal.classList.add('hidden')
 })
+
+addAddressBtn?.addEventListener('click', () => openAddressModal())
+
+saveAddressBtn?.addEventListener('click', async () => {
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) return
+
+  const id = addressIdInput.value
+  const name = addressNameInput.value
+  const addr = addressValInput.value
+  const isDefault = addressDefaultInput.checked
+
+  if (!name || !addr) return alert('Please fill in all fields')
+
+  // If setting as default, unset others first (simplified, Supabase can handle default better)
+  if (isDefault) {
+    await supabase.from('address_book').update({ is_default: false }).eq('user_id', user.id)
+  }
+
+  const payload = {
+    user_id: user.id,
+    recipient_name: name,
+    address: addr,
+    is_default: isDefault
+  }
+
+  let res;
+  if (id) {
+    res = await supabase.from('address_book').update(payload).eq('id', id)
+  } else {
+    res = await supabase.from('address_book').insert(payload)
+  }
+
+  if (res.error) {
+    alert('Error saving address: ' + res.error.message)
+  } else {
+    addressModal.classList.add('hidden')
+    renderAddresses(user.id)
+  }
+})
+
+async function deleteAddress(id) {
+  if (!confirm('Are you sure?')) return
+  const { error } = await supabase.from('address_book').delete().eq('id', id)
+  if (error) alert(error.message)
+  else {
+    const { data: { user } } = await supabase.auth.getUser()
+    renderAddresses(user.id)
+  }
+}

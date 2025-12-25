@@ -106,6 +106,30 @@
     </div>
 
   </div>
+
+  <!-- Address Modal -->
+  <div id="address-modal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <h3 id="modal-title">{{ i18n "account_section_address_book" }}</h3>
+      <input type="hidden" id="edit-address-id">
+      <div class="form-group-alt">
+        <label>{{ i18n "account_label_recipient_name" }}</label>
+        <input type="text" id="address-name" class="form-control-alt">
+      </div>
+      <div class="form-group-alt">
+        <label>{{ i18n "account_label_address" }}</label>
+        <textarea id="address-val" class="form-control-alt" rows="3"></textarea>
+      </div>
+      <div class="form-group-alt" style="display: flex; align-items: center; gap: 0.5rem; margin-top: 0.5rem;">
+        <input type="checkbox" id="address-default" style="width: auto;">
+        <label for="address-default" style="margin-bottom: 0;">{{ i18n "account_label_set_default" }}</label>
+      </div>
+      <div class="btn-group" style="margin-top: 1.5rem; display: flex; gap: 0.5rem;">
+        <button id="save-address-btn" class="btn-main" style="flex: 1;">{{ i18n "account_btn_save" }}</button>
+        <button id="close-address-modal" class="btn-main-outline" style="flex: 1;">{{ i18n "account_btn_cancel" }}</button>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- Account JS Logic -->
