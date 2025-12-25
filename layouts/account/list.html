@@ -1,15 +1,46 @@
 {{ define "main" }}
 <section class="account-page">
-  <div class="container" style="width: 100%; max-width: 800px; margin: 0 auto;">
+  <div class="container" style="width: 100%; max-width: 800px; margin: 0 auto; padding: 4rem 1rem;">
     
-    <header class="section-header" style="margin-top: 0;">
-      <h2>{{ .Title }}</h2>
-    </header>
+    <!-- Authenticated View -->
+    <div class="auth-only">
+      <div class="account-header">
+        <h3>{{ i18n "account_welcome" }}, <span id="account-email" style="color: var(--accent-green);"></span></h3>
+        <button id="logout-btn" class="btn-main" style="background: #ef4444; margin-top: 0; width: auto; padding: 0.5rem 1.5rem;">
+          {{ i18n "account_logout_btn" }}
+        </button>
+      </div>
 
-    <div class="account-content">
-      {{ .Content }}
+      <div class="account-grid">
+        <!-- Points Card -->
+        <div class="account-card point-card">
+          <h4><i class="fa-solid fa-star"></i> {{ i18n "account_section_points" }}</h4>
+          <div class="point-value">
+            <span id="member-points">0</span> {{ i18n "account_points_unit" }}
+          </div>
+        </div>
+
+        <!-- Orders Card -->
+        <div class="account-card order-card">
+          <h4><i class="fa-solid fa-box"></i> {{ i18n "account_section_orders" }}</h4>
+          <div id="order-list" class="empty-state">
+            <p>{{ i18n "account_no_orders" }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Login Required View -->
+    <div class="login-only" style="text-align: center; padding: 5rem 1rem;">
+      <p style="margin-bottom: 1.5rem;">{{ i18n "account_login_required" }}</p>
+      <a href="{{ relLangURL "login/" }}" class="btn-main" style="display: inline-block; width: auto; padding: 0.75rem 2rem;">
+        {{ i18n "account_go_to_login" }}
+      </a>
     </div>
 
   </div>
 </section>
+
+<!-- Account JS Logic -->
+<script type="module" src="/js/account.js"></script>
 {{ end }}
