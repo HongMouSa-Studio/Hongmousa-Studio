@@ -331,28 +331,28 @@ body.is-auth .auth-only {
   background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  padding: 3.5rem 2.8rem;
+  padding: 2.2rem 2.5rem 3.5rem;
+  /* Less top padding, more bottom */
   border-radius: 1rem;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  /* Soft shadow */
   border: 1px solid rgba(255, 255, 255, 0.5);
   width: 100%;
   max-width: 400px;
-  /* Limit width */
   text-align: center;
 }
 
 .auth-header {
   text-align: center;
-  margin-bottom: 1.5rem;
-  /* Slightly further distance from card */
+  margin-bottom: 2rem;
 }
 
 .auth-card-subtitle {
-  margin-bottom: 2rem;
+  margin-bottom: 1.8rem;
   font-size: 0.95rem;
-  color: var(--text-muted);
+  color: #666;
   line-height: 1.5;
+  /* Reduced visual distance to top */
+  margin-top: -0.2rem;
 }
 
 .auth-header h1,
@@ -621,4 +621,60 @@ body.is-auth .auth-only {
   margin: 0 10px;
   color: var(--accent-green);
   font-weight: bold;
+}
+
+/* ------------------------------
+    Account Dashboard
+--------------------------------*/
+.account-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 800px;
+  margin-bottom: 2rem;
+  gap: 1rem;
+}
+
+.account-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+  width: 100%;
+  max-width: 800px;
+}
+
+@media (max-width: 768px) {
+  .account-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.account-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 1px solid #eee;
+}
+
+.account-card h4 {
+  margin-bottom: 1.2rem;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #333;
+}
+
+.point-value {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--accent-green);
+}
+
+.empty-state {
+  color: #999;
+  padding: 2rem 0;
+  text-align: center;
 }

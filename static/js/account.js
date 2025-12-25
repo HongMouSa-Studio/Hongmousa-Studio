@@ -1,26 +1,42 @@
 /*------ account page ------*/
-import { getSession, logout, getLangBase } from './auth.js'
+import { supabase, getLangBase } from './auth.js'
 
 const emailEl = document.getElementById('account-email')
-const logoutBtn = document.getElementById('logout-btn')
+const pointsEl = document.getElementById('member-points')
+const orderListEl = document.getElementById('order-list')
 
-// 1. Check Session
-const { data } = await getSession()
+// 1. Listen for Auth State
+supabase.auth.onAuthStateChange(async (event, session) => {
+  if (session) {
+    // User is logged in
+    document.body.classList.add('is-auth')
+    if (emailEl) emailEl.textContent = session.user.email
 
-if (!data.session) {
-  // Bô session -> redirect to login
-  window.location.href = getLangBase() + '/login/';
-} else {
-  // Ū session -> Show UI
-  document.body.classList.add('is-auth')
-  if (emailEl) emailEl.textContent = data.session.user.email
+    // Load dynamic data (Mock for now)
+    loadAccountData(session.user.id)
+  } else {
+    // No session -> redirect to login if we are still on account page
+    // We wait a tiny bit to avoid flashing or race conditions on initial load
+    setTimeout(() => {
+      if (!window.localStorage.getItem('supabase.auth.token')) {
+        window.location.href = getLangBase() + '/login/';
+      }
+    }, 1000);
+  }
+})
+
+// 2. Fetch/Load Data
+async function loadAccountData(userId) {
+  // Mocking points (In future, fetch from 'profiles' table)
+  if (pointsEl) pointsEl.textContent = "120";
+
+  // Mocking orders (In future, fetch from 'orders' table)
+  if (orderListEl) {
+    // If there are orders, we would populate the list here.
+    // For now, it stays as the default "No orders found" from HTML.
+  }
 }
 
-// 2. Logout Logic
-logoutBtn?.addEventListener('click', async () => {
-  const { error } = await logout()
-  if (error) alert(error.message)
-
-  // Logout -> stay on homepage of current language
-  window.location.href = getLangBase() + '/'
-})
+// 3. Logout (Already handled in global-auth.js generally, but we keep local if needed)
+// Actually, global-auth.js handles #logout-btn clicks. 
+// We are good.

@@ -43,6 +43,15 @@ document.getElementById('send-otp-btn')
     document.getElementById('step-email').classList.add('hidden')
     document.getElementById('step-otp').classList.remove('hidden')
 
+    // Hide the subtitle on step 2
+    const subtitleEl = document.getElementById('auth-subtitle')
+    if (subtitleEl) subtitleEl.classList.add('hidden')
+
+    // Hide subtitle, divider and google login for a clean look
+    document.getElementById('auth-subtitle')?.classList.add('hidden')
+    document.querySelector('.auth-divider')?.classList.add('hidden')
+    document.getElementById('google-login')?.closest('.auth-section')?.classList.add('hidden')
+
     // Get i18n message from data attribute
     if (msgEl) {
       msgEl.textContent = msgEl.getAttribute('data-success-msg') || "Check your inbox!"
