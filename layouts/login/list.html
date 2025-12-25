@@ -14,7 +14,7 @@
     <div class="auth-section">
       <button id="google-login" class="google-btn">
         <i class="fa-brands fa-google"></i>
-        Continue with Google
+        {{ i18n "auth_google_btn" }}
       </button>
     </div>
 
@@ -24,25 +24,25 @@
       <!-- Step 1: Send Email -->
       <div id="step-email">
         <div class="form-group">
-          <label for="login-email" class="sr-only">Email address</label>
+          <label for="login-email" class="sr-only">{{ i18n "auth_email_label" }}</label>
           <input
             type="email"
             id="login-email"
             class="form-control"
-            placeholder="name@example.com"
+            placeholder="{{ i18n "auth_email_placeholder" }}"
             required
           />
         </div>
         <button id="send-otp-btn" class="btn-main">
-          Send login code
+          {{ i18n "auth_send_code_btn" }}
         </button>
       </div>
 
       <!-- Step 2: Verify OTP (Hidden by default) -->
       <div id="step-otp" class="hidden">
-        <p style="margin-bottom: 1rem; font-size: 0.9rem; color: #666;">Check your email for the code.</p>
+        <p style="margin-bottom: 1rem; font-size: 0.9rem; color: #666;">{{ i18n "auth_otp_instruction" }}</p>
         <div class="form-group">
-          <label for="login-otp" class="sr-only">Login Code</label>
+          <label for="login-otp" class="sr-only">{{ i18n "auth_otp_label" }}</label>
           <input
             type="text"
             id="login-otp"
@@ -51,15 +51,19 @@
           />
         </div>
         <button id="verify-otp-btn" class="btn-main">
-          Verify & Login
+          {{ i18n "auth_verify_btn" }}
         </button>
       </div>
 
-      <p id="otp-message" class="auth-message" style="margin-top: 1rem; color: var(--accent-green); font-size: 0.9rem;"></p>
+      <p id="otp-message" 
+         class="auth-message" 
+         data-success-msg="{{ i18n "auth_code_sent_msg" }}"
+         style="margin-top: 1rem; color: var(--accent-green); font-size: 0.9rem;">
+      </p>
     </div>
 
     <div class="auth-divider" style="margin: 1.5rem 0; color: #999; font-size: 0.9rem;">
-      <span>or continue with email</span>
+      <span>{{ i18n "auth_divider_text" }}</span>
     </div>
 
   </div>

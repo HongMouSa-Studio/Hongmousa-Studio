@@ -1,8 +1,6 @@
 ---
 title: "Login"
-subtitle: "Choose a login method"
+subtitle: "Please enter your email or use Google to login"
 layout: "login"
 draft: false
 ---
-
-LOGIN PAGE OK

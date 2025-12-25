@@ -7,7 +7,7 @@ export const supabase = createClient(
 )
 
 /* ---------- Helper to get current language base path ---------- */
-function getLangBase() {
+export function getLangBase() {
   const path = window.location.pathname;
   const parts = path.split('/').filter(p => !!p);
   const lang = (parts.length > 0 && ['tb-hj', 'tb-poj', 'en'].includes(parts[0])) ? parts[0] : 'tb-poj';
@@ -20,8 +20,8 @@ export async function sendOtp(email) {
   return await supabase.auth.signInWithOtp({
     email,
     options: {
-      // This ensures magic link redirects to the account page in the correct language
-      emailRedirectTo: window.location.origin + langBase + '/account/'
+      // Redirect to home after magic link
+      emailRedirectTo: window.location.origin + langBase + '/'
     }
   })
 }
@@ -62,7 +62,7 @@ export async function loginWithGoogle() {
   return await supabase.auth.signInWithOAuth({
     provider: 'google',
     options: {
-      redirectTo: window.location.origin + langBase + '/account/'
+      redirectTo: window.location.origin + langBase + '/'
     }
   })
 }

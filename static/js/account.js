@@ -1,5 +1,5 @@
 /*------ account page ------*/
-import { getSession, logout } from './auth.js'
+import { getSession, logout, getLangBase } from './auth.js'
 
 const emailEl = document.getElementById('account-email')
 const logoutBtn = document.getElementById('logout-btn')
@@ -8,13 +8,8 @@ const logoutBtn = document.getElementById('logout-btn')
 const { data } = await getSession()
 
 if (!data.session) {
-  // Bô session -> Tī 1 bjo chìn-chêng (UX) ut khì login
-  // Lâi-goân language prefix
-  const path = window.location.pathname;
-  const parts = path.split('/').filter(p => p);
-  const lang = (parts.length > 0 && ['tb-hj', 'tb-poj', 'en'].includes(parts[0])) ? '/' + parts[0] : '';
-
-  window.location.href = lang + '/login/';
+  // Bô session -> redirect to login
+  window.location.href = getLangBase() + '/login/';
 } else {
   // Ū session -> Show UI
   document.body.classList.add('is-auth')
@@ -26,10 +21,6 @@ logoutBtn?.addEventListener('click', async () => {
   const { error } = await logout()
   if (error) alert(error.message)
 
-  // Logout liáu-āu tò-tńg khì Home
-  const path = window.location.pathname;
-  const parts = path.split('/').filter(p => p);
-  const lang = (parts.length > 0 && ['tb-hj', 'tb-poj', 'en'].includes(parts[0])) ? '/' + parts[0] + '/' : '/';
-
-  window.location.href = lang
+  // Logout -> stay on homepage of current language
+  window.location.href = getLangBase() + '/'
 })
