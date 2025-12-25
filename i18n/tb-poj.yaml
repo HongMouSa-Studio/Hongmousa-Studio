@@ -23,6 +23,7 @@ published_at: "Hoat-piáu: "
 updated_at: "Siu-kái: "
 
 auth_google_btn: "Iōng Google teng-ji̍p"
+auth_subtitle: "Chhiáⁿ su-ji̍p Email ia̍h-sī iōng Google teng-ji̍p"
 auth_email_label: "Email"
 auth_email_placeholder: "kháu-chō@example.com"
 auth_send_code_btn: "Kià teng-ji̍p-bé"

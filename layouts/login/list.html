@@ -3,12 +3,10 @@
 
   <header class="auth-header">
     <h1>{{ .Title }}</h1>
-    {{ with .Params.subtitle }}
-      <p class="auth-subtitle">{{ . }}</p>
-    {{ end }}
   </header>
 
   <div class="auth-card">
+    <p class="auth-card-subtitle">{{ i18n "auth_subtitle" }}</p>
     
     <!-- 1. OTP login (Primary now) -->
     <div class="auth-section">

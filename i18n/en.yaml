@@ -22,6 +22,7 @@ published_at: "Published at: "
 updated_at: "Updated at: "
 
 auth_google_btn: "Continue with Google"
+auth_subtitle: "Please enter your email or use Google to login"
 auth_email_label: "Email Address"
 auth_email_placeholder: "name@example.com"
 auth_send_code_btn: "Send login code"

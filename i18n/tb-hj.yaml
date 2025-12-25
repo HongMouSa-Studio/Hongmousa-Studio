@@ -22,6 +22,7 @@ published_at: "發表日期："
 updated_at: "修改日期："
 
 auth_google_btn: "用 Google 登入"
+auth_subtitle: "請輸入電子郵件或是用 Google 登入"
 auth_email_label: "電子郵件"
 auth_email_placeholder: "kháu-chō@example.com"
 auth_send_code_btn: "寄送登入碼"
