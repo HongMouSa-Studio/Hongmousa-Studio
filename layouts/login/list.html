@@ -10,15 +10,7 @@
 
   <div class="auth-card">
     
-    <!-- Google login (Primary) -->
-    <div class="auth-section">
-      <button id="google-login" class="google-btn">
-        <i class="fa-brands fa-google"></i>
-        {{ i18n "auth_google_btn" }}
-      </button>
-    </div>
-
-    <!-- OTP login -->
+    <!-- 1. OTP login (Primary now) -->
     <div class="auth-section">
       
       <!-- Step 1: Send Email -->
@@ -62,8 +54,17 @@
       </p>
     </div>
 
+    <!-- 2. Divider -->
     <div class="auth-divider" style="margin: 1.5rem 0; color: #999; font-size: 0.9rem;">
       <span>{{ i18n "auth_divider_text" }}</span>
+    </div>
+
+    <!-- 3. Google login (Secondary now) -->
+    <div class="auth-section">
+      <button id="google-login" class="google-btn">
+        <i class="fa-brands fa-google"></i>
+        {{ i18n "auth_google_btn" }}
+      </button>
     </div>
 
   </div>

@@ -342,6 +342,11 @@ body.is-auth .auth-only {
   text-align: center;
 }
 
+.auth-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
 .auth-header h1,
 .section-header h2 {
   margin-bottom: 1.5rem;
