@@ -55,14 +55,19 @@
     </div>
 
     <!-- 2. Divider -->
-    <div class="auth-divider" style="margin: 1.5rem 0; color: #999; font-size: 0.9rem;">
+    <div class="auth-divider">
       <span>{{ i18n "auth_divider_text" }}</span>
     </div>
 
     <!-- 3. Google login (Secondary now) -->
     <div class="auth-section">
       <button id="google-login" class="google-btn">
-        <i class="fa-brands fa-google"></i>
+        <svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <path d="M19.6 10.2c0-.7-.1-1.4-.2-2H10v3.8h5.4c-.2 1.2-.9 2.1-1.9 2.8v2.3h3.1c1.8-1.7 2.9-4.2 3.1-6.9z" fill="#4285F4"/>
+          <path d="M10 20c2.7 0 5-1 6.7-2.6l-3.2-2.3c-.9.6-2 .9-3.5.9-2.7 0-5-1.8-5.8-4.2H1.1v2.5c1.7 3.4 5.2 5.7 8.9 5.7z" fill="#34A853"/>
+          <path d="M4.2 11.8c-.2-.6-.3-1.2-.3-1.8s.1-1.2.3-1.8V5.7H1.1C.4 7 .1 8.5.1 10c0 1.5.3 3 .1 4.3l3.1-2.5z" fill="#FBBC05"/>
+          <path d="M10 4c1.5 0 2.8.5 3.8 1.5l2.9-2.9C15 1 12.7 0 10 0 6.3 0 2.8 2.3 1.1 5.7l3.1 2.5c.8-2.4 3.1-4.2 5.8-4.2z" fill="#EA4335"/>
+        </svg>
         {{ i18n "auth_google_btn" }}
       </button>
     </div>
