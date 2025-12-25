@@ -5,14 +5,15 @@
 main {
   max-width: 1200px;
   margin-inline: auto;
-  padding: 1.5rem;
+  padding: 0.5rem 1.5rem 1.5rem;
+  /* Reduced top padding from 1.5rem to 0.5rem */
   width: 100%;
   flex-grow: 1;
 }
 
 .site-header {
   position: sticky;
-  top: 1.5rem;
+  top: 0.8rem;
   z-index: 1000;
 
   width: 100%;
@@ -643,7 +644,7 @@ footer {
   }
 
   body {
-    padding-top: 80px;
+    padding-top: 70px;
     /* Fixed Header height compensation for ALL pages */
   }
 

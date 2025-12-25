@@ -1,6 +1,6 @@
 {{ define "main" }}
 <section class="account-page">
-  <div class="container" style="width: 100%; max-width: 800px; margin: 0 auto; padding: 4rem 1rem;">
+  <div class="container" style="width: 100%; max-width: 900px; margin: 0 auto; padding: 1.5rem 1rem;">
     
     <!-- Authenticated View -->
     <div class="auth-only">
@@ -13,10 +13,12 @@
 
       <div class="account-grid">
         <!-- 1. Points Card -->
-        <div class="account-card point-card">
+        <div class="account-card point-card" style="display: flex; flex-direction: column;">
           <h4><i class="fa-solid fa-star"></i> {{ i18n "account_section_points" }}</h4>
-          <div class="point-value">
-            <span id="member-points">0</span> {{ i18n "account_points_unit" }}
+          <div class="point-value-container" style="flex-grow: 1; display: flex; align-items: center; justify-content: center; min-height: 100px;">
+            <div class="point-value">
+              <span id="member-points">0</span> {{ i18n "account_points_unit" }}
+            </div>
           </div>
         </div>
 
@@ -29,9 +31,13 @@
               <span class="label">{{ i18n "account_label_name" }}:</span>
               <span id="display-name-val" class="value">---</span>
             </div>
-            <div class="profile-info-row" style="border-bottom: none;">
+            <div class="profile-info-row">
               <span class="label">{{ i18n "account_label_phone" }}:</span>
               <span id="phone-val" class="value">---</span>
+            </div>
+            <div class="profile-info-row" style="border-bottom: none;">
+              <span class="label">{{ i18n "account_label_contact_email" }}:</span>
+              <span id="contact-email-val" class="value">---</span>
             </div>
             <button id="edit-profile-btn" class="btn-main-outline" style="margin-top: 1rem; font-size: 0.9rem; width: 100%;">
               {{ i18n "account_btn_edit" }}
@@ -46,6 +52,10 @@
             <div class="form-group-alt">
               <label>{{ i18n "account_label_phone" }}</label>
               <input type="text" id="edit-phone" class="form-control-alt">
+            </div>
+            <div class="form-group-alt">
+              <label>{{ i18n "account_label_contact_email" }}</label>
+              <input type="email" id="edit-contact-email" class="form-control-alt">
             </div>
             <div class="btn-group" style="margin-top: 1.5rem; display: flex; gap: 0.5rem;">
               <button id="save-profile-btn" class="btn-main" style="flex: 1;">{{ i18n "account_btn_save" }}</button>

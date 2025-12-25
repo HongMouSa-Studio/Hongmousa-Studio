@@ -7,6 +7,7 @@ const pointsEl = document.getElementById('member-points')
 const orderListEl = document.getElementById('order-list')
 const displayNameVal = document.getElementById('display-name-val')
 const phoneVal = document.getElementById('phone-val')
+const contactEmailVal = document.getElementById('contact-email-val')
 const addressItemsContainer = document.getElementById('address-items-container')
 const addressEmpty = document.getElementById('address-empty')
 
@@ -15,6 +16,7 @@ const profileView = document.getElementById('profile-view')
 const profileEdit = document.getElementById('profile-edit')
 const editNameInput = document.getElementById('edit-name')
 const editPhoneInput = document.getElementById('edit-phone')
+const editContactEmailInput = document.getElementById('edit-contact-email')
 
 // Buttons
 const editProfileBtn = document.getElementById('edit-profile-btn')
@@ -31,6 +33,7 @@ supabase.auth.onAuthStateChange(async (event, session) => {
     // Load dynamic data
     loadAccountData(session.user.id)
   } else {
+    // If no session and specifically on account page, redirect
     if (window.location.pathname.includes('/account/')) {
       setTimeout(() => {
         if (!window.localStorage.getItem('supabase.auth.token')) {
@@ -46,14 +49,14 @@ async function loadAccountData(userId) {
   // Mocking points
   if (pointsEl) pointsEl.textContent = "120";
 
-  // Mocking Address Book (Address items)
+  // Mocking Address Book
   const mockAddresses = [
     { name: 'Khó-lo-lân (Caroline)', addr: 'Tâi-pak-chhī Sìn-gī-khu...' },
     { name: 'A-it', addr: 'Ko-hiông-chhī Chó-êng-khu...' }
   ]
 
   if (addressItemsContainer && mockAddresses.length > 0) {
-    addressEmpty.classList.add('hidden')
+    if (addressEmpty) addressEmpty.classList.add('hidden')
     addressItemsContainer.innerHTML = mockAddresses.map(item => `
         <div class="address-item">
             <span class="recipient">${item.name}</span>
@@ -67,6 +70,7 @@ async function loadAccountData(userId) {
 editProfileBtn?.addEventListener('click', () => {
   editNameInput.value = displayNameVal.textContent === '---' ? '' : displayNameVal.textContent
   editPhoneInput.value = phoneVal.textContent === '---' ? '' : phoneVal.textContent
+  editContactEmailInput.value = contactEmailVal.textContent === '---' ? '' : contactEmailVal.textContent
 
   profileView.classList.add('hidden')
   profileEdit.classList.remove('hidden')
@@ -80,10 +84,12 @@ cancelEditBtn?.addEventListener('click', () => {
 saveProfileBtn?.addEventListener('click', async () => {
   const newName = editNameInput.value
   const newPhone = editPhoneInput.value
+  const newEmail = editContactEmailInput.value
 
   // Update UI (Optimistic)
   displayNameVal.textContent = newName || '---'
   phoneVal.textContent = newPhone || '---'
+  contactEmailVal.textContent = newEmail || '---'
 
   profileView.classList.remove('hidden')
   profileEdit.classList.add('hidden')
