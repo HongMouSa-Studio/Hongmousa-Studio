@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ .Site.Language.Lang }}">
+<html lang="{{ if eq .Site.Language.Lang "tb-poj" }}en{{ else if eq .Site.Language.Lang "tb-hj" }}zh-TW{{ else }}{{ .Site.Language.Lang }}{{ end }}">
   <head>
     <!-- lang-redirect khē tiàm head a̍h-sī header chìn-chêng ē-tàng khah chá chip-hêng -->
     {{ partial "lang-redirect.html" . }} {{ partial "head.html" . }}
