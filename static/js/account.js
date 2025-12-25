@@ -30,10 +30,9 @@ supabase.auth.onAuthStateChange(async (event, session) => {
     document.body.classList.add('is-auth')
     if (emailEl) emailEl.textContent = session.user.email
 
-    // Load dynamic data
+    // Load real data from Supabase
     loadAccountData(session.user.id)
   } else {
-    // If no session and specifically on account page, redirect
     if (window.location.pathname.includes('/account/')) {
       setTimeout(() => {
         if (!window.localStorage.getItem('supabase.auth.token')) {
@@ -46,23 +45,74 @@ supabase.auth.onAuthStateChange(async (event, session) => {
 
 // 2. Fetch/Load Data
 async function loadAccountData(userId) {
-  // Mocking points
-  if (pointsEl) pointsEl.textContent = "120";
+  // Fetch Profile (Points, Name, Phone, Contact Email)
+  const { data: profile, error: pError } = await supabase
+    .from('profiles')
+    .select('*')
+    .eq('id', userId)
+    .single()
 
-  // Mocking Address Book
-  const mockAddresses = [
-    { name: 'Khó-lo-lân (Caroline)', addr: 'Tâi-pak-chhī Sìn-gī-khu...' },
-    { name: 'A-it', addr: 'Ko-hiông-chhī Chó-êng-khu...' }
-  ]
+  if (profile) {
+    if (pointsEl) pointsEl.textContent = profile.points || "0";
+    if (displayNameVal) displayNameVal.textContent = profile.display_name || '---';
+    if (phoneVal) phoneVal.textContent = profile.phone || '---';
+    if (contactEmailVal) contactEmailVal.textContent = profile.contact_email || profile.email || '---';
+  }
 
-  if (addressItemsContainer && mockAddresses.length > 0) {
+  // Fetch Address Book
+  const { data: addresses, error: aError } = await supabase
+    .from('address_book')
+    .select('*')
+    .eq('user_id', userId)
+    .order('is_default', { ascending: false })
+
+  if (addresses && addresses.length > 0) {
     if (addressEmpty) addressEmpty.classList.add('hidden')
-    addressItemsContainer.innerHTML = mockAddresses.map(item => `
+    if (addressItemsContainer) {
+      addressItemsContainer.innerHTML = addresses.map(item => `
         <div class="address-item">
-            <span class="recipient">${item.name}</span>
-            <span class="addr-text">${item.addr}</span>
+            <span class="recipient">${item.recipient_name} ${item.is_default ? '<small>(預設)</small>' : ''}</span>
+            <span class="addr-text">${item.address}</span>
         </div>
       `).join('')
+    }
+  }
+
+  // Fetch Orders
+  const { data: orders, error: oError } = await supabase
+    .from('orders')
+    .select('*')
+    .eq('user_id', userId)
+    .order('created_at', { ascending: false })
+
+  if (orders && orders.length > 0) {
+    if (orderListEl) {
+      orderListEl.classList.remove('empty-state')
+      orderListEl.innerHTML = `
+        <div class="order-table-wrapper">
+          <table class="order-table">
+            <thead>
+              <tr>
+                <th>編號</th>
+                <th>日期</th>
+                <th>總計</th>
+                <th>狀態</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${orders.map(order => `
+                <tr>
+                  <td>${order.snipcart_id.substring(0, 8)}...</td>
+                  <td>${new Date(order.created_at).toLocaleDateString()}</td>
+                  <td>$${order.total_price}</td>
+                  <td><span class="status-pill ${order.status.toLowerCase()}">${order.status}</span></td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      `
+    }
   }
 }
 
@@ -82,20 +132,36 @@ cancelEditBtn?.addEventListener('click', () => {
 })
 
 saveProfileBtn?.addEventListener('click', async () => {
+  const user = (await supabase.auth.getUser()).data.user
+  if (!user) return
+
   const newName = editNameInput.value
   const newPhone = editPhoneInput.value
   const newEmail = editContactEmailInput.value
 
-  // Update UI (Optimistic)
-  displayNameVal.textContent = newName || '---'
-  phoneVal.textContent = newPhone || '---'
-  contactEmailVal.textContent = newEmail || '---'
+  const { error } = await supabase
+    .from('profiles')
+    .upsert({
+      id: user.id,
+      display_name: newName,
+      phone: newPhone,
+      contact_email: newEmail,
+      updated_at: new Date().toISOString()
+    })
 
-  profileView.classList.remove('hidden')
-  profileEdit.classList.add('hidden')
+  if (!error) {
+    displayNameVal.textContent = newName || '---'
+    phoneVal.textContent = newPhone || '---'
+    contactEmailVal.textContent = newEmail || '---'
+
+    profileView.classList.remove('hidden')
+    profileEdit.classList.add('hidden')
+  } else {
+    alert('Error updating profile: ' + error.message)
+  }
 })
 
 // 4. Address Book Actions
 addAddressBtn?.addEventListener('click', () => {
-  alert('Address Book Management coming soon!')
+  alert('Address Book Management coming soon! 我哋將會支援新增、修改同刪除多個收件地址。')
 })
