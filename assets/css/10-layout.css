@@ -14,7 +14,7 @@ main {
 .site-header {
   position: sticky;
   top: 0.8rem;
-  z-index: 1000;
+  z-index: 500;
 
   width: 100%;
   max-width: 1280px;
