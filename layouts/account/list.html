@@ -28,15 +28,15 @@
           
           <div id="profile-view">
             <div class="profile-info-row">
-              <span class="label">{{ i18n "account_label_name" }}:</span>
+              <span class="label">{{ i18n "account_label_name" }}</span>
               <span id="display-name-val" class="value">---</span>
             </div>
             <div class="profile-info-row">
-              <span class="label">{{ i18n "account_label_phone" }}:</span>
+              <span class="label">{{ i18n "account_label_phone" }}</span>
               <span id="phone-val" class="value">---</span>
             </div>
             <div class="profile-info-row" style="border-bottom: none;">
-              <span class="label">{{ i18n "account_label_contact_email" }}:</span>
+              <span class="label">{{ i18n "account_label_contact_email" }}</span>
               <span id="contact-email-val" class="value">---</span>
             </div>
             <button id="edit-profile-btn" class="btn-main-outline" style="margin-top: 1rem; font-size: 0.9rem; width: 100%;">
@@ -85,7 +85,11 @@
         <!-- 4. Orders Card -->
         <div class="account-card order-card" style="grid-column: span 3;">
           <h4><i class="fa-solid fa-box"></i> {{ i18n "account_section_orders" }}</h4>
-          <div id="order-list" class="empty-state">
+          <div id="order-list" class="empty-state" 
+               data-label-id="{{ i18n "account_table_id" }}"
+               data-label-date="{{ i18n "account_table_date" }}"
+               data-label-total="{{ i18n "account_table_total" }}"
+               data-label-status="{{ i18n "account_table_status" }}">
             <p>{{ i18n "account_no_orders" }}</p>
           </div>
         </div>

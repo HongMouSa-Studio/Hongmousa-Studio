@@ -87,16 +87,17 @@ async function loadAccountData(userId) {
 
   if (orders && orders.length > 0) {
     if (orderListEl) {
+      const labels = orderListEl.dataset
       orderListEl.classList.remove('empty-state')
       orderListEl.innerHTML = `
         <div class="order-table-wrapper">
           <table class="order-table">
             <thead>
               <tr>
-                <th>編號</th>
-                <th>日期</th>
-                <th>總計</th>
-                <th>狀態</th>
+                <th>${labels.labelId}</th>
+                <th>${labels.labelDate}</th>
+                <th>${labels.labelTotal}</th>
+                <th>${labels.labelStatus}</th>
               </tr>
             </thead>
             <tbody>
