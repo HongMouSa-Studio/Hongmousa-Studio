@@ -12,7 +12,7 @@
       </div>
 
       <div class="account-grid">
-        <!-- Points Card -->
+        <!-- 1. Points Card -->
         <div class="account-card point-card">
           <h4><i class="fa-solid fa-star"></i> {{ i18n "account_section_points" }}</h4>
           <div class="point-value">
@@ -20,8 +20,50 @@
           </div>
         </div>
 
-        <!-- Orders Card -->
-        <div class="account-card order-card">
+        <!-- 2. Profile Card -->
+        <div class="account-card profile-card">
+          <h4><i class="fa-solid fa-user"></i> {{ i18n "account_section_profile" }}</h4>
+          
+          <div id="profile-view">
+            <div class="profile-info-row">
+              <span class="label">{{ i18n "account_label_name" }}:</span>
+              <span id="display-name-val" class="value">---</span>
+            </div>
+            <div class="profile-info-row">
+              <span class="label">{{ i18n "account_label_phone" }}:</span>
+              <span id="phone-val" class="value">---</span>
+            </div>
+            <div class="profile-info-row">
+              <span class="label">{{ i18n "account_label_address" }}:</span>
+              <span id="address-val" class="value">---</span>
+            </div>
+            <button id="edit-profile-btn" class="btn-main-outline" style="margin-top: 1rem; font-size: 0.9rem;">
+              {{ i18n "account_btn_edit" }}
+            </button>
+          </div>
+
+          <div id="profile-edit" class="hidden">
+            <div class="form-group-alt">
+              <label>{{ i18n "account_label_name" }}</label>
+              <input type="text" id="edit-name" class="form-control-alt">
+            </div>
+            <div class="form-group-alt">
+              <label>{{ i18n "account_label_phone" }}</label>
+              <input type="text" id="edit-phone" class="form-control-alt">
+            </div>
+            <div class="form-group-alt">
+              <label>{{ i18n "account_label_address" }}</label>
+              <textarea id="edit-address" class="form-control-alt" rows="2"></textarea>
+            </div>
+            <div class="btn-group" style="margin-top: 1.5rem; display: flex; gap: 0.5rem;">
+              <button id="save-profile-btn" class="btn-main" style="flex: 1;">{{ i18n "account_btn_save" }}</button>
+              <button id="cancel-edit-btn" class="btn-main-outline" style="flex: 1;">{{ i18n "account_btn_cancel" }}</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Orders Card (Spans full width or side) -->
+        <div class="account-card order-card" style="grid-column: span 2;">
           <h4><i class="fa-solid fa-box"></i> {{ i18n "account_section_orders" }}</h4>
           <div id="order-list" class="empty-state">
             <p>{{ i18n "account_no_orders" }}</p>
