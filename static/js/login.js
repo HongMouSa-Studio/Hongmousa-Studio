@@ -3,6 +3,21 @@ import { sendOtp, verifyOtp, loginWithGoogle, getLangBase } from './auth.js'
 
 const emailInput = document.getElementById('login-email')
 const otpInput = document.getElementById('login-otp')
+const msgEl = document.getElementById('otp-message')
+
+// Helper function to translate Supabase errors
+function translateError(errorMsg) {
+  if (!errorMsg) return msgEl?.getAttribute('data-error-generic');
+
+  const msg = errorMsg.toLowerCase();
+  if (msg.includes('security') || msg.includes('seconds')) {
+    return msgEl?.getAttribute('data-error-rate-limit');
+  }
+  if (msg.includes('invalid') || msg.includes('expired')) {
+    return msgEl?.getAttribute('data-error-invalid-otp');
+  }
+  return msgEl?.getAttribute('data-error-generic') || errorMsg;
+}
 
 // Auto-redirect if already logged in
 import { getSession } from './auth.js'
@@ -17,18 +32,21 @@ document.getElementById('send-otp-btn')
   ?.addEventListener('click', async (e) => {
     e.preventDefault() // Prevent form submit refresh
     const email = emailInput.value.trim()
-    if (!email) return alert('Enter email')
+    if (!email) {
+      return alert(msgEl?.getAttribute('data-alert-enter-email') || 'Enter email');
+    }
 
     const { error } = await sendOtp(email)
-    if (error) return alert(error.message)
+    if (error) return alert(translateError(error.message))
 
     // Show step 2
-    const msgEl = document.getElementById('otp-message')
     document.getElementById('step-email').classList.add('hidden')
     document.getElementById('step-otp').classList.remove('hidden')
 
     // Get i18n message from data attribute
-    msgEl.textContent = msgEl.getAttribute('data-success-msg') || "Check your inbox!"
+    if (msgEl) {
+      msgEl.textContent = msgEl.getAttribute('data-success-msg') || "Check your inbox!"
+    }
   })
 
 document.getElementById('verify-otp-btn')
@@ -37,7 +55,7 @@ document.getElementById('verify-otp-btn')
     const token = otpInput.value.trim()
 
     const { error } = await verifyOtp(email, token)
-    if (error) return alert(error.message)
+    if (error) return alert(translateError(error.message))
 
     window.location.href = getLangBase() + '/'
   })
@@ -47,6 +65,6 @@ document.getElementById('google-login')
   ?.addEventListener('click', async () => {
     const { error } = await loginWithGoogle();
     if (error) {
-      alert('Google Login Error: ' + error.message);
+      alert(translateError(error.message));
     }
   })
