@@ -104,7 +104,7 @@ async function loadAccountData(userId) {
                 <tr>
                   <td>${order.snipcart_id.substring(0, 8)}...</td>
                   <td>${new Date(order.created_at).toLocaleDateString()}</td>
-                  <td>$${order.total_price}</td>
+                  <td>NT$${order.total_price}</td>
                   <td><span class="status-pill ${order.status.toLowerCase()}">${order.status}</span></td>
                 </tr>
               `).join('')}

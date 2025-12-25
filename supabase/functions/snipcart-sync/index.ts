@@ -16,25 +16,26 @@ serve(async (req) => {
 
     const order = payload.content
     const userEmail = order.email
-    const totalAmount = order.total
+    const totalAmount = order.total // This is the total in NT$
     const snipcartId = order.token
 
     const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY)
 
-    // 1. Find the user in auth.users
-    const { data: users, error: userError } = await supabase
+    // 1. Find the user in auth.users by email
+    // Note: We use contact_email or the email from the auth system
+    const { data: profile, error: userError } = await supabase
       .from('profiles')
       .select('id, points')
       .eq('contact_email', userEmail)
       .single()
 
-    if (userError || !users) {
+    if (userError || !profile) {
       console.error('User not found in profiles:', userEmail)
       return new Response(JSON.stringify({ error: 'User not found' }), { status: 404 })
     }
 
-    const userId = users.id
-    const currentPoints = users.points || 0
+    const userId = profile.id
+    const currentPoints = profile.points || 0
 
     // 2. Save the order to public.orders
     const { error: orderError } = await supabase
@@ -45,7 +46,7 @@ serve(async (req) => {
         total_price: totalAmount,
         status: 'COMPLETED',
         items: order.items,
-        created_at: new Date(order.completionDate).toISOString()
+        created_at: new Date(order.completionDate || new Date()).toISOString()
       })
 
     if (orderError) {
@@ -53,18 +54,21 @@ serve(async (req) => {
       return new Response(JSON.stringify({ error: 'Sync failed' }), { status: 500 })
     }
 
-    // 3. Update Points (Example: 1 point per $1 spent)
-    const pointsToAdd = Math.floor(totalAmount)
-    const { error: pointError } = await supabase
-      .from('profiles')
-      .update({
-        points: currentPoints + pointsToAdd,
-        updated_at: new Date().toISOString()
-      })
-      .eq('id', userId)
+    // 3. Update Points: 1 point per NT$100 spent
+    const pointsToAdd = Math.floor(totalAmount / 100)
 
-    if (pointError) {
-      console.error('Error updating points:', pointError)
+    if (pointsToAdd > 0) {
+      const { error: pointError } = await supabase
+        .from('profiles')
+        .update({
+          points: currentPoints + pointsToAdd,
+          updated_at: new Date().toISOString()
+        })
+        .eq('id', userId)
+
+      if (pointError) {
+        console.error('Error updating points:', pointError)
+      }
     }
 
     return new Response(JSON.stringify({ success: true, pointsAdded: pointsToAdd }), { status: 200 })
