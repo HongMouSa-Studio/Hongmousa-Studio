@@ -638,10 +638,17 @@ body.is-auth .auth-only {
 
 .account-grid {
   display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 2rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
   width: 100%;
-  max-width: 800px;
+  max-width: 900px;
+  /* Slightly wider for 3 columns */
+}
+
+@media (max-width: 1024px) {
+  .account-grid {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 @media (max-width: 768px) {
@@ -652,19 +659,32 @@ body.is-auth .auth-only {
 
 .account-card {
   background: white;
-  padding: 1.5rem;
+  padding: 0.8rem 1.2rem 1.2rem;
+  /* Reduced top padding from 1.5rem to 0.8rem */
   border-radius: 1rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   border: 1px solid #eee;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.account-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
 .account-card h4 {
-  margin-bottom: 1.2rem;
-  font-size: 1.1rem;
+  margin-bottom: 0.8rem;
+  font-size: 0.95rem;
+  /* Slightly smaller for tighter look */
+  font-weight: 700;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  color: #333;
+  gap: 0.6rem;
+  color: var(--text-dark);
+  border-bottom: 1px solid #f8f8f8;
+  padding-bottom: 0.65rem;
+  margin-top: 0.2rem;
+  /* Pull up towards top edge */
 }
 
 .point-value {
@@ -743,4 +763,28 @@ body.is-auth .auth-only {
 
 .btn-main-outline:hover {
   background: rgba(16, 185, 129, 0.05);
+}
+
+.address-item {
+  padding: 0.8rem;
+  background: #fdfdfd;
+  border: 1px solid #f0f0f0;
+  border-radius: 0.8rem;
+  margin-bottom: 0.6rem;
+  font-size: 0.9rem;
+  text-align: left;
+}
+
+.address-item .recipient {
+  display: block;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 0.2rem;
+}
+
+.address-item .addr-text {
+  display: block;
+  font-size: 0.85rem;
+  color: #666;
+  line-height: 1.4;
 }

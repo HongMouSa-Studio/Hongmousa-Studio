@@ -29,15 +29,11 @@
               <span class="label">{{ i18n "account_label_name" }}:</span>
               <span id="display-name-val" class="value">---</span>
             </div>
-            <div class="profile-info-row">
+            <div class="profile-info-row" style="border-bottom: none;">
               <span class="label">{{ i18n "account_label_phone" }}:</span>
               <span id="phone-val" class="value">---</span>
             </div>
-            <div class="profile-info-row">
-              <span class="label">{{ i18n "account_label_address" }}:</span>
-              <span id="address-val" class="value">---</span>
-            </div>
-            <button id="edit-profile-btn" class="btn-main-outline" style="margin-top: 1rem; font-size: 0.9rem;">
+            <button id="edit-profile-btn" class="btn-main-outline" style="margin-top: 1rem; font-size: 0.9rem; width: 100%;">
               {{ i18n "account_btn_edit" }}
             </button>
           </div>
@@ -51,10 +47,6 @@
               <label>{{ i18n "account_label_phone" }}</label>
               <input type="text" id="edit-phone" class="form-control-alt">
             </div>
-            <div class="form-group-alt">
-              <label>{{ i18n "account_label_address" }}</label>
-              <textarea id="edit-address" class="form-control-alt" rows="2"></textarea>
-            </div>
             <div class="btn-group" style="margin-top: 1.5rem; display: flex; gap: 0.5rem;">
               <button id="save-profile-btn" class="btn-main" style="flex: 1;">{{ i18n "account_btn_save" }}</button>
               <button id="cancel-edit-btn" class="btn-main-outline" style="flex: 1;">{{ i18n "account_btn_cancel" }}</button>
@@ -62,8 +54,26 @@
           </div>
         </div>
 
-        <!-- 3. Orders Card (Spans full width or side) -->
-        <div class="account-card order-card" style="grid-column: span 2;">
+        <!-- 3. Address Book Card -->
+        <div class="account-card address-book-card">
+          <h4><i class="fa-solid fa-address-book"></i> {{ i18n "account_section_address_book" }}</h4>
+          <div id="address-list">
+            <div id="address-empty" class="empty-state" style="padding: 1rem 0;">
+              <p>{{ i18n "account_no_address" }}</p>
+            </div>
+            
+            <!-- Recipient List Placeholder -->
+            <div id="address-items-container" class="address-items">
+              <!-- Example of how it will look -->
+            </div>
+          </div>
+          <button id="add-address-btn" class="btn-main-outline" style="margin-top: 1rem; font-size: 0.85rem; width: 100%; border-style: dashed;">
+            + {{ i18n "account_btn_edit" }}
+          </button>
+        </div>
+
+        <!-- 4. Orders Card -->
+        <div class="account-card order-card" style="grid-column: span 3;">
           <h4><i class="fa-solid fa-box"></i> {{ i18n "account_section_orders" }}</h4>
           <div id="order-list" class="empty-state">
             <p>{{ i18n "account_no_orders" }}</p>
