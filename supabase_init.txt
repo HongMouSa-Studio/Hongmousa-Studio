@@ -1,5 +1,5 @@
 -- ==========================================
--- 1. DATABASE SETUP (Idempotent Version)
+-- 1. DATABASE SETUP (Fixes Trigger Error)
 -- ==========================================
 
 -- PROFILES TABLE
@@ -71,15 +71,14 @@ CREATE TRIGGER on_profile_update BEFORE UPDATE ON public.profiles FOR EACH ROW E
 
 -- Handle new user signup (auto-create profile)
 CREATE OR REPLACE FUNCTION public.handle_new_user() RETURNS TRIGGER AS $$ BEGIN INSERT INTO public.profiles (id, contact_email) VALUES (NEW.id, NEW.email) ON CONFLICT (id) DO NOTHING; RETURN NEW; END; $$ LANGUAGE plpgsql;
-DROP TRIGGER IF EXISTS on_auth_user_created ON public.auth_user_created_trigger; -- Actually attached to auth.users
+
+-- CORRECTED TRIGGER DROP
 DROP TRIGGER IF EXISTS on_auth_user_created ON auth.users;
 CREATE TRIGGER on_auth_user_created AFTER INSERT ON auth.users FOR EACH ROW EXECUTE PROCEDURE public.handle_new_user();
 
 -- ==========================================
 -- 2. TESTING (Optional)
 -- ==========================================
--- After running the code above, you can manually add an order to see it in the UI.
--- 1. Find your UUID in the 'auth.users' table
--- 2. Run these:
+-- Run these after getting your UUID from auth.users:
 -- INSERT INTO public.orders (user_id, snipcart_id, total_price, status, created_at) VALUES ('YOUR_ID_HERE', 'TEST_001', 500.00, 'COMPLETED', NOW());
 -- INSERT INTO public.address_book (user_id, recipient_name, address, is_default) VALUES ('YOUR_ID_HERE', 'A-it', 'Ko-hiông-chhī...', true);
