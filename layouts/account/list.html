@@ -78,7 +78,7 @@
             </div>
           </div>
           <button id="add-address-btn" class="btn-main-outline" style="margin-top: 1rem; font-size: 0.85rem; width: 100%; border-style: dashed;">
-            + {{ i18n "account_btn_edit" }}
+            + {{ i18n "account_btn_add" }}
           </button>
         </div>
 
@@ -110,20 +110,45 @@
   <!-- Address Modal -->
   <div id="address-modal" class="modal-overlay hidden">
     <div class="modal-card">
-      <h3 id="modal-title">{{ i18n "account_section_address_book" }}</h3>
+      <h3 id="modal-title">{{ i18n "account_section_add_address" }}</h3>
+      <p class="modal-note" style="font-size: 0.85rem; color: #666; margin-bottom: 1.5rem; line-height: 1.4;">
+        {{ i18n "account_modal_note" }}
+      </p>
       <input type="hidden" id="edit-address-id">
-      <div class="form-group-alt">
-        <label>{{ i18n "account_label_recipient_name" }}</label>
-        <input type="text" id="address-name" class="form-control-alt">
+      
+      <div class="form-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+        <div class="form-group-alt">
+          <label>{{ i18n "account_label_recipient_name" }}</label>
+          <input type="text" id="address-name" class="form-control-alt">
+        </div>
+        <div class="form-group-alt">
+          <label>{{ i18n "account_label_recipient_phone" }}</label>
+          <input type="text" id="address-phone" class="form-control-alt">
+        </div>
       </div>
+
+      <div class="form-group-alt">
+        <label>{{ i18n "account_label_postal_code" }}</label>
+        <input type="text" id="address-postal" class="form-control-alt" placeholder="100-001">
+      </div>
+
       <div class="form-group-alt">
         <label>{{ i18n "account_label_address" }}</label>
-        <textarea id="address-val" class="form-control-alt" rows="3"></textarea>
+        <textarea id="address-val" class="form-control-alt" rows="2"></textarea>
       </div>
+
+      <hr style="border: 0; border-top: 1px solid #eee; margin: 1rem 0;">
+
+      <div class="form-group-alt">
+        <label>{{ i18n "account_label_cvs_pickup" }}</label>
+        <input type="text" id="address-cvs" class="form-control-alt" placeholder="Ex: 7-11 某某門市 (000000)">
+      </div>
+
       <div class="form-group-alt" style="display: flex; align-items: center; gap: 0.5rem; margin-top: 0.5rem;">
         <input type="checkbox" id="address-default" style="width: auto;">
         <label for="address-default" style="margin-bottom: 0;">{{ i18n "account_label_set_default" }}</label>
       </div>
+
       <div class="btn-group" style="margin-top: 1.5rem; display: flex; gap: 0.5rem;">
         <button id="save-address-btn" class="btn-main" style="flex: 1;">{{ i18n "account_btn_save" }}</button>
         <button id="close-address-modal" class="btn-main-outline" style="flex: 1;">{{ i18n "account_btn_cancel" }}</button>

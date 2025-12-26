@@ -26,9 +26,13 @@ const addAddressBtn = document.getElementById('add-address-btn')
 
 // Elements - Address Modal
 const addressModal = document.getElementById('address-modal')
+const modalTitle = document.getElementById('modal-title')
 const addressIdInput = document.getElementById('edit-address-id')
 const addressNameInput = document.getElementById('address-name')
+const addressPhoneInput = document.getElementById('address-phone')
+const addressPostalInput = document.getElementById('address-postal')
 const addressValInput = document.getElementById('address-val')
+const addressCvsInput = document.getElementById('address-cvs')
 const addressDefaultInput = document.getElementById('address-default')
 const saveAddressBtn = document.getElementById('save-address-btn')
 const closeAddressModalBtn = document.getElementById('close-address-modal')
@@ -197,14 +201,22 @@ saveProfileBtn?.addEventListener('click', async () => {
 // 4. Address Book Logic
 function openAddressModal(address = null) {
   if (address) {
+    modalTitle.innerText = "修改收件資料 / Siu-kái chu-liāu"
     addressIdInput.value = address.id
-    addressNameInput.value = address.recipient_name
-    addressValInput.value = address.address
+    addressNameInput.value = address.recipient_name || ''
+    addressPhoneInput.value = address.phone || ''
+    addressPostalInput.value = address.postal_code || ''
+    addressValInput.value = address.address || ''
+    addressCvsInput.value = address.cvs_store || ''
     addressDefaultInput.checked = address.is_default
   } else {
+    modalTitle.innerText = "增添收件資料 / Chiam-thin chu-liāu"
     addressIdInput.value = ''
     addressNameInput.value = ''
+    addressPhoneInput.value = ''
+    addressPostalInput.value = ''
     addressValInput.value = ''
+    addressCvsInput.value = ''
     addressDefaultInput.checked = false
   }
   addressModal.classList.remove('hidden')
@@ -222,12 +234,15 @@ saveAddressBtn?.addEventListener('click', async () => {
 
   const id = addressIdInput.value
   const name = addressNameInput.value
+  const phone = addressPhoneInput.value
+  const postal = addressPostalInput.value
   const addr = addressValInput.value
+  const cvs = addressCvsInput.value
   const isDefault = addressDefaultInput.checked
 
-  if (!name || !addr) return alert('Please fill in all fields')
+  if (!name || (!addr && !cvs)) return alert('Please fill in name and either address or CVS store')
 
-  // If setting as default, unset others first (simplified, Supabase can handle default better)
+  // If setting as default, unset others first
   if (isDefault) {
     await supabase.from('address_book').update({ is_default: false }).eq('user_id', user.id)
   }
@@ -235,7 +250,10 @@ saveAddressBtn?.addEventListener('click', async () => {
   const payload = {
     user_id: user.id,
     recipient_name: name,
+    phone: phone,
+    postal_code: postal,
     address: addr,
+    cvs_store: cvs,
     is_default: isDefault
   }
 
@@ -247,7 +265,7 @@ saveAddressBtn?.addEventListener('click', async () => {
   }
 
   if (res.error) {
-    alert('Error saving address: ' + res.error.message)
+    alert('Error saving address: ' + res.error.message + '\n(Make sure your database has the new columns: phone, postal_code, cvs_store)')
   } else {
     addressModal.classList.add('hidden')
     renderAddresses(user.id)
