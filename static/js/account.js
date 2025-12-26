@@ -101,26 +101,54 @@ async function renderAddresses(userId) {
     .eq('user_id', userId)
     .order('is_default', { ascending: false })
 
+  // Get i18n strings from HTML
+  const deliveryMailLabel = document.querySelector('[data-i18n-delivery-mail]')?.dataset.i18nDeliveryMail || 'Mail Delivery';
+  const deliveryCvsLabel = document.querySelector('[data-i18n-delivery-cvs]')?.dataset.i18nDeliveryCvs || 'CVS Pickup';
+  const confirmDeleteMsg = document.querySelector('[data-i18n-confirm-delete]')?.dataset.i18nConfirmDelete || 'Are you sure?';
+
   if (addresses && addresses.length > 0) {
     if (addressEmpty) addressEmpty.classList.add('hidden')
     if (addressItemsContainer) {
-      addressItemsContainer.innerHTML = addresses.map(item => `
-        <div class="address-item" data-id="${item.id}">
-            <span class="recipient">${item.recipient_name} ${item.is_default ? '<small>(預設)</small>' : ''}</span>
-            <span class="addr-text">${item.address}</span>
-            <div class="address-actions">
-              <button class="edit-addr-btn" data-id="${item.id}">修改</button>
-              <button class="delete-addr-btn" data-id="${item.id}" style="color: #ef4444;">刪除</button>
-            </div>
-        </div>
-      `).join('')
+      addressItemsContainer.innerHTML = addresses.map(item => {
+        // Determine delivery method
+        const hasCVS = item.cvs_store;
+        const hasAddress = item.address;
+        const deliveryMethod = hasCVS ? deliveryCvsLabel : (hasAddress ? deliveryMailLabel : '-');
+
+        // Build address display text
+        let addressText = '';
+        if (hasAddress) {
+          addressText = `${item.postal_code || ''} ${item.address || ''}`.trim();
+        }
+        if (hasCVS) {
+          addressText = addressText ? `${addressText} | ${item.cvs_store}` : item.cvs_store;
+        }
+
+        return `
+          <div class="address-item" data-id="${item.id}">
+              <div class="address-main">
+                <span class="recipient">${item.recipient_name} ${item.is_default ? '<small style="color: #10b981;">(預設)</small>' : ''}</span>
+                <span class="delivery-method" style="font-size: 0.85rem; color: #6b7280; margin-left: 0.5rem;">${deliveryMethod}</span>
+              </div>
+              <span class="addr-text">${addressText || '-'}</span>
+              <div class="address-actions">
+                <button class="edit-addr-btn" data-id="${item.id}">修改</button>
+                <button class="delete-addr-btn" data-id="${item.id}" data-confirm="${confirmDeleteMsg}" style="color: #ef4444;">刪除</button>
+              </div>
+          </div>
+        `;
+      }).join('')
 
       // Attach listeners
       document.querySelectorAll('.edit-addr-btn').forEach(btn => {
         btn.addEventListener('click', () => openAddressModal(addresses.find(a => a.id === btn.dataset.id)))
       })
       document.querySelectorAll('.delete-addr-btn').forEach(btn => {
-        btn.addEventListener('click', () => deleteAddress(btn.dataset.id))
+        btn.addEventListener('click', () => {
+          if (confirm(btn.dataset.confirm || 'Are you sure?')) {
+            deleteAddress(btn.dataset.id);
+          }
+        })
       })
     }
   } else {
@@ -329,7 +357,9 @@ if (cvsPickerBtn && cvsPicker) {
       addressCvsInput.dataset.storeType = storeInfo.storeType;
     } catch (error) {
       console.error('CVS Picker Error:', error);
-      alert('無法開啟門市選擇器，請手動輸入門市資訊。');
+      const modalContainer = document.getElementById('address-modal');
+      const errorMsg = modalContainer?.dataset.errorCvsPicker || 'Unable to open store selector. Please enter store information manually.';
+      alert(errorMsg);
     }
   });
 }

@@ -78,6 +78,10 @@ account_modal_title_edit: "Siu-kái Siu-kiāⁿ Chu-liāu"
 account_modal_unsaved_warning: "Ū siu-kái--kòe ê chu-liāu iáu-bōe pó-chûn, kám khak-tēng beh chhú-siau?"
 account_error_missing_name: "Chhiáⁿ thiⁿ-siá siu-kiāⁿ-jîn bêng-chheng."
 account_error_missing_address_or_cvs: "Chhiáⁿ thiⁿ-siá siu-kiāⁿ tē-chí he̍k-chiá kéng chhiau-siong niá hòe."
+account_confirm_delete: "Kám khak-tēng beh san-tû chit-ê tē-chí?"
+account_delivery_method_mail: "Phòe-ta̍t kàu-ūi"
+account_delivery_method_cvs: "Chhiau-siong niá hòe"
+account_error_cvs_picker: "Bô hoat-tō͘ phah-khui bûn-chhī soán-te̍k-khì, chhiáⁿ ti̍t-chiap su-ji̍p bûn-chhī chu-sìn."
 
 account_section_add_address: "Ke-thiⁿ siu-kiāⁿ chu-liāu"
 
