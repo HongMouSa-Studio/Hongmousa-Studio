@@ -660,11 +660,12 @@ body.is-auth .auth-only {
 .account-card {
   background: white;
   padding: 0.8rem 1.2rem 1.2rem;
-  /* Reduced top padding from 1.5rem to 0.8rem */
   border-radius: 1rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   border: 1px solid #eee;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  max-height: 320px;
+  overflow-y: auto;
 }
 
 .account-card:hover {
