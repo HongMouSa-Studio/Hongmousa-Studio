@@ -121,14 +121,10 @@ async function renderAddresses(userId) {
         const hasAddress = item.address;
         const deliveryMethod = hasCVS ? deliveryCvsLabel : (hasAddress ? deliveryMailLabel : '-');
 
-        // Build address display text
-        let addressText = '';
-        if (hasAddress) {
-          addressText = `${item.postal_code || ''} ${item.address || ''}`.trim();
-        }
-        if (hasCVS) {
-          addressText = addressText ? `${addressText} | ${item.cvs_store}` : item.cvs_store;
-        }
+        // Build address lines
+        const addressLine = hasAddress ? `${item.postal_code || ''} ${item.address || ''}`.trim() : '';
+        const cvsLine = hasCVS ? item.cvs_store : '';
+        const phoneLine = item.phone || '';
 
         return `
           <div class="address-item" data-id="${item.id}">
@@ -136,7 +132,11 @@ async function renderAddresses(userId) {
                 <span class="recipient">${item.recipient_name} ${item.is_default ? '<small style="color: #10b981;">(' + defaultLabel + ')</small>' : ''}</span>
                 <span class="delivery-method" style="font-size: 0.85rem; color: #6b7280; margin-left: 0.5rem;">${deliveryMethod}</span>
               </div>
-              <span class="addr-text">${addressText || '-'}</span>
+              <div class="address-details" style="font-size: 0.9rem; color: #555; line-height: 1.6; margin: 0.5rem 0;">
+                ${phoneLine ? `<div style="color: #888;"><i class="fa-solid fa-phone" style="width: 1rem; margin-right: 0.4rem; font-size: 0.75rem;"></i>${phoneLine}</div>` : ''}
+                ${addressLine ? `<div><i class="fa-solid fa-location-dot" style="width: 1rem; margin-right: 0.4rem; font-size: 0.75rem; color: #888;"></i>${addressLine}</div>` : ''}
+                ${cvsLine ? `<div><i class="fa-solid fa-store" style="width: 1rem; margin-right: 0.4rem; font-size: 0.75rem; color: #888;"></i>${cvsLine}</div>` : ''}
+              </div>
               <div class="address-actions">
                 <button class="edit-addr-btn" data-id="${item.id}">${editLabel}</button>
                 <button class="delete-addr-btn" data-id="${item.id}" data-confirm="${confirmDeleteMsg}" style="color: #ef4444;">${deleteLabel}</button>
