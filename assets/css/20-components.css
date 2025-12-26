@@ -767,6 +767,18 @@ body.is-auth .auth-only {
   transform: translateY(-1px);
 }
 
+#add-address-btn {
+  margin-top: auto;
+  font-size: 0.9rem;
+  width: 100%;
+  border-style: dashed;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 1.2rem;
+}
+
 .order-table-wrapper {
   overflow-x: auto;
   margin-top: 0.5rem;

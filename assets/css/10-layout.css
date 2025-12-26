@@ -244,6 +244,25 @@ main {
   font-weight: bold;
 }
 
+/* Language-specific font overrides for cleaner look */
+.lang-option[data-lang="tb-poj"],
+.lang-button[data-lang="tb-poj"] {
+  font-family: "Charis", serif;
+  font-weight: 500;
+}
+
+.lang-option[data-lang="tb-hj"],
+.lang-button[data-lang="tb-hj"] {
+  font-family: "Noto Serif TC", serif;
+  font-weight: 500;
+}
+
+.lang-option[data-lang="en"],
+.lang-button[data-lang="en"] {
+  font-family: "Noto Serif TC", serif;
+  font-weight: 500;
+}
+
 /* ---------------------------------------------------
     hamburger toggle (desktop hidden)
 -----------------------------------------------------*/

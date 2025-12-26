@@ -1,7 +1,7 @@
 <div class="group lang-switcher-inline">
   
   <!-- Button -->
-  <button class="lang-button">
+  <button class="lang-button" data-lang="{{ .Site.Language.Lang }}">
     🌐 {{ .Site.Language.Lang | upper }}
   </button>
 
@@ -15,11 +15,13 @@
       {{ $targetPrefix := printf "/%s/" .Lang }}
       {{ if in $cur $fromPrefix }}
         <a href="{{ replace $cur $fromPrefix $targetPrefix }}"
+           class="lang-option" data-lang="{{ .Lang }}"
            onclick="document.cookie='preferred_lang={{ .Lang }};path=/;max-age=31536000';">
           {{ .LanguageName }}
         </a>
       {{ else }}
         <a href="/{{ .Lang }}/"
+           class="lang-option" data-lang="{{ .Lang }}"
            onclick="document.cookie='preferred_lang={{ .Lang }};path=/;max-age=31536000';">
           {{ .LanguageName }}
         </a>

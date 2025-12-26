@@ -18,37 +18,40 @@ serve(async (req) => {
   try {
     // ECPay sends data in application/x-www-form-urlencoded
     const formData = await req.formData()
-    const data: Record<string, string> = {}
+    const data: Record<string, any> = {}
     for (const [key, value] of formData.entries()) {
       data[key] = value.toString()
     }
 
     console.log('ECPay Callback Data:', data)
 
-    // Check if we have the minimum required data
-    if (!data.CVSStoreID) {
-      throw new Error('Missing CVSStoreID in callback data')
-    }
-
-    // Return an HTML page that posts message back to parent and closes
+    // Return an HTML page that posts message back to parent and closes automatically after a short delay
     const html = `
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
   <link rel="icon" href="data:,">
-  <title>Store Selected</title>
+  <title>門市選擇成功</title>
+  <style>
+    body { 
+      display: flex; flex-direction: column; align-items: center; justify-content: center; 
+      height: 100vh; margin: 0; font-family: system-ui, sans-serif; background: #fff; color: #333;
+    }
+    .check-icon { 
+      width: 60px; height: 60px; border-radius: 50%; background: #22c55e; color: white;
+      display: flex; align-items: center; justify-content: center; font-size: 30px;
+      margin-bottom: 20px; animation: scaleIn 0.3s ease-out;
+    }
+    @keyframes scaleIn { from { transform: scale(0); } to { transform: scale(1); } }
+  </style>
 </head>
 <body>
-  <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; font-family: sans-serif; color: #333;">
-    <div style="border: 4px solid #f3f3f3; border-top: 4px solid #3498db; border-radius: 50%; width: 40px; height: 40px; animation: spin 2s linear infinite;"></div>
-    <p style="margin-top: 20px;">門市選擇成功，正在回到網頁...</p>
-  </div>
-  <style>
-    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-  </style>
+  <div class="check-icon">✓</div>
+  <div style="font-weight: bold; font-size: 1.2rem;">門市選擇成功</div>
+  <p>正在返回網站...</p>
+
   <script>
-    // Send data back to the main window
     const storeData = ${JSON.stringify({
       type: 'ECPAY_CVS_SELECTED',
       ...data
@@ -56,9 +59,12 @@ serve(async (req) => {
     
     if (window.opener) {
       window.opener.postMessage(storeData, '*');
-      window.close();
+      // Delay slightly so user sees the success message
+      setTimeout(() => {
+        window.close();
+      }, 1200);
     } else {
-      document.body.innerHTML = '<p>門市選擇成功！請手動關閉此視窗。</p>';
+      document.body.innerHTML = '<h2>門市選擇成功！</h2><p>請手動關閉此視窗。</p>';
     }
   </script>
 </body>
