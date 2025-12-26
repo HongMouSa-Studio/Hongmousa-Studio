@@ -32,13 +32,25 @@ serve(async (req) => {
 
     // Build ECPay CVS Map parameters
     const timestamp = Math.floor(Date.now() / 1000).toString()
-    const params = {
+
+    // Map storeType to correct ECPay LogisticsSubType
+    // UNIMART = 7-11, FAMI = 全家, HILIFE = 萊爾富, UNIMARTC2C = 7-11 C2C
+    const subTypeMap: Record<string, string> = {
+      '711': 'UNIMART',
+      'family': 'FAMI',
+      'hilife': 'HILIFE',
+      'UNIMART': 'UNIMART',
+      'FAMI': 'FAMI'
+    }
+    const logisticsSubType = subTypeMap[storeType] || 'UNIMART'
+
+    const params: Record<string, string> = {
       MerchantID: MERCHANT_ID,
       MerchantTradeNo: `CVS${timestamp}`, // Unique trade number
       LogisticsType: 'CVS',
-      LogisticsSubType: storeType || '01', // 01=UNIMART(7-11), 02=FAMI(全家)
-      IsCollection: isCollection || 'Y',
-      ServerReplyURL: serverReplyURL,
+      LogisticsSubType: logisticsSubType,
+      IsCollection: isCollection || 'N', // N = 不代收, Y = 代收
+      ServerReplyURL: serverReplyURL || `${Deno.env.get('SUPABASE_URL')}/functions/v1/ecpay-cvs-callback`,
       ExtraData: extraData || '',
       Device: '0' // 0=PC, 1=Mobile
     }
