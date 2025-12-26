@@ -47,12 +47,27 @@ serve(async (req) => {
     const checkMacValue = await generateCheckMacValue(params, HASH_KEY, HASH_IV)
     const finalParams = { ...params, CheckMacValue: checkMacValue }
 
-    // Build the ECPay map URL with parameters
-    const urlParams = new URLSearchParams(finalParams as Record<string, string>)
-    const mapURL = `${ECPAY_API_URL}?${urlParams.toString()}`
+    // Build auto-submitting HTML form (ECPay requires POST, not GET)
+    const formHtml = `
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>Loading...</title></head>
+<body>
+<form id="ecpay-form" method="POST" action="${ECPAY_API_URL}">
+${Object.entries(finalParams).map(([k, v]) => `<input type="hidden" name="${k}" value="${v}">`).join('\n')}
+</form>
+<script>document.getElementById('ecpay-form').submit();</script>
+</body>
+</html>`
 
     return new Response(
-      JSON.stringify({ mapURL, merchantTradeNo: finalParams.MerchantTradeNo }),
+      JSON.stringify({
+        formHtml,
+        merchantTradeNo: finalParams.MerchantTradeNo,
+        // Also provide params for alternative implementations
+        params: finalParams,
+        actionUrl: ECPAY_API_URL
+      }),
       {
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
         status: 200,

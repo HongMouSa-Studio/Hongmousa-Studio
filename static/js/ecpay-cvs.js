@@ -25,7 +25,7 @@ export class ECPayCVSPicker {
     } = params;
 
     try {
-      // Step 1: Get ECPay CVS map URL from our backend
+      // Step 1: Get ECPay CVS form data from our backend
       const response = await fetch(this.serverEndpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -44,14 +44,14 @@ export class ECPayCVSPicker {
 
       const data = await response.json();
 
-      // Step 2: Open ECPay map in a popup window
+      // Step 2: Open popup window and write the auto-submit form
       const width = 800;
       const height = 600;
       const left = (screen.width - width) / 2;
       const top = (screen.height - height) / 2;
 
       const popup = window.open(
-        data.mapURL,
+        'about:blank',
         'ECPayCVSMap',
         `width=${width},height=${height},left=${left},top=${top},resizable=yes,scrollbars=yes`
       );
@@ -59,6 +59,10 @@ export class ECPayCVSPicker {
       if (!popup) {
         throw new Error('Popup blocked. Please allow popups for this site.');
       }
+
+      // Write the auto-submitting form HTML to the popup
+      popup.document.write(data.formHtml);
+      popup.document.close();
 
       // Step 3: Listen for the callback from ECPay
       return this._waitForCallback();

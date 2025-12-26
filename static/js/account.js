@@ -36,8 +36,11 @@ const editContactEmailInput = document.getElementById('edit-contact-email')
 // Buttons
 const editProfileBtn = document.getElementById('edit-profile-btn')
 const saveProfileBtn = document.getElementById('save-profile-btn')
-const cancelEditBtn = document.getElementById('cancel-edit-btn')
+const closeProfileModalBtn = document.getElementById('close-profile-modal')
 const addAddressBtn = document.getElementById('add-address-btn')
+
+// Elements - Profile Modal
+const profileModal = document.getElementById('profile-modal')
 
 // Elements - Address Modal
 const addressModal = document.getElementById('address-modal')
@@ -199,19 +202,28 @@ async function renderOrders(userId) {
   }
 }
 
-// 3. Profile Edit Toggle
+// 3. Profile Edit Modal
 editProfileBtn?.addEventListener('click', () => {
   editNameInput.value = displayNameVal.textContent === '---' ? '' : displayNameVal.textContent
   editPhoneInput.value = phoneVal.textContent === '---' ? '' : phoneVal.textContent
   editContactEmailInput.value = contactEmailVal.textContent === '---' ? '' : contactEmailVal.textContent
-
-  profileView.classList.add('hidden')
-  profileEdit.classList.remove('hidden')
+  profileModal.classList.remove('hidden')
 })
 
-cancelEditBtn?.addEventListener('click', () => {
-  profileView.classList.remove('hidden')
-  profileEdit.classList.add('hidden')
+closeProfileModalBtn?.addEventListener('click', () => {
+  profileModal.classList.add('hidden')
+})
+
+// Close profile modal on ESC or click outside
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && !profileModal.classList.contains('hidden')) {
+    profileModal.classList.add('hidden')
+  }
+})
+profileModal?.addEventListener('click', (e) => {
+  if (e.target === profileModal) {
+    profileModal.classList.add('hidden')
+  }
 })
 
 saveProfileBtn?.addEventListener('click', async () => {
@@ -236,9 +248,7 @@ saveProfileBtn?.addEventListener('click', async () => {
     displayNameVal.textContent = newName || '---'
     phoneVal.textContent = newPhone || '---'
     contactEmailVal.textContent = newEmail || '---'
-
-    profileView.classList.remove('hidden')
-    profileEdit.classList.add('hidden')
+    profileModal.classList.add('hidden')
   } else {
     alert('Error: ' + error.message)
   }
@@ -427,7 +437,6 @@ saveAddressBtn?.addEventListener('click', async () => {
 });
 
 async function deleteAddress(id) {
-  if (!confirm('Are you sure?')) return;
   const { error } = await supabase.from('address_book').delete().eq('id', id);
   if (error) alert(error.message);
   else {

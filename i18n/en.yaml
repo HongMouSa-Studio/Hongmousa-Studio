@@ -57,6 +57,7 @@ account_label_name: "Full Name: "
 account_label_phone: "Phone: "
 account_label_contact_email: "Contact Email: "
 account_btn_edit: "Edit Profile"
+account_modal_title_edit_profile: "Edit Profile"
 account_btn_save: "Save Changes"
 account_btn_cancel: "Cancel"
 
