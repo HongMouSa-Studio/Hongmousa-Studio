@@ -163,18 +163,45 @@
    * Replace NT$ with localized currency symbol
    */
   function replaceCurrencySymbols(symbol) {
-    // Wait for Snipcart to fully render
-    setTimeout(() => {
-      const snipcartElements = document.querySelectorAll('.snipcart-cart-summary, .snipcart-cart-summary-item, .snipcart__cart-summary, .snipcart__total');
+    let attempts = 0;
+    const maxAttempts = 5;
 
-      snipcartElements.forEach(el => {
-        replaceTextContent(el, symbol);
+    function performReplacement() {
+      attempts++;
+
+      // Broader set of selectors to catch all Snipcart money displays
+      const selectors = [
+        '.snipcart',
+        '.snipcart-cart-summary',
+        '.snipcart-cart-summary-item',
+        '.snipcart__cart-summary',
+        '.snipcart__total',
+        '.snipcart__box--badge',
+        '.snipcart-item-quantity',
+        '.snipcart__font--secondary',
+        '.snipcart__font--subtitle',
+        '[class*="snipcart"]'
+      ];
+
+      selectors.forEach(selector => {
+        const elements = document.querySelectorAll(selector);
+        elements.forEach(el => replaceTextContent(el, symbol));
       });
+
+      // Continue trying for a few more times to catch lazy-loaded content
+      if (attempts < maxAttempts) {
+        setTimeout(performReplacement, 1000);
+      }
+    }
+
+    // First attempt after a short delay
+    setTimeout(() => {
+      performReplacement();
 
       // Use MutationObserver to catch dynamically added content
       const observer = new MutationObserver(() => {
-        const newElements = document.querySelectorAll('.snipcart-cart-summary, .snipcart-cart-summary-item, .snipcart__cart-summary, .snipcart__total');
-        newElements.forEach(el => replaceTextContent(el, symbol));
+        const elements = document.querySelectorAll('[class*="snipcart"]');
+        elements.forEach(el => replaceTextContent(el, symbol));
       });
 
       const snipcartContainer = document.querySelector('#snipcart');
@@ -185,10 +212,11 @@
           characterData: true
         });
       }
-    }, 1000);
+    }, 500);
   }
 
   function replaceTextContent(element, symbol) {
+    // Only process text nodes
     const walker = document.createTreeWalker(
       element,
       NodeFilter.SHOW_TEXT,
@@ -197,13 +225,20 @@
     );
 
     let node;
+    const nodesToUpdate = [];
+
     while (node = walker.nextNode()) {
-      if (node.textContent.includes('NT$') || node.textContent.includes('$')) {
-        node.textContent = node.textContent
-          .replace(/NT\$/g, symbol)
-          .replace(/\$(\d)/g, `${symbol} $1`);
+      if (node.textContent.includes('NT$') || /\$\s*\d/.test(node.textContent)) {
+        nodesToUpdate.push(node);
       }
     }
+
+    // Update all collected nodes
+    nodesToUpdate.forEach(node => {
+      node.textContent = node.textContent
+        .replace(/NT\$/g, symbol + ' ')
+        .replace(/\$(\s*\d)/g, `${symbol} $1`);
+    });
   }
 
   function setupCartToggle() {

@@ -76,6 +76,8 @@ account_btn_select_store: "Kéng bûn-chhī"
 account_label_set_default: "Siat chò ī-siat tē-chí"
 account_modal_title_edit: "Siu-kái Siu-kiāⁿ Chu-liāu"
 account_modal_unsaved_warning: "Ū siu-kái--kòe ê chu-liāu iáu-bōe pó-chûn, kám khak-tēng beh chhú-siau?"
+account_error_missing_name: "Chhiáⁿ thiⁿ-siá siu-kiāⁿ-jîn bêng-chheng."
+account_error_missing_address_or_cvs: "Chhiáⁿ thiⁿ-siá siu-kiāⁿ tē-chí he̍k-chiá kéng chhiau-siong niá hòe."
 
 account_section_add_address: "Ke-thiⁿ siu-kiāⁿ chu-liāu"
 

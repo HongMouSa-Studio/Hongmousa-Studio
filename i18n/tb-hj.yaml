@@ -76,5 +76,7 @@ account_btn_select_store: "揀門市"
 account_label_set_default: "設做預設地址"
 account_modal_title_edit: "修改收件資料"
 account_modal_unsaved_warning: "有修改過兮資料夭未保存，咁確定卜取消？"
+account_error_missing_name: "請填寫收件人名稱。"
+account_error_missing_address_or_cvs: "請填寫收件地址或者揀超商取貨。"
 
 account_section_add_address: "加添收件資料"

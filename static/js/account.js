@@ -348,7 +348,9 @@ saveAddressBtn?.addEventListener('click', async () => {
 
   // Validation: Must fill name
   if (!name) {
-    return alert('請填寫收件人名稱 / Please fill in recipient name');
+    const modalContainer = document.getElementById('address-modal');
+    const errorMsg = modalContainer?.dataset.errorMissingName || 'Please fill in recipient name';
+    return alert(errorMsg);
   }
 
   // Validation: Must choose either (Postal + Address) OR CVS
@@ -356,7 +358,9 @@ saveAddressBtn?.addEventListener('click', async () => {
   const hasCVS = cvs;
 
   if (!hasAddress && !hasCVS) {
-    return alert('請填寫收件地址或選擇超商取貨 / Please fill in address OR select CVS pickup');
+    const modalContainer = document.getElementById('address-modal');
+    const errorMsg = modalContainer?.dataset.errorMissingAddressOrCvs || 'Please fill in address OR select CVS pickup';
+    return alert(errorMsg);
   }
 
   // If setting as default, unset others first

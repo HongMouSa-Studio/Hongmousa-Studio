@@ -76,5 +76,7 @@ account_btn_select_store: "Select Store"
 account_label_set_default: "Set as default address"
 account_modal_title_edit: "Edit Shipping Information"
 account_modal_unsaved_warning: "You have unsaved changes. Are you sure you want to cancel?"
+account_error_missing_name: "Please fill in recipient name."
+account_error_missing_address_or_cvs: "Please fill in address OR select CVS pickup."
 
 account_section_add_address: "Add Shipping Information"
