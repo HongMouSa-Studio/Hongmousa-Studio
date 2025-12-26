@@ -108,9 +108,11 @@
   </div>
 
   <!-- Address Modal -->
-  <div id="address-modal" class="modal-overlay hidden">
+  <div id="address-modal" class="modal-overlay hidden"
+       data-title-add="{{ i18n "account_modal_title_add" }}"
+       data-title-edit="{{ i18n "account_modal_title_edit" }}">
     <div class="modal-card">
-      <h3 id="modal-title">{{ i18n "account_section_add_address" }}</h3>
+      <h3 id="modal-title">{{ i18n "account_modal_title_add" }}</h3>
       <p class="modal-note" style="font-size: 0.85rem; color: #666; margin-bottom: 1.5rem; line-height: 1.4;">
         {{ i18n "account_modal_note" }}
       </p>
@@ -141,7 +143,12 @@
 
       <div class="form-group-alt">
         <label>{{ i18n "account_label_cvs_pickup" }}</label>
-        <input type="text" id="address-cvs" class="form-control-alt" placeholder="Ex: 7-11 某某門市 (000000)">
+        <div style="display: flex; gap: 0.5rem;">
+          <input type="text" id="address-cvs" class="form-control-alt" placeholder="{{ i18n "account_cvs_placeholder" }}" style="flex: 1;">
+          <button type="button" id="cvs-picker-btn" class="btn-main-outline" style="white-space: nowrap; padding: 0.5rem 1rem;">
+            <i class="fa-solid fa-map-location-dot"></i> {{ i18n "account_btn_select_store" }}
+          </button>
+        </div>
       </div>
 
       <div class="form-group-alt" style="display: flex; align-items: center; gap: 0.5rem; margin-top: 0.5rem;">

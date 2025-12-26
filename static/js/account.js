@@ -1,5 +1,19 @@
 /*------ account page ------*/
 import { supabase, getLangBase } from './auth.js'
+import { initECPayCVS } from './ecpay-cvs.js'
+
+// Initialize ECPay CVS Picker (configure with your credentials)
+const cvsPicker = initECPayCVS({
+  merchantID: '3408671', // TODO: Replace with actual merchant ID
+  isTestMode: true // Khai-hoat sî iōng true, chèng-sek khoân-kéng kái-chò false
+});
+
+// Get i18n strings from data attributes
+function getI18n(key) {
+  const container = document.querySelector('[data-i18n-modal-title-add]');
+  if (!container) return key;
+  return container.dataset[`i18n${key.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join('')}`] || key;
+}
 
 // Elements - View
 const emailEl = document.getElementById('account-email')
@@ -200,51 +214,91 @@ saveProfileBtn?.addEventListener('click', async () => {
 
 // 4. Address Book Logic
 function openAddressModal(address = null) {
+  // Get i18n title from HTML data attributes
+  const modalContainer = document.getElementById('address-modal');
+  const titleAdd = modalContainer?.dataset.titleAdd || 'Add Shipping Information';
+  const titleEdit = modalContainer?.dataset.titleEdit || 'Edit Shipping Information';
+
   if (address) {
-    modalTitle.innerText = "修改收件資料 / Siu-kái chu-liāu"
-    addressIdInput.value = address.id
-    addressNameInput.value = address.recipient_name || ''
-    addressPhoneInput.value = address.phone || ''
-    addressPostalInput.value = address.postal_code || ''
-    addressValInput.value = address.address || ''
-    addressCvsInput.value = address.cvs_store || ''
-    addressDefaultInput.checked = address.is_default
+    modalTitle.textContent = titleEdit;
+    addressIdInput.value = address.id;
+    addressNameInput.value = address.recipient_name || '';
+    addressPhoneInput.value = address.phone || '';
+    addressPostalInput.value = address.postal_code || '';
+    addressValInput.value = address.address || '';
+    addressCvsInput.value = address.cvs_store || '';
+    addressDefaultInput.checked = address.is_default;
   } else {
-    modalTitle.innerText = "增添收件資料 / Chiam-thin chu-liāu"
-    addressIdInput.value = ''
-    addressNameInput.value = ''
-    addressPhoneInput.value = ''
-    addressPostalInput.value = ''
-    addressValInput.value = ''
-    addressCvsInput.value = ''
-    addressDefaultInput.checked = false
+    modalTitle.textContent = titleAdd;
+    addressIdInput.value = '';
+    addressNameInput.value = '';
+    addressPhoneInput.value = '';
+    addressPostalInput.value = '';
+    addressValInput.value = '';
+    addressCvsInput.value = '';
+    addressDefaultInput.checked = false;
   }
-  addressModal.classList.remove('hidden')
+  addressModal.classList.remove('hidden');
 }
 
 closeAddressModalBtn.addEventListener('click', () => {
-  addressModal.classList.add('hidden')
-})
+  addressModal.classList.add('hidden');
+});
 
-addAddressBtn?.addEventListener('click', () => openAddressModal())
+addAddressBtn?.addEventListener('click', () => openAddressModal());
+
+// CVS Store Picker Integration
+const cvsPickerBtn = document.getElementById('cvs-picker-btn');
+if (cvsPickerBtn && cvsPicker) {
+  cvsPickerBtn.addEventListener('click', async () => {
+    try {
+      const storeInfo = await cvsPicker.openStoreMap({
+        isCollection: 'Y',
+        storeType: '01' // Default to 7-11
+      });
+
+      // Auto-fill the CVS input with formatted store info
+      addressCvsInput.value = cvsPicker.formatStoreInfo(storeInfo);
+
+      // Store the raw store data for later use
+      addressCvsInput.dataset.storeId = storeInfo.storeID;
+      addressCvsInput.dataset.storeName = storeInfo.storeName;
+      addressCvsInput.dataset.storeType = storeInfo.storeType;
+    } catch (error) {
+      console.error('CVS Picker Error:', error);
+      alert('無法開啟門市選擇器，請手動輸入門市資訊。');
+    }
+  });
+}
 
 saveAddressBtn?.addEventListener('click', async () => {
-  const { data: { user } } = await supabase.auth.getUser()
-  if (!user) return
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return;
 
-  const id = addressIdInput.value
-  const name = addressNameInput.value
-  const phone = addressPhoneInput.value
-  const postal = addressPostalInput.value
-  const addr = addressValInput.value
-  const cvs = addressCvsInput.value
-  const isDefault = addressDefaultInput.checked
+  const id = addressIdInput.value;
+  const name = addressNameInput.value;
+  const phone = addressPhoneInput.value;
+  const postal = addressPostalInput.value;
+  const addr = addressValInput.value;
+  const cvs = addressCvsInput.value;
+  const isDefault = addressDefaultInput.checked;
 
-  if (!name || (!addr && !cvs)) return alert('Please fill in name and either address or CVS store')
+  // Validation: Must fill name
+  if (!name) {
+    return alert('請填寫收件人名稱 / Please fill in recipient name');
+  }
+
+  // Validation: Must choose either (Postal + Address) OR CVS
+  const hasAddress = postal && addr;
+  const hasCVS = cvs;
+
+  if (!hasAddress && !hasCVS) {
+    return alert('請填寫收件地址或選擇超商取貨 / Please fill in address OR select CVS pickup');
+  }
 
   // If setting as default, unset others first
   if (isDefault) {
-    await supabase.from('address_book').update({ is_default: false }).eq('user_id', user.id)
+    await supabase.from('address_book').update({ is_default: false }).eq('user_id', user.id);
   }
 
   const payload = {
@@ -255,29 +309,29 @@ saveAddressBtn?.addEventListener('click', async () => {
     address: addr,
     cvs_store: cvs,
     is_default: isDefault
-  }
+  };
 
   let res;
   if (id) {
-    res = await supabase.from('address_book').update(payload).eq('id', id)
+    res = await supabase.from('address_book').update(payload).eq('id', id);
   } else {
-    res = await supabase.from('address_book').insert(payload)
+    res = await supabase.from('address_book').insert(payload);
   }
 
   if (res.error) {
-    alert('Error saving address: ' + res.error.message + '\n(Make sure your database has the new columns: phone, postal_code, cvs_store)')
+    alert('Error saving address: ' + res.error.message + '\n(Make sure your database has the new columns: phone, postal_code, cvs_store)');
   } else {
-    addressModal.classList.add('hidden')
-    renderAddresses(user.id)
+    addressModal.classList.add('hidden');
+    renderAddresses(user.id);
   }
-})
+});
 
 async function deleteAddress(id) {
-  if (!confirm('Are you sure?')) return
-  const { error } = await supabase.from('address_book').delete().eq('id', id)
-  if (error) alert(error.message)
+  if (!confirm('Are you sure?')) return;
+  const { error } = await supabase.from('address_book').delete().eq('id', id);
+  if (error) alert(error.message);
   else {
-    const { data: { user } } = await supabase.auth.getUser()
-    renderAddresses(user.id)
+    const { data: { user } } = await supabase.auth.getUser();
+    renderAddresses(user.id);
   }
 }

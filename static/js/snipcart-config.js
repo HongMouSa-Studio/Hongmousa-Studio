@@ -10,68 +10,128 @@
     const pojTranslations = {
       "cart": {
         "title": "Kò͘-bu̍t-chhia",
+        "summary": "Kò͘-bu̍t-chhia lāi-iông",
         "checkout": "Lâi-khì kiat-siàu",
+        "continue_shopping": "Kè-sio̍k bé",
         "empty": "Lí ê kò͘-bu̍t-chhia sī khang--ê.",
-        "subtotal": "Sió-kè"
+        "subtotal": "Sió-kè",
+        "total": "Chóng-kè",
+        "quantity": "Sò͘-liōng",
+        "remove": "The̍h tiāu",
+        "back_to_store": "Tńg-khì thia̍h",
+        "shipping_taxes_notice": "Ūn-hùi kap sòe ē tī kiat-siàu sî kè-sǹg."
       },
       "header": {
         "title": "Kò͘-bu̍t-chhia"
       },
+      "item": {
+        "quantity": "Sò͘-liōng",
+        "total_price": "Kè-kin",
+        "unit_price": "Tan-kè"
+      },
       "shipping": {
         "title": "Siu-kiāⁿ",
         "address": "Siu-kiāⁿ tē-chí",
-        "methods": "Ūn-sàng hong-sek"
+        "methods": "Ūn-sàng hong-sek",
+        "continue_to_payment": "Kè-sio̍k khì pe̍h-khoan"
       },
       "payment": {
         "title": "Kiat-siàu",
-        "type": "Pe̍h-khoan hong-sek"
+        "type": "Pe̍h-khoan hong-sek",
+        "bill_me_later": "Āu-lâi chài pe̍h",
+        "card_number": "Ka-á hō",
+        "card_cvv": "An-choân má",
+        "card_expiry": "Kò͘-kî"
       },
       "billing": {
-        "title": "Siàu-toaⁿ"
+        "title": "Siàu-toaⁿ",
+        "continue_to_review": "Kám-cha siàu-toaⁿ"
+      },
+      "review": {
+        "title": "Cha̍p-tàng",
+        "confirm_order": "Khak-jīn lo̍h-toaⁿ"
       },
       "customer_inputs": {
         "phone": "Tiān-ōe",
         "email": "Tiān-chú-phoe-tháng",
-        "name": "Miâ-sèⁿ"
+        "name": "Miâ-sèⁿ",
+        "full_name": "Choân-miâ"
       },
       "actions": {
         "continue_to_shipping": "Khì siu-kiāⁿ",
         "continue_to_payment": "Khì kiat-siàu",
-        "place_order": "Lo̍h-toaⁿ"
+        "place_order": "Lo̍h-toaⁿ",
+        "continue": "Kè-sio̍k",
+        "back": "Tńg-khì"
+      },
+      "discount": {
+        "promo_code": "Ìⁿ-hoē má",
+        "apply": "Ēng",
+        "remove": "Chhú tiāu"
       }
     };
 
     const hjTranslations = {
       "cart": {
         "title": "購物車",
+        "summary": "購物車內容",
         "checkout": "來去結賬",
+        "continue_shopping": "繼續買",
         "empty": "汝兮購物車是空兮。",
-        "subtotal": "小計"
+        "subtotal": "小計",
+        "total": "總計",
+        "quantity": "數量",
+        "remove": "提掉",
+        "back_to_store": "轉去覕",
+        "shipping_taxes_notice": "運費佮稅會佇結賬時計算。"
       },
       "header": {
         "title": "購物車"
       },
+      "item": {
+        "quantity": "數量",
+        "total_price": "價銀",
+        "unit_price": "單價"
+      },
       "shipping": {
         "title": "收件",
         "address": "收件地址",
-        "methods": "運送方式"
+        "methods": "運送方式",
+        "continue_to_payment": "繼續去付款"
       },
       "payment": {
         "title": "結賬",
-        "type": "付款方式"
+        "type": "付款方式",
+        "bill_me_later": "後來才付",
+        "card_number": "卡仔號",
+        "card_cvv": "安全碼",
+        "card_expiry": "過期"
       },
       "billing": {
-        "title": "賬單"
+        "title": "賬單",
+        "continue_to_review": "檢查賬單"
+      },
+      "review": {
+        "title": "查當",
+        "confirm_order": "確認落單"
       },
       "customer_inputs": {
         "phone": "電話",
         "email": "電子批桶",
-        "name": "名姓"
+        "name": "名姓",
+        "full_name": "全名"
       },
       "actions": {
         "continue_to_shipping": "去收件",
         "continue_to_payment": "去結賬",
-        "place_order": "落單"
+        "place_order": "落單",
+        "continue": "繼續",
+        "back": "轉去"
+      },
+      "discount": {
+        "promo_code": "用兮碼",
+        "apply": "用",
+        "remove": "除掉"
       }
     };
 
