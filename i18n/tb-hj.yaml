@@ -75,5 +75,6 @@ account_label_cvs_store: "門市名稱 / 番號："
 account_btn_select_store: "揀門市"
 account_label_set_default: "設做預設地址"
 account_modal_title_edit: "修改收件資料"
+account_modal_unsaved_warning: "有修改過兮資料夭未保存，咁確定卜取消？"
 
 account_section_add_address: "加添收件資料"

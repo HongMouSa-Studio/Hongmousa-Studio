@@ -4,7 +4,8 @@ import { initECPayCVS } from './ecpay-cvs.js'
 
 // Initialize ECPay CVS Picker (configure with your credentials)
 const cvsPicker = initECPayCVS({
-  merchantID: '3408671', // TODO: Replace with actual merchant ID
+  merchantID: '3408671',
+  serverEndpoint: 'https://suxxspkxmpbxzvwdfdun.supabase.co/functions/v1/ecpay-cvs',
   isTestMode: true // Khai-hoat sî iōng true, chèng-sek khoân-kéng kái-chò false
 });
 
@@ -77,7 +78,7 @@ async function loadAccountData(userId) {
     .from('profiles')
     .select('*')
     .eq('id', userId)
-    .single()
+    .maybeSingle()
 
   if (profile) {
     if (pointsEl) pointsEl.textContent = profile.points || "0";
@@ -213,6 +214,42 @@ saveProfileBtn?.addEventListener('click', async () => {
 })
 
 // 4. Address Book Logic
+let isFormDirty = false;
+let initialFormState = {};
+
+function captureInitialState() {
+  initialFormState = {
+    name: addressNameInput.value,
+    phone: addressPhoneInput.value,
+    postal: addressPostalInput.value,
+    address: addressValInput.value,
+    cvs: addressCvsInput.value,
+    isDefault: addressDefaultInput.checked
+  };
+  isFormDirty = false;
+}
+
+function checkFormDirty() {
+  if (!addressModal.classList.contains('hidden')) {
+    const currentState = {
+      name: addressNameInput.value,
+      phone: addressPhoneInput.value,
+      postal: addressPostalInput.value,
+      address: addressValInput.value,
+      cvs: addressCvsInput.value,
+      isDefault: addressDefaultInput.checked
+    };
+
+    isFormDirty = JSON.stringify(initialFormState) !== JSON.stringify(currentState);
+  }
+}
+
+// Track form changes
+[addressNameInput, addressPhoneInput, addressPostalInput, addressValInput, addressCvsInput].forEach(input => {
+  input?.addEventListener('input', checkFormDirty);
+});
+addressDefaultInput?.addEventListener('change', checkFormDirty);
+
 function openAddressModal(address = null) {
   // Get i18n title from HTML data attributes
   const modalContainer = document.getElementById('address-modal');
@@ -238,11 +275,37 @@ function openAddressModal(address = null) {
     addressCvsInput.value = '';
     addressDefaultInput.checked = false;
   }
+
   addressModal.classList.remove('hidden');
+  captureInitialState();
 }
 
-closeAddressModalBtn.addEventListener('click', () => {
+function closeAddressModal() {
+  const modalContainer = document.getElementById('address-modal');
+  const warningMsg = modalContainer?.dataset.unsavedWarning || 'You have unsaved changes. Are you sure you want to cancel?';
+
+  if (isFormDirty && !confirm(warningMsg)) {
+    return;
+  }
+
   addressModal.classList.add('hidden');
+  isFormDirty = false;
+}
+
+closeAddressModalBtn.addEventListener('click', closeAddressModal);
+
+// ESC key to close
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && !addressModal.classList.contains('hidden')) {
+    closeAddressModal();
+  }
+});
+
+// Click outside to close
+addressModal.addEventListener('click', (e) => {
+  if (e.target === addressModal) {
+    closeAddressModal();
+  }
 });
 
 addAddressBtn?.addEventListener('click', () => openAddressModal());

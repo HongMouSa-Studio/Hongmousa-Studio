@@ -8,12 +8,10 @@ export class ECPayCVSPicker {
     this.merchantID = options.merchantID || '';
     this.hashKey = options.hashKey || '';
     this.hashIV = options.hashIV || '';
-    this.serverEndpoint = options.serverEndpoint || '/api/ecpay-cvs';
+    this.serverEndpoint = options.serverEndpoint || 'https://suxxspkxmpbxzvwdfdun.supabase.co/functions/v1/ecpay-cvs';
     this.callback = options.onStoreSelected || null;
     this.isTestMode = options.isTestMode !== false; // Default to test mode
   }
-
-  serverEndpoint = 'https://suxxspkxmpbxzvwdfdun.supabase.co/functions/v1/ecpay-cvs'
 
   /**
    * Open ECPay CVS store selection map

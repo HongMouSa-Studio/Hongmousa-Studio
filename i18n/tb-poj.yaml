@@ -75,6 +75,7 @@ account_label_cvs_store: "Bûn-chhī bêng-chheng / hoan-hō: "
 account_btn_select_store: "Kéng bûn-chhī"
 account_label_set_default: "Siat chò ī-siat tē-chí"
 account_modal_title_edit: "Siu-kái Siu-kiāⁿ Chu-liāu"
+account_modal_unsaved_warning: "Ū siu-kái--kòe ê chu-liāu iáu-bōe pó-chûn, kám khak-tēng beh chhú-siau?"
 
 account_section_add_address: "Ke-thiⁿ siu-kiāⁿ chu-liāu"
 

@@ -75,5 +75,6 @@ account_label_cvs_store: "Store Name / ID: "
 account_btn_select_store: "Select Store"
 account_label_set_default: "Set as default address"
 account_modal_title_edit: "Edit Shipping Information"
+account_modal_unsaved_warning: "You have unsaved changes. Are you sure you want to cancel?"
 
 account_section_add_address: "Add Shipping Information"

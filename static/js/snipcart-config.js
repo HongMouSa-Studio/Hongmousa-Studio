@@ -137,17 +137,73 @@
 
     // 2. Apply based on current language
     const path = window.location.pathname;
+    let currencySymbol = 'TWD';
+
     if (path.includes('/tb-poj/')) {
       Snipcart.api.session.setLanguage('en', pojTranslations);
+      currencySymbol = 'TWD';
     } else if (path.includes('/tb-hj/')) {
       Snipcart.api.session.setLanguage('zh-TW', hjTranslations);
+      currencySymbol = 'TWD';
+    } else {
+      currencySymbol = 'TWD';
     }
 
-    // 3. Sync Address Book from Supabase
+    // 3. Replace currency symbols in the DOM
+    replaceCurrencySymbols(currencySymbol);
+
+    // 4. Sync Address Book from Supabase
     syncAddressWithSnipcart();
 
-    // 4. Cart Toggle Logic
+    // 5. Cart Toggle Logic
     setupCartToggle();
+  }
+
+  /**
+   * Replace NT$ with localized currency symbol
+   */
+  function replaceCurrencySymbols(symbol) {
+    // Wait for Snipcart to fully render
+    setTimeout(() => {
+      const snipcartElements = document.querySelectorAll('.snipcart-cart-summary, .snipcart-cart-summary-item, .snipcart__cart-summary, .snipcart__total');
+
+      snipcartElements.forEach(el => {
+        replaceTextContent(el, symbol);
+      });
+
+      // Use MutationObserver to catch dynamically added content
+      const observer = new MutationObserver(() => {
+        const newElements = document.querySelectorAll('.snipcart-cart-summary, .snipcart-cart-summary-item, .snipcart__cart-summary, .snipcart__total');
+        newElements.forEach(el => replaceTextContent(el, symbol));
+      });
+
+      const snipcartContainer = document.querySelector('#snipcart');
+      if (snipcartContainer) {
+        observer.observe(snipcartContainer, {
+          childList: true,
+          subtree: true,
+          characterData: true
+        });
+      }
+    }, 1000);
+  }
+
+  function replaceTextContent(element, symbol) {
+    const walker = document.createTreeWalker(
+      element,
+      NodeFilter.SHOW_TEXT,
+      null,
+      false
+    );
+
+    let node;
+    while (node = walker.nextNode()) {
+      if (node.textContent.includes('NT$') || node.textContent.includes('$')) {
+        node.textContent = node.textContent
+          .replace(/NT\$/g, symbol)
+          .replace(/\$(\d)/g, `${symbol} $1`);
+      }
+    }
   }
 
   function setupCartToggle() {
