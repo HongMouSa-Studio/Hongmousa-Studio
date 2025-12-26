@@ -85,8 +85,11 @@ export class ECPayCVSPicker {
   _waitForCallback() {
     return new Promise((resolve, reject) => {
       const handleMessage = (event) => {
-        // Validate origin for security
-        if (event.origin !== window.location.origin) return;
+        console.log('ECPay Message Received - Origin:', event.origin, 'Data:', event.data);
+
+        // Validate origin - Allow local origin and our Supabase backend origin
+        const allowedOrigins = [window.location.origin, 'https://suxxspkxmpbxzvwdfdun.supabase.co'];
+        if (!allowedOrigins.includes(event.origin)) return;
 
         const data = event.data;
         if (data.type === 'ECPAY_CVS_SELECTED') {

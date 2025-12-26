@@ -17,6 +17,14 @@
 
 @font-face {
   font-family: 'Charis';
+  src: url('/fonts/Charis-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Charis';
   src: url('/fonts/Charis-Italic.woff2') format('woff2');
   font-weight: 400;
   font-style: italic;
@@ -54,7 +62,7 @@ body {
   /* Châi-ēng "Charis" ia̍h "Gentium" tùi POJ hián-sī khah hó (Self-hosted) */
   --font-body: "Charis", "Gentium", "Inter", "Noto Sans TC", system-ui, sans-serif;
   --font-heading: "Charis", "Noto Serif TC", serif;
-  --font-ui: "Inter", "Noto Sans TC", sans-serif;
+  --font-ui: "Charis", "Inter", "Noto Sans TC", sans-serif;
   --font-mono: "Menlo", monospace;
 
   /* POJ Opentype Settings to fix diacritics */
