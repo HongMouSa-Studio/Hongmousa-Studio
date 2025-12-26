@@ -26,9 +26,16 @@ export class ECPayCVSPicker {
 
     try {
       // Step 1: Get ECPay CVS form data from our backend
+      // Supabase Edge Functions require the anon key in the apikey header
+      const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN1eHhzcGt4bXBieHp2d2RmZHVuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjY1MDY1MjUsImV4cCI6MjA4MjA4MjUyNX0.jmkDz9wodOGTqXgeZ11fqurNDkKs9vJoosyyIkI9S7E';
+
       const response = await fetch(this.serverEndpoint, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+        },
         body: JSON.stringify({
           merchantID: this.merchantID,
           isCollection,
