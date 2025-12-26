@@ -36,6 +36,7 @@ serve(async (req) => {
 <html>
 <head>
   <meta charset="utf-8">
+  <link rel="icon" href="data:,">
   <title>Store Selected</title>
 </head>
 <body>

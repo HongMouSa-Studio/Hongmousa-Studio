@@ -1,11 +1,44 @@
-/* Google Fonts are loaded in head.html */
+/* Local POJ Fonts (Self-hosted for complete character support) */
+@font-face {
+  font-family: 'Charis';
+  src: url('/fonts/Charis-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 
-/* --------------------
-    Variables (Siat-tēng-tóng)
-----------------------*/
-/* --------------------
-    HTML Goân-sò͘-kip
-----------------------*/
+@font-face {
+  font-family: 'Charis';
+  src: url('/fonts/Charis-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Charis';
+  src: url('/fonts/Charis-Italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gentium';
+  src: url('/fonts/Gentium-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gentium';
+  src: url('/fonts/Gentium-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 body {
   font-family: var(--font-body);
   /* Lāi-bûn ēng Sans */
@@ -18,10 +51,9 @@ body {
   background-size: cover;
 
   /* Fonts */
-  /* Châi-ēng "Charis SIL" ia̍h "Gentium Plus" tùi POJ hián-sī khah hó, 
-     nā bô chió-put-jî-kò ēng Noto Sans/Serif */
-  --font-body: "Charis SIL", "Gentium Plus", "Inter", "Noto Sans TC", system-ui, sans-serif;
-  --font-heading: "Charis SIL", "Noto Serif TC", serif;
+  /* Châi-ēng "Charis" ia̍h "Gentium" tùi POJ hián-sī khah hó (Self-hosted) */
+  --font-body: "Charis", "Gentium", "Inter", "Noto Sans TC", system-ui, sans-serif;
+  --font-heading: "Charis", "Noto Serif TC", serif;
   --font-ui: "Inter", "Noto Sans TC", sans-serif;
   --font-mono: "Menlo", monospace;
 
