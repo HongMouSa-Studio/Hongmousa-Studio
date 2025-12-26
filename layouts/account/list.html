@@ -76,7 +76,10 @@
             <div id="address-items-container" class="address-items"
                  data-i18n-delivery-mail="{{ i18n "account_delivery_method_mail" }}"
                  data-i18n-delivery-cvs="{{ i18n "account_delivery_method_cvs" }}"
-                 data-i18n-confirm-delete="{{ i18n "account_confirm_delete" }}">
+                 data-i18n-confirm-delete="{{ i18n "account_confirm_delete" }}"
+                 data-i18n-default="{{ i18n "account_label_default" }}"
+                 data-i18n-edit="{{ i18n "account_btn_edit_short" }}"
+                 data-i18n-delete="{{ i18n "account_btn_delete" }}">
               <!-- Example of how it will look -->
             </div>
           </div>
@@ -164,7 +167,7 @@
       </div>
 
       <div class="btn-group" style="margin-top: 1.5rem; display: flex; gap: 0.5rem;">
-        <button id="save-address-btn" class="btn-main" style="flex: 1;">{{ i18n "account_btn_save" }}</button>
+        <button id="save-address-btn" class="btn-main" style="flex: 2;">{{ i18n "account_btn_save" }}</button>
         <button id="close-address-modal" class="btn-main-outline" style="flex: 1;">{{ i18n "account_btn_cancel" }}</button>
       </div>
     </div>

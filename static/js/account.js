@@ -105,6 +105,9 @@ async function renderAddresses(userId) {
   const deliveryMailLabel = document.querySelector('[data-i18n-delivery-mail]')?.dataset.i18nDeliveryMail || 'Mail Delivery';
   const deliveryCvsLabel = document.querySelector('[data-i18n-delivery-cvs]')?.dataset.i18nDeliveryCvs || 'CVS Pickup';
   const confirmDeleteMsg = document.querySelector('[data-i18n-confirm-delete]')?.dataset.i18nConfirmDelete || 'Are you sure?';
+  const defaultLabel = document.querySelector('[data-i18n-default]')?.dataset.i18nDefault || 'Default';
+  const editLabel = document.querySelector('[data-i18n-edit]')?.dataset.i18nEdit || 'Edit';
+  const deleteLabel = document.querySelector('[data-i18n-delete]')?.dataset.i18nDelete || 'Delete';
 
   if (addresses && addresses.length > 0) {
     if (addressEmpty) addressEmpty.classList.add('hidden')
@@ -127,13 +130,13 @@ async function renderAddresses(userId) {
         return `
           <div class="address-item" data-id="${item.id}">
               <div class="address-main">
-                <span class="recipient">${item.recipient_name} ${item.is_default ? '<small style="color: #10b981;">(預設)</small>' : ''}</span>
+                <span class="recipient">${item.recipient_name} ${item.is_default ? '<small style="color: #10b981;">(' + defaultLabel + ')</small>' : ''}</span>
                 <span class="delivery-method" style="font-size: 0.85rem; color: #6b7280; margin-left: 0.5rem;">${deliveryMethod}</span>
               </div>
               <span class="addr-text">${addressText || '-'}</span>
               <div class="address-actions">
-                <button class="edit-addr-btn" data-id="${item.id}">修改</button>
-                <button class="delete-addr-btn" data-id="${item.id}" data-confirm="${confirmDeleteMsg}" style="color: #ef4444;">刪除</button>
+                <button class="edit-addr-btn" data-id="${item.id}">${editLabel}</button>
+                <button class="delete-addr-btn" data-id="${item.id}" data-confirm="${confirmDeleteMsg}" style="color: #ef4444;">${deleteLabel}</button>
               </div>
           </div>
         `;

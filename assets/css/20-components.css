@@ -820,6 +820,11 @@ body.is-auth .auth-only {
   color: #1e40af;
 }
 
+.address-items {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
 .address-item {
   padding: 1.2rem;
   background: #fdfdfd;
