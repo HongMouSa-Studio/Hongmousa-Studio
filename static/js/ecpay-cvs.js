@@ -40,8 +40,8 @@ export class ECPayCVSPicker {
           merchantID: this.merchantID,
           isCollection,
           storeType,
-          extraData,
-          serverReplyURL: window.location.origin + '/api/ecpay-cvs-callback'
+          extraData
+          // serverReplyURL will be handled by the backend default to point to ecpay-cvs-callback
         })
       });
 
