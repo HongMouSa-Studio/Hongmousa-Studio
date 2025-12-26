@@ -826,6 +826,26 @@ body.is-auth .auth-only {
   overflow-y: auto;
 }
 
+.delivery-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.7rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-weight: 500;
+}
+
+.delivery-badge.mail {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.delivery-badge.cvs {
+  background: #ffedd5;
+  color: #c2410c;
+}
+
 .address-item {
   padding: 1.2rem;
   background: #fdfdfd;

@@ -119,7 +119,14 @@ async function renderAddresses(userId) {
         // Determine delivery method
         const hasCVS = item.cvs_store;
         const hasAddress = item.address;
-        const deliveryMethod = hasCVS ? deliveryCvsLabel : (hasAddress ? deliveryMailLabel : '-');
+
+        // Build delivery badge with icon
+        let deliveryBadge = '';
+        if (hasCVS) {
+          deliveryBadge = `<span class="delivery-badge cvs"><i class="fa-solid fa-store"></i> ${deliveryCvsLabel}</span>`;
+        } else if (hasAddress) {
+          deliveryBadge = `<span class="delivery-badge mail"><i class="fa-solid fa-truck"></i> ${deliveryMailLabel}</span>`;
+        }
 
         // Build address lines
         const addressLine = hasAddress ? `${item.postal_code || ''} ${item.address || ''}`.trim() : '';
@@ -128,16 +135,19 @@ async function renderAddresses(userId) {
 
         return `
           <div class="address-item" data-id="${item.id}">
-              <div class="address-main">
-                <span class="recipient">${item.recipient_name} ${item.is_default ? '<small style="color: #10b981;">(' + defaultLabel + ')</small>' : ''}</span>
-                <span class="delivery-method" style="font-size: 0.85rem; color: #6b7280; margin-left: 0.5rem;">${deliveryMethod}</span>
+              <div class="address-header" style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
+                <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+                  <span class="recipient" style="font-weight: 600;">${item.recipient_name}</span>
+                  ${item.is_default ? `<span style="background: #dcfce7; color: #15803d; font-size: 0.7rem; padding: 0.15rem 0.5rem; border-radius: 999px;">${defaultLabel}</span>` : ''}
+                </div>
+                ${deliveryBadge}
               </div>
-              <div class="address-details" style="font-size: 0.9rem; color: #555; line-height: 1.6; margin: 0.5rem 0;">
-                ${phoneLine ? `<div style="color: #888;"><i class="fa-solid fa-phone" style="width: 1rem; margin-right: 0.4rem; font-size: 0.75rem;"></i>${phoneLine}</div>` : ''}
-                ${addressLine ? `<div><i class="fa-solid fa-location-dot" style="width: 1rem; margin-right: 0.4rem; font-size: 0.75rem; color: #888;"></i>${addressLine}</div>` : ''}
-                ${cvsLine ? `<div><i class="fa-solid fa-store" style="width: 1rem; margin-right: 0.4rem; font-size: 0.75rem; color: #888;"></i>${cvsLine}</div>` : ''}
+              <div class="address-details" style="font-size: 0.85rem; color: #555; line-height: 1.7; margin: 0.3rem 0;">
+                ${phoneLine ? `<div style="color: #666;"><i class="fa-solid fa-phone" style="width: 1.2rem; margin-right: 0.3rem; font-size: 0.7rem; color: #9ca3af;"></i>${phoneLine}</div>` : ''}
+                ${addressLine ? `<div><i class="fa-solid fa-location-dot" style="width: 1.2rem; margin-right: 0.3rem; font-size: 0.7rem; color: #9ca3af;"></i>${addressLine}</div>` : ''}
+                ${cvsLine ? `<div><i class="fa-solid fa-store" style="width: 1.2rem; margin-right: 0.3rem; font-size: 0.7rem; color: #9ca3af;"></i>${cvsLine}</div>` : ''}
               </div>
-              <div class="address-actions">
+              <div class="address-actions" style="margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px solid #f5f5f5;">
                 <button class="edit-addr-btn" data-id="${item.id}">${editLabel}</button>
                 <button class="delete-addr-btn" data-id="${item.id}" data-confirm="${confirmDeleteMsg}" style="color: #ef4444;">${deleteLabel}</button>
               </div>
