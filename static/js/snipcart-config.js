@@ -158,14 +158,19 @@
     // 5. Cart Toggle Logic
     setupCartToggle();
 
-    // 6. Auto-open cart when item is added
+    // 6. Listeners (Ensure they are added after Snipcart is fully ready)
     Snipcart.events.on('item.added', (item) => {
+      console.log('Snipcart: Item added, opening modal');
       Snipcart.api.modal.show();
     });
+
+    // Handle removal manually if needed, but usually Snipcart's default should work 
+    // IF we don't break its DOM with our observer.
   }
 
   /**
    * Replace NT$ with localized currency symbol
+   * Optimized to avoid breaking Snipcart's reactivity/buttons
    */
   function replaceCurrencySymbols(symbol) {
     let attempts = 0;
@@ -173,76 +178,70 @@
 
     function performReplacement() {
       attempts++;
+      const elements = document.querySelectorAll('[class*="snipcart"]');
+      elements.forEach(el => replaceTextContent(el, symbol));
 
-      // Broader set of selectors to catch all Snipcart money displays
-      const selectors = [
-        '.snipcart',
-        '.snipcart-cart-summary',
-        '.snipcart-cart-summary-item',
-        '.snipcart__cart-summary',
-        '.snipcart__total',
-        '.snipcart__box--badge',
-        '.snipcart-item-quantity',
-        '.snipcart__font--secondary',
-        '.snipcart__font--subtitle',
-        '[class*="snipcart"]'
-      ];
-
-      selectors.forEach(selector => {
-        const elements = document.querySelectorAll(selector);
-        elements.forEach(el => replaceTextContent(el, symbol));
-      });
-
-      // Continue trying for a few more times to catch lazy-loaded content
       if (attempts < maxAttempts) {
         setTimeout(performReplacement, 1000);
       }
     }
 
-    // First attempt after a short delay
     setTimeout(() => {
       performReplacement();
 
-      // Use MutationObserver to catch dynamically added content
-      const observer = new MutationObserver(() => {
-        const elements = document.querySelectorAll('[class*="snipcart"]');
-        elements.forEach(el => replaceTextContent(el, symbol));
+      // Use a safer observer that only targets specific areas or ignores buttons
+      const observer = new MutationObserver((mutations) => {
+        mutations.forEach(mutation => {
+          if (mutation.type === 'childList') {
+            mutation.addedNodes.forEach(node => {
+              if (node.nodeType === 1) { // Element
+                // Only target text-heavy containers, avoid deep-cleaning interactive elements
+                const moneyElements = node.querySelectorAll('.snipcart__font--secondary, .snipcart-item-quantity, .snipcart__total');
+                moneyElements.forEach(el => replaceTextContent(el, symbol));
+
+                // Also check the node itself if it matches
+                if (node.classList && (node.classList.contains('snipcart__total') || node.classList.contains('snipcart-item-line'))) {
+                  replaceTextContent(node, symbol);
+                }
+              }
+            });
+          }
+        });
       });
 
       const snipcartContainer = document.querySelector('#snipcart');
       if (snipcartContainer) {
         observer.observe(snipcartContainer, {
           childList: true,
-          subtree: true,
-          characterData: true
+          subtree: true
         });
       }
-    }, 500);
+    }, 1000);
   }
 
   function replaceTextContent(element, symbol) {
-    // Only process text nodes
-    const walker = document.createTreeWalker(
-      element,
-      NodeFilter.SHOW_TEXT,
-      null,
-      false
-    );
-
+    // Only process text nodes to be absolutely safe
+    const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT, null, false);
     let node;
     const nodesToUpdate = [];
 
     while (node = walker.nextNode()) {
+      // Avoid updating nodes that are likely part of buttons or inputs
+      if (node.parentElement.tagName === 'BUTTON' || node.parentElement.tagName === 'INPUT') continue;
+
       if (node.textContent.includes('NT$') || /\$\s*\d/.test(node.textContent)) {
         nodesToUpdate.push(node);
       }
     }
 
-    // Update all collected nodes
     nodesToUpdate.forEach(node => {
-      node.textContent = node.textContent
+      const newText = node.textContent
         .replace(/NT\$/g, symbol + ' ')
         .replace(/\$(\s*\d)/g, `${symbol} $1`);
+
+      if (node.textContent !== newText) {
+        node.textContent = newText;
+      }
     });
   }
 
