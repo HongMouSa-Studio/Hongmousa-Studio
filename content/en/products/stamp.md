@@ -1,5 +1,6 @@
 ---
 title: "Personalized Formosan Languages Romanization Stamp"
+weight: 1
 id: "stamp-roman-personalized"
 price: 228
 image: "/img/romanization_stamp.png"

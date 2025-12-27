@@ -1,5 +1,6 @@
 ---
 title: "Formosa語言羅馬字姓名個人印章"
+weight: 1
 id: "stamp-roman-personalized"
 price: 228
 image: "/img/romanization_stamp.png"

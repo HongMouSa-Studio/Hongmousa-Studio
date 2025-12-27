@@ -6,7 +6,7 @@
     </div>
 
     <div class="product-grid">
-      {{ range where .Site.RegularPages "Section" "products" }}
+      {{ range (where .Site.RegularPages "Section" "products").ByWeight }}
       <div class="product-card">
         <div class="product-image-wrapper">
           <img
@@ -20,7 +20,7 @@
             class="snipcart-add-item add-to-cart-btn"
             data-item-id="{{ .Params.id }}"
             data-item-price="{{ .Params.price }}"
-            data-item-url="{{ .Permalink }}"
+            data-item-url="{{ .RelPermalink }}"
             data-item-image="{{ .Params.image }}"
             data-item-name="{{ .Title }}"
             data-item-description="{{ .Params.description }}"
