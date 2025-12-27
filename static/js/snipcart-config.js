@@ -157,6 +157,11 @@
 
     // 5. Cart Toggle Logic
     setupCartToggle();
+
+    // 6. Auto-open cart when item is added
+    Snipcart.events.on('item.added', (item) => {
+      Snipcart.api.modal.show();
+    });
   }
 
   /**

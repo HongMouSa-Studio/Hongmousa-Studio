@@ -10,13 +10,16 @@ hero_subtitle: "Chia ê ta̍k hāng lóng ùi Formosa chhut-hoat.\nMúi 1 ê sá
 view_products: "Lâi khòaⁿ-māi"
 
 product_section_title: "Siōng Sin Sán-phín"
-product_name_1: "Siu-lêng-chiá (Hunter)"
-product_name_2: "Thêng-hiō"
-product_name_3: "Classic Logo Tee"
-product_name_4: "Tâi-oân Tē-tô͘ Thiap-chóa"
-product_price_format: "Sin Tâi-phiò %v kho͘"
 product_section_sub: "Sán-phín kap siāu-kài"
-product_btn_add: "+ Ka-ji̍p Kò͘-bu̍t-chhia"
+product_btn_add: "+ Ka-ji̍p Kò-bu̍t-chhia"
+product_price_format: "Sin Tâi-phiò %v kho͘"
+
+product_name_5: "Formosa言語羅馬字名姓個人印á"
+product_desc_5: "Choan-bûn ūi-tio̍h sú-iōng Lô-má-jī (POJ, Kheh-gí téng-téng) ê pêng-iú siat-pī, gîn-hàng khah-miâ mā ē-tàng iōng."
+product_label_font: "Jī-thé Soán-te̍k"
+product_label_pinyin: "Phing-im Choán-oân"
+product_label_material: "Châi-chit"
+product_label_engraving: "Eng-kh刻 Hong-sek"
 
 blog_section_title: "Bûn-chiuⁿ"
 blog_card_more: "Tha̍k bûn-chiuⁿ"

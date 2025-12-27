@@ -1,0 +1,74 @@
+{{ define "main" }}
+<div class="product-page-container container">
+  <div class="product-single-layout">
+    <!-- LEFT: Image Gallery -->
+    <div class="product-single-gallery">
+      <img src="{{ .Params.image }}" alt="{{ .Title }}" class="product-main-img" id="main-product-image">
+      
+      <!-- Option Guides (Dynamic Images) -->
+      <div class="option-guides" style="margin-top: 2rem;">
+        <h4 class="font-serif">{{ if eq .Site.Language.Lang "tb-poj" }}Chéng-sek Siong-koan{{ else if eq .Site.Language.Lang "tb-hj" }}屬性指南{{ else }}Option Guides{{ end }}</h4>
+        <div class="guide-grid">
+           <!-- We can add specific images for font groups / materials here later -->
+           <div class="guide-item">
+             <h5>{{ if eq .Site.Language.Lang "tb-poj" }}Jī-thé Hoân-pó{{ else if eq .Site.Language.Lang "tb-hj" }}字體範例{{ else }}Font Samples{{ end }}</h5>
+             <img src="/img/font_guide.png" alt="Font Guide" class="guide-thumb">
+           </div>
+           <div class="guide-item">
+             <h5>{{ if eq .Site.Language.Lang "tb-poj" }}Châi-chit{{ else if eq .Site.Language.Lang "tb-hj" }}木材材質{{ else }}Wood Materials{{ end }}</h5>
+             <img src="/img/material_guide.png" alt="Material Guide" class="guide-thumb">
+           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Product Info & Purchase -->
+    <div class="product-single-info">
+      <nav class="breadcrumb">
+        <a href="/">{{ i18n "nav_home" }}</a> / <a href="/#products">{{ i18n "nav_products" }}</a> / {{ .Title }}
+      </nav>
+      
+      <h1 class="font-serif product-title">{{ .Title }}</h1>
+      <div class="product-meta">
+        <span class="product-category-badge">{{ .Params.category }}</span>
+        {{ range .Params.tags }}
+          <span class="product-tag">#{{ . }}</span>
+        {{ end }}
+      </div>
+
+      <div class="product-price-large">
+        {{ printf (i18n "product_price_format") .Params.price }}
+      </div>
+
+      <p class="product-short-desc">{{ .Params.description }}</p>
+
+      <!-- Snipcart Button with Options -->
+      <div class="purchase-zone">
+        <button
+          class="snipcart-add-item add-to-cart-btn-large"
+          data-item-id="{{ .Params.id }}"
+          data-item-price="{{ .Params.price }}"
+          data-item-url="{{ .Permalink }}"
+          data-item-image="{{ .Params.image }}"
+          data-item-name="{{ .Title }}"
+          data-item-description="{{ .Params.description }}"
+          
+          {{ range $index, $opt := .Params.options }}
+            {{ $snipIndex := add $index 1 }}
+            data-item-custom{{ $snipIndex }}-name="{{ $opt.name }}"
+            data-item-custom{{ $snipIndex }}-options="{{ range $vIndex, $val := $opt.values }}{{ if $vIndex }}|{{ end }}{{ if reflect.IsMap $val }}{{ $val.name }} {{ if $val.price }}[+{{ printf "%.2f" $val.price }}]{{ end }}{{ else }}{{ $val }}{{ end }}{{ end }}"
+          {{ end }}
+        >
+          <i class="fa-solid fa-cart-plus"></i> {{ i18n "product_btn_add" }}
+        </button>
+        <p class="purchase-note">{{ if eq .Site.Language.Lang "tb-poj" }}Ūn-hùi tī kiat-siàu sî kè-sǹg.{{ else if eq .Site.Language.Lang "tb-hj" }}運費佇結賬時計算。{{ else }}Shipping calculated at checkout.{{ end }}</p>
+      </div>
+
+      <div class="product-description-content">
+        <h4 class="font-serif">{{ if eq .Site.Language.Lang "tb-poj" }}Siū-sè Biâu-shu̍t{{ else if eq .Site.Language.Lang "tb-hj" }}詳細描述{{ else }}Detailed Description{{ end }}</h4>
+        {{ .Content }}
+      </div>
+    </div>
+  </div>
+</div>
+{{ end }}

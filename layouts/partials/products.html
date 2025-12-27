@@ -6,120 +6,47 @@
     </div>
 
     <div class="product-grid">
-      <!-- PRODUCT 1 -->
+      {{ range where .Site.RegularPages "Section" "products" }}
       <div class="product-card">
         <div class="product-image-wrapper">
           <img
-            src="https://images.unsplash.com/photo-1572295727871-d296914081e6?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
-            alt="Hunter Print"
+            src="{{ .Params.image }}"
+            alt="{{ .Title }}"
             class="product-img"
           />
 
-          <!-- Add to Cart Button (Snipcart) -->
+          <!-- Snipcart Button -->
           <button
             class="snipcart-add-item add-to-cart-btn"
-            data-item-id="print-hunter"
-            data-item-price="500.00"
-            data-item-url="/"
-            data-item-description="Limited edition print, A3 size."
-            data-item-image="https://images.unsplash.com/photo-1572295727871-d296914081e6?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80"
-            data-item-name="Siu-lêng-chiá (Print)"
+            data-item-id="{{ .Params.id }}"
+            data-item-price="{{ .Params.price }}"
+            data-item-url="{{ .Permalink }}"
+            data-item-image="{{ .Params.image }}"
+            data-item-name="{{ .Title }}"
+            data-item-description="{{ .Params.description }}"
+            
+            {{ range $index, $opt := .Params.options }}
+              {{ $snipIndex := add $index 1 }}
+              data-item-custom{{ $snipIndex }}-name="{{ $opt.name }}"
+              data-item-custom{{ $snipIndex }}-options="{{ range $vIndex, $val := $opt.values }}{{ if $vIndex }}|{{ end }}{{ if reflect.IsMap $val }}{{ $val.name }} {{ if $val.price }}[+{{ printf "%.2f" $val.price }}]{{ end }}{{ else }}{{ $val }}{{ end }}{{ end }}"
+            {{ end }}
           >
             {{ i18n "product_btn_add" }}
           </button>
         </div>
         <div class="product-info">
-          <h3 class="font-serif">{{ i18n "product_name_1" }}</h3>
-          <p>Art Print / A3</p>
-          <div class="product-price">{{ printf (i18n "product_price_format") 500 }}</div>
-        </div>
-      </div>
-
-      <!-- PRODUCT 2 -->
-      <div class="product-card">
-        <div class="product-image-wrapper">
-          <img
-            src="https://images.unsplash.com/photo-1615184697985-c9bde1b07da7?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
-            alt="Thêng-hiō"
-            class="product-img"
-          />
-
-          <button
-            class="snipcart-add-item add-to-cart-btn"
-            data-item-id="print-afternoon"
-            data-item-price="450.00"
-            data-item-url="/"
-            data-item-description="Digital illustration print."
-            data-item-image="https://images.unsplash.com/photo-1615184697985-c9bde1b07da7?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80"
-            data-item-name="Thêng-hiō (Print)"
-          >
-            {{ i18n "product_btn_add" }}
-          </button>
-        </div>
-        <div class="product-info">
-          <h3 class="font-serif">{{ i18n "product_name_2" }}</h3>
-          <p>Art Print / A4</p>
+          <h3 class="font-serif">{{ .Title }}</h3>
+          <p>{{ .Params.category }} / {{ index .Params.tags 0 }}</p>
           <div class="product-price">
-            {{ printf (i18n "product_price_format") 450 }}
-            <span class="original-price">{{ printf (i18n "product_price_format") 600 }}</span>
+            {{ printf (i18n "product_price_format") .Params.price }}
           </div>
+          <!-- Learn More Link -->
+          <a href="{{ .RelPermalink }}" class="learn-more-link" style="margin-top: 1rem; display: inline-block; font-size: 0.9rem; color: var(--accent-green); text-decoration: underline;">
+            {{ if eq .Site.Language.Lang "tb-poj" }}Khòaⁿ siū-sè →{{ else if eq .Site.Language.Lang "tb-hj" }}瞭解更多 →{{ else }}Learn More →{{ end }}
+          </a>
         </div>
       </div>
-
-      <!-- PRODUCT 3 (T-Shirt) -->
-      <div class="product-card">
-        <div class="product-image-wrapper">
-          <img
-            src="https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
-            alt="Logo Tee"
-            class="product-img"
-          />
-
-          <!-- Snipcart Button with Options (Size) -->
-          <button
-            class="snipcart-add-item add-to-cart-btn"
-            data-item-id="tee-logo"
-            data-item-price="850.00"
-            data-item-url="/"
-            data-item-name="Hong-mô-sa Logo Tee"
-            data-item-custom1-name="Size"
-            data-item-custom1-options="S|M|L|XL"
-          >
-            {{ i18n "product_btn_add" }}
-          </button>
-        </div>
-        <div class="product-info">
-          <h3 class="font-serif">{{ i18n "product_name_3" }}</h3>
-          <p>Apparel / 100% Cotton</p>
-          <div class="product-price">{{ printf (i18n "product_price_format") 850 }}</div>
-        </div>
-      </div>
-
-      <!-- PRODUCT 4 -->
-      <div class="product-card">
-        <div class="product-image-wrapper">
-          <img
-            src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
-            alt="Sticker Pack"
-            class="product-img"
-          />
-
-          <button
-            class="snipcart-add-item add-to-cart-btn"
-            data-item-id="sticker-pack"
-            data-item-price="150.00"
-            data-item-url="/"
-            data-item-name="Taiwan Map Stickers"
-          >
-            {{ i18n "product_btn_add" }}
-          </button>
-        </div>
-        <div class="product-info">
-          <h3 class="font-serif">{{ i18n "product_name_4" }}</h3>
-          <p>Stationery / 5pcs</p>
-          <div class="product-price">{{ printf (i18n "product_price_format") 150 }}</div>
-        </div>
-      </div>
+      {{ end }}
     </div>
   </div>
 </section>
