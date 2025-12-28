@@ -1136,3 +1136,18 @@ body.is-auth .auth-only {
 .breadcrumb a:hover {
   color: var(--accent-green);
 }
+
+/* ------------------------------
+    Snipcart Font & Style Overrides
+--------------------------------*/
+#snipcart *:not([class^="fa-"]),
+.snipcart-modal *:not([class^="fa-"]) {
+  font-family: var(--font-body) !important;
+  /* Use the POJ-friendly fonts defined in base.css */
+  font-feature-settings: "cv01", "ss01" !important;
+  -webkit-font-smoothing: antialiased !important;
+}
+
+.snipcart-checkout {
+  font-family: var(--font-ui) !important;
+}
