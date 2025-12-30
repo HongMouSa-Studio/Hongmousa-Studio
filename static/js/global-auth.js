@@ -29,7 +29,7 @@ supabase.auth.getSession().then(({ data }) => {
 // Header Logout Button
 import { logout, getLangBase } from './auth.js'
 document.addEventListener('click', async (e) => {
-  if (e.target.matches('#logout-btn, #logout-btn-header, .member-link-logout')) {
+  if (e.target.closest('#logout-btn, #logout-btn-header, .member-link-logout')) {
     await logout()
     window.location.href = getLangBase() + '/'
   }

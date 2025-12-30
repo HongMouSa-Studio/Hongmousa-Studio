@@ -1148,6 +1148,1016 @@ body.is-auth .auth-only {
   -webkit-font-smoothing: antialiased !important;
 }
 
+/* Snipcart Header Sticky Fix - Force it by making the modal a flex container */
+/* Snipcart Modal Overlay - Dimmed Background */
+#snipcart .snipcart-modal__container {
+  display: flex;
+  /* Removed !important so Snipcart can hide it */
+  flex-direction: column !important;
+  overflow: hidden !important;
+  height: 100vh !important;
+  width: 100% !important;
+
+  /* Default Backdrop (Main Cart) */
+  background: rgba(0, 0, 0, 0.5) !important;
+  backdrop-filter: blur(4px) !important;
+}
+
+/* Independent Backdrop for "Side/Edit" Panel */
+/* Uses :has() to detect if the container holds a side-panel content */
+#snipcart .snipcart-modal__container:has(.snipcart-layout__content--side) {
+  background: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.5) 100%) !important;
+  /* Transparency-based gradient: left (transparent) to right (dark) */
+  backdrop-filter: blur(2px) !important;
+  /* Subtle blur */
+  align-items: flex-end !important;
+  /* Maintain right alignment */
+}
+
+/* Clean up duplicate background definitions */
+#snipcart {
+  background: transparent !important;
+  height: 100vh !important;
+  width: 100vw !important;
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  z-index: 9000;
+  /* Level 1: Overlay */
+  pointer-events: none !important;
+  /* Critical: Allow clicks to pass through! */
+}
+
+/* Re-enable clicks on the implementation itself (defaults) */
+#snipcart .snipcart-modal__container {
+  pointer-events: auto !important;
+}
+
+#snipcart .snipcart-layout {
+  pointer-events: auto !important;
+}
+
+/* Integrated Layout Container for Header AND Content */
+#snipcart .snipcart-layout {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  padding: 0 !important;
+  background: #fff !important;
+  /* Default for full-screen cart */
+  box-shadow: none !important;
+  height: 100vh !important;
+  max-height: 100vh !important;
+  overflow-y: scroll !important;
+  /* FORCE SCROLL (Performance Optimization) */
+  overflow-x: hidden !important;
+  position: absolute !important;
+  right: 0 !important;
+  top: 0 !important;
+}
+
+/* Side/Edit Panel Specific: Remove background, allow click-through, LOCK PARENT SCROLL */
+#snipcart .snipcart-layout:has(.snipcart-layout__content--side) {
+  background: transparent !important;
+  pointer-events: none !important;
+  overflow: hidden !important;
+  /* Lock parent scroll to prevent breakage */
+}
+
+/* LOCK to 1100px ONLY during Checkout (Desktop) */
+#snipcart .snipcart-layout:has(.snipcart-checkout__content) {
+  width: 1100px !important;
+  max-width: 1100px !important;
+  margin: 0 auto !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  right: auto !important;
+  overflow-y: scroll !important;
+  /* ENABLE SCROLL */
+}
+
+#snipcart .snipcart-layout__content {
+  border-radius: 0 !important;
+  /* Flush edges */
+  box-shadow: var(--shadow-soft) !important;
+
+  /* Shared Mechanics: FIXED UNIFIED SCROLL AREA */
+  flex: 1 1 auto !important;
+  display: block !important;
+  overflow: visible !important;
+  /* ALLOW CONTENT TO EXPAND */
+  min-height: 0 !important;
+  /* Critical for flex scroll */
+  overscroll-behavior: contain;
+
+  /* Global Content Padding */
+  padding: 0 !important;
+  /* Columns will handle their own internal spacing */
+}
+
+/* Side Panel Override: SIDEBAR STATE (Cart Preview) */
+#snipcart .snipcart-layout__content--side {
+  width: 520px !important;
+  max-width: 95vw !important;
+  margin-left: auto !important;
+  margin-right: 0 !important;
+  padding: 0 !important;
+  /* padding-bottom moved to inner content for scroll safety */
+  padding-top: 0 !important;
+  /* Remove the ugly gap */
+  background: #fff !important;
+  /* Force white background for the actual panel */
+  pointer-events: auto !important;
+  /* Re-enable clicks for the panel itself */
+  border-radius: 0 !important;
+  /* 去掉圓角，貼住右邊 */
+  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1) !important;
+  /* Removed global overflow: hidden to fix Cart Summary */
+  /* Display handled by Snipcart defaults or above flex rules */
+  display: flex !important;
+  flex-direction: column !important;
+  position: absolute !important;
+  right: 0 !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  z-index: 9200 !important;
+  /* Higher than Main Header (9100) */
+}
+
+/* EDIT MODE ONLY: Lock Parent to fix Sticky Header */
+#snipcart .snipcart-layout__content--side:has(.snipcart-form) {
+  overflow: hidden !important;
+}
+
+/* EDIT MODE ONLY: Inner Content Scroll Wrapper */
+#snipcart .snipcart-layout__content--side:has(.snipcart-form) .snipcart-cart__content {
+  overflow-y: auto !important;
+  overscroll-behavior: contain;
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  /* Critical for Flexbox scrolling to work properly */
+  height: auto !important;
+  /* Let Flex handle the height */
+  padding-bottom: 120px !important;
+  /* Restored padding as primary spacer */
+}
+
+/* Force bottom spacing using pseudo-element (Backup) */
+#snipcart .snipcart-layout__content--side:has(.snipcart-form) .snipcart-cart__content::after {
+  content: "" !important;
+  display: block !important;
+  height: 1px !important;
+  /* Just a tiny pusher if padding fails */
+  width: 100% !important;
+  flex-shrink: 0 !important;
+}
+
+/* CSS Rule Removed to resolve conflict. Inner scroll is now strictly scoped to Edit Mode above. */
+
+/* Fixed Confirm Button Styles */
+.antigravity-confirm-btn {
+  position: fixed !important;
+  bottom: 2rem !important;
+  right: 1rem !important;
+  width: calc(520px - 2rem) !important;
+  /* Match desktop panel width */
+  height: 50px !important;
+  line-height: 50px !important;
+  font-size: 1.1rem !important;
+  font-weight: 700 !important;
+  padding: 0 !important;
+  z-index: 9999 !important;
+  /* Highest priority */
+  text-align: center !important;
+  cursor: pointer !important;
+  display: block !important;
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1) !important;
+  /* Subtle shadow lift */
+}
+
+@media (max-width: 520px) {
+  .antigravity-confirm-btn {
+    width: calc(100% - 2rem) !important;
+  }
+}
+
+/* Side Cart Header - Fixed at top (ONLY for side cart) */
+#snipcart .snipcart-layout__content--side .snipcart-cart-header {
+  flex-shrink: 0 !important;
+  background: #fff !important;
+  border-bottom: 1px solid #eee !important;
+  padding: 1rem 1.5rem !important;
+  z-index: 9201 !important;
+  position: relative !important;
+}
+
+/* Side Cart Header Title - Centered */
+#snipcart .snipcart-cart__secondary-header {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  text-align: center !important;
+}
+
+#snipcart .snipcart-cart__secondary-header-title {
+  text-align: center !important;
+  width: 100% !important;
+}
+
+/* Side Cart Scrollable Content Area */
+#snipcart .snipcart-layout__content--side .snipcart-cart__content {
+  flex: 1 1 auto !important;
+  overflow-y: auto !important;
+  padding: 1.5rem !important;
+  min-height: 0 !important;
+}
+
+/* Side Cart Footer - Fixed at bottom (ONLY for side cart) */
+#snipcart .snipcart-layout__content--side .snipcart-cart__footer {
+  position: sticky !important;
+  bottom: 0 !important;
+  flex-shrink: 0 !important;
+  background: #fff !important;
+  border-top: 1px solid #eee !important;
+  padding: 0.75rem 1rem !important;
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.05) !important;
+  z-index: 100 !important;
+}
+
+/* Side Cart RWD - Mobile ONLY (不再縮窄 tablet) */
+@media (max-width: 768px) {
+  #snipcart .snipcart-layout__content--side {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 1rem !important;
+    border-radius: 0 !important;
+  }
+}
+
+/* Ensure inner Snipcart content doesn't break our scroll */
+/* Force all checkout-related wrappers to NOT have their own scroll/height constraints */
+#snipcart .snipcart-cart__content,
+#snipcart .snipcart-checkout,
+#snipcart .snipcart-checkout-step,
+#snipcart .snipcart-checkout__content,
+#snipcart .snipcart-cart__content--checkout,
+#snipcart .snipcart-checkout-container,
+#snipcart .snipcart-order-confirm {
+  flex: 1 1 auto !important;
+  height: auto !important;
+  min-height: min-content !important;
+  /* Force grow to trigger parent scroll */
+  max-height: none !important;
+  overflow: visible !important;
+  display: block !important;
+}
+
+/* Maintain Flex Grid for Desktop Columns (ABSOLUTE 68/32 LOCK) */
+#snipcart .snipcart-layout__cols,
+#snipcart .snipcart-checkout__cols {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  flex: 1 1 auto !important;
+  width: 100% !important;
+  max-width: 1100px !important;
+  height: auto !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  gap: 0 !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+  overflow-x: clip !important;
+  /* ABSOLUTE Containment - clip prevents any child protrusion */
+}
+
+/* 1. General Column Baseline */
+#snipcart .snipcart-layout__col {
+  padding: 1.5rem !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* 2. SPECIFIC Overrides */
+/* Large Column (Desktop): 68% share of 1100px */
+#snipcart .snipcart-layout__col--large {
+  display: block !important;
+  flex: 0 0 68% !important;
+  width: 68% !important;
+  max-width: 68% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+  /* Visual Gutter: 5rem provides perfect alignment for step icons */
+  padding: 2rem 1rem 0 5rem !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* Side Column (Desktop): 32% share of 1100px */
+#snipcart .snipcart-layout__col--side {
+  flex: 0 0 32% !important;
+  width: 32% !important;
+  max-width: 32% !important;
+  height: auto !important;
+  overflow: hidden !important;
+  min-width: 0 !important;
+  padding: 1.5rem 0 1.5rem 1.5rem !important;
+  /* Zero right side protrusion */
+  margin: 0 !important;
+  margin-right: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* Order Summary Styling (Solid Background & Containment) */
+#snipcart .snipcart-cart-summary,
+#snipcart .snipcart-cart-summary__content {
+  padding: 0 !important;
+  margin: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  background: #f8f8f8 !important;
+  /* Restore Solid Background */
+  border: none !important;
+  display: block !important;
+  overflow: hidden !important;
+}
+
+/* Wrapper Force-Wrapping */
+.snipcart-cart-summary-items-list,
+.snipcart-cart-summary-item__title {
+  max-width: 100% !important;
+  overflow: hidden !important;
+  overflow-wrap: break-word !important;
+  word-wrap: break-word !important;
+  white-space: normal !important;
+}
+
+/* Ensure first step doesn't have top margin if it's the only one */
+#snipcart .snipcart-checkout-step:first-child {
+  margin-top: 0 !important;
+}
+
+/* -----------------------------------------------------------
+   ISOLATED SETTINGS: Order Summary / Side Panel
+   Prevent "cramped" look by using compact specific padding
+----------------------------------------------------------- */
+@media (max-width: 768px) {
+
+  /* Mobile check for Summary */
+  #snipcart .snipcart-cart-summary {
+    padding: 1rem !important;
+  }
+
+  /* Base Mobile Overrides (Max-Width) */
+  #snipcart .snipcart-layout {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+  }
+
+  #snipcart .snipcart-layout__content {
+    border-radius: 0 !important;
+    padding: 1rem !important;
+  }
+}
+
+/* Ensure footer and summary fees have padding and don't touch edges */
+.snipcart-summary-fees,
+.snipcart-cart-summary-fees--reverse,
+.snipcart-cart-summary-fees--reverse,
+.snipcart-cart__footer,
+.snipcart-cart__footer-buttons {
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+  width: 100% !important;
+  max-width: 768px !important;
+  margin: 0 0 0 auto !important;
+}
+
+.snipcart-base-button__label {
+  font-size: 1rem !important;
+}
+
+@media (max-width: 1024px) {
+
+  .snipcart-summary-fees,
+  .snipcart-cart-summary-fees--reverse,
+  .snipcart-cart__footer {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    width: 100% !important;
+    max-width: 768px !important;
+    margin: 0 auto !important;
+    /* Center the container */
+  }
+}
+
+/* Force centering for Footer Elements matching mobile layout */
+/* Global Footer (Main Cart) - Not sticky, follows content flow */
+#snipcart .snipcart-cart__footer {
+  position: relative !important;
+  background: #fff !important;
+  padding: 1rem !important;
+  border-top: 1px solid #eee !important;
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Slim down the bottom spacing inside the footer */
+#snipcart .snipcart-featured-payment-methods {
+  margin-top: 1.5rem !important;
+  margin-bottom: 2rem !important;
+}
+
+/* Reduce gap above footer (product list bottom) */
+#snipcart .snipcart-item-list {
+  margin-bottom: 0.5rem !important;
+}
+
+/* Inner footer elements - no sticky, just centering */
+.snipcart-cart__footer-col {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+  width: 100% !important;
+}
+
+/* 1. Reduce outer page margins to gain space */
+#snipcart .snipcart-checkout__content {
+  margin-left: 1.5rem !important;
+  margin-right: 1.5rem !important;
+  max-width: none !important;
+}
+
+/* 2. Adjust flex balance between main column and sidebar */
+#snipcart .snipcart-layout__col--large {
+  flex-basis: 60% !important;
+  /* Reduced from 68% */
+  max-width: 60% !important;
+  padding-left: 2rem !important;
+  /* Reduced from 80px */
+}
+
+#snipcart .snipcart-layout__sidebar {
+  flex-basis: 35% !important;
+  /* Increased basis */
+  min-width: 320px !important;
+  /* Ensure a minimum width */
+  flex-grow: 1 !important;
+}
+
+/* 3. Container refinements - Use ID prefix for maximum specificity */
+#snipcart .snipcart-layout__col {
+  padding: 4rem 3.5rem !important;
+  /* Increased top and horizontal padding */
+}
+
+/* 4. Remove Snipcart's default width restrictions on the summary block */
+#snipcart .snipcart-cart-summary,
+#snipcart .snipcart-cart-summary-items,
+#snipcart .snipcart-summary-fees,
+#snipcart .snipcart-cart-summary-items-list {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+#snipcart .snipcart-cart-summary__title {
+  margin-top: 1.5rem !important;
+  /* Gap from top of container */
+  margin-bottom: 2.5rem !important;
+  line-height: 1.4 !important;
+  letter-spacing: 0.02em !important;
+  font-family: inherit !important;
+  padding-right: 5rem !important;
+  /* More room for EDIT button */
+}
+
+.snipcart-button-link {
+  text-decoration: none !important;
+  text-transform: uppercase !important;
+  font-size: 0.75rem !important;
+  letter-spacing: 0.1em !important;
+  opacity: 0.8 !important;
+  transition: opacity 0.2s !important;
+  color: var(--color-primary, #1a4db3) !important;
+}
+
+.snipcart-button-link:hover {
+  opacity: 1 !important;
+  text-decoration: none !important;
+}
+
+/* Items in summary */
+.snipcart-cart-summary-item {
+  margin-bottom: 1.25rem !important;
+  border-bottom: 1px solid #f2f2f2 !important;
+  padding-bottom: 1rem !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: baseline !important;
+  width: 100% !important;
+}
+
+.snipcart-cart-summary-item__name {
+  line-height: 1.5 !important;
+  margin-bottom: 0 !important;
+  display: block !important;
+  font-weight: 500 !important;
+  flex-grow: 1 !important;
+  padding-right: 2rem !important;
+  /* Ensure gap from price */
+}
+
+.snipcart-cart-summary-item__quantity,
+.snipcart-cart-summary-item__price {
+  font-size: 0.85rem !important;
+  color: #666 !important;
+  white-space: nowrap !important;
+  text-align: right !important;
+}
+
+/* Totals */
+.snipcart-summary-fees__item {
+  padding: 0.75rem 0 !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  gap: 2rem !important;
+  width: 100% !important;
+}
+
+.snipcart-summary-fees__label,
+.snipcart-summary-fees__item--total .snipcart-summary-fees__label {
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+  text-align: left !important;
+}
+
+.snipcart-summary-fees__amount,
+.snipcart-cart-summary-item__price {
+  text-align: right !important;
+  flex-basis: auto !important;
+  flex-grow: 1 !important;
+  white-space: nowrap !important;
+}
+
+.snipcart-summary-fees__item--total {
+  margin-top: 1.5rem !important;
+  padding-top: 1.5rem !important;
+  border-top: 1px solid #ddd !important;
+}
+
+.snipcart-summary-fees__item--total .snipcart-summary-fees__label {
+  font-size: 1.2rem !important;
+  font-weight: 600 !important;
+}
+
+.snipcart-summary-fees__item--total .snipcart-summary-fees__amount {
+  font-size: 1.35rem !important;
+  color: #000 !important;
+  font-weight: 700 !important;
+}
+
+/* Ensure buttons inside stretch or center? Usually center for 'mobile' look */
+.snipcart-cart__footer-col .snipcart-button {
+  width: 100% !important;
+  /* Re-added !important to Force full width */
+  max-width: 100% !important;
+  /* Allow full width as requested */
+}
+
+/* Force Summary Title Small via HIGH SPECIFICITY */
+.snipcart-cart-summary__title,
+.snipcart-layout__content .snipcart-cart-summary__title,
+section.snipcart-cart-summary h1,
+section.snipcart-cart-summary h2 {
+  font-size: 1.25rem !important;
+  margin-top: 0 !important;
+  margin-bottom: 1rem !important;
+}
+
+/* Main Cart Title (Desktop First Default) */
+.snipcart-cart__title,
+.snipcart-modal__header-title,
+.snipcart-cart__header-title {
+  font-size: 2.8rem !important;
+  font-weight: 700 !important;
+  margin-bottom: 2rem !important;
+  margin-top: 1.5rem !important;
+  display: block !important;
+}
+
+/* Mobile Title Overrides (Downgrade to 2rem) */
+@media (max-width: 1024px) {
+
+  .snipcart-cart__title,
+  .snipcart-modal__header-title,
+  .snipcart-cart__header-title {
+    font-size: 2rem !important;
+    margin-top: 0 !important;
+    margin-bottom: 1.5rem !important;
+  }
+}
+
+/* Fix Summary Fees (not too big) */
+.snipcart-summary-fees__title,
+.snipcart-summary-fees__amount {
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+}
+
+.snipcart-summary-fees__total .snipcart-summary-fees__title,
+.snipcart-summary-fees__total .snipcart-summary-fees__amount {
+  font-size: 1.25rem !important;
+  font-weight: 700 !important;
+}
+
+
+/* Integrated Header: Wider and Grid Aligned */
+/* Integrated Header: Perfectly matched to layout & Sticky */
+/* Integrated Header: Perfectly matched to layout & Sticky */
+/* Consolidated all variations with ULTRA-HIGH SPECIFICITY to ensure thick look and stable flow */
+#snipcart .snipcart-cart-header,
+#snipcart .snipcart-modal__header,
+#snipcart .snipcart-cart__header,
+#snipcart .snipcart-checkout__header,
+#snipcart .snipcart-header,
+#snipcart .snipcart-layout__header,
+#snipcart .snipcart-layout__header--fixed {
+  flex: 0 0 auto !important;
+  z-index: 9100 !important;
+  background-color: #fff !important;
+  border-bottom: 1px solid #eee !important;
+
+  /* Positioning Flow Fix (Prevents Floating Up) */
+  position: sticky !important;
+  /* STICKY HEADER */
+  top: 0 !important;
+  left: 0 !important;
+  transform: none !important;
+  /* Neutralize any JS-driven sliding */
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+
+  /* Force Thick Header */
+  padding: 1.5rem 3rem !important;
+  min-height: 80px !important;
+  /* Guaranteed thickness for desktop */
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Ensure inner options don't override the thickness or cause shifts */
+#snipcart .snipcart-cart-header__options,
+#snipcart .snipcart-header__options {
+  padding: 0 !important;
+  height: auto !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  display: flex !important;
+  flex: 1 1 auto !important;
+}
+
+/* Ensure inner options don't override the thickness or cause shifts */
+#snipcart .snipcart-cart-header__options {
+  padding: 0 !important;
+  height: auto !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  display: flex !important;
+  flex: 1 1 auto !important;
+}
+
+/* Also ensure the inner options container doesn't collapse or hide padding */
+.snipcart-cart-header__options {
+  padding: 0 !important;
+  width: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* Left Column - Continue Shopping */
+.snipcart-cart-header__close-button,
+.snipcart-modal__header-buttons {
+  z-index: 10 !important;
+  position: absolute !important;
+  /* Force it out of flow */
+  left: 1.5rem !important;
+  /* Match container padding */
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  justify-content: flex-start !important;
+}
+
+/* Center Column - Title (Absolute) */
+.snipcart-cart-header__title,
+.snipcart-modal__header-title,
+.snipcart-cart__header-title {
+  position: absolute !important;
+  left: 50% !important;
+  top: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  width: auto !important;
+  white-space: nowrap !important;
+  display: block !important;
+  z-index: 1 !important;
+  font-size: 1.25rem !important;
+  margin: 0 !important;
+  order: 2 !important;
+  /* Just in case */
+}
+
+/* Ensure step icons don't drift into padding area on Desktop */
+/* Snipcart puts these icons in a header with potential negative margins */
+#snipcart .snipcart-checkout-step__header {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+  /* Rely on column padding now */
+  display: flex !important;
+  align-items: center !important;
+}
+
+#snipcart .snipcart-checkout-step__icon {
+  position: static !important;
+  /* Force out of absolute if it was there */
+  margin-right: 1.25rem !important;
+}
+
+/* Fix "Edit" Side Panel Z-Index to be ABOVE Header */
+.snipcart-item-configuration,
+.snipcart-side-cart,
+.snipcart-layout__content--side {
+  z-index: 9200 !important;
+  /* Level 3: Sidebar */
+  /* Must be > 9100 */
+  position: relative !important;
+}
+
+/* Billing Content Adjustments - Background stabilization */
+#snipcart .snipcart-layout__content {
+  background-color: #fff !important;
+}
+
+@media (max-width: 1024px) {
+
+  /* Tablet RWD: Stack columns vertically */
+  #snipcart .snipcart-layout:has(.snipcart-checkout__content) {
+    width: 100% !important;
+    max-width: 100% !important;
+    left: 0 !important;
+    transform: none !important;
+    right: 0 !important;
+  }
+
+  #snipcart .snipcart-layout__cols,
+  #snipcart .snipcart-checkout__cols {
+    flex-direction: column !important;
+    max-width: 100% !important;
+  }
+
+  #snipcart .snipcart-layout__col--large {
+    flex: 1 1 auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    order: 1 !important;
+  }
+
+  #snipcart .snipcart-layout__col--side {
+    flex: 0 0 auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 1rem !important;
+    order: 2 !important;
+    margin-top: 1.5rem !important;
+  }
+
+  /* Reduce oversized white background - tighter padding */
+  #snipcart .snipcart-layout__content {
+    padding: 1.5rem !important;
+  }
+
+  /* Summary background - more compact */
+  #snipcart .snipcart-cart-summary,
+  #snipcart .snipcart-cart-summary__content {
+    padding: 1rem !important;
+    border-radius: 0.75rem !important;
+  }
+}
+
+@media (max-width: 768px) {
+
+  /* Mobile RWD: Standard approved padding */
+  #snipcart .snipcart-layout__content {
+    padding: 2.5rem 1.5rem 1.5rem !important;
+    /* Top 2.5rem, Horizontal 1.5rem */
+  }
+}
+
+@media (max-width: 768px) {
+
+  #snipcart .snipcart-modal__header,
+  #snipcart .snipcart-cart__header {
+    border-radius: 0 !important;
+    padding: 1rem !important;
+  }
+}
+
+/* Special Case: Flex Layout specifically for Empty Cart Vertical Centering */
+#snipcart .snipcart-layout__content:has(.snipcart-empty-cart) {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* Snipcart Empty Cart Line Breaks & Centering */
+/* Snipcart Empty Cart Container - Vertical & Horizontal Center */
+.snipcart-empty-cart,
+.snipcart-cart-empty {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  /* Vertical Center */
+  align-items: center !important;
+  /* Horizontal Center */
+  flex-grow: 1 !important;
+  /* Grow to fill parent height */
+  width: 100% !important;
+  text-align: center !important;
+  height: auto !important;
+  /* Let flex handle height */
+  margin: 0 !important;
+  /* Remove potential margins */
+}
+
+/* Hide Empty Cart Icon to prevent Top-Spacing */
+.snipcart-empty-cart__icon,
+.snipcart-cart-empty__icon {
+  display: none !important;
+}
+
+/* Empty Cart Title */
+.snipcart-empty-cart__title,
+.snipcart-cart-empty__title {
+  white-space: pre-line !important;
+  line-height: 1.5 !important;
+  margin-bottom: 2rem !important;
+  /* Space between title and button */
+  display: block !important;
+  width: 100% !important;
+}
+
+/* Empty Cart Button Center */
+.snipcart-empty-cart .snipcart-button-secondary,
+.snipcart-cart-empty .snipcart-button-secondary {
+  margin: 0 auto !important;
+  display: inline-flex !important;
+  /* or flex depending on button properties */
+}
+
+/* Taiwan Address Format Reordering & Flex Layout (Apply to ALL forms) */
+.snipcart-address-form,
+.snipcart-billing-address,
+.snipcart-customer-address-form,
+.snipcart-address-fields {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: space-between !important;
+  gap: 20px 2% !important;
+  /* Increased gap slightly */
+  margin-top: 1rem !important;
+}
+
+/* FORCE ALL FIELDS TO SHOW AND BE FORMATTED */
+.snipcart-form__field,
+.snipcart-form__field--hidden,
+[data-test^="snipcart-address-form__"],
+[data-test^="snipcart-billing-address__"] {
+  display: block !important;
+  flex: 1 1 100% !important;
+  margin-bottom: 15px !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Hide the toggle buttons that Snipcart uses to hide fields */
+.snipcart-billing-address__manual-entry,
+.snipcart-address-form__dont-see-address,
+button.snipcart-button--link,
+[data-test$="manual-entry"],
+[data-test$="dont-see-address"] {
+  display: none !important;
+}
+
+/* Adjust Billing Area specifically to be wider or fuller */
+.snipcart-billing-address {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* Row 1: Name & Phone */
+.snipcart-form__field[data-test$="name"],
+.snipcart-form__field[data-test$="phone"] {
+  flex: 1 1 48% !important;
+  order: 1 !important;
+  min-width: 140px !important;
+}
+
+/* Row 2: Postal Code, County/City, Township/District (One line) */
+.snipcart-form__field[data-test$="postalCode"] {
+  flex: 1 1 20% !important;
+  order: 3 !important;
+  min-width: 80px !important;
+}
+
+.snipcart-form__field[data-test$="province"] {
+  flex: 1 1 38% !important;
+  order: 4 !important;
+  min-width: 110px !important;
+}
+
+.snipcart-form__field[data-test$="city"] {
+  flex: 1 1 38% !important;
+  order: 5 !important;
+  min-width: 110px !important;
+}
+
+/* Row 3: Country (Forced full width or separate) */
+.snipcart-form__field[data-test$="country"] {
+  flex: 1 1 100% !important;
+  order: 2 !important;
+}
+
+/* Row 4: Detailed Address (One line 100%) */
+.snipcart-form__field[data-test$="address1"] {
+  flex: 1 1 100% !important;
+  order: 6 !important;
+}
+
+/* Row 5: Notes (One line 100%) */
+.snipcart-form__field[data-test$="address2"] {
+  flex: 1 1 100% !important;
+  order: 7 !important;
+}
+
+/* Fix "Missing Inputs" - make sure internal inputs inside the fields are visible */
+.snipcart-form__field input,
+.snipcart-form__field select,
+.snipcart-form__field textarea,
+.snipcart-textbox {
+  display: block !important;
+  width: 100% !important;
+  min-height: 48px !important;
+  /* Slightly taller */
+  visibility: visible !important;
+}
+
+/* Custom Field Layout in Cart Summary */
+.snipcart-item-details__custom-fields {
+  display: block !important;
+  font-size: 0.85rem !important;
+  color: #666 !important;
+}
+
 .snipcart-checkout {
   font-family: var(--font-ui) !important;
+}
+
+/* Ensure Layout Remains Scrollable even during Loading/Processing */
+#snipcart .snipcart-layout.snipcart-layout--loading,
+#snipcart .snipcart-layout--processing,
+#snipcart .snipcart-layout--disabled {
+  overflow-y: scroll !important;
+  pointer-events: auto !important;
+}
+
+/* Ensure the mask doesn't block scroll events on the container */
+.snipcart-loading-overlay,
+.snipcart-spinner-container {
+  pointer-events: none !important;
+  /* Allow scroll through mask */
+}
+
+/* NUCLEAR OPTION: Force HTML/Body to yield scroll control to Snipcart Layout */
+html.snipcart-html-lock,
+body.snipcart-body-lock,
+html:has(#snipcart .snipcart-layout--processing),
+body:has(#snipcart .snipcart-layout--processing) {
+  overflow: hidden !important;
+  /* Let layout handle it, but don't double scroll */
+  height: 100% !important;
 }

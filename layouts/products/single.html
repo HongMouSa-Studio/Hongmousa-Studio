@@ -55,7 +55,8 @@
           
           {{ range $index, $opt := .Params.options }}
             {{ $snipIndex := add $index 1 }}
-            data-item-custom{{ $snipIndex }}-name="{{ $opt.name }}"
+            {{ $slug := index (slice "font" "conversion" "material" "engraving") $index }}
+            data-item-custom{{ $snipIndex }}-name="{{ $slug }}"
             data-item-custom{{ $snipIndex }}-options="{{ range $vIndex, $val := $opt.values }}{{ if $vIndex }}|{{ end }}{{ if reflect.IsMap $val }}{{ $val.name }} {{ if $val.price }}[+{{ printf "%.2f" $val.price }}]{{ end }}{{ else }}{{ $val }}{{ end }}{{ end }}"
           {{ end }}
         >

@@ -55,46 +55,124 @@ const addressDefaultInput = document.getElementById('address-default')
 const saveAddressBtn = document.getElementById('save-address-btn')
 const closeAddressModalBtn = document.getElementById('close-address-modal')
 
-// 1. Listen for Auth State
-supabase.auth.onAuthStateChange(async (event, session) => {
-  if (session) {
-    document.body.classList.add('is-auth')
-    if (emailEl) emailEl.textContent = session.user.email
+// Address Book State
+let isFormDirty = false;
+let initialFormState = {};
 
-    // Load real data from Supabase
-    loadAccountData(session.user.id)
+function captureInitialState() {
+  if (!addressNameInput) return; // Guard for non-address pages
+  initialFormState = {
+    name: addressNameInput.value,
+    phone: addressPhoneInput.value,
+    postal: addressPostalInput.value,
+    address: addressValInput.value,
+    cvs: addressCvsInput.value,
+    isDefault: addressDefaultInput.checked
+  };
+  isFormDirty = false;
+}
+
+function checkFormDirty() {
+  if (!addressModal.classList.contains('hidden')) {
+    const currentState = {
+      name: addressNameInput.value,
+      phone: addressPhoneInput.value,
+      postal: addressPostalInput.value,
+      address: addressValInput.value,
+      cvs: addressCvsInput.value,
+      isDefault: addressDefaultInput.checked
+    };
+
+    isFormDirty = JSON.stringify(initialFormState) !== JSON.stringify(currentState);
+  }
+}
+
+// 1. Auth & Data Loading Logic
+let isInitialized = false;
+
+async function handleAuthStateChange(session) {
+  if (isInitialized && session) return; // Prevent double trigger
+
+  if (session) {
+    console.log('User is authenticated:', session.user.email);
+    isInitialized = true;
+    document.body.classList.add('is-auth');
+    if (emailEl) emailEl.textContent = session.user.email;
+    loadAccountData(session.user.id);
   } else {
+    console.log('No session found. Checking fallback...');
     if (window.location.pathname.includes('/account/')) {
-      setTimeout(() => {
-        if (!window.localStorage.getItem('supabase.auth.token')) {
-          window.location.href = getLangBase() + '/login/';
-        }
-      }, 1000);
+      const { data: { session: currentSession } } = await supabase.auth.getSession();
+      if (!currentSession) {
+        console.log('No fallback session. Redirecting to login...');
+        setTimeout(() => {
+          if (!window.localStorage.getItem('supabase.auth.token')) {
+            window.location.href = getLangBase() + '/login/';
+          }
+        }, 1500);
+      } else {
+        console.log('Fallback session found:', currentSession.user.email);
+        isInitialized = true;
+        document.body.classList.add('is-auth');
+        if (emailEl) emailEl.textContent = currentSession.user.email;
+        loadAccountData(currentSession.user.id);
+      }
     }
   }
-})
+}
+
+// Global initialization
+(async () => {
+  try {
+    console.log('Account JS initializing...');
+
+    // Initial session check
+    const { data: { session } } = await supabase.auth.getSession();
+    await handleAuthStateChange(session);
+
+    // Watch for subsequent changes
+    supabase.auth.onAuthStateChange(async (event, newSession) => {
+      console.log('Auth event triggered:', event);
+      if (event === 'SIGNED_OUT') {
+        isInitialized = false;
+        document.body.classList.remove('is-auth');
+        window.location.href = getLangBase() + '/login/';
+      } else if (newSession) {
+        await handleAuthStateChange(newSession);
+      }
+    });
+
+  } catch (err) {
+    console.error('Fatal Initialization Error:', err);
+  }
+})();
 
 // 2. Fetch/Load Data
 async function loadAccountData(userId) {
-  // Fetch Profile (Points, Name, Phone, Contact Email)
-  const { data: profile, error: pError } = await supabase
-    .from('profiles')
-    .select('*')
-    .eq('id', userId)
-    .maybeSingle()
+  console.log('Loading account data for:', userId);
+  try {
+    // Fetch Profile (Points, Name, Phone, Contact Email)
+    const { data: profile, error: pError } = await supabase
+      .from('profiles')
+      .select('*')
+      .eq('id', userId)
+      .maybeSingle()
 
-  if (profile) {
-    if (pointsEl) pointsEl.textContent = profile.points || "0";
-    if (displayNameVal) displayNameVal.textContent = profile.display_name || '---';
-    if (phoneVal) phoneVal.textContent = profile.phone || '---';
-    if (contactEmailVal) contactEmailVal.textContent = profile.contact_email || profile.email || '---';
+    if (profile) {
+      if (pointsEl) pointsEl.textContent = profile.points || "0";
+      if (displayNameVal) displayNameVal.textContent = profile.display_name || '---';
+      if (phoneVal) phoneVal.textContent = profile.phone || '---';
+      if (contactEmailVal) contactEmailVal.textContent = profile.contact_email || profile.email || '---';
+    }
+
+    // Fetch Address Book
+    renderAddresses(userId)
+
+    // Fetch Orders
+    renderOrders(userId)
+  } catch (err) {
+    console.error('Data Load Error:', err);
   }
-
-  // Fetch Address Book
-  renderAddresses(userId)
-
-  // Fetch Orders
-  renderOrders(userId)
 }
 
 async function renderAddresses(userId) {
@@ -212,12 +290,16 @@ async function renderOrders(userId) {
   }
 }
 
-// 3. Profile Edit Modal
+// 3. Profile Edit Modal Logic
+console.log('Attaching profile listeners...');
+if (!editProfileBtn) console.warn('Edit Profile button not found!');
+
 editProfileBtn?.addEventListener('click', () => {
-  editNameInput.value = displayNameVal.textContent === '---' ? '' : displayNameVal.textContent
-  editPhoneInput.value = phoneVal.textContent === '---' ? '' : phoneVal.textContent
-  editContactEmailInput.value = contactEmailVal.textContent === '---' ? '' : contactEmailVal.textContent
-  profileModal.classList.remove('hidden')
+  console.log('Edit Profile clicked');
+  if (editNameInput) editNameInput.value = displayNameVal.textContent === '---' ? '' : displayNameVal.textContent
+  if (editPhoneInput) editPhoneInput.value = phoneVal.textContent === '---' ? '' : phoneVal.textContent
+  if (editContactEmailInput) editContactEmailInput.value = contactEmailVal.textContent === '---' ? '' : contactEmailVal.textContent
+  profileModal?.classList.remove('hidden')
 })
 
 closeProfileModalBtn?.addEventListener('click', () => {
@@ -265,73 +347,51 @@ saveProfileBtn?.addEventListener('click', async () => {
 })
 
 // 4. Address Book Logic
-let isFormDirty = false;
-let initialFormState = {};
-
-function captureInitialState() {
-  initialFormState = {
-    name: addressNameInput.value,
-    phone: addressPhoneInput.value,
-    postal: addressPostalInput.value,
-    address: addressValInput.value,
-    cvs: addressCvsInput.value,
-    isDefault: addressDefaultInput.checked
-  };
-  isFormDirty = false;
-}
-
-function checkFormDirty() {
-  if (!addressModal.classList.contains('hidden')) {
-    const currentState = {
-      name: addressNameInput.value,
-      phone: addressPhoneInput.value,
-      postal: addressPostalInput.value,
-      address: addressValInput.value,
-      cvs: addressCvsInput.value,
-      isDefault: addressDefaultInput.checked
-    };
-
-    isFormDirty = JSON.stringify(initialFormState) !== JSON.stringify(currentState);
-  }
-}
+console.log('Attaching address book listeners...');
+if (!addAddressBtn) console.warn('Add Address button not found!');
 
 // Track form changes
 [addressNameInput, addressPhoneInput, addressPostalInput, addressValInput, addressCvsInput].forEach(input => {
-  input?.addEventListener('input', checkFormDirty);
+  input?.addEventListener('input', () => {
+    console.log('Input changed:', input.id);
+    checkFormDirty();
+  });
 });
 addressDefaultInput?.addEventListener('change', checkFormDirty);
 
 function openAddressModal(address = null) {
+  console.log('Opening address modal', address ? 'for edit' : 'for add');
   // Get i18n title from HTML data attributes
   const modalContainer = document.getElementById('address-modal');
   const titleAdd = modalContainer?.dataset.titleAdd || 'Add Shipping Information';
   const titleEdit = modalContainer?.dataset.titleEdit || 'Edit Shipping Information';
 
   if (address) {
-    modalTitle.textContent = titleEdit;
-    addressIdInput.value = address.id;
-    addressNameInput.value = address.recipient_name || '';
-    addressPhoneInput.value = address.phone || '';
-    addressPostalInput.value = address.postal_code || '';
-    addressValInput.value = address.address || '';
-    addressCvsInput.value = address.cvs_store || '';
-    addressDefaultInput.checked = address.is_default;
+    if (modalTitle) modalTitle.textContent = titleEdit;
+    if (addressIdInput) addressIdInput.value = address.id;
+    if (addressNameInput) addressNameInput.value = address.recipient_name || '';
+    if (addressPhoneInput) addressPhoneInput.value = address.phone || '';
+    if (addressPostalInput) addressPostalInput.value = address.postal_code || '';
+    if (addressValInput) addressValInput.value = address.address || '';
+    if (addressCvsInput) addressCvsInput.value = address.cvs_store || '';
+    if (addressDefaultInput) addressDefaultInput.checked = address.is_default;
   } else {
-    modalTitle.textContent = titleAdd;
-    addressIdInput.value = '';
-    addressNameInput.value = '';
-    addressPhoneInput.value = '';
-    addressPostalInput.value = '';
-    addressValInput.value = '';
-    addressCvsInput.value = '';
-    addressDefaultInput.checked = false;
+    if (modalTitle) modalTitle.textContent = titleAdd;
+    if (addressIdInput) addressIdInput.value = '';
+    if (addressNameInput) addressNameInput.value = '';
+    if (addressPhoneInput) addressPhoneInput.value = '';
+    if (addressPostalInput) addressPostalInput.value = '';
+    if (addressValInput) addressValInput.value = '';
+    if (addressCvsInput) addressCvsInput.value = '';
+    if (addressDefaultInput) addressDefaultInput.checked = false;
   }
 
-  addressModal.classList.remove('hidden');
+  addressModal?.classList.remove('hidden');
   captureInitialState();
 }
 
 function closeAddressModal() {
+  console.log('Closing address modal');
   const modalContainer = document.getElementById('address-modal');
   const warningMsg = modalContainer?.dataset.unsavedWarning || 'You have unsaved changes. Are you sure you want to cancel?';
 
@@ -339,32 +399,37 @@ function closeAddressModal() {
     return;
   }
 
-  addressModal.classList.add('hidden');
+  addressModal?.classList.add('hidden');
   isFormDirty = false;
 }
 
-closeAddressModalBtn.addEventListener('click', closeAddressModal);
+closeAddressModalBtn?.addEventListener('click', closeAddressModal);
 
 // ESC key to close
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && !addressModal.classList.contains('hidden')) {
+  if (e.key === 'Escape' && addressModal && !addressModal.classList.contains('hidden')) {
     closeAddressModal();
   }
 });
 
 // Click outside to close
-addressModal.addEventListener('click', (e) => {
+addressModal?.addEventListener('click', (e) => {
   if (e.target === addressModal) {
     closeAddressModal();
   }
 });
 
-addAddressBtn?.addEventListener('click', () => openAddressModal());
+addAddressBtn?.addEventListener('click', () => {
+  console.log('Add Address clicked');
+  openAddressModal();
+});
 
 // CVS Store Picker Integration
 const cvsPickerBtn = document.getElementById('cvs-picker-btn');
 if (cvsPickerBtn && cvsPicker) {
+  console.log('Attaching CVS picker listener');
   cvsPickerBtn.addEventListener('click', async () => {
+    console.log('CVS Picker clicked');
     try {
       const storeInfo = await cvsPicker.openStoreMap({
         isCollection: 'Y',
@@ -372,12 +437,13 @@ if (cvsPickerBtn && cvsPicker) {
       });
 
       // Auto-fill the CVS input with formatted store info
-      addressCvsInput.value = cvsPicker.formatStoreInfo(storeInfo);
-
-      // Store the raw store data for later use
-      addressCvsInput.dataset.storeId = storeInfo.storeID;
-      addressCvsInput.dataset.storeName = storeInfo.storeName;
-      addressCvsInput.dataset.storeType = storeInfo.storeType;
+      if (addressCvsInput) {
+        addressCvsInput.value = cvsPicker.formatStoreInfo(storeInfo);
+        // Store the raw store data for later use
+        addressCvsInput.dataset.storeId = storeInfo.storeID;
+        addressCvsInput.dataset.storeName = storeInfo.storeName;
+        addressCvsInput.dataset.storeType = storeInfo.storeType;
+      }
     } catch (error) {
       console.error('CVS Picker Error:', error);
       const modalContainer = document.getElementById('address-modal');
