@@ -89,3 +89,7 @@ account_confirm_delete: "咁確定卜芟除？"
 account_delivery_method_mail: "配達到位"
 account_delivery_method_cvs: "超商領貨"
 account_error_cvs_picker: "無法度打開門市選擇器，請直接輸入門市資訊。"
+
+member_login: "登入"
+member_register: "註冊"
+member_my_account: "會員中心"

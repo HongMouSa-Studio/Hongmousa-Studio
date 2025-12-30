@@ -94,6 +94,11 @@ main {
   height: 75px;
   /* LOGO ê koân-tō͘ */
   width: auto;
+
+  /* Vertical Divider Style */
+  padding-right: 15px;
+  border-right: 1px solid #e5e7eb;
+  /* Subtle gray divider */
 }
 
 .logo-block i {
@@ -106,7 +111,7 @@ main {
   display: flex;
   color: var(--text-dark);
   flex-direction: column;
-  line-height: 1.2;
+  line-height: 1.25;
   width: max-content;
   /* Ta̍k chōa í siōng khoah--ê ûi chú */
   text-align: left;
@@ -116,17 +121,24 @@ main {
 /* LOGO piⁿ ê jī, tiâu-chéng jī-thé */
 .site-title-l1 {
   font-size: 1.1rem;
-  /* Desktop size */
+  /* Desktop size: POJ (Primary) */
+  color: var(--text-dark);
 }
 
 .site-title-l2 {
-  font-size: 1.05rem;
-  /* Desktop size */
+  font-size: 1rem;
+  /* Desktop size: Hanji (Secondary) */
+  color: #4b5563;
+  /* slightly lighter */
+  font-weight: 500;
 }
 
 .site-title-l3 {
-  font-size: 1.05rem;
-  /* Desktop size */
+  font-size: 0.85rem;
+  /* Desktop size: English (Tertiary) */
+  color: #9ca3af;
+  /* Distinctly lighter */
+  font-weight: 400;
 }
 
 /* ---------------------------------------------------
@@ -181,67 +193,90 @@ main {
     language switcher inline
 -----------------------------------------------------*/
 .lang-switcher-inline {
-  margin-left: 1rem;
   position: relative;
   display: inline-block;
+  /* Removed margin-left to rely on flex gap in parent */
 }
 
-.lang-button {
-  padding: 6px 12px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  background: white;
-  cursor: pointer;
-}
-
-/* lang dropdown */
+/* lang dropdown (Unified Style with Member Menu) */
 .lang-dropdown {
   position: absolute;
   right: 0;
-  margin-top: 8px;
-  width: 165px;
+  top: 100%;
+  /* Align below button */
+  margin-top: 35px;
+  /* Increased to clear header bottom */
+
+  /* width: 160px; Removed fixed width */
+  min-width: 160px;
+  /* Minimum width */
+  width: max-content;
+  /* Auto expand for long languages */
   background: white;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  border-radius: 12px;
+  /* Softer Radius */
+
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  /* Slightly stronger shadow (Unified) */
+  border: 1px solid rgba(0, 0, 0, 0.05);
+
   overflow: hidden;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   opacity: 0;
   visibility: hidden;
-  transform: scaleY(0.98);
-  transform-origin: top right;
-  transition: 0.2s;
+  transform: translateY(-20px);
+  /* Dropping Down Start */
+  /* Clean Slide Down Animation */
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 100;
 }
 
 /* hover bridge */
+/* Robust hover bridge (Extra Tall) */
 .lang-dropdown::before {
   content: "";
   position: absolute;
-  top: -14px;
-  left: -12px;
-  right: -12px;
-  height: 14px;
+  top: -50px;
+  /* Extends way up to overlap button securely */
+  left: -40px;
+  right: -20px;
+  height: 60px;
+  /* Tall enough to cover any gap */
   pointer-events: auto;
+  /* Ensure mouse events are captured */
+  z-index: 999;
+  /* Must be ON TOP to catch mouse */
+  background: transparent;
+  /* Ensure hit testing works */
 }
 
 .lang-dropdown.show {
   opacity: 1;
   visibility: visible;
-  transform: scaleY(1);
+  transform: translateY(0);
 }
 
 .lang-dropdown a {
   display: block;
-  padding: 10px 12px;
-  color: #222;
+  padding: 12px 16px;
+  /* Unified Padding */
+  color: #333;
+  /* Darker Text */
+  font-weight: 500;
   text-decoration: none;
+  transition: background 0.2s;
+  white-space: nowrap;
+  /* Prevent wrapping */
 }
 
 .lang-dropdown a:hover {
-  background: #f0f0f0;
+  background: #f9fafb;
+  color: var(--accent-green);
 }
 
 .current-lang {
-  font-weight: bold;
+  color: var(--accent-green) !important;
+  background: #f0fdf4;
+  /* Very light green bg */
 }
 
 /* Language-specific font overrides for cleaner look */
@@ -301,10 +336,12 @@ main {
 
 .nav-mobile a {
   display: block;
-  padding: 0.5rem 0;
+  padding: 12px 16px;
+  /* Unified Padding */
   font-size: 1.05rem;
   color: inherit;
   text-decoration: none;
+  font-weight: 500;
 }
 
 .nav-mobile a:hover {
@@ -315,24 +352,61 @@ main {
     Icons (Snipcart)
 -----------------------------------------------------*/
 
+/* ---------------------------------------------------
+    Icons & Actions Group
+-----------------------------------------------------*/
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
 .icons-group {
   display: flex;
   align-items: center;
-  gap: 1.25rem;
+  gap: 0.5rem;
+  /* Tighter gap between icons themselves */
   color: #4b5563;
 }
 
-.icons-group button {
+/* Enhances Icon Buttons (Circle Hover Effect) */
+.icon-btn {
   background: none;
   border: none;
   cursor: pointer;
-  padding: 0.5rem;
+
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: all 0.2s ease;
+  color: #4b5563;
   position: relative;
 }
 
-.icons-group button:hover {
+.icon-btn i {
+  font-size: 1.2rem;
+  /* Larger Icon Size */
+  transition: transform 0.2s ease;
+}
+
+.icon-btn:hover {
+  background-color: #f3f4f6;
+  /* Circular gray hover bg */
   color: var(--accent-green);
-  transition: color 0.3s;
+}
+
+.icon-btn:hover i {
+  transform: scale(1.1);
+  /* Subtle zoom */
+}
+
+.icon-btn:active {
+  transform: scale(0.95);
 }
 
 .member-area {
@@ -340,16 +414,30 @@ main {
   display: block;
 }
 
+/* Cart Badge Pilla */
 .cart-count {
   background-color: var(--accent-green);
+  /* Brand Green */
   color: white;
-  font-size: 10px;
-  font-weight: bold;
-  padding: 2px 6px;
-  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 10px;
+  /* Pill shape */
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   position: absolute;
-  top: -8px;
-  right: -8px;
+  top: -2px;
+  right: -2px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid #fff;
+  /* White border for contrast */
 }
 
 /* ---------------------------------------------------
@@ -472,9 +560,41 @@ main {
   opacity: 0.9;
 }
 
-/* ---------------------------------------------------
-    7. Footer
------------------------------------------------------*/
+/* Shared Icon Styles for Header (Hamburger + Actions) */
+.icon-btn,
+.menu-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  /* Clean centering */
+  width: 40px;
+  /* Fixed size for perfect circle */
+  height: 40px;
+  font-size: 1.2rem;
+  /* Touch friendly icon size */
+  color: #333;
+  transition: color 0.2s, background-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  /* Circle shape */
+}
+
+.icon-btn:hover,
+.menu-toggle:hover,
+.menu-toggle[aria-expanded="true"] {
+  background-color: #f3f4f6;
+  /* Light gray hover */
+  color: var(--accent-green);
+}
+
+/* Smooth Rotation for Hamburger Icon (Slower) */
+.menu-toggle i {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 footer {
   background-color: var(--text-dark);
   color: #d1d5db;
@@ -494,19 +614,16 @@ footer {
 /* ================================================= */
 
 /* -------------------------
-   1. Desktop: ≥ 1024px
+   1. Desktop: Be Default (moved from min-width query)
 ---------------------------*/
-@media (min-width: 1024px) {
+.nav-links,
+.main-nav {
+  display: flex;
+}
 
-  /* Desktop hián-sī nav */
-  .nav-links,
-  .main-nav {
-    display: flex;
-  }
-
-  .menu-mobile {
-    display: none;
-  }
+.menu-mobile,
+.menu-toggle {
+  display: none;
 }
 
 /* -------------------------
@@ -550,10 +667,125 @@ footer {
     grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
   }
+
+  /* Hide Desktop Nav but KEEP Title & Lang (Default for Tablet) */
+  .nav-links,
+  .main-nav {
+    display: none !important;
+  }
+
+  /* Show Hamburger */
+  /* Show Hamburger */
+  .menu-toggle {
+    display: flex !important;
+    /* Force flex for icon-btn alignment */
+    z-index: 120;
+    /* Higher than menu bridge (100) to allow click-to-close */
+    /* Other styles inherited from .icon-btn */
+  }
+
+  .lang-dropdown {
+    margin-top: 30px;
+  }
+
+  /* Basic Header Layout for Tablet+Mobile */
+  .header-inner {
+    padding: 0.8rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    position: relative;
+    z-index: 50;
+  }
+
+  /* Ensure Logo block behaves normally on Tablet */
+  .logo-block {
+    display: flex;
+    align-items: center;
+    position: static;
+    /* Default static for Tablet */
+    transform: none;
+  }
+
+  .logo-block img {
+    height: 65px;
+  }
+
+  /* Mobile Menu Styles (Hybrid: Card on Tablet, Full on Phone) */
+  .menu-mobile {
+    display: block;
+    /* Controlled by opacity/visibility for animation */
+    background: #fff;
+
+    position: absolute;
+    top: 100%;
+    margin-top: 0px;
+    /* Compensate for header padding to match Member Menu gap */
+
+    /* Tablet Default: Floating Card aligned Left (under Hamburger) */
+    left: 1.5rem;
+    /* Match header padding */
+    right: auto;
+    /* Unset right alignment */
+    width: 300px;
+    border-radius: 12px;
+
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    /* Slightly stronger shadow */
+    border: 1px solid rgba(0, 0, 0, 0.05);
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    /* Dropping Down */
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 90;
+  }
+
+  /* Robust Hover Bridge for Hamburger */
+  .menu-mobile::before {
+    content: "";
+    position: absolute;
+    top: -50px;
+    right: 0;
+    left: 0;
+    /* Cover full width of card */
+    height: 60px;
+    pointer-events: auto;
+    background: transparent;
+    z-index: 100;
+  }
+
+  .menu-mobile.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .menu-mobile a {
+    padding: 12px 16px;
+    display: block;
+    border-bottom: 1px solid #f0f0f0;
+    color: #333;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+
+  .menu-mobile a:hover {
+    background-color: #f9fafb;
+    color: var(--accent-green);
+  }
+
+  .menu-mobile a:last-child {
+    border-bottom: none;
+  }
 }
 
 /* -------------------------
-    3. Mobile: ≤ 768px
+    4. Strict Mobile: ≤ 768px (Compact Mode)
+    Specific overrides for small screens
 ---------------------------*/
 @media (max-width: 768px) {
   .site-header {
@@ -561,33 +793,46 @@ footer {
     top: 0;
     left: 0;
     right: 0;
-
     padding: 0;
     margin: 0;
-    z-index: 10;
+    z-index: 100;
+    background: #fff;
   }
 
   .site-header .header-inner {
     max-width: 100%;
     margin: 0;
-
     border-radius: 0;
-    /* Bô hûi-kak */
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.07);
+    padding: calc(0.8rem + env(safe-area-inset-top)) 1rem 0.8rem;
+    min-height: 70px;
 
-    /* Hide desktop nav & extra components */
-    .nav-links,
-    .main-nav,
+    /* Strict Mobile: Hide Lang & Member */
     .lang-desktop,
     .member-area {
       display: none !important;
     }
 
-    /* iOS safe-area */
-    padding: calc(0.8rem + env(safe-area-inset-top)) 1rem 0.8rem;
+    /* Reorder for "Two Sides Distribution" */
+    /* Hamburger is now DOM-first, so it stays Left */
+    .menu-toggle {
+      display: block;
+      /* Ensure it's visible */
+      margin-right: auto;
+    }
+
+    /* Logo -> Center (Absolute) */
+
+    /* Icons -> Right */
+    .header-actions {
+      display: flex;
+      /* Ensure actions stay together */
+      margin-left: auto;
+      /* Force push to right */
+    }
   }
 
-  /* Logo - Absolute Center for Mobile */
+  /* Logo - Absolute Center for Mobile Only */
   .logo-block {
     position: absolute;
     left: 50%;
@@ -595,130 +840,75 @@ footer {
     z-index: 10;
   }
 
-  .logo-block img {
-    height: 65px;
-    /* Exact match with tablet size */
+  /* Reset Mobile Menu to Full Width for Phone */
+  /* Restored to inherit Tablet Card Style (Stick Left) */
+  .header-inner .menu-mobile {
+    /* Explicitly force Stick Left Card Style */
+    width: 300px;
+    left: 1.5rem;
+    right: auto;
+
+    margin-top: 6px;
+    /* Ensure gap consistency */
+    border-radius: 12px;
+    border-top: 1px solid #f0f0f0;
   }
 
+  /* Reset vertical divider for mobile */
+  .logo-block img {
+    border-right: none;
+    padding-right: 0;
+  }
+
+  /* Hide Site Title on Mobile Only */
   .site-title {
     display: none !important;
   }
 
-  /* Show hamburger */
-  .menu-toggle {
-    display: block;
-    font-size: 1.6rem;
-    cursor: pointer;
-    color: #4b5563;
-    /* Remove order since we are using absolute center for logo */
-    z-index: 20;
-    /* Ensure clickable */
-  }
-
-  .header-inner {
-    justify-content: space-between;
-    padding: 0.8rem 1rem !important;
-    /* Increased vertical padding */
-    position: relative;
-    /* Context for absolute logo */
-    min-height: 70px;
-    /* Increased height */
-  }
-
-  /* Icons group styling adjustment for mobile */
-  .icons-group {
-    gap: 0.8rem;
-    z-index: 20;
-    /* Ensure clickable */
-  }
-
-  /* mobile menu: full width, edge-to-edge, below header */
-  .menu-mobile {
-    display: none;
-    opacity: 0;
-    transform: translateY(-10px);
-    transition: 0.25s ease;
-    z-index: 1999;
-  }
-
-  /* Ji̍h hamburger í-āu show */
-  .menu-mobile.show {
-    display: block;
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .menu-mobile a {
-    padding: 10px 0;
-    display: block;
-  }
-
-  .menu-mobile a:hover {
-    background: #f0f0f0;
-  }
-
-  /* Language switch inside mobile */
+  /* Language switch inside mobile menu */
   .lang-mobile {
     margin-top: 0.6rem;
     padding-top: 1rem;
     position: relative;
+    border-top: 1px solid #eee;
   }
 
   body {
     padding-top: 70px;
-    /* Fixed Header height compensation for ALL pages */
+    /* Compensation */
   }
 
-  /* Hero Section */
+  /* Hero Adjustments */
   .hero {
-    margin-top: 0rem;
+    margin-top: 0;
   }
 
   .hero-content {
     grid-template-columns: 1fr;
-    /* Mobile: 1 column */
     min-height: 400px;
   }
 
   .hero-text {
     padding: 2.5rem 0;
     order: 2;
-    /* Text below image on small screens if image was shown */
   }
 
   .hero-img {
     display: none;
-    /* Mobile: Hide large background image */
   }
 
-  /* Product Grid: 2 Columns */
+  /* Product Grid */
   .product-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
   }
 
-  /* Home Blog Section */
-  .home-blog {
-    margin: 60px auto;
-  }
-
-  .blog-card-body {
-    padding: 1.2rem 1.25rem;
-  }
-
-  /* Blog Single */
-
   /* Footer */
   .footer-grid {
     grid-template-columns: 1fr;
-    /* Mobile: 1 column */
   }
 
-  .site-footer h4 {
-    margin-bottom: 0.5rem;
-  }
-
-  /* Khòng-chè Snipcart Button ē-tàng chhi̍h */
+  /* Utilities */
   .snipcart-add-item {
     cursor: pointer;
   }

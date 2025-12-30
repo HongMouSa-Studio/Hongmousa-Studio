@@ -89,3 +89,7 @@ account_confirm_delete: "Kám khak-tēng beh san-tû?"
 account_delivery_method_mail: "Phòe-ta̍t kàu-ūi"
 account_delivery_method_cvs: "Chhiau-siong"
 account_error_cvs_picker: "Bô hoat-tō͘ phah-khui bûn-chhī soán-te̍k-khì, chhiáⁿ ti̍t-chiap su-ji̍p bûn-chhī chu-sìn."
+
+member_login: "Teng-ji̍p"
+member_register: "Chù-chheh"
+member_my_account: "Hōe-oân Tiong-sim"

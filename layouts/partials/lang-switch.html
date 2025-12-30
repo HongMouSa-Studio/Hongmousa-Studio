@@ -1,8 +1,9 @@
 <div class="group lang-switcher-inline">
   
   <!-- Button -->
-  <button class="lang-button" data-lang="{{ .Site.Language.Lang }}">
-    🌐 {{ .Site.Language.Lang | upper }}
+  <!-- Button (Globe Icon) -->
+  <button class="icon-btn lang-button" aria-label="Language">
+    <i class="fa-solid fa-globe"></i>
   </button>
 
   <!-- Dropdown -->
@@ -35,27 +36,38 @@ document.addEventListener('DOMContentLoaded', function () {
   const group = document.querySelector('.lang-switcher-inline');
   const button = group.querySelector('.lang-button');
   const dropdown = group.querySelector('.lang-dropdown');
+  let leaveTimer;
 
-  group.addEventListener('mouseenter', () => {
+  const showDropdown = () => {
+    clearTimeout(leaveTimer);
     dropdown.classList.add("show");
-  });
+    button.setAttribute('aria-expanded', 'true');
+  };
 
-  group.addEventListener('mouseleave', () => {
-    dropdown.classList.remove("show");
-  });
+  const hideDropdown = () => {
+    leaveTimer = setTimeout(() => {
+      dropdown.classList.remove("show");
+      button.setAttribute('aria-expanded', 'false');
+    }, 300); // 300ms grace period
+  };
 
-    // keyboard accessibility: toggle with Enter/Space
+  // Mouse interactions
+  group.addEventListener('mouseenter', showDropdown);
+  group.addEventListener('mouseleave', hideDropdown);
+  
+  // Also keep open if hovering the dropdown itself (redundant but safe)
+  dropdown.addEventListener('mouseenter', showDropdown);
+  dropdown.addEventListener('mouseleave', hideDropdown);
+
+  // Keyboard accessibility
   button.addEventListener('keydown', function (e) {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
-      const isOpen = dropdown.style.visibility === 'visible';
+      const isOpen = dropdown.classList.contains('show');
       if (isOpen) {
-        dropdown.style.opacity = '0'; dropdown.style.visibility = 'hidden';
-        button.setAttribute('aria-expanded', 'false');
+        dropdown.classList.remove('show');
       } else {
-        dropdown.style.opacity = '1'; dropdown.style.visibility = 'visible';
-        button.setAttribute('aria-expanded', 'true');
-        dropdown.querySelector('a')?.focus();
+        dropdown.classList.add('show');
       }
     }
   });

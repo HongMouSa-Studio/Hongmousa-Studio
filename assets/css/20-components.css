@@ -81,27 +81,47 @@ button {
 .member-menu {
   position: absolute;
   top: 100%;
-  margin-top: 0.5rem;
+  margin-top: 35px;
+  /* Increased to clear header bottom */
 
-  /* Kò͘-tēng X */
-  left: 50%;
-  transform: translateX(-90%) translateY(-6px);
+  /* Align Right */
+  right: 0;
+  left: auto;
+  transform: translateY(10px);
+  /* Clean Slide Up Start */
 
-  min-width: 20px;
+  min-width: 200px;
   max-width: calc(100vw - 2rem);
 
   background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 0.75rem;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  /* Unified border */
+  border-radius: 12px;
+  /* Unified radius */
+  /* Unified shadow */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+
+  overflow: hidden;
 
   opacity: 0;
   visibility: hidden;
-  transition:
-    opacity 0.15s ease,
-    transform 0.15s ease;
-
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(-20px);
+  /* Dropping Down */
+  /* Unified animation */
   z-index: 1000;
+}
+
+@media (max-width: 1024px) {
+  .member-menu {
+    margin-top: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .member-menu {
+    margin-top: 15px;
+  }
 }
 
 .member-menu-inner {
@@ -109,23 +129,25 @@ button {
   border-radius: 0.75rem;
 }
 
-/* hover bridge */
+/* Robust hover bridge (Extra Tall) */
 .member-menu::before {
   content: "";
   position: absolute;
-  top: -12px;
-  /* kiô ê koân-tō͘ */
-  left: -8px;
-  right: -8px;
-  height: 12px;
+  top: -50px;
+  left: -40px;
+  right: -20px;
+  height: 60px;
   pointer-events: auto;
+  z-index: 100;
+  /* On top */
+  background: transparent;
 }
 
-.member-dropdown:hover .member-menu,
-.member-dropdown:focus-within .member-menu {
+/* Relies on JS .show with delay */
+.member-menu.show {
   opacity: 1;
   visibility: visible;
-  transform: translateX(-90%) translateY(0);
+  transform: translateY(0);
 }
 
 .member-toggle {
@@ -142,9 +164,19 @@ button {
 }
 
 .member-info {
-  padding: 0.8rem 1rem;
-  font-size: 0.9rem;
+  padding: 12px 16px;
+  /* Unified Padding */
   border-bottom: 1px solid #eee;
+}
+
+.member-email {
+  font-size: 0.85rem;
+  color: #9ca3af;
+  /* Muted gray (Label style) */
+  font-weight: 500;
+  cursor: default;
+  /* Non-clickable cursor */
+  display: block;
 }
 
 .member-links {
@@ -155,16 +187,41 @@ button {
 
 .member-link {
   display: block;
-  padding: 0.75rem 1rem;
+  padding: 12px 16px;
+  /* Unified Padding */
   text-decoration: none;
   color: #333;
   width: 100%;
   text-align: left;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
+  /* Match Hamburger font size */
+  font-weight: 500;
 }
 
 .member-link:hover {
-  background: #f7f7f7;
+  background: #f9fafb;
+}
+
+/* Specific styling for Logout to be subtle */
+#logout-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  color: #6b7280;
+  /* Neutral Gray */
+  transition: all 0.2s;
+  padding: 12px 16px;
+  /* Unified Padding */
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+#logout-btn:hover {
+  color: #ef4444;
+  /* Subtle Red on Hover only */
+  background: #fef2f2;
 }
 
 /* Auth state helpers */
