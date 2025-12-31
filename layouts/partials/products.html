@@ -42,8 +42,8 @@
             {{ printf (i18n "product_price_format") .Params.price }}
           </div>
           <!-- Learn More Link -->
-          <a href="{{ .RelPermalink }}" class="learn-more-link" style="margin-top: 1rem; display: inline-block; font-size: 0.9rem; color: var(--accent-green); text-decoration: underline;">
-            {{ if eq .Site.Language.Lang "tb-poj" }}Khòaⁿ siū-sè →{{ else if eq .Site.Language.Lang "tb-hj" }}瞭解更多 →{{ else }}Learn More →{{ end }}
+          <a href="{{ .RelPermalink }}" class="learn-more-link">
+            {{ i18n "product_learn_more" }}
           </a>
         </div>
       </div>

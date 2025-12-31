@@ -484,8 +484,8 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-block: 4rem;
-  /* Standardized vertical padding */
+  padding-block: 3rem;
+  /* Reduced from 4rem to 3rem */
   z-index: 10;
 }
 
