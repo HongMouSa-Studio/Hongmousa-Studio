@@ -544,11 +544,11 @@ main {
   letter-spacing: 0.1em;
   font-size: 1rem;
   margin-bottom: 0.5rem;
-  /* Use Charis SIL for correct italics if needed, though this span looks like normal text */
+  /* Use Charis for correct italics if needed, though this span looks like normal text */
 }
 
 .hero-text h1 {
-  font-family: "Charis SIL", "Noto Serif TC", serif;
+  font-family: "Charis", "Noto Serif TC", serif;
   /* Force Charis for main title to support tones */
   font-size: clamp(2.5rem, 5vw, 3rem);
   /*  Chū-tōng RWD hâm-sò͘ */
@@ -559,7 +559,7 @@ main {
 }
 
 .hero-text h1 span {
-  font-family: "Charis SIL", serif;
+  font-family: "Charis", serif;
   /* Crucial for 7th tone italics */
   font-style: italic;
   font-size: clamp(1rem, 2.5vw + 1rem, 1.75rem);
@@ -571,7 +571,7 @@ main {
   color: #6b7280;
   margin-bottom: 2rem;
   max-width: 28rem;
-  font-family: "Charis SIL", "Gentium Plus", var(--font-body);
+  font-family: "Charis", "Gentium", var(--font-body);
   /* Ensure body text also supports o͘ */
 }
 
