@@ -4,6 +4,7 @@ nav_blog: "Blog"
 nav_about: "About us"
 nav_contact: "Contact us"
 cur_lang_name: "English"
+nav_lang_title: "Language"
 
 hero_title_1: "We create"
 hero_title_2: "digital experiences"

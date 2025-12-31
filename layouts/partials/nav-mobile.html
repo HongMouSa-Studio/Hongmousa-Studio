@@ -8,22 +8,20 @@
   </ul>
 
   <!-- Styled Mobile Language Switcher -->
-  <div class="lang-mobile-group" style="margin-top: 1.5rem; border-top: 1px solid #eee; padding-top: 1rem;">
-    <!-- Earth icon + Label -->
-    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.8rem; color: #888; padding-left: 0.5rem;">
-       <span>🌐</span>
-       <span style="font-size: 0.85rem;">Language</span>
+  <div class="lang-mobile-group">
+    <div class="lang-mobile-header">
+       <i class="fa-solid fa-globe"></i>
+       <span>{{ i18n "nav_lang_title" }}</span>
     </div>
 
-    <!-- Language Pills -->
-    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+    <!-- Language List (Grid Design) -->
+    <div class="lang-mobile-list">
       {{ $currentLang := .Site.Language.Lang }}
       {{ $currentUrl := .Page.RelPermalink }}
       
       {{ range .Site.Languages }}
         {{ $active := eq .Lang $currentLang }}
         
-        <!-- Calculate Target URL: Replace current /lang/ with target /lang/ -->
         {{ $targetUrl := "" }}
         {{ $currentPrefix := printf "/%s/" $currentLang }}
         {{ $targetPrefix := printf "/%s/" .Lang }}
@@ -31,13 +29,11 @@
         {{ if in $currentUrl $currentPrefix }}
             {{ $targetUrl = replace $currentUrl $currentPrefix $targetPrefix }}
         {{ else }}
-            <!-- Fallback if prefix not found (shouldn't happen with subdir: true) -->
             {{ $targetUrl = $targetPrefix }} 
         {{ end }}
 
-        <a href="{{ $targetUrl }}" class="lang-pill {{ if $active }}active{{ end }}" 
-           style="{{ if $active }}background: var(--text-dark); color: white;{{ else }}background: #f3f4f6; color: #333;{{ end }} padding: 6px 14px; border-radius: 99px; font-size: 0.9rem; text-decoration: none; transition: background 0.2s;">
-           {{ .LanguageName }}
+        <a href="{{ $targetUrl }}" class="lang-mobile-item {{ if $active }}active{{ end }}" data-lang="{{ .Lang }}">
+           <span class="lang-name">{{ .LanguageName }}</span>
         </a>
       {{ end }}
     </div>
