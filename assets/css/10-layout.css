@@ -696,7 +696,8 @@ footer {
     justify-content: space-between;
     gap: 1rem;
     position: relative;
-    z-index: 50;
+    z-index: 110;
+    /* Above mobile-menu (90) and its bridge (100) */
   }
 
   /* Ensure Logo block behaves normally on Tablet */
