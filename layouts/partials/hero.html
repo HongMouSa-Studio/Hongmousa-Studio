@@ -14,11 +14,156 @@
     </div>
 
     <!-- Background Image Area -->
-    <div class="hero-img">
-      <img
-        src="https://images.unsplash.com/photo-1547891654-e66ed7ebb968?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
-        alt="Hero Art"
-      />
+    <!-- Hero Product Slider -->
+    <div class="hero-slider-wrapper">
+      {{ $featured := where .Site.RegularPages "Params.featured" true }}
+      <div class="hero-slider" id="heroSlider">
+        {{ range $index, $p := $featured }}
+        <a href="{{ .RelPermalink }}" class="hero-slide {{ if eq $index 0 }}active{{ end }}">
+          <div class="hero-slide-img-box">
+            <img src="{{ .Params.image }}" alt="{{ .Title }}" loading="lazy" />
+          </div>
+          <div class="hero-slide-info">
+            <span class="slide-tag">{{ i18n (printf "filter_%s" .Params.product_type) | default .Params.product_type }}</span>
+            <h3 class="slide-title">{{ .Title }}</h3>
+          </div>
+        </a>
+        {{ end }}
+      </div>
+    
+      <!-- Navigation Buttons -->
+      <button class="hero-nav prev" aria-label="Previous Slide">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </button>
+      <button class="hero-nav next" aria-label="Next Slide">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </button>
     </div>
   </div>
 </section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const slides = document.querySelectorAll('.hero-slide');
+    const prevBtn = document.querySelector('.hero-nav.prev');
+    const nextBtn = document.querySelector('.hero-nav.next');
+    const sliderWrapper = document.querySelector('.hero-slider-wrapper');
+    
+    if(slides.length < 2) {
+      if(prevBtn) prevBtn.style.display = 'none';
+      if(nextBtn) nextBtn.style.display = 'none';
+      return;
+    }
+
+    let currentIndex = 0;
+    const intervalTime = 4000;
+    let slideInterval;
+    let isHovering = false;
+
+    const showSlide = (index) => {
+      // Remove active class from current
+      slides[currentIndex].classList.remove('active');
+      
+      // Update index with wrap-around
+      if (index >= slides.length) {
+        currentIndex = 0;
+      } else if (index < 0) {
+        currentIndex = slides.length - 1;
+      } else {
+        currentIndex = index;
+      }
+
+      // Add active class to new
+      slides[currentIndex].classList.add('active');
+    };
+
+    const nextSlide = () => showSlide(currentIndex + 1);
+    const prevSlide = () => showSlide(currentIndex - 1);
+
+    const startAutoPlay = () => {
+      clearInterval(slideInterval);
+      if (!isHovering) {
+        slideInterval = setInterval(nextSlide, intervalTime);
+      }
+    };
+
+    const stopAutoPlay = () => {
+      clearInterval(slideInterval);
+    };
+
+    // Event Listeners
+    if (nextBtn) {
+      nextBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        nextSlide();
+        startAutoPlay(); // Restart timer (unless hovering, handled by startAutoPlay logic check?) 
+        // Actually startAutoPlay checks !isHovering. 
+        // If we click while hovering, it won't start. That's fine.
+        // If we click via keyboard (not hovering), it will start. Perfect.
+      });
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        prevSlide();
+        startAutoPlay();
+      });
+    }
+
+    // Precise Hover Control for Navigation
+    let activeZoneHoverCount = 0;
+    let hideTimeout;
+
+    const updateNavVisibility = () => {
+      if (activeZoneHoverCount > 0) {
+        clearTimeout(hideTimeout);
+        sliderWrapper.classList.add('nav-visible');
+      } else {
+        // Small delay to prevent flickering when moving between elements
+        hideTimeout = setTimeout(() => {
+          if (activeZoneHoverCount === 0) {
+            sliderWrapper.classList.remove('nav-visible');
+          }
+        }, 50);
+      }
+    };
+
+    // Add listeners to active zones (Image Boxes + Buttons)
+    const activeZones = [
+      ...document.querySelectorAll('.hero-slide-img-box'),
+      prevBtn,
+      nextBtn
+    ].filter(el => el); // Filter out nulls if buttons missing
+
+    activeZones.forEach(zone => {
+      zone.addEventListener('mouseenter', () => {
+        activeZoneHoverCount++;
+        updateNavVisibility();
+      });
+      zone.addEventListener('mouseleave', () => {
+        activeZoneHoverCount--;
+        updateNavVisibility();
+      });
+    });
+
+    // Pause Auto-play Logic (Keep on wrapper for general usability mostly, or match zones?)
+    // User asked for specific nav visibility, but auto-play pause is usually expected on the whole area?
+    // Let's keep auto-play pause on the whole wrapper as it's safer for UX (reading text).
+    
+    if (sliderWrapper) {
+      sliderWrapper.addEventListener('mouseenter', () => {
+        isHovering = true;
+        stopAutoPlay();
+      });
+      
+      sliderWrapper.addEventListener('mouseleave', () => {
+        isHovering = false;
+        startAutoPlay();
+      });
+    }
+
+    // Initialize
+    startAutoPlay();
+  });
+</script>

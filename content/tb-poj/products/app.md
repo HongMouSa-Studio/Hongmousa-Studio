@@ -1,6 +1,7 @@
 ---
 title: "Tâi-gí Phing-im Lo̍h-im-ki"
 product_type: "app"
+featured: true
 draft: true
 weight: 10
 price: 0

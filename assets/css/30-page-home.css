@@ -1,0 +1,212 @@
+/* Hero (Split Screen) */
+.hero {
+  max-width: var(--page-max);
+  margin: 0 auto;
+  min-height: calc(100vh - var(--header-height));
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.hero-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  width: 100%;
+  align-items: center;
+}
+
+/* Text Side */
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 500px;
+}
+
+/* Slider Side (Right) */
+.hero-slider-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4/3;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+  background: white;
+  group: hero-slider;
+  /* For hover detection if needed, but CSS doesn't support named groups like this */
+}
+
+/* Instead of group, we use usage of :hover on wrapper to show buttons if desired, 
+   but for better UX on mobile we might just leave them visible or only visible on hover for desktop. */
+
+.hero-slider {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+/* Individual Slide */
+.hero-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  background: white;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  z-index: 1;
+}
+
+.hero-slide.active {
+  opacity: 1;
+  visibility: visible;
+  z-index: 2;
+}
+
+/* Slide Image */
+.hero-slide-img-box {
+  width: 100%;
+  height: 75%;
+  overflow: hidden;
+}
+
+.hero-slide-img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 6s ease;
+}
+
+.hero-slide.active .hero-slide-img-box img {
+  transform: scale(1.05);
+}
+
+/* Slide Info (Bottom) */
+.hero-slide-info {
+  height: 25%;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: white;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  position: relative;
+  z-index: 3;
+  /* Ensure text is above potentially overlapping elements */
+}
+
+.slide-tag {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--accent-green);
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.slide-title {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 0;
+  transition: color 0.2s ease;
+}
+
+/* Interactive Hover */
+.slide-title:hover {
+  color: var(--accent-green);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+
+/* Navigation Buttons */
+.hero-nav {
+  position: absolute;
+  top: 37.5%;
+  /* Center vertically relative to the image part (75% height) */
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  color: var(--text-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s ease;
+  opacity: 0;
+  /* Hidden by default */
+}
+
+/* Show when JS adds nav-visible class (hovering img or buttons) */
+.hero-slider-wrapper.nav-visible .hero-nav {
+  opacity: 1;
+}
+
+.hero-nav:hover {
+  background: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.hero-nav.prev {
+  left: 1rem;
+}
+
+.hero-nav.next {
+  right: 1rem;
+}
+
+/* On touch devices, always show navigation or rely on swipe (not implemented yet), 
+   let's make them always visible on touch/mobile if we can distinguish, 
+   or just always visible on smaller screens? 
+   Actually, for simplicity and usability, let's keep them visible on hover for desktop 
+   and maybe always visible on mobile? Or just hover is fine for now as mobile users tap.
+   Let's make them always visible for now to be safe, or just opacity 1.
+   Wait, the user wants "Previous/Next buttons", so maybe always visible is better for discoverability.
+*/
+
+.hero-nav {
+  opacity: 0;
+  /* Let's try hover first as it's cleaner */
+}
+
+@media (hover: none) {
+  .hero-nav {
+    opacity: 1;
+    /* Always visible on touch devices */
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    text-align: center;
+  }
+
+  .hero-text {
+    align-items: center;
+    margin: 0 auto;
+  }
+
+  /* Make sure buttons are visible on mobile */
+  .hero-nav {
+    opacity: 1;
+    width: 36px;
+    height: 36px;
+  }
+}

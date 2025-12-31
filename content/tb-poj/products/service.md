@@ -1,6 +1,7 @@
 ---
 title: "Studio Design Siong-thàm"
 product_type: "service"
+featured: true
 draft: true
 weight: 20
 price: 0
