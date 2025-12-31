@@ -15,13 +15,14 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2.5rem;
-  position: relative;
+  /* Side-by-side on desktop */
+  margin: 0 auto 2.5rem;
   max-width: 1200px;
-  margin: 0 auto 2rem;
-  /* Reduced from 3rem */
-  padding: 0 1rem;
-  gap: 1.5rem;
+  padding: 0 1.5rem 0 1.25rem;
+  /* Room for the accent line */
+  border-left: 4px solid var(--accent-green);
+  /* Global shared accent line */
+  position: relative;
 }
 
 .section-title,
@@ -34,32 +35,10 @@ button {
   letter-spacing: 0.05em;
   color: var(--text-dark);
   margin: 0;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
   line-height: 1.2;
 }
 
-.section-title::before,
-.section-header h1::before,
-.section-header h2::before,
-.section-header h3::before {
-  content: "";
-  display: inline-block;
-  width: 5px;
-  height: 1.25em;
-  background: linear-gradient(180deg, var(--accent-green) 0%, #22c55e 100%);
-  border-radius: 10px;
-  box-shadow: 2px 0 10px rgba(34, 197, 94, 0.25);
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.section-header:hover h1::before,
-.section-header:hover h2::before,
-.section-header:hover h3::before,
-.section-header:hover .section-title::before {
-  box-shadow: 3px 0 15px rgba(34, 197, 94, 0.4);
-}
+/* Legacy accent line removed in favor of global .section-header border */
 
 .section-sub {
   color: #9ca3af;
@@ -68,9 +47,11 @@ button {
   letter-spacing: 0.12em;
   font-weight: 500;
   text-transform: uppercase;
-  white-space: nowrap;
+  white-space: normal;
+  /* Allow wrapping */
   transition: all 0.3s ease;
   font-family: var(--font-ui);
+  line-height: 1.6;
 }
 
 .section-header:hover .section-sub {
@@ -83,7 +64,7 @@ button {
   .section-header {
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.75rem;
+    gap: 0.35rem;
     margin-bottom: 2rem;
   }
 
@@ -97,12 +78,6 @@ button {
 
   .section-sub {
     transform: none !important;
-    padding-left: 1rem;
-    /* Indent slightly under title */
-    border-left: 2px solid #eee;
-    /* Light vertical accent for sub-link */
-    width: 100%;
-    box-sizing: border-box;
   }
 }
 
