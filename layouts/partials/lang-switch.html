@@ -44,38 +44,61 @@ document.addEventListener('DOMContentLoaded', function () {
   const dropdown = group.querySelector('.lang-dropdown');
   let leaveTimer;
 
-  const showDropdown = () => {
+  const openDropdown = () => {
     clearTimeout(leaveTimer);
     dropdown.classList.add("show");
     button.setAttribute('aria-expanded', 'true');
+    button.classList.add('active');
   };
 
-  const hideDropdown = () => {
-    leaveTimer = setTimeout(() => {
-      dropdown.classList.remove("show");
-      button.setAttribute('aria-expanded', 'false');
-    }, 300); // 300ms grace period
+  const closeDropdown = () => {
+    dropdown.classList.remove("show");
+    button.setAttribute('aria-expanded', 'false');
+    button.classList.remove('active');
   };
 
-  // Mouse interactions
-  group.addEventListener('mouseenter', showDropdown);
-  group.addEventListener('mouseleave', hideDropdown);
-  
-  // Also keep open if hovering the dropdown itself (redundant but safe)
-  dropdown.addEventListener('mouseenter', showDropdown);
-  dropdown.addEventListener('mouseleave', hideDropdown);
+  const toggleDropdown = (e) => {
+    if (e) e.stopPropagation();
+    const isOpen = dropdown.classList.contains('show');
+    if (isOpen) {
+      closeDropdown();
+    } else {
+      openDropdown();
+    }
+  };
+
+  // Hover Interactions (Desktop)
+  group.addEventListener('mouseenter', openDropdown);
+  group.addEventListener('mouseleave', () => {
+    leaveTimer = setTimeout(closeDropdown, 300); // 300ms grace period
+  });
+
+  // Click Interactions (Explicit Toggle / Mobile)
+  button.addEventListener('click', toggleDropdown);
+
+  // Close when clicking outside
+  document.addEventListener('click', function (e) {
+    if (!group.contains(e.target)) {
+      closeDropdown();
+    }
+  });
 
   // Keyboard accessibility
   button.addEventListener('keydown', function (e) {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
-      const isOpen = dropdown.classList.contains('show');
-      if (isOpen) {
-        dropdown.classList.remove('show');
-      } else {
-        dropdown.classList.add('show');
-      }
+      toggleDropdown(e);
+    } else if (e.key === 'Escape') {
+      closeDropdown();
     }
+  });
+
+  // Close after selecting a language
+  const options = dropdown.querySelectorAll('.lang-option');
+  options.forEach(opt => {
+    opt.addEventListener('click', () => {
+      closeDropdown();
+    });
   });
 });
 </script>

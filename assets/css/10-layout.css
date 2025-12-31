@@ -206,49 +206,43 @@ main {
 
 
 
-/* lang dropdown (Unified Style with Member Menu) */
+/* lang dropdown (Hamburger-Style Card) */
 .lang-dropdown {
   position: absolute;
   right: 0;
   top: 100%;
-  /* Align below button */
-  margin-top: 35px;
-  /* Tighter gap for better hover stability */
+  margin-top: 2.75rem;
+  /* User preferred gap */
   min-width: 180px;
-  /* Minimum width */
   width: max-content;
-  /* Auto expand for long languages */
   background: white;
-  border-radius: 16px;
-  /* Softer Radius */
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
-  border: 1px solid rgba(0, 0, 0, 0.08);
+
+  /* Floating Card Style (Hamburger Parity) */
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+
   overflow: hidden;
   opacity: 0;
   visibility: hidden;
   transform: translateY(10px);
-  /* Slide up slightly instead of large drop */
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   z-index: 100;
 }
 
-/* hover bridge */
-/* Robust hover bridge (Extra Tall) */
+
+
+/* hover bridge - Ensures seamless transition between button and dropdown */
 .lang-dropdown::before {
   content: "";
   position: absolute;
   top: -50px;
-  /* Extends way up to overlap button securely */
-  left: -40px;
+  /* Covers the 2.75rem (~44px) gap */
+  left: -20px;
   right: -20px;
   height: 60px;
-  /* Tall enough to cover any gap */
-  pointer-events: auto;
-  /* Ensure mouse events are captured */
-  z-index: 999;
-  /* Must be ON TOP to catch mouse */
   background: transparent;
-  /* Ensure hit testing works */
+  z-index: -1;
 }
 
 .lang-dropdown.show {
@@ -260,14 +254,17 @@ main {
 .lang-dropdown a {
   display: block;
   padding: 12px 16px;
-  /* Unified Padding */
   color: #333;
-  /* Darker Text */
   font-weight: 500;
   text-decoration: none;
   transition: background 0.2s;
   white-space: nowrap;
-  /* Prevent wrapping */
+  border-bottom: 1px solid #f0f0f0;
+  /* Divider like Hamburger */
+}
+
+.lang-dropdown a:last-child {
+  border-bottom: none;
 }
 
 .lang-dropdown a:hover {
@@ -451,15 +448,15 @@ main {
   letter-spacing: 0.01em;
 }
 
-.lang-switcher-inline .chevron-icon {
-  font-size: 0.7rem;
-  opacity: 0.4;
-  transition: transform 0.3s ease;
-}
-
-.lang-switcher-inline:hover .chevron-icon {
+.lang-button.active .chevron-icon {
   transform: rotate(180deg);
   opacity: 0.7;
+}
+
+.lang-button .chevron-icon {
+  transform: rotate(0deg);
+  opacity: 0.4;
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 .member-area {
@@ -737,7 +734,19 @@ footer {
   }
 
   .lang-dropdown {
-    margin-top: 30px;
+    margin-top: 2.75rem;
+    /* Consistent 2.75rem for tablet as well */
+    min-width: 220px;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  .lang-dropdown a {
+    padding: 16px 20px;
+    /* Larger touch targets */
+    font-size: 1.1rem;
+    /* More readable on mobile */
   }
 
   /* Basic Header Layout for Tablet+Mobile */
@@ -765,28 +774,28 @@ footer {
     height: 65px;
   }
 
-  /* Mobile Menu Styles (Hybrid: Card on Tablet, Full on Phone) */
+  /* Mobile Menu Styles (Integrated Pull-Down) */
   .menu-mobile {
     display: block;
-    /* Controlled by opacity/visibility for animation */
     background: #fff;
-
     position: absolute;
     top: 100%;
-    margin-top: 0px;
-    /* Compensate for header padding to match Member Menu gap */
+    margin-top: 0.8rem;
+    /* Match header padding to sit flush with bottom border */
 
-    /* Tablet Default: Floating Card aligned Left (under Hamburger) */
+    /* Tablet Default: Floating Card aligned Left */
     left: 1.5rem;
-    /* Match header padding */
     right: auto;
-    /* Unset right alignment */
     width: 300px;
-    border-radius: 12px;
+
+    /* Flush Integration: Rounded bottom, flat top */
+    border-radius: 0 0 12px 12px;
+    border-top: none;
 
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-    /* Slightly stronger shadow */
     border: 1px solid rgba(0, 0, 0, 0.05);
+    border-top: none;
+    /* Integration */
 
     opacity: 0;
     visibility: hidden;
@@ -841,6 +850,24 @@ footer {
     Specific overrides for small screens
 ---------------------------*/
 @media (max-width: 768px) {
+
+  .lang-dropdown {
+    top: 0;
+    margin-top: 55px;
+    /* User requested 55px gap for mobile */
+    width: 250px;
+    /* Specific width for mobile */
+    max-width: 90vw;
+    /* Prevent overflow on very small devices */
+    left: auto;
+    right: 0;
+    /* Anchor to right to prevent overflow */
+    border-radius: 12px;
+    /* All corners rounded for card look */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
   .site-header {
     position: fixed;
     top: 0;
