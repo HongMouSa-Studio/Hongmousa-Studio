@@ -840,18 +840,20 @@ footer {
     z-index: 10;
   }
 
-  /* Reset Mobile Menu to Full Width for Phone */
-  /* Restored to inherit Tablet Card Style (Stick Left) */
-  .header-inner .menu-mobile {
-    /* Explicitly force Stick Left Card Style */
-    width: 300px;
-    left: 1.5rem;
-    right: auto;
+  /* Simplified Full Width Mobile Menu (Sibling to header-inner) */
+  .menu-mobile {
+    width: 100% !important;
+    left: 0 !important;
+    right: 0 !important;
+    margin-left: 0 !important;
+    transform: none !important;
+    /* Reset any centering transforms */
 
-    margin-top: 6px;
-    /* Ensure gap consistency */
-    border-radius: 12px;
-    border-top: 1px solid #f0f0f0;
+    margin-top: 0;
+    border-radius: 0 0 12px 12px;
+    border-top: none;
+    /* Remove border to prevent 'light leakage' look */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   }
 
   /* Reset vertical divider for mobile */
