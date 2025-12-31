@@ -1392,7 +1392,14 @@ body.is-auth .auth-only {
   color: var(--accent-green);
   margin-bottom: 0.8rem;
   white-space: nowrap;
-  /* Prevent line breaks */
+  /* Keep single line on desktop */
+}
+
+@media (max-width: 600px) {
+  .product-price {
+    white-space: normal;
+    /* Allow wrap on small screens */
+  }
 }
 
 .product-price-large {
@@ -1401,7 +1408,12 @@ body.is-auth .auth-only {
   color: var(--accent-green);
   margin-bottom: 2rem;
   white-space: nowrap;
-  /* Prevent line breaks */
+}
+
+@media (max-width: 600px) {
+  .product-price-large {
+    white-space: normal;
+  }
 }
 
 .product-short-desc {

@@ -983,8 +983,15 @@ footer {
   }
 
   /* Footer */
+  footer {
+    padding: 2.5rem 1.25rem;
+    /* Tighter padding for mobile */
+  }
+
   .footer-grid {
     grid-template-columns: 1fr;
+    gap: 1.5rem;
+    /* Reduced gap */
   }
 
   /* Utilities */
