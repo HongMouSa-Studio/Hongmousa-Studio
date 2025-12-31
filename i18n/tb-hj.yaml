@@ -96,3 +96,13 @@ account_error_cvs_picker: "無法度打開門市選擇器，請直接輸入門�
 member_login: "登入"
 member_register: "註冊"
 member_my_account: "會員中心"
+
+# Multi-Product Expansion
+product_btn_book: "預約服務"
+product_badge_app_store: "App Store"
+product_badge_google_play: "Google Play"
+product_price_free: "免費"
+filter_all: "全部產品"
+filter_physical: "實體產品"
+filter_app: "App"
+filter_service: "服務"

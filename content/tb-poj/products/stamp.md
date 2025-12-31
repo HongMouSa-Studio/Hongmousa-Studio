@@ -1,5 +1,6 @@
 ---
 title: "Formosa言語羅馬字名姓個人印á"
+product_type: "physical"
 weight: 1
 id: "stamp-roman-personalized"
 price: 228

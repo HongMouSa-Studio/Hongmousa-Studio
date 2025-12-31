@@ -459,6 +459,41 @@ body.is-auth .auth-only {
   padding-bottom: 4rem;
 }
 
+/* Filter Tabs */
+.product-filter-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+
+.filter-tab {
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 0.6rem 1.5rem;
+  border-radius: 9999px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #6b7280;
+  /* Gray text */
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: var(--font-ui);
+}
+
+.filter-tab:hover {
+  background: #f9fafb;
+  color: var(--text-dark);
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+.filter-tab.active {
+  background: var(--text-dark);
+  color: white;
+  border-color: var(--text-dark);
+}
+
 /* Desktop: 4 Columns */
 /* Match Blog Grid RWD (3-2-1) */
 .product-grid {
@@ -551,35 +586,49 @@ body.is-auth .auth-only {
   /* More pronounced zoom */
 }
 
-.add-to-cart-btn {
-  position: absolute;
-  bottom: 0.75rem;
-  left: 0.75rem;
-  right: 0.75rem;
+.add-to-cart-btn,
+.app-badge-btn,
+.service-action-btn {
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   color: var(--text-dark);
   padding: 0.65rem 1rem;
   border-radius: 9999px;
-  /* Modern pill shape */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  opacity: 0;
-  transform: translateY(1.5rem);
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   font-weight: 600;
   font-size: 0.85rem;
   border: 1px solid rgba(0, 0, 0, 0.05);
   cursor: pointer;
   z-index: 2;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
-.product-card:hover .add-to-cart-btn {
+.product-actions-overlay {
+  position: absolute;
+  bottom: 0.75rem;
+  left: 0.75rem;
+  right: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  opacity: 0;
+  transform: translateY(1.5rem);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.product-card:hover .product-actions-overlay {
   opacity: 1;
   transform: translateY(0);
 }
 
-.add-to-cart-btn:hover {
+.add-to-cart-btn:hover,
+.app-badge-btn:hover,
+.service-action-btn:hover {
   background-color: var(--accent-green);
   color: white;
 }

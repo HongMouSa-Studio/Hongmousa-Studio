@@ -96,3 +96,13 @@ account_error_cvs_picker: "Bô hoat-tō͘ phah-khui bûn-chhī soán-te̍k-khì,
 member_login: "Teng-ji̍p"
 member_register: "Chù-chheh"
 member_my_account: "Hōe-oân Tiong-sim"
+
+# Multi-Product Expansion
+product_btn_book: "Ī-iok ho̍k-bū"
+product_badge_app_store: "App Store"
+product_badge_google_play: "Google Play"
+product_price_free: "Bián-hùi"
+filter_all: "Choân-pō͘ sán-phín"
+filter_physical: "Si̍t-thé sán-phín"
+filter_app: "App"
+filter_service: "Ho̍k-bū"

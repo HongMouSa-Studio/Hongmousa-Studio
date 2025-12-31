@@ -2,7 +2,7 @@
 title: "大家好"
 date: 2025-12-10
 translationKey: "hello-post"
-draft: ture
+draft: true
 ---
 
 # 芳芼莎工作室 - 網站文案 (Copywriting Drafts)

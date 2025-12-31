@@ -2,7 +2,7 @@
 title: "Hello everyone"
 date: 2025-12-10
 translationKey: "hello-post"
-draft: ture
+draft: true
 ---
 
 # HongMouSa Studio - Bāng-chām Bûn-àn (Copywriting Drafts)

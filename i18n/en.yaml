@@ -96,3 +96,13 @@ account_error_cvs_picker: "Unable to open store selector. Please enter store inf
 member_login: "Login"
 member_register: "Register"
 member_my_account: "My Account"
+
+# Multi-Product Expansion
+product_btn_book: "Book Now"
+product_badge_app_store: "App Store"
+product_badge_google_play: "Google Play"
+product_price_free: "Free"
+filter_all: "All"
+filter_physical: "Physical"
+filter_app: "Apps"
+filter_service: "Services"
