@@ -1,17 +1,23 @@
 /* Hero (Split Screen) */
+/* Hero (Split Screen) */
 .hero {
   max-width: var(--page-max);
   margin: 0 auto;
-  min-height: calc(100vh - var(--header-height));
+  /* Relaxed min-height so padding defines the spacing ('keep distance') */
+  min-height: clamp(300px, 40vh, 600px);
   display: flex;
   align-items: center;
-  padding: 0 1rem;
+  /* Padding dictates the 'distance' with content more directly */
+  padding: clamp(2rem, 5vh, 5rem) 5%;
+  /* Increased horizontal padding */
 }
 
 .hero-content {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
+  /* Adjusted ratio: Text (0.8fr) vs Slider (1.2fr) to make slider larger */
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 4rem;
+  /* Increased horizontal gap for breathing room */
   width: 100%;
   align-items: center;
 }
@@ -20,8 +26,62 @@
 .hero-text {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  max-width: 500px;
+  gap: 1rem;
+  max-width: 540px;
+  /* Slightly wider text area */
+}
+
+.hero-text span:first-child {
+  font-size: clamp(1.125rem, 2vw, 1.25rem);
+  /* Increased Green Text Size further */
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent-green);
+  font-weight: 700;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.hero-text h1 {
+  /* Reduced size and enforced no-wrap as requested */
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  line-height: 1.4;
+  /* Increased line-height */
+  color: var(--text-dark);
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  /* Prevent wrapping */
+  width: 100%;
+}
+
+.hero-text p {
+  font-size: clamp(1rem, 1.2vw, 1.125rem);
+  /* Responsive body text */
+  line-height: 1.6;
+  color: var(--text-gray, #666);
+  max-width: 48ch;
+  margin-bottom: 1.5rem;
+}
+
+.hero-shop-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.875rem 2rem;
+  background-color: var(--text-dark);
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 50px;
+  align-self: flex-start;
+  transition: all 0.2s ease;
+}
+
+.hero-shop-btn:hover {
+  background-color: var(--accent-green);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 /* Slider Side (Right) */
@@ -33,8 +93,8 @@
   overflow: hidden;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
   background: white;
-  group: hero-slider;
-  /* For hover detection if needed, but CSS doesn't support named groups like this */
+  /* Cap height to viewport to ensure responsiveness on shorter screens */
+  max-height: 65vh;
 }
 
 /* Instead of group, we use usage of :hover on wrapper to show buttons if desired, 
@@ -103,7 +163,8 @@
 }
 
 .slide-tag {
-  font-size: 0.75rem;
+  font-size: 1rem;
+  /* Increased from 0.75rem */
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--accent-green);
@@ -191,22 +252,71 @@
 }
 
 /* Responsive */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .hero-content {
-    grid-template-columns: 1fr;
-    gap: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
     text-align: center;
+    min-height: auto;
+  }
+
+  /* Slider on TOP (REVERTED: Now standard flow, Text First) */
+  .hero-slider-wrapper {
+    order: 2;
+    /* Explicitly place slider AFTER text */
+    width: 100%;
+    aspect-ratio: 4/3;
   }
 
   .hero-text {
+    order: 1;
+    /* Explicitly place text FIRST */
     align-items: center;
     margin: 0 auto;
+    max-width: 100%;
+  }
+
+  /* Typography Scaling for Tablet/Mobile */
+  .hero-text h1 {
+    font-size: clamp(2.75rem, 6vw, 3.5rem);
+    /* Larger for tablet impact */
+  }
+
+
+  .hero-text p {
+    font-size: 1.25rem;
+    /* Larger body text */
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 90%;
+  }
+
+  .hero-shop-btn {
+    align-self: center;
+    font-size: 1rem;
+    padding: 1rem 2.5rem;
+  }
+
+  /* Slider Info Text Scaling */
+  .slide-title {
+    font-size: 1.5rem;
+    /* Larger than desktop 1.25rem */
+  }
+
+  /* .slide-tag font size inherits global 1rem now */
+
+  .hero {
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+    min-height: auto;
   }
 
   /* Make sure buttons are visible on mobile */
   .hero-nav {
     opacity: 1;
-    width: 36px;
-    height: 36px;
+    width: 44px;
+    /* Larger touch target */
+    height: 44px;
   }
 }

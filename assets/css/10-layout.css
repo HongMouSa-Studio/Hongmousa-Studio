@@ -510,7 +510,6 @@ main {
   display: grid;
   grid-template-columns: 1fr 1fr;
   /* Desktop default: 2 columns */
-  min-height: 500px;
 }
 
 /* Chhù-bī ê pōe-kéng bâng-bōng (Blobs) */
