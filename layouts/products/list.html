@@ -1,11 +1,12 @@
-<section id="products" class="product-section">
-  <div class="section-header">
-    <h2 class="section-title">{{ i18n "product_section_title" }}</h2>
+{{ define "main" }}
+<section class="product-page-list">
+  <header class="section-header">
+    <h1 class="section-title">{{ .Title }}</h1>
     <span class="section-sub">{{ i18n "product_section_sub" }}</span>
-  </div>
+  </header>
 
   <div class="product-grid">
-    {{ range (where .Site.RegularPages "Section" "products").ByWeight }}
+    {{ range .Pages.ByWeight }}
     <div class="product-card">
       <div class="product-image-wrapper">
         <img
@@ -36,7 +37,9 @@
       </div>
       <div class="product-info">
         <h3 class="font-serif">{{ .Title }}</h3>
-        <p>{{ .Params.category }} / {{ index .Params.tags 0 }}</p>
+        {{ if .Params.category }}
+        <p>{{ .Params.category }}{{ if .Params.tags }} / {{ index .Params.tags 0 }}{{ end }}</p>
+        {{ end }}
         <div class="product-price">
           {{ printf (i18n "product_price_format") .Params.price }}
         </div>
@@ -49,3 +52,4 @@
     {{ end }}
   </div>
 </section>
+{{ end }}

@@ -16,10 +16,9 @@ button {
   justify-content: space-between;
   align-items: center;
   /* Side-by-side on desktop */
-  margin: 0 auto 2.5rem;
-  max-width: 1200px;
-  padding: 0 1.5rem 0 1.25rem;
-  /* Room for the accent line */
+  margin-bottom: 2.5rem;
+  padding-left: 1rem;
+  /* Space from the accent line */
   border-left: 4px solid var(--accent-green);
   /* Global shared accent line */
   position: relative;
@@ -451,9 +450,13 @@ body.is-auth .auth-only {
 .product-section {
   padding: 3rem 0;
   /* Reduced from 4rem */
-  /* Container handles horizontal padding */
-  max-width: 1200px;
-  margin: 0 auto;
+  /* Parent main handles max-width and horizontal padding */
+}
+
+.product-page-list,
+.blog-page-list {
+  width: 100%;
+  padding-bottom: 4rem;
 }
 
 /* Desktop: 4 Columns */
@@ -463,8 +466,6 @@ body.is-auth .auth-only {
   grid-template-columns: repeat(3, 1fr);
   /* Same as blog-grid */
   gap: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
   width: 100%;
 }
 
@@ -860,18 +861,19 @@ body.is-auth .auth-only {
 .blog-card {
   border-radius: 20px;
   position: relative;
-  background: rgba(255, 255, 255, 0.6);
+  background: var(--card-bg);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.45);
-  box-shadow: 0 8px 24px rgba(31, 38, 135, 0.08);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   overflow: hidden;
+  height: 100%;
 }
 
 .blog-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(31, 38, 135, 0.12);
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
 }
 
 .blog-card-link {

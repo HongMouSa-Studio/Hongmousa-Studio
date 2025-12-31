@@ -1,18 +1,14 @@
 <section class="home-blog">
-  <div class="container">
-    <div class="section-header">
-      <h2 class="section-title">
-        {{ i18n "blog_section_title" | default "Blog" }} 
-      </h2>
-      <span class="section-sub">Bûn-chiuⁿ kap siāu-kài</span>
-    </div>
+  <div class="section-header">
+    <h2 class="section-title">
+      {{ i18n "blog_section_title" | default "Blog" }} 
+    </h2>
+    <span class="section-sub">Bûn-chiuⁿ kap siāu-kài</span>
+  </div>
 
   <div class="blog-grid">
     {{ range first 3 (where .Site.RegularPages "Section" "blog") }}
       {{ partial "blog-card.html" . }}
     {{ end }}
   </div>
-
-
-</div>
 </section>
