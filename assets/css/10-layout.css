@@ -2,12 +2,17 @@
     Kui ê kiat-kò͘
 ---------------------*/
 
-main {
+main,
+.container {
+  width: 100%;
   max-width: 1200px;
   margin-inline: auto;
-  padding: 0.5rem 1.5rem 1.5rem;
+  padding-inline: 1.5rem;
+}
+
+main {
+  padding-block: 0.5rem 1.5rem;
   /* Reduced top padding from 1.5rem to 0.5rem */
-  width: 100%;
   flex-grow: 1;
 }
 
@@ -479,10 +484,9 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 4rem 0;
-  /* Desktop padding */
+  padding-block: 4rem;
+  /* Standardized vertical padding */
   z-index: 10;
-  padding: 30px;
 }
 
 .hero-text span {
@@ -632,8 +636,8 @@ footer {
 ---------------------------*/
 @media (max-width: 1024px) {
   .container {
-    padding: 0 1.5rem;
-    /* Tablet: 24px padding */
+    padding-inline: 1.5rem;
+    /* Maintain consistent 24px padding on tablets */
   }
 
   .logo-block img {

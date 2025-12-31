@@ -531,16 +531,11 @@ body.is-auth .auth-only {
 -----------------------------------------------------*/
 
 .home-blog {
-  padding: 60px 5%;
+  padding-block: 4rem;
 }
 
 .blog-list {
-  padding: 80px 5%;
-}
-
-.home-blog-inner {
-  max-width: 1200px;
-  margin: 0 auto;
+  padding-block: 4rem;
 }
 
 /* Home blog grid */
