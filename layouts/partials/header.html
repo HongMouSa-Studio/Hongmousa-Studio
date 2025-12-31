@@ -125,52 +125,20 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   };
 
-  const hideMenu = () => {
-    menuTimer = setTimeout(() => {
-      menu.classList.remove('show');
-      btn.setAttribute('aria-expanded', 'false');
-      // Reset Icon
-      if (icon) {
-        icon.classList.remove('fa-xmark');
-        icon.classList.add('fa-bars');
-        icon.style.transform = 'rotate(0deg)';
-      }
-    }, 300); // 300ms delay
-  };
 
   // Click Toggle
   btn.addEventListener('click', function (e) {
-    e.stopPropagation(); // prevent document click from closing immediately
+    e.stopPropagation();
     const isOpen = menu.classList.contains('show');
     if (isOpen) {
-      // Force hide immediately on click (no delay)
-      clearTimeout(menuTimer);
-      menu.classList.remove('show');
-      btn.setAttribute('aria-expanded', 'false');
-      if (icon) {
-        icon.classList.remove('fa-xmark');
-        icon.classList.add('fa-bars');
-        icon.style.transform = 'rotate(0deg)';
-      }
+      hideMenu(true); // Force immediate hide
     } else {
       showMenu();
     }
   });
 
-  // Hover Events (Only for mouse users to prevent touch conflict)
-  if (window.matchMedia('(hover: hover)').matches) {
-    btn.addEventListener('mouseenter', showMenu);
-    btn.addEventListener('mouseleave', hideMenu);
-    menu.addEventListener('mouseenter', showMenu);
-    menu.addEventListener('mouseleave', hideMenu);
-  }
-
-  // Auto-close when clicking a link inside the hamburger menu
-  const menuLinks = menu.querySelectorAll('a');
-  menuLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      // Force hide immediately
-      clearTimeout(menuTimer);
+  const hideMenu = (immediate = false) => {
+    const doHide = () => {
       menu.classList.remove('show');
       btn.setAttribute('aria-expanded', 'false');
       if (icon) {
@@ -178,7 +146,27 @@ document.addEventListener('DOMContentLoaded', function () {
         icon.classList.add('fa-bars');
         icon.style.transform = 'rotate(0deg)';
       }
-    });
+    };
+
+    if (immediate) {
+      clearTimeout(menuTimer);
+      doHide();
+    } else {
+      menuTimer = setTimeout(doHide, 300);
+    }
+  };
+
+  // Hover Events (Desktop only)
+  if (window.matchMedia('(hover: hover)').matches) {
+    btn.addEventListener('mouseenter', showMenu);
+    btn.addEventListener('mouseleave', () => hideMenu(false));
+    menu.addEventListener('mouseenter', showMenu);
+    menu.addEventListener('mouseleave', () => hideMenu(false));
+  }
+
+  // Auto-close on link click
+  menu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => hideMenu(true));
   });
 
   // Close when clicking outside

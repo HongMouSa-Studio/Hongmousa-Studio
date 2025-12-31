@@ -209,15 +209,16 @@
       }
     });
 
-    // 3. Handle ESC key (Robust & Simplified - Window Level)
+    // 3. Handle ESC key (Robust & Simplified)
     window.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' || e.key === 'Esc') {
-        console.log('[Antigravity] ESC pressed. Attempting closure...');
-        try {
-          if (window.Snipcart && window.Snipcart.api && window.Snipcart.api.theme && window.Snipcart.api.theme.cart) {
-            window.Snipcart.api.theme.cart.close();
-          }
-        } catch (err) { console.warn('ESC close error:', err); }
+        const state = Snipcart.store.getState();
+        if (state.cart.display) {
+          console.log('[Antigravity] ESC pressed. Closing Snipcart.');
+          window.Snipcart.api.theme.cart.close();
+          e.preventDefault();
+          e.stopPropagation();
+        }
       }
     }, { capture: true });
 

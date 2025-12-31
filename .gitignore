@@ -49,3 +49,7 @@ yarn-error.log*
 
 # Specific Sensitive Files
 supabase_init.txt
+
+# Agent Data
+.gemini/
+brain/

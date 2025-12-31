@@ -14,8 +14,8 @@
       <div class="account-grid">
         <!-- Row 1: Profile + Address Book (side by side on desktop) -->
         <div class="account-card profile-card">
-          <div class="profile-header" style="display: flex; justify-content: space-between; align-items: center;">
-            <h4 style="margin-bottom: 0; border-bottom: none; padding-bottom: 0;"><i class="fa-solid fa-user"></i> {{ i18n "account_section_profile" }}</h4>
+          <div class="profile-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem;">
+            <h4 class="section-title" style="margin-bottom: 0;">{{ i18n "account_section_profile" }}</h4>
             <div class="point-badge" style="display: flex; align-items: center; gap: 0.5rem; background: linear-gradient(135deg, #f0fdf4, #dcfce7); padding: 0.4rem 1rem; border-radius: 999px; font-size: 0.85rem;">
               <svg width="16" height="16" viewBox="0 0 142 142">
                 <defs>
@@ -72,7 +72,7 @@
 
         <!-- Address Book (same row as Profile on desktop) -->
         <div class="account-card address-book-card" style="display: flex; flex-direction: column;">
-          <h4><i class="fa-solid fa-address-book"></i> {{ i18n "account_section_address_book" }}</h4>
+          <h4 class="section-title" style="margin-bottom: 1.2rem;">{{ i18n "account_section_address_book" }}</h4>
           <div id="address-list" style="flex: 1; overflow-y: auto; max-height: 200px;">
             <div id="address-empty" class="empty-state" style="padding: 1rem 0;">
               <p>{{ i18n "account_no_address" }}</p>
@@ -96,7 +96,7 @@
 
         <!-- Row 3: Orders (full width) -->
         <div class="account-card order-card" style="grid-column: span 2;">
-          <h4><i class="fa-solid fa-box"></i> {{ i18n "account_section_orders" }}</h4>
+          <h4 class="section-title" style="margin-bottom: 1.2rem;">{{ i18n "account_section_orders" }}</h4>
           <div id="order-list" class="empty-state" 
                data-label-id="{{ i18n "account_table_id" }}"
                data-label-date="{{ i18n "account_table_date" }}"
