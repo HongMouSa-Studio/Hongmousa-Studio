@@ -1,9 +1,37 @@
-/* debug/helper */
-.u-hidden,
-.hidden {
-  display: none !important;
+/* Typography Utilities */
+.font-serif {
+  font-family: "Charis", "Noto Serif TC", serif !important;
+  font-feature-settings: "cv01", "ss01";
 }
 
-.debug-outline * {
-  outline: 1px solid red;
+.font-sans {
+  font-family: var(--font-ui) !important;
+}
+
+/* Flex Utilities (Tailwind-like) */
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.flex-grow {
+  flex-grow: 1;
+}
+
+.min-h-screen {
+  min-height: 100vh;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 }
