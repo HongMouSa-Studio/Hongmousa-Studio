@@ -1,28 +1,34 @@
 <div class="group lang-switcher-inline">
   
-  <!-- Button -->
-  <!-- Button (Globe Icon) -->
-  <button class="icon-btn lang-button" aria-label="Language">
+  <!-- Button (Globe Icon + Active Lang Label) -->
+  <button class="icon-btn lang-button" aria-label="Language" data-lang="{{ .Site.Language.Lang }}">
     <i class="fa-solid fa-globe"></i>
+    <span class="active-lang-label">
+      {{ i18n "cur_lang_name" }}
+    </span>
+    <i class="fa-solid fa-chevron-down chevron-icon"></i>
   </button>
 
   <!-- Dropdown -->
   <div class="lang-dropdown">
 
-    {{ $cur := .Page.RelPermalink }}
-    {{ $fromPrefix := printf "/%s/" .Site.Language.Lang }}
+    {{ $curLang := .Site.Language.Lang }}
+    {{ $curPath := .Page.RelPermalink }}
+    {{ $fromPrefix := printf "/%s/" $curLang }}
     
     {{ range .Site.Languages }}
       {{ $targetPrefix := printf "/%s/" .Lang }}
-      {{ if in $cur $fromPrefix }}
-        <a href="{{ replace $cur $fromPrefix $targetPrefix }}"
-           class="lang-option" data-lang="{{ .Lang }}"
+      {{ $isActive := eq .Lang $curLang }}
+      
+      {{ if in $curPath $fromPrefix }}
+        <a href="{{ replace $curPath $fromPrefix $targetPrefix }}"
+           class="lang-option {{ if $isActive }}current-lang{{ end }}" data-lang="{{ .Lang }}"
            onclick="document.cookie='preferred_lang={{ .Lang }};path=/;max-age=31536000';">
           {{ .LanguageName }}
         </a>
       {{ else }}
         <a href="/{{ .Lang }}/"
-           class="lang-option" data-lang="{{ .Lang }}"
+           class="lang-option {{ if $isActive }}current-lang{{ end }}" data-lang="{{ .Lang }}"
            onclick="document.cookie='preferred_lang={{ .Lang }};path=/;max-age=31536000';">
           {{ .LanguageName }}
         </a>

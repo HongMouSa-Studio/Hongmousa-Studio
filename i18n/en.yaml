@@ -3,6 +3,7 @@ nav_products: "All Products"
 nav_blog: "Blog"
 nav_about: "About us"
 nav_contact: "Contact us"
+cur_lang_name: "English"
 
 hero_title_1: "We create"
 hero_title_2: "digital experiences"
