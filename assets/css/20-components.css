@@ -106,9 +106,214 @@ button {
   }
 }
 
-/* ------------------------------
-    Member dropdown (Auth)
---------------------------------*/
+/* ---------------------------------------------------
+    Floating Action Bubble (FAB) 🫧
+-----------------------------------------------------*/
+.fab-container {
+  position: fixed;
+  bottom: 1.25rem;
+  /* Tighter to corner */
+  right: 1.25rem;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.fab-main-btn {
+  order: 2;
+  /* Ensure main button is ALWAYS at the bottom */
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #ffffff !important;
+  /* Changed to white for high visibility */
+  color: var(--text-dark) !important;
+  /* Dark icon */
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+  /* Stronger shadow */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+}
+
+.fab-main-btn:hover {
+  transform: scale(1.1);
+  background: var(--accent-green);
+}
+
+.fab-container.expanded .fab-main-btn {
+  transform: rotate(90deg);
+  background: #f3f4f6 !important;
+  /* Subtle gray when expanded */
+  color: var(--accent-green) !important;
+  /* Change icon color when expanded */
+}
+
+.fab-actions {
+  order: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(30px) scale(0.6);
+  /* Pop up from below */
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  /* Bouncy spring */
+}
+
+.fab-container.expanded .fab-actions {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+.fab-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 50% !important;
+  /* Force circular shape */
+  background: #ffffff !important;
+  /* Force solid white */
+  backdrop-filter: none !important;
+  /* Remove blur to prevent transparency look */
+  -webkit-backdrop-filter: none !important;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  /* Slightly more defined border */
+  color: var(--text-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  font-size: 1.25rem;
+  /* Slightly larger icons */
+}
+
+.fab-btn:hover {
+  background: white;
+  color: var(--accent-green);
+  transform: scale(1.1) translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+}
+
+.fab-item {
+  position: relative;
+}
+
+/* Float-specific Member Menu position & Style Unification */
+.fab-container .member-menu {
+  position: absolute;
+  bottom: 0;
+  right: 72px;
+  /* Adjusted for larger buttons */
+  top: auto;
+  margin-top: 0;
+  width: 220px;
+  background: #ffffff;
+  /* Solid white to match buttons */
+  border-radius: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  transform: translateX(20px);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fab-container .member-menu.show {
+  transform: translateX(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+.fab-container .member-link {
+  padding: 14px 20px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-dark);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease;
+}
+
+.fab-container .member-link:hover {
+  background: rgba(0, 0, 0, 0.03);
+  color: var(--accent-green);
+  padding-left: 24px;
+  /* Subtle slide effect */
+}
+
+.fab-container .member-info {
+  padding: 16px 20px;
+  background: rgba(0, 0, 0, 0.02);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+/* Badge for FAB cart - High Visibility Mode */
+.fab-container .cart-count {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #65a30d;
+  /* Slightly more vibrant green */
+  color: white;
+  font-size: 0.85rem;
+  font-weight: 800;
+  min-width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2.5px solid white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  animation: badgePulse 2s infinite;
+}
+
+@keyframes badgePulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(101, 163, 13, 0.4);
+  }
+
+  70% {
+    transform: scale(1.1);
+    box-shadow: 0 0 0 10px rgba(101, 163, 13, 0);
+  }
+
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(101, 163, 13, 0);
+  }
+}
+
+/* Hide main badge when expanded to avoid clutter */
+.fab-container.expanded .main-cart-badge {
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.5);
+  pointer-events: none;
+}
+
+.main-cart-badge {
+  z-index: 10;
+}
+
+@media (max-width: 768px) {
+  .fab-container {
+    bottom: 1.5rem;
+    right: 1.5rem;
+  }
+}
+
 .member-dropdown {
   position: relative;
 }
@@ -185,18 +390,7 @@ button {
   transform: translateY(0);
 }
 
-.member-toggle {
-  background: none;
-  border: none;
-  padding: 0.4rem;
-  cursor: pointer;
-  font-size: 1.05rem;
-  border-radius: 0.5rem;
-}
-
-.member-toggle:hover {
-  background: rgba(0, 0, 0, 0.05);
-}
+/* Old member-toggle styles removed to avoid conflict with FAB circular buttons */
 
 .member-info {
   padding: 12px 16px;

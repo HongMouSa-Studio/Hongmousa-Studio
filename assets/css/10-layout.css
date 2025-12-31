@@ -875,8 +875,7 @@ footer {
     padding: calc(0.8rem + env(safe-area-inset-top)) 1rem 0.8rem;
     min-height: 70px;
 
-    /* Strict Mobile: Hide Lang & Member */
-    .lang-desktop,
+    /* Mobile: Hide Member (Search moved to FAB, Lang now visible) */
     .member-area {
       display: none !important;
     }

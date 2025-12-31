@@ -1,0 +1,130 @@
+<div class="fab-container">
+  <!-- Sub-actions (Member & Cart) -->
+  <div class="fab-actions">
+    
+    <!-- Search Button -->
+    <button aria-label="Search" class="fab-btn fab-item">
+      <i class="fa-solid fa-magnifying-glass"></i>
+    </button>
+    
+    <!-- Member Dropdown -->
+    <div class="member-dropdown fab-item">
+      <button class="member-toggle fab-btn" aria-label="User menu">
+        <i class="fa-regular fa-user"></i>
+      </button>
+      
+      <div class="member-menu">
+        <div class="member-menu-inner">
+          <div class="member-info auth-only">
+            <span class="member-email"></span>
+          </div>
+          <ul class="member-links">
+            <li class="login-only">
+              <a href="{{ "login/" | relLangURL }}" class="member-link">{{ i18n "member_login" }}</a>
+            </li>
+            <li class="login-only">
+              <a href="{{ "register/" | relLangURL }}" class="member-link">{{ i18n "member_register" }}</a>
+            </li>
+            <li class="auth-only">
+              <a href="{{ "account/" | relLangURL }}" class="member-link">{{ i18n "member_my_account" }}</a>
+            </li>
+            <li class="auth-only">
+              <button id="logout-btn" class="member-link">{{ i18n "account_logout_btn" }}</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cart Button -->
+    <button class="snipcart-checkout fab-btn fab-item" aria-label="Cart">
+      <i class="fa-solid fa-cart-shopping"></i>
+      <span class="snipcart-items-count cart-count">0</span>
+    </button>
+  </div>
+
+  <!-- Primary Toggle Bubble -->
+  <button class="fab-main-btn" aria-label="Toggle Actions">
+    <i class="fa-solid fa-ellipsis"></i>
+    <!-- Duplicate cart count for awareness when collapsed -->
+    <span class="snipcart-items-count cart-count main-cart-badge">0</span>
+  </button>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const container = document.querySelector('.fab-container');
+  const mainBtn = document.querySelector('.fab-main-btn');
+  const memberGroup = document.querySelector('.member-dropdown');
+  const memberMenu = memberGroup ? memberGroup.querySelector('.member-menu') : null;
+  const memberBtn = memberGroup ? memberGroup.querySelector('.member-toggle') : null;
+
+  if (!container || !mainBtn) return;
+
+  // Toggle FAB on Click/Hover
+  const toggleFAB = (show) => {
+    container.classList.toggle('expanded', show);
+  };
+
+  mainBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    container.classList.toggle('expanded');
+  });
+
+  // Desktop Hover
+  if (window.matchMedia('(hover: hover)').matches) {
+    container.addEventListener('mouseenter', () => toggleFAB(true));
+    container.addEventListener('mouseleave', () => toggleFAB(false));
+  }
+
+  // Member Dropdown logic (Adapted for FAB)
+  if (memberGroup && memberMenu && memberBtn) {
+    let memberTimer;
+
+    const showMember = () => {
+      clearTimeout(memberTimer);
+      memberMenu.classList.add('show');
+    };
+
+    const hideMember = () => {
+      memberTimer = setTimeout(() => {
+        memberMenu.classList.remove('show');
+      }, 300);
+    };
+
+    memberBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      memberMenu.classList.toggle('show');
+    });
+
+    if (window.matchMedia('(hover: hover)').matches) {
+      memberGroup.addEventListener('mouseenter', showMember);
+      memberGroup.addEventListener('mouseleave', hideMember);
+    }
+  }
+
+  // Ensure main badge is hidden if count is 0
+  const mainBadge = document.querySelector('.main-cart-badge');
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      const count = parseInt(mutation.target.textContent || "0");
+      if (mainBadge) {
+        mainBadge.style.display = count > 0 ? 'flex' : 'none';
+      }
+    });
+  });
+
+  const cartCountElem = document.querySelector('.fab-actions .cart-count');
+  if (cartCountElem) {
+    observer.observe(cartCountElem, { childList: true });
+  }
+
+  // Close when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!container.contains(e.target)) {
+      container.classList.remove('expanded');
+      if (memberMenu) memberMenu.classList.remove('show');
+    }
+  });
+});
+</script>

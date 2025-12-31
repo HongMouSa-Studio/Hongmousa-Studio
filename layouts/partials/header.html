@@ -24,69 +24,13 @@
     {{ partial "nav.html" . }}
 
     <!-- Right Side Actions Group -->
-    <div class="header-actions">
       
-      <!-- Language Switcher (desktop only) -->
+      <!-- Icons (Search - Moved to FAB) -->
+
+      <!-- Language Switcher (Now on the far right) -->
       <div class="lang-desktop">
         {{ partial "lang-switch.html" . }}
       </div>
-
-      <!-- Icons (Search, User, Cart) -->
-      <div class="icons-group">
-
-        <!-- Search -->
-        <button aria-label="Search" class="icon-btn">
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </button>
-
-        <!-- Auth (Member Dropdown) -->
-        <div class="member-dropdown">
-
-          <!-- Member icon (always visible) -->
-          <button class="member-toggle icon-btn" aria-label="User menu">
-            <i class="fa-regular fa-user"></i>
-          </button>
-          
-          <!-- Dropdown menu -->
-          <div class="member-menu">
-            <div class="member-menu-inner">
-
-              <!-- Logged-in info -->
-              <div class="member-info auth-only">
-                <span class="member-email"></span>
-              </div>
-
-              <ul class="member-links">
-                <!-- Not logged in -->
-                <li class="login-only">
-                  <a href="{{ "login/" | relLangURL }}" class="member-link">{{ i18n "member_login" }}</a>
-                </li>
-
-                <li class="login-only">
-                  <a href="{{ "register/" | relLangURL }}" class="member-link">{{ i18n "member_register" }}</a>
-                </li>
-
-                <!-- Logged in -->
-                <li class="auth-only">
-                  <a href="{{ "account/" | relLangURL }}" class="member-link">{{ i18n "member_my_account" }}</a>
-                </li>
-
-                <li class="auth-only">
-                  <button id="logout-btn" class="member-link">{{ i18n "account_logout_btn" }}</button>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <!-- Cart (Snipcart Checkout)-->
-        <button class="snipcart-checkout icon-btn" aria-label="Cart">
-          <i class="fa-solid fa-cart-shopping"></i>
-          <!-- Kò͘-bu̍t-chhia sò͘-liōng -->
-          <span class="snipcart-items-count cart-count">0</span>
-        </button>
-      </div>
-
     </div>
   </div>
 
@@ -184,33 +128,6 @@ document.addEventListener('DOMContentLoaded', function () {
       icon.style.transform = 'rotate(0deg)';
     }
   });
-  // Member Dropdown Hover Logic with Delay
-  const memberGroup = document.querySelector('.member-dropdown');
-  const memberBtn   = memberGroup ? memberGroup.querySelector('.member-toggle') : null;
-  const memberMenu  = memberGroup ? memberGroup.querySelector('.member-menu') : null;
 
-  if (memberGroup && memberBtn && memberMenu) {
-    let memberTimer;
-
-    const showMemberMenu = () => {
-      clearTimeout(memberTimer);
-      memberMenu.classList.add('show');
-      memberBtn.setAttribute('aria-expanded', 'true');
-    };
-
-    const hideMemberMenu = () => {
-      memberTimer = setTimeout(() => {
-        memberMenu.classList.remove('show');
-        memberBtn.setAttribute('aria-expanded', 'false');
-      }, 300); // 300ms grace period
-    };
-
-    memberGroup.addEventListener('mouseenter', showMemberMenu);
-    memberGroup.addEventListener('mouseleave', hideMemberMenu);
-    
-    // Safety: keep open if hovering menu itself
-    memberMenu.addEventListener('mouseenter', showMemberMenu);
-    memberMenu.addEventListener('mouseleave', hideMemberMenu);
-  }
 });
 </script>
