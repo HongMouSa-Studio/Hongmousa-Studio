@@ -914,6 +914,16 @@ footer {
   .hero-text {
     padding: 2.5rem 0;
     order: 2;
+    text-align: center;
+    align-items: center;
+  }
+
+  .hero-shop-btn {
+    margin-inline: auto;
+  }
+
+  .hero-text p {
+    margin-inline: auto;
   }
 
   .hero-img {
