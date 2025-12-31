@@ -1,22 +1,38 @@
+# -----------------------------------------------------------------------------
+# Navigation
+# -----------------------------------------------------------------------------
 nav_home: "頭頁"
 nav_products: "產品"
 nav_blog: "文章"
 nav_about: "緣由"
 nav_contact: "聯絡阮"
+
+# -----------------------------------------------------------------------------
+# Language Switcher
+# -----------------------------------------------------------------------------
 cur_lang_name: "台文"
 nav_lang_title: "言語"
 
+# -----------------------------------------------------------------------------
+# Hero Section
+# -----------------------------------------------------------------------------
 hero_title_1: "阮創作"
 hero_title_2: "數位體驗"
 hero_subtitle: "用心設計無障礙兮現代網站體驗。"
 view_products: "來看覓"
 
+# -----------------------------------------------------------------------------
+# Products
+# -----------------------------------------------------------------------------
 product_section_title: "上新產品"
 product_section_sub: "商品佮介紹"
 product_btn_add: "+ 加入購物車"
-product_price_format: "新台幣 %v 元"
+product_btn_book: "預約服務"
 product_learn_more: "了解恰多 →"
+product_price_format: "新台幣 %v 元"
+product_price_free: "免費"
 
+# Product Details & Labels
 product_name_1: "Formosa語言羅馬字姓名個人印章"
 product_desc_1: "專門為著使用羅馬字（POJ、客語等等）的朋友設計，銀行、開戶嘛會當用。"
 product_label_font: "字體選擇"
@@ -24,12 +40,30 @@ product_label_pinyin: "拼音轉換"
 product_label_material: "材質"
 product_label_engraving: "雕刻方式"
 
+# Badges
+product_badge_app_store: "App Store"
+product_badge_google_play: "Google Play"
+
+# -----------------------------------------------------------------------------
+# Filters (Product List)
+# -----------------------------------------------------------------------------
+filter_all: "全部產品"
+filter_physical: "實體產品"
+filter_app: "App"
+filter_service: "服務"
+
+# -----------------------------------------------------------------------------
+# Blog
+# -----------------------------------------------------------------------------
 blog_section_title: "文章"
 blog_card_more: "讀文章"
 blog_btn_main: "抦全部文章"
 published_at: "發表："
 updated_at: "修改："
 
+# -----------------------------------------------------------------------------
+# Authentication
+# -----------------------------------------------------------------------------
 auth_google_btn: "用 Google 登入"
 auth_subtitle: "請輸入電子批桶"
 auth_email_label: "電子批桶"
@@ -45,10 +79,17 @@ auth_error_rate_limit: "揤 siuⁿ 猛--ah！請聽候幾若秒即閣試看覓�
 auth_error_invalid_otp: "格式 m̄ 着，請檢查一下。"
 auth_error_generic: "發生錯誤，請聯絡阮。"
 
+# -----------------------------------------------------------------------------
+# Account & Membership
+# -----------------------------------------------------------------------------
+member_login: "登入"
+member_register: "註冊"
+member_my_account: "會員中心"
+
 account_welcome: "歡迎"
 account_logout_btn: "登出"
-account_section_points: "粒積點數"
 account_section_orders: "交易記錄"
+account_section_points: "粒積點數"
 account_no_orders: "夭無任何記錄。"
 account_points_unit: "點"
 account_table_id: "編號"
@@ -58,6 +99,7 @@ account_table_status: "狀態"
 account_login_required: "請先登入。"
 account_go_to_login: "倒返登入頁"
 
+# Account Profile
 account_section_profile: "口座資料"
 account_label_name: "名姓："
 account_label_phone: "電話："
@@ -67,6 +109,7 @@ account_modal_title_edit_profile: "修改資料"
 account_btn_save: "保存"
 account_btn_cancel: "取消"
 
+# Address Book
 account_section_address_book: "收件通訊錄"
 account_label_default: "預設"
 account_btn_edit_short: "修改"
@@ -92,17 +135,3 @@ account_confirm_delete: "咁確定卜芟除？"
 account_delivery_method_mail: "配達到位"
 account_delivery_method_cvs: "超商領貨"
 account_error_cvs_picker: "無法度打開門市選擇器，請直接輸入門市資訊。"
-
-member_login: "登入"
-member_register: "註冊"
-member_my_account: "會員中心"
-
-# Multi-Product Expansion
-product_btn_book: "預約服務"
-product_badge_app_store: "App Store"
-product_badge_google_play: "Google Play"
-product_price_free: "免費"
-filter_all: "全部產品"
-filter_physical: "實體產品"
-filter_app: "App"
-filter_service: "服務"

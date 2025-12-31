@@ -1,22 +1,38 @@
+# -----------------------------------------------------------------------------
+# Navigation
+# -----------------------------------------------------------------------------
 nav_home: "Thâu-ia̍h"
 nav_products: "Sán-phín"
 nav_blog: "Bûn-chiuⁿ"
 nav_about: "Iân-kò͘"
 nav_contact: "Liân-lo̍k"
+
+# -----------------------------------------------------------------------------
+# Language Switcher
+# -----------------------------------------------------------------------------
 cur_lang_name: "Tâi-bûn"
 nav_lang_title: "Giân-gí"
 
+# -----------------------------------------------------------------------------
+# Hero Section
+# -----------------------------------------------------------------------------
 hero_title_1: "Goán chhòng-chok"
 hero_title_2: "sò͘-ūi thé-giām"
 hero_subtitle: "Chia ê ta̍k hāng lóng ùi Formosa chhut-hoat.\nMúi 1 ê sán-phín lóng sī tùi thó͘-tē ê kám-siā."
 view_products: "Lâi khòaⁿ-māi"
 
+# -----------------------------------------------------------------------------
+# Products
+# -----------------------------------------------------------------------------
 product_section_title: "Siōng Sin Sán-phín"
 product_section_sub: "Sán-phín kap siāu-kài"
 product_btn_add: "+ Ka-ji̍p Kò͘-bu̍t-chhia"
-product_price_format: "Sin Tâi-phiò %v kho͘"
+product_btn_book: "Ī-iok ho̍k-bū"
 product_learn_more: "Liáu-kái khah chē →"
+product_price_format: "Sin Tâi-phiò %v kho͘"
+product_price_free: "Bián-hùi"
 
+# Product Details & Labels
 product_name_1: "Formosa言語羅馬字名姓個人印á"
 product_desc_1: "Choan-bûn ūi-tio̍h sú-iōng Lô-má-jī (POJ, Kheh-gí téng-téng) ê pêng-iú siat-pī, gîn-hàng khah-miâ mā ē-tàng iōng."
 product_label_font: "Jī-thé Soán-te̍k"
@@ -24,12 +40,30 @@ product_label_pinyin: "Phing-im Choán-oân"
 product_label_material: "Châi-chit"
 product_label_engraving: "Eng-kh刻 Hong-sek"
 
+# Badges
+product_badge_app_store: "App Store"
+product_badge_google_play: "Google Play"
+
+# -----------------------------------------------------------------------------
+# Filters (Product List)
+# -----------------------------------------------------------------------------
+filter_all: "Choân-pō͘ sán-phín"
+filter_physical: "Si̍t-thé sán-phín"
+filter_app: "App"
+filter_service: "Ho̍k-bū"
+
+# -----------------------------------------------------------------------------
+# Blog
+# -----------------------------------------------------------------------------
 blog_section_title: "Bûn-chiuⁿ"
 blog_card_more: "Tha̍k bûn-chiuⁿ"
 blog_btn_main: "Péng choân-pō͘ bûn-chiuⁿ"
 published_at: "Hoat-piáu: "
 updated_at: "Siu-kái: "
 
+# -----------------------------------------------------------------------------
+# Authentication
+# -----------------------------------------------------------------------------
 auth_google_btn: "Iōng Google teng-ji̍p"
 auth_subtitle: "Chhiáⁿ su-ji̍p tiān-chú-phoe-tháng"
 auth_email_label: "Email"
@@ -45,6 +79,13 @@ auth_error_rate_limit: "Chhi̍h siuⁿ mé--ah! Chhiáⁿ thèng-hāu kúi-nā b
 auth_error_invalid_otp: "Keh-sek m̄-tio̍h, chhiáⁿ koh kiám-cha--chi̍t-ē."
 auth_error_generic: "Hoat-seng chhò-gō͘, chhiáⁿ liân-lo̍k--goán."
 
+# -----------------------------------------------------------------------------
+# Account & Membership
+# -----------------------------------------------------------------------------
+member_login: "Teng-ji̍p"
+member_register: "Chù-chheh"
+member_my_account: "Hōe-oân Tiong-sim"
+
 account_welcome: "Hoan-gêng"
 account_logout_btn: "Teng-chhut"
 account_section_orders: "Kau-e̍k Kì-lio̍k"
@@ -58,6 +99,7 @@ account_table_status: "Chōng-thài"
 account_login_required: "Chhiáⁿ seng teng-ji̍p."
 account_go_to_login: "Tò-tńg khì teng-ji̍p ia̍h"
 
+# Account Profile
 account_section_profile: "Kháu-chō Chu-liāu"
 account_label_name: "Miâ-sèⁿ: "
 account_label_phone: "Tiān-ōe: "
@@ -67,6 +109,7 @@ account_modal_title_edit_profile: "Siu-kái Chu-liāu"
 account_btn_save: "Pó-chûn"
 account_btn_cancel: "Chhú-siau"
 
+# Address Book
 account_section_address_book: "Siu-kiāⁿ Thong-sìn-lio̍k"
 account_label_default: "Ī-siat"
 account_btn_edit_short: "Siu-kái"
@@ -92,17 +135,3 @@ account_confirm_delete: "Kám khak-tēng beh san-tû?"
 account_delivery_method_mail: "Phòe-ta̍t kàu-ūi"
 account_delivery_method_cvs: "Chhiau-siong"
 account_error_cvs_picker: "Bô hoat-tō͘ phah-khui bûn-chhī soán-te̍k-khì, chhiáⁿ ti̍t-chiap su-ji̍p bûn-chhī chu-sìn."
-
-member_login: "Teng-ji̍p"
-member_register: "Chù-chheh"
-member_my_account: "Hōe-oân Tiong-sim"
-
-# Multi-Product Expansion
-product_btn_book: "Ī-iok ho̍k-bū"
-product_badge_app_store: "App Store"
-product_badge_google_play: "Google Play"
-product_price_free: "Bián-hùi"
-filter_all: "Choân-pō͘ sán-phín"
-filter_physical: "Si̍t-thé sán-phín"
-filter_app: "App"
-filter_service: "Ho̍k-bū"

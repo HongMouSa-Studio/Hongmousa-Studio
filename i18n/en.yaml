@@ -1,22 +1,38 @@
+# -----------------------------------------------------------------------------
+# Navigation
+# -----------------------------------------------------------------------------
 nav_home: "Home"
 nav_products: "All Products"
 nav_blog: "Blog"
 nav_about: "About us"
 nav_contact: "Contact us"
+
+# -----------------------------------------------------------------------------
+# Language Switcher
+# -----------------------------------------------------------------------------
 cur_lang_name: "English"
 nav_lang_title: "Language"
 
+# -----------------------------------------------------------------------------
+# Hero Section
+# -----------------------------------------------------------------------------
 hero_title_1: "We create"
 hero_title_2: "digital experiences"
 hero_subtitle: "Designing modern, accessible web experiences with care."
 view_products: "Shop Now"
 
+# -----------------------------------------------------------------------------
+# Products
+# -----------------------------------------------------------------------------
 product_section_title: "New Releases"
 product_section_sub: "Products & Descriptions"
 product_btn_add: "Add to Cart"
-product_price_format: "NT$ %v"
+product_btn_book: "Book Now"
 product_learn_more: "Learn More →"
+product_price_format: "NT$ %v"
+product_price_free: "Free"
 
+# Product Details & Labels
 product_name_1: "Personalized Formosan Languages Romanization Stamp"
 product_desc_1: "Custom-made seal for Romanized scripts (POJ, Hakka, etc.). Suitable for official use and bank transactions."
 product_label_font: "Font Selection"
@@ -24,12 +40,30 @@ product_label_pinyin: "Pinyin Conversion"
 product_label_material: "Material"
 product_label_engraving: "Engraving Style"
 
+# Badges
+product_badge_app_store: "App Store"
+product_badge_google_play: "Google Play"
+
+# -----------------------------------------------------------------------------
+# Filters (Product List)
+# -----------------------------------------------------------------------------
+filter_all: "All"
+filter_physical: "Physical"
+filter_app: "Apps"
+filter_service: "Services"
+
+# -----------------------------------------------------------------------------
+# Blog
+# -----------------------------------------------------------------------------
 blog_section_title: "Blog"
 blog_card_more: "Read more"
 blog_btn_main: "View all posts"
 published_at: "Published at: "
 updated_at: "Updated at: "
 
+# -----------------------------------------------------------------------------
+# Authentication
+# -----------------------------------------------------------------------------
 auth_google_btn: "Continue with Google"
 auth_subtitle: "Please enter your email to login"
 auth_email_label: "Email Address"
@@ -45,6 +79,13 @@ auth_error_rate_limit: "For security purposes, please wait a moment before tryin
 auth_error_invalid_otp: "Invalid input format. Please try again."
 auth_error_generic: "An error occurred, please contact us."
 
+# -----------------------------------------------------------------------------
+# Account & Membership
+# -----------------------------------------------------------------------------
+member_login: "Login"
+member_register: "Register"
+member_my_account: "My Account"
+
 account_welcome: "Welcome"
 account_logout_btn: "Logout"
 account_section_orders: "Order History"
@@ -58,6 +99,7 @@ account_table_status: "Status"
 account_login_required: "Please login first."
 account_go_to_login: "Back to Login"
 
+# Account Profile
 account_section_profile: "Account Profile"
 account_label_name: "Full Name: "
 account_label_phone: "Phone: "
@@ -67,6 +109,7 @@ account_modal_title_edit_profile: "Edit Profile"
 account_btn_save: "Save Changes"
 account_btn_cancel: "Cancel"
 
+# Address Book
 account_section_address_book: "Address Book"
 account_label_default: "Default"
 account_btn_edit_short: "Edit"
@@ -92,17 +135,3 @@ account_confirm_delete: "Are you sure you want to delete this address?"
 account_delivery_method_mail: "Home Delivery"
 account_delivery_method_cvs: "CVS Pickup"
 account_error_cvs_picker: "Unable to open store selector. Please enter store information manually."
-
-member_login: "Login"
-member_register: "Register"
-member_my_account: "My Account"
-
-# Multi-Product Expansion
-product_btn_book: "Book Now"
-product_badge_app_store: "App Store"
-product_badge_google_play: "Google Play"
-product_price_free: "Free"
-filter_all: "All"
-filter_physical: "Physical"
-filter_app: "Apps"
-filter_service: "Services"
