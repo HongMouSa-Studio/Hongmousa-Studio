@@ -651,7 +651,16 @@ footer {
   background-color: var(--text-dark);
   color: #d1d5db;
   padding: 3rem;
-  font-size: 0.875rem;
+  font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+  /* Responsive footer body text */
+}
+
+footer h4 {
+  font-size: clamp(1.1rem, 3vw, 1.35rem);
+  /* Responsive footer headers */
+  color: white;
+  margin-bottom: 1.2rem;
+  font-weight: 700;
 }
 
 .footer-grid {

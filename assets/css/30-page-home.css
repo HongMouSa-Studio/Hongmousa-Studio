@@ -163,8 +163,8 @@
 }
 
 .slide-tag {
-  font-size: 1rem;
-  /* Increased from 0.75rem */
+  font-size: clamp(0.85rem, 2vw, 1rem);
+  /* Increased from 0.75rem but responsive */
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--accent-green);
@@ -174,7 +174,8 @@
 
 .slide-title {
   font-family: var(--font-heading);
-  font-size: 1.25rem;
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  /* Responsive scaling */
   font-weight: 700;
   color: var(--text-dark);
   margin: 0;
@@ -275,12 +276,24 @@
     align-items: center;
     margin: 0 auto;
     max-width: 100%;
+    padding-inline: 1rem;
+    /* Ensure breathing room on edges so text doesn't stick */
   }
 
   /* Typography Scaling for Tablet/Mobile */
   .hero-text h1 {
-    font-size: clamp(2.75rem, 6vw, 3.5rem);
-    /* Larger for tablet impact */
+    font-size: clamp(1.5rem, 7vw, 2.8rem);
+    /* Main title: Bigger base (1.5rem) so it pops */
+    white-space: nowrap;
+    width: 100%;
+    overflow: visible;
+  }
+
+  .hero-text h1 span {
+    display: block;
+    font-size: clamp(0.9rem, 4vw, 1.3rem);
+    /* Subtitle: Significantly smaller to maintain hierarchy */
+    margin-top: 0.2rem;
   }
 
 
@@ -299,10 +312,7 @@
   }
 
   /* Slider Info Text Scaling */
-  .slide-title {
-    font-size: 1.5rem;
-    /* Larger than desktop 1.25rem */
-  }
+
 
   /* .slide-tag font size inherits global 1rem now */
 

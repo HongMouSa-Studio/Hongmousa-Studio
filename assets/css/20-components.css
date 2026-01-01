@@ -71,8 +71,8 @@ button {
   .section-header h1,
   .section-header h2,
   .section-header h3 {
-    font-size: 1.5rem;
-    /* Better mobile fit */
+    font-size: 1.75rem;
+    /* Larger mobile headers per request */
   }
 
   .section-sub {
@@ -655,7 +655,8 @@ body.is-auth .auth-only {
 
 .product-info h3 {
   font-family: "Noto Serif TC", serif;
-  font-size: 1.15rem;
+  font-size: clamp(1rem, 3vw, 1.15rem);
+  /* Responsive: smaller on mobile, up to 1.15rem on desktop */
   font-weight: 700;
   color: var(--text-dark);
   margin: 0;
@@ -663,7 +664,8 @@ body.is-auth .auth-only {
 }
 
 .product-info p {
-  font-size: 0.875rem;
+  font-size: clamp(0.8rem, 2.5vw, 0.875rem);
+  /* Responsive: smaller on mobile */
   color: #6b7280;
   margin: 0;
   opacity: 0.8;
@@ -673,8 +675,10 @@ body.is-auth .auth-only {
 .product-price {
   font-family: var(--font-ui);
   font-weight: 700;
-  font-size: 1.1rem;
-  color: var(--accent-green);
+  font-size: clamp(1rem, 3vw, 1.15rem);
+  /* Responsive: 1rem on mobile -> 1.15rem desktop */
+  color: #ea580c;
+  /* Brighter Rust Orange */
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -696,8 +700,16 @@ body.is-auth .auth-only {
 
 .learn-more-link:hover {
   border-bottom-color: #5a8700;
-  gap: 6px;
   /* Subtle arrow movement nudge on hover */
+}
+
+@media (max-width: 1024px) {
+  .learn-more-link {
+    font-size: 1rem;
+    /* Larger size for touch/reading on mobile/tablet */
+    padding: 0.2rem 0;
+    /* Touch target padding */
+  }
 }
 
 .original-price {
@@ -939,9 +951,11 @@ body.is-auth .auth-only {
 
 /* Text */
 .blog-card-title {
-  font-size: 1.15rem;
+  font-size: clamp(1rem, 3vw, 1.15rem);
+  /* Responsive: smaller on mobile, larger on desktop */
   margin: 0.4rem 0 0.6rem;
   line-height: 1.45;
+  font-weight: 700;
 }
 
 /* Body */
@@ -950,7 +964,8 @@ body.is-auth .auth-only {
 }
 
 .blog-card-date {
-  font-size: 0.85rem;
+  font-size: clamp(0.75rem, 2vw, 0.85rem);
+  /* Responsive date */
   opacity: 0.65;
   letter-spacing: 0.05em;
   color: var(--text-light);
@@ -959,7 +974,8 @@ body.is-auth .auth-only {
 }
 
 .blog-card-excerpt {
-  font-size: 0.9rem;
+  font-size: clamp(0.85rem, 2.5vw, 0.9rem);
+  /* Responsive excerpt */
   color: #555;
   line-height: 1.7;
   margin-bottom: 1rem;
@@ -1440,7 +1456,8 @@ body.is-auth .auth-only {
 .product-price {
   font-size: 1.25rem;
   font-weight: 700;
-  color: var(--accent-green);
+  color: #ea580c;
+  /* Brighter Rust Orange */
   margin-bottom: 0.8rem;
   white-space: nowrap;
   /* Keep single line on desktop */
@@ -1456,7 +1473,8 @@ body.is-auth .auth-only {
 .product-price-large {
   font-size: 2rem;
   font-weight: 700;
-  color: var(--accent-green);
+  color: #ea580c;
+  /* Brighter Rust Orange */
   margin-bottom: 2rem;
   white-space: nowrap;
 }
@@ -1497,6 +1515,18 @@ body.is-auth .auth-only {
   align-items: center;
   justify-content: center;
   gap: 1rem;
+}
+
+/* Responsive Scaling for Section Headers */
+.option-guides h4,
+.product-description-content h4 {
+  font-size: clamp(1.4rem, 5vw, 1.8rem);
+  /* Adjusted: Larger on mobile/tablet (min 1.4rem) per request */
+  margin-bottom: 1rem;
+}
+
+.guide-item h5 {
+  font-size: clamp(0.9rem, 2.5vw, 1.1rem);
 }
 
 .add-to-cart-btn-large:hover {
