@@ -32,7 +32,7 @@
       "engraving": "Eng-kh刻 Hong-sek",
       "actions": {
         "checkout": "Lâi-khì kiat-siàu", "continue_shopping": "Se̍h bô kàu-khùi", "back_to_store": "Tò-tńg-khì kang-chok-sek",
-        "close_cart": "Koaiⁿ--khí-lâi", "continue_to_shipping": "Thiⁿ-siá siu-kiāⁿ chu-sìn", "continue_to_payment": "Khì kiat-siàu",
+        "close_cart": "Koaiⁿ--khí-lâi", "continue_to_shipping": "Thiᴺ-siá siu-kiāᴺ chu-sìn", "continue_to_payment": "Khì kiat-siàu",
         "place_order": "Chù-bûn", "edit": "Siu-kái"
       },
       "cart_summary": { "title": "Ka-chì-tē-á Tek-iàu", "subtotal": "Sió sǹg", "total": "Kè-kiōng" },
@@ -47,8 +47,8 @@
         "remove_item": "Bô beh ti̍h"
       },
       "checkout": { "shipping_taxes_calculated_when_address_provided": "Ūn-hùi kap sòe ē tī thê-kiong tē-chí liáu-āu kè-sǹg." },
-      "billing": { "title": "Siàu-toaⁿ", "address": "Siàu-toaⁿ tē-chí", "continue_to_shipping": "Thiⁿ-siá siu-kiāⁿ chu-sìn", "use_different_shipping_address": "Sú-iōng bô-kāng ê siu-kiāⁿ tē-chí" },
-      "shipping": { "title": "Siu-kiāⁿ", "address": "Siu-kiāⁿ tē-chí", "method": "Ūn-sàng hong-sek" },
+      "billing": { "title": "Siàu-toaⁿ", "address": "Siàu-toaⁿ tē-chí", "continue_to_shipping": "Thiᴺ-siá siu-kiāᴺ chu-sìn", "use_different_shipping_address": "Sú-iōng bô-kāng ê siu-kiāᴺ tē-chí" },
+      "shipping": { "title": "Siu-kiāᴺ", "address": "Siu-kiāᴺ tē-chí", "method": "Ūn-sàng hong-sek" },
       "address_form": {
         "name": "Miâ-sèⁿ", "email": "Tiān-chú-phoe-tháng", "city": "Hiong/Tìn/Chhī/Khu", "country": "Kok-ka",
         "phone": "Tiān-ōe", "postalCode": "Iû-piān-hoan-hō", "province": "Koān/Chhī", "address1": "Tē-chí", "address2": "Pī-chù", "dont_see_address": ""

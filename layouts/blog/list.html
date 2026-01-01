@@ -1,8 +1,8 @@
 {{ define "main" }}
 <section class="blog-page-list">
   <header class="section-header">
-    <h1 class="section-title">{{ .Title }}</h1>
-    <span class="section-sub">Writing / 記錄</span>
+    <h1 class="section-title">{{ i18n "blog_section_title" | default .Title }}</h1>
+    <span class="section-sub">{{ i18n "blog_section_sub" }}</span>
   </header>
 
   {{ with .Site.Taxonomies.tags }}

@@ -62,6 +62,7 @@ filter_service: "Services"
 # Blog
 # -----------------------------------------------------------------------------
 blog_section_title: "Blog"
+blog_section_sub: "Articles & Introduction"
 blog_card_more: "Read more"
 blog_btn_main: "View all posts"
 published_at: "Published at: "

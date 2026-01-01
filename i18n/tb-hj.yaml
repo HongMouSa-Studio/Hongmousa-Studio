@@ -26,7 +26,7 @@ view_products: "來看覓"
 # Products
 # -----------------------------------------------------------------------------
 product_section_title: "上新產品"
-product_section_sub: "商品佮介紹"
+product_section_sub: "商品甲介紹"
 product_btn_add: "+ 加入茄荎袋仔"
 product_btn_book: "預約服務"
 product_learn_more: "了解恰多 →"
@@ -54,14 +54,15 @@ product_badge_google_play: "Google Play"
 # Filters (Product List)
 # -----------------------------------------------------------------------------
 filter_all: "展全部"
-filter_physical: "實體"
-filter_app: "數位虛擬"
-filter_service: "服務"
+filter_physical: "實體產品"
+filter_app: "數位產品"
+filter_service: "提供服務"
 
 # -----------------------------------------------------------------------------
 # Blog
 # -----------------------------------------------------------------------------
 blog_section_title: "文章"
+blog_section_sub: "文章甲介紹"
 blog_card_more: "讀文章"
 blog_btn_main: "抦全部文章"
 published_at: "發表："

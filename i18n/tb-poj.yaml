@@ -54,14 +54,15 @@ product_badge_google_play: "Google Play"
 # Filters (Product List)
 # -----------------------------------------------------------------------------
 filter_all: "Tián Choân-pō͘"
-filter_physical: "Si̍t-thé"
-filter_app: "Sò͘-ūi Hi-gí"
-filter_service: "Ho̍k-bū"
+filter_physical: "Si̍t-thé Sán-phín"
+filter_app: "Sò͘-ūi Sán-phín"
+filter_service: "Thê-kiong Ho̍k-bū"
 
 # -----------------------------------------------------------------------------
 # Blog
 # -----------------------------------------------------------------------------
 blog_section_title: "Bûn-chiuⁿ"
+blog_section_sub: "Bûn-chiuᴺ kap siāu-kài"
 blog_card_more: "Tha̍k bûn-chiuⁿ"
 blog_btn_main: "Péng choân-pō͘ bûn-chiuⁿ"
 published_at: "Hoat-piáu: "
