@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Desktop Hover
   if (window.matchMedia('(hover: hover)').matches) {
-    container.addEventListener('mouseenter', () => toggleFAB(true));
+    mainBtn.addEventListener('mouseenter', () => toggleFAB(true));
     container.addEventListener('mouseleave', () => toggleFAB(false));
   }
 
