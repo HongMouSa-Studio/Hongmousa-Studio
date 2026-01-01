@@ -32,18 +32,18 @@
 }
 
 @font-face {
-  font-family: 'Gentium';
-  src: url('/fonts/Gentium-Regular.woff2') format('woff2');
-  font-weight: 400;
+  font-family: 'SourceSans3';
+  src: url('/fonts/SourceSans3VF-Upright.ttf.woff2') format('woff2');
+  font-weight: 200 900;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Gentium';
-  src: url('/fonts/Gentium-Bold.woff2') format('woff2');
-  font-weight: 700;
-  font-style: normal;
+  font-family: 'SourceSans3';
+  src: url('/fonts/SourceSans3VF-Italic.ttf.woff2') format('woff2');
+  font-weight: 200 900;
+  font-style: italic;
   font-display: swap;
 }
 
@@ -59,10 +59,10 @@ body {
   background-size: cover;
 
   /* Fonts */
-  /* Châi-ēng "Charis" ia̍h "Gentium" tùi POJ hián-sī khah hó (Self-hosted) */
-  --font-body: "Charis", "Gentium", "Inter", "Noto Sans TC", system-ui, sans-serif;
+  /* Châi-ēng "Charis" tùi POJ hián-sī khah hó (Self-hosted) */
+  --font-body: "SourceSans3", "Inter", "Noto Sans TC", system-ui, sans-serif;
   --font-heading: "Charis", "Noto Serif TC", serif;
-  --font-ui: "Charis", "Inter", "Noto Sans TC", sans-serif;
+  --font-ui: "SourceSans3", "Inter", "Noto Sans TC", sans-serif;
   --font-mono: "Menlo", monospace;
 
   /* POJ Opentype Settings to fix diacritics */

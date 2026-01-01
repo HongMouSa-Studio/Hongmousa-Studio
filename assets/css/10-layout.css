@@ -592,7 +592,7 @@ main {
   color: #6b7280;
   margin-bottom: 2rem;
   max-width: 28rem;
-  font-family: "Charis", "Gentium", var(--font-body);
+  font-family: "Charis", var(--font-body);
   /* Ensure body text also supports o͘ */
 }
 
