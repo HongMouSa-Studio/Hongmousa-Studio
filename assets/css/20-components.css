@@ -1,8 +1,14 @@
 /* -------------------------
     Thong-iōng goân-kiāⁿ
 ---------------------------*/
-button {
-  font-family: var(--font-ui);
+font-family: var(--font-ui);
+}
+
+@media (max-width: 1024px) {
+  .btn-main {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+  }
 }
 
 .tag {
@@ -655,8 +661,8 @@ body.is-auth .auth-only {
 
 .product-info h3 {
   font-family: "Noto Serif TC", serif;
-  font-size: clamp(1rem, 3vw, 1.15rem);
-  /* Responsive: smaller on mobile, up to 1.15rem on desktop */
+  font-size: clamp(1.2rem, 4vw, 1.35rem);
+  /* Significantly larger on mobile (min 1.2rem) per request */
   font-weight: 700;
   color: var(--text-dark);
   margin: 0;
@@ -664,8 +670,8 @@ body.is-auth .auth-only {
 }
 
 .product-info p {
-  font-size: clamp(0.8rem, 2.5vw, 0.875rem);
-  /* Responsive: smaller on mobile */
+  font-size: clamp(1rem, 3vw, 1.05rem);
+  /* Larger body text on mobile (min 1rem) for readability */
   color: #6b7280;
   margin: 0;
   opacity: 0.8;

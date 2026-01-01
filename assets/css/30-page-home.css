@@ -308,8 +308,12 @@
 
   .hero-shop-btn {
     align-self: center;
-    font-size: 1rem;
-    padding: 1rem 2.5rem;
+    padding: 1.25rem 3rem;
+    font-size: 1.1rem;
+    /* Larger button on mobile/tablet */
+    width: 100%;
+    /* Full width on mobile for easier tap */
+    max-width: 300px;
   }
 
   /* Slider Info Text Scaling */
