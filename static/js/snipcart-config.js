@@ -155,16 +155,16 @@
 
     const enTranslations = {
       "header": {
-        "title": "Ka-chi bag summary",
-        "title_cart_summary": "Ka-chi bag summary"
+        "title": "Ka-chì bag summary",
+        "title_cart_summary": "Ka-chì bag summary"
       },
       "cart": {
-        "title": "Ka-chi bag summary",
-        "loading": "Loading your ka-chi bag...",
-        "loading_cart": "Loading your ka-chi bag...",
-        "preparing_cart": "Preparing your ka-chi bag...",
-        "view_detailed_cart": "View detailed ka-chi bag",
-        "empty": "Your ka-chi bag is empty"
+        "title": "Ka-chì bag summary",
+        "loading": "Loading your ka-chì bag...",
+        "loading_cart": "Loading your ka-chì bag...",
+        "preparing_cart": "Preparing your ka-chì bag...",
+        "view_detailed_cart": "View detailed ka-chì bag",
+        "empty": "Your ka-chì bag is empty"
       },
       "actions": {
         "continue_shopping": "Continue shopping",
@@ -192,7 +192,7 @@
         console.warn('[Antigravity] Snipcart setLanguage (HJ) threw error:', e);
       }
     } else {
-      // Default: English -> Use ka-chi bag overrides
+      // Default: English -> Use ka-chì bag overrides
       try {
         const p = Snipcart.api.session.setLanguage('en', enTranslations);
         if (p && typeof p.catch === 'function') {

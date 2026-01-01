@@ -439,7 +439,16 @@ main {
 .fab-btn:hover .icon-kachi,
 .icon-kachi:hover {
   filter: grayscale(0%) brightness(1);
-  /* Reveal original colors */
+  /* Reveal original colors on hover (Desktop) */
+}
+
+/* On Mobile/Touch: Reveal color immediately when menu is expanded */
+/* On Mobile/Touch: Reveal color immediately when menu is expanded */
+@media (hover: none),
+(max-width: 1024px) {
+  .fab-container.expanded .icon-kachi {
+    filter: grayscale(0%) brightness(1);
+  }
 }
 
 /* Specific overrides for Language Switcher Button (Pill -> Square) */
