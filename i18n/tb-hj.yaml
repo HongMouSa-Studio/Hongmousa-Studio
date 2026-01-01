@@ -39,6 +39,11 @@ product_label_font: "字體選擇"
 product_label_pinyin: "拼音轉換"
 product_label_material: "材質"
 product_label_engraving: "雕刻方式"
+product_option_guides: "屬性指南"
+product_font_samples: "字體見本"
+product_materials: "材質"
+product_shipping_note: "運費佇結賬時計算。"
+product_details_title: "產品紹介"
 
 # Badges
 product_badge_app_store: "App Store"

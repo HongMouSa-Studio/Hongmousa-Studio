@@ -7,15 +7,15 @@
       
       <!-- Option Guides (Dynamic Images) -->
       <div class="option-guides" style="margin-top: 2rem;">
-        <h4 class="font-serif">{{ if eq .Site.Language.Lang "tb-poj" }}Chéng-sek Siong-koan{{ else if eq .Site.Language.Lang "tb-hj" }}屬性指南{{ else }}Option Guides{{ end }}</h4>
+        <h4 class="font-serif">{{ i18n "product_option_guides" }}</h4>
         <div class="guide-grid">
            <!-- We can add specific images for font groups / materials here later -->
            <div class="guide-item">
-             <h5>{{ if eq .Site.Language.Lang "tb-poj" }}Jī-thé Hoân-pó{{ else if eq .Site.Language.Lang "tb-hj" }}字體範例{{ else }}Font Samples{{ end }}</h5>
+             <h5>{{ i18n "product_font_samples" }}</h5>
              <img src="/img/font_guide.png" alt="Font Guide" class="guide-thumb">
            </div>
            <div class="guide-item">
-             <h5>{{ if eq .Site.Language.Lang "tb-poj" }}Châi-chit{{ else if eq .Site.Language.Lang "tb-hj" }}木材材質{{ else }}Wood Materials{{ end }}</h5>
+             <h5>{{ i18n "product_materials" }}</h5>
              <img src="/img/material_guide.png" alt="Material Guide" class="guide-thumb">
            </div>
         </div>
@@ -62,11 +62,11 @@
         >
           <i class="fa-solid fa-cart-plus"></i> {{ i18n "product_btn_add" }}
         </button>
-        <p class="purchase-note">{{ if eq .Site.Language.Lang "tb-poj" }}Ūn-hùi tī kiat-siàu sî kè-sǹg.{{ else if eq .Site.Language.Lang "tb-hj" }}運費佇結賬時計算。{{ else }}Shipping calculated at checkout.{{ end }}</p>
+        <p class="purchase-note">{{ i18n "product_shipping_note" }}</p>
       </div>
 
       <div class="product-description-content">
-        <h4 class="font-serif">{{ if eq .Site.Language.Lang "tb-poj" }}Siū-sè Biâu-shu̍t{{ else if eq .Site.Language.Lang "tb-hj" }}詳細描述{{ else }}Detailed Description{{ end }}</h4>
+        <h4 class="font-serif">{{ i18n "product_details_title" }}</h4>
         {{ .Content }}
       </div>
     </div>

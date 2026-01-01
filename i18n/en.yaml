@@ -39,6 +39,11 @@ product_label_font: "Font Selection"
 product_label_pinyin: "Pinyin Conversion"
 product_label_material: "Material"
 product_label_engraving: "Engraving Style"
+product_option_guides: "Option Guides"
+product_font_samples: "Font Samples"
+product_materials: "Materials"
+product_shipping_note: "Shipping calculated at checkout."
+product_details_title: "Product Description"
 
 # Badges
 product_badge_app_store: "App Store"

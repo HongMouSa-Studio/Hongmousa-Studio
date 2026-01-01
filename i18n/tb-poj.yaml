@@ -38,7 +38,12 @@ product_desc_1: "Choan-bûn ūi-tio̍h sú-iōng Lô-má-jī (POJ, Kheh-gí tén
 product_label_font: "Jī-thé Soán-te̍k"
 product_label_pinyin: "Phing-im Choán-oân"
 product_label_material: "Châi-chit"
-product_label_engraving: "Eng-kh刻 Hong-sek"
+product_label_engraving: "Tiau-khek Hong-sek"
+product_option_guides: "Chéng-sek Siong-koan"
+product_font_samples: "Jī-thé Kiàn-pún"
+product_materials: "Châi-chit"
+product_shipping_note: "Ūn-hùi tī kiat-siàu ê sî kè-sǹg."
+product_details_title: "Sán-phín Siāu-kài"
 
 # Badges
 product_badge_app_store: "App Store"
