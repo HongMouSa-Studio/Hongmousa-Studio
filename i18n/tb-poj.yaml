@@ -47,9 +47,9 @@ product_badge_google_play: "Google Play"
 # -----------------------------------------------------------------------------
 # Filters (Product List)
 # -----------------------------------------------------------------------------
-filter_all: "Choân-pō͘ sán-phín"
-filter_physical: "Si̍t-thé sán-phín"
-filter_app: "App"
+filter_all: "Tián Choân-pō͘"
+filter_physical: "Si̍t-thé"
+filter_app: "Sò͘-ūi Hi-gí"
 filter_service: "Ho̍k-bū"
 
 # -----------------------------------------------------------------------------

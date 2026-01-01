@@ -49,7 +49,7 @@ product_badge_google_play: "Google Play"
 # -----------------------------------------------------------------------------
 filter_all: "All"
 filter_physical: "Physical"
-filter_app: "Apps"
+filter_app: "Digital"
 filter_service: "Services"
 
 # -----------------------------------------------------------------------------
