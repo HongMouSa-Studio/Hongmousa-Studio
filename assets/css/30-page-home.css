@@ -276,8 +276,8 @@
     align-items: center;
     margin: 0 auto;
     max-width: 100%;
-    padding-inline: 1rem;
-    /* Ensure breathing room on edges so text doesn't stick */
+    padding-inline: 0;
+    /* Removed extra padding side padding (1rem -> 0) */
   }
 
   /* Typography Scaling for Tablet/Mobile */
@@ -302,7 +302,8 @@
     /* Larger body text */
     margin-left: auto;
     margin-right: auto;
-    max-width: 90%;
+    max-width: 100%;
+    /* Utilise full width */
   }
 
   .hero-shop-btn {
