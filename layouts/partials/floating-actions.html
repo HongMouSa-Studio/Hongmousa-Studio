@@ -42,7 +42,27 @@
 
     <!-- Cart Button -->
     <button class="snipcart-checkout fab-btn fab-item" aria-label="{{ i18n "nav_cart" }}">
-      <i class="fa-solid fa-cart-shopping"></i>
+      <svg class="icon-kachi" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+        <defs>
+          <clipPath id="bag-shape">
+            <!-- Shifted down (Top y=8) to make room for handle -->
+            <path d="M1,8 L23,8 L22.5,20 C22.5,22.5 19,23.5 12,23.5 C5,23.5 1.5,22.5 1.5,20 L1,8 Z" />
+          </clipPath>
+        </defs>
+        <!-- Handles (Blue) - Peak at y=2, ends at y=8 -->
+        <path d="M6,8 C6,3.5 8.5,2 12,2 C15.5,2 18,3.5 18,8" fill="none" stroke="#003399" stroke-width="2.5" stroke-linecap="round"/>
+        <!-- Bag Body Group -->
+        <g clip-path="url(#bag-shape)">
+          <!-- 3 Simple Horizontal Stripes (Soft/Cute Mode) -->
+          <rect x="0" y="8" width="24" height="5" fill="#9ED64B" /> <!-- Top Green (Lighter Brand Green) -->
+          <rect x="0" y="13" width="24" height="5" fill="#FF8A8A" /> <!-- Middle Red (Soft Coral) -->
+          <rect x="0" y="18" width="24" height="6" fill="#6EB5FF" /> <!-- Bottom Blue (Soft Sky) -->
+          
+          <!-- Vertical Straps (Start at y=8) -->
+          <rect x="4.75" y="8" width="2.5" height="16" fill="#003399" />
+          <rect x="16.75" y="8" width="2.5" height="16" fill="#003399" />
+        </g>
+      </svg>
       <span class="snipcart-items-count cart-count">0</span>
     </button>
   </div>
