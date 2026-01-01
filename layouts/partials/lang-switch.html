@@ -44,11 +44,14 @@ document.addEventListener('DOMContentLoaded', function () {
   const dropdown = group.querySelector('.lang-dropdown');
   let leaveTimer;
 
+  let lastOpenTime = 0;
+
   const openDropdown = () => {
     clearTimeout(leaveTimer);
     dropdown.classList.add("show");
     button.setAttribute('aria-expanded', 'true');
     button.classList.add('active');
+    lastOpenTime = Date.now();
   };
 
   const closeDropdown = () => {
@@ -58,9 +61,20 @@ document.addEventListener('DOMContentLoaded', function () {
   };
 
   const toggleDropdown = (e) => {
-    if (e) e.stopPropagation();
+    if (e) {
+      e.stopPropagation();
+      e.preventDefault(); // Prevent default button submission/jump
+    }
     const isOpen = dropdown.classList.contains('show');
+    
+    // Fix for Mobile "Double Tap":
+    // On touch, 'mouseenter' might fire just before 'click', opening it.
+    // Then 'click' sees it's open and closes it immediately.
+    // If it was opened very recently (<200ms), assume it was part of this interaction and keep it open.
     if (isOpen) {
+      if (Date.now() - lastOpenTime < 200) {
+        return; // Keep it open
+      }
       closeDropdown();
     } else {
       openDropdown();
