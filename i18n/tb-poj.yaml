@@ -6,6 +6,7 @@ nav_products: "Sán-phín"
 nav_blog: "Bûn-chiuⁿ"
 nav_about: "Iân-kò͘"
 nav_contact: "Liân-lo̍k"
+nav_cart: "Ka-chì-tē-á"
 
 # -----------------------------------------------------------------------------
 # Language Switcher
@@ -26,7 +27,7 @@ view_products: "Lâi khòaⁿ-māi"
 # -----------------------------------------------------------------------------
 product_section_title: "Siōng Sin Sán-phín"
 product_section_sub: "Sán-phín kap siāu-kài"
-product_btn_add: "+ Ka-ji̍p Kò͘-bu̍t-chhia"
+product_btn_add: "+ Khǹg ji̍p Ka-chì-tē-á"
 product_btn_book: "Ī-iok ho̍k-bū"
 product_learn_more: "Liáu-kái khah chē →"
 product_price_format: "Sin Tâi-phiò %v kho͘"

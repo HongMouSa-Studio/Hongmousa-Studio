@@ -7,20 +7,20 @@
 
     const pojTranslations = {
       "header": {
-        "title": "Kò͘-bu̍t-chhia Tek-iàu",
-        "title_cart_summary": "Kò͘-bu̍t-chhia Tek-iàu",
+        "title": "Ka-chì-tē-á Tek-iàu",
+        "title_cart_summary": "Ka-chì-tē-á Tek-iàu",
         "loading": "Tng teh chún-pī..."
       },
       "cart": {
         "summary": "Chù-bûn Tek-iàu",
-        "title": "Kò͘-bu̍t-chhia Tek-iàu",
-        "loading": "Tng teh chún-pī lí ê kò͘-bu̍t-chhia...",
-        "loading_cart": "Tng teh chún-pī lí ê kò͘-bu̍t-chhia...",
-        "preparing_cart": "Tng teh chún-pī lí ê kò͘-bu̍t-chhia...",
+        "title": "Ka-chì-tē-á Tek-iàu",
+        "loading": "Tng teh chún-pī lí ê Ka-chì-tē-á...",
+        "loading_cart": "Tng teh chún-pī lí ê Ka-chì-tē-á...",
+        "preparing_cart": "Tng teh chún-pī lí ê Ka-chì-tē-á...",
         "shipping_taxes_calculated_at_checkout": "Ūn-hùi kap sòe ē tī thê-kiong tē-chí liáu-āu kè-sǹg.",
-        "view_detailed_cart": "Khòaⁿ kò͘-bu̍t-chhia siông-sè chu-sìn",
+        "view_detailed_cart": "Khòaⁿ Ka-chì-tē-á siông-sè chu-sìn",
         "secured_by": "Iû Snipcart pó-pì",
-        "empty": "Lí ê kò͘-bu̍t-chhia iáu khang-khang,\nbô pòaⁿ-hāng mi̍h."
+        "empty": "Lí ê Ka-chì-tē-á iáu khang-khang,\nbô pòaⁿ-hāng mi̍h."
       },
       "loading": "Tng teh chún-pī...",
       "initial_loading": "Tng teh chún-pī...",
@@ -35,7 +35,7 @@
         "close_cart": "Koaiⁿ--khí-lâi", "continue_to_shipping": "Thiⁿ-siá siu-kiāⁿ chu-sìn", "continue_to_payment": "Khì kiat-siàu",
         "place_order": "Chù-bûn", "edit": "Siu-kái"
       },
-      "cart_summary": { "title": "Kò͘-bu̍t-chhia Tek-iàu", "subtotal": "Sió sǹg", "total": "Kè-kiōng" },
+      "cart_summary": { "title": "Ka-chì-tē-á Tek-iàu", "subtotal": "Sió sǹg", "total": "Kè-kiōng" },
       "item": {
         "font": "Jī-thé Soán-te̍k",
         "Font": "Jī-thé Soán-te̍k",
@@ -82,18 +82,18 @@
 
     const hjTranslations = {
       "header": {
-        "title": "購物車摘要",
-        "title_cart_summary": "購物車摘要",
+        "title": "茄荎袋仔摘要",
+        "title_cart_summary": "茄荎袋仔摘要",
         "loading": "當塊準備..."
       },
       "cart": {
         "summary": "注文摘要",
-        "title": "購物車摘要",
-        "loading": "當塊準備汝兮購物車...",
-        "loading_cart": "當塊準備汝兮購物車...",
-        "preparing_cart": "當塊準備汝兮購物車...",
+        "title": "茄荎袋仔摘要",
+        "loading": "當塊準備汝兮茄荎袋仔...",
+        "loading_cart": "當塊準備汝兮茄荎袋仔...",
+        "preparing_cart": "當塊準備汝兮茄荎袋仔...",
         "shipping_taxes_calculated_at_checkout": "運費甲稅會在提供地址了後計算。",
-        "view_detailed_cart": "看購物車詳細資訊", "secured_by": "由 Snipcart 保庇", "empty": "汝兮購物車夭空空，無半項物。"
+        "view_detailed_cart": "看茄荎袋仔詳細資訊", "secured_by": "由 Snipcart 保庇", "empty": "汝兮茄荎袋仔夭空空，無半項物。"
       },
       "loading": "當塊準備...",
       "initial_loading": "當塊準備...",
@@ -108,7 +108,7 @@
         "close_cart": "關起來", "continue_to_shipping": "添寫收件資訊", "continue_to_payment": "去結賬",
         "place_order": "注文", "edit": "修改"
       },
-      "cart_summary": { "title": "購物車摘要", "subtotal": "小算", "total": "總計" },
+      "cart_summary": { "title": "茄荎袋仔摘要", "subtotal": "小算", "total": "總計" },
       "item": {
         "font": "字體選擇",
         "Font": "字體選擇",
@@ -153,6 +153,25 @@
       }
     };
 
+    const enTranslations = {
+      "header": {
+        "title": "Ka-chi bag summary",
+        "title_cart_summary": "Ka-chi bag summary"
+      },
+      "cart": {
+        "title": "Ka-chi bag summary",
+        "loading": "Loading your ka-chi bag...",
+        "loading_cart": "Loading your ka-chi bag...",
+        "preparing_cart": "Preparing your ka-chi bag...",
+        "view_detailed_cart": "View detailed ka-chi bag",
+        "empty": "Your ka-chi bag is empty"
+      },
+      "actions": {
+        "continue_shopping": "Continue shopping",
+        "back_to_store": "Back to studio"
+      }
+    };
+
     const path = window.location.pathname;
     if (path.includes('/tb-poj/')) {
       try {
@@ -171,6 +190,16 @@
         }
       } catch (e) {
         console.warn('[Antigravity] Snipcart setLanguage (HJ) threw error:', e);
+      }
+    } else {
+      // Default: English -> Use ka-chi bag overrides
+      try {
+        const p = Snipcart.api.session.setLanguage('en', enTranslations);
+        if (p && typeof p.catch === 'function') {
+          p.catch(err => console.warn('[Antigravity] Snipcart setLanguage (EN) failed/timed out:', err));
+        }
+      } catch (e) {
+        console.warn('[Antigravity] Snipcart setLanguage (EN) threw error:', e);
       }
     }
 

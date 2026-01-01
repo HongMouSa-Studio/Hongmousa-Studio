@@ -6,6 +6,7 @@ nav_products: "All Products"
 nav_blog: "Blog"
 nav_about: "About us"
 nav_contact: "Contact us"
+nav_cart: "Ka-chi Bag"
 
 # -----------------------------------------------------------------------------
 # Language Switcher
@@ -26,7 +27,7 @@ view_products: "Shop Now"
 # -----------------------------------------------------------------------------
 product_section_title: "New Releases"
 product_section_sub: "Products & Descriptions"
-product_btn_add: "Add to Cart"
+product_btn_add: "Add to Ka-chi Bag"
 product_btn_book: "Book Now"
 product_learn_more: "Learn More →"
 product_price_format: "NT$ %v"
