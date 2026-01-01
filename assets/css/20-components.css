@@ -1,8 +1,6 @@
 /* -------------------------
     Thong-iōng goân-kiāⁿ
 ---------------------------*/
-font-family: var(--font-ui);
-}
 
 @media (max-width: 1024px) {
   .btn-main {
