@@ -25,7 +25,7 @@
     <!-- RIGHT: Product Info & Purchase -->
     <div class="product-single-info">
       <nav class="breadcrumb">
-        <a href="/">{{ i18n "nav_home" }}</a> / <a href="/#products">{{ i18n "nav_products" }}</a> / {{ .Title }}
+        <a href="{{ .Site.Home.RelPermalink }}">{{ i18n "nav_home" }}</a> / <a href="{{ ($.Site.GetPage "products").RelPermalink }}">{{ i18n "nav_products" }}</a> / {{ .Title }}
       </nav>
       
       <h1 class="font-serif product-title">{{ .Title }}</h1>
