@@ -88,13 +88,15 @@
 .hero-slider-wrapper {
   position: relative;
   width: 100%;
-  aspect-ratio: 4/3;
+  /* aspect-ratio: 4/3;  REMOVED to enable content-based height (Image 4/3 + Text) */
+  height: auto;
+  min-height: 100%;
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
   background: white;
   /* Cap height to viewport to ensure responsiveness on shorter screens */
-  max-height: 65vh;
+  /* max-height: 80vh; REMOVED to prevent clipping on tablet where vertical stack might be tall */
 }
 
 /* Instead of group, we use usage of :hover on wrapper to show buttons if desired, 
@@ -104,15 +106,19 @@
   width: 100%;
   height: 100%;
   position: relative;
+  display: grid;
+  grid-template-areas: "stack";
+  /* Grid stacking allows container to grow to tallest slide */
 }
 
 /* Individual Slide */
 .hero-slide {
-  position: absolute;
-  top: 0;
-  left: 0;
+  grid-area: stack;
+  position: relative;
+  /* Changed from absolute to allow content flow */
   width: 100%;
-  height: 100%;
+  height: auto;
+  min-height: 100%;
   opacity: 0;
   visibility: hidden;
   transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
@@ -122,18 +128,24 @@
   text-decoration: none;
   color: inherit;
   z-index: 1;
+  pointer-events: none;
 }
 
 .hero-slide.active {
   opacity: 1;
   visibility: visible;
   z-index: 2;
+  pointer-events: auto;
 }
 
 /* Slide Image */
 .hero-slide-img-box {
   width: 100%;
-  height: 75%;
+  height: auto;
+  aspect-ratio: 4/3;
+  /* Fixed ratio, ensuring it keeps size */
+  flex-shrink: 0;
+  /* Never shrink */
   overflow: hidden;
 }
 
@@ -150,11 +162,17 @@
 
 /* Slide Info (Bottom) */
 .hero-slide-info {
-  height: 25%;
+  height: auto;
+  /* Was fixed 25%, now auto to fit content */
+  min-height: 25%;
+  /* Ensure at least 25% logic is kept */
+  flex-shrink: 0;
+  /* Prevent shrinking */
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+  /* Align to top (near image) as requested */
   background: white;
   border-top: 1px solid rgba(0, 0, 0, 0.05);
   position: relative;
@@ -172,6 +190,8 @@
   margin-bottom: 0.25rem;
 }
 
+/* On very small screens, hide tag to ensure title has space - REVERTED per user request to extend info box instead */
+
 .slide-title {
   font-family: var(--font-heading);
   font-size: clamp(1.35rem, 5vw, 1.5rem);
@@ -180,6 +200,8 @@
   color: var(--text-dark);
   margin: 0;
   transition: color 0.2s ease;
+  /* Text Truncation: Removed strict limit per user request */
+  /* Allow full title display; tag will be hidden if space is tight on mobile */
 }
 
 /* Interactive Hover */
@@ -267,7 +289,8 @@
     order: 2;
     /* Explicitly place slider AFTER text */
     width: 100%;
-    aspect-ratio: 4/3;
+    /* aspect-ratio: 4/3; -> Removed strict ratio to allow growing */
+    height: auto;
   }
 
   .hero-text {
