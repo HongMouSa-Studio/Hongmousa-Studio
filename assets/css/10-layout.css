@@ -407,15 +407,24 @@ main {
   transition: transform 0.2s ease;
 }
 
-.icon-btn:hover {
-  background-color: #f3f4f6;
-  /* Circular gray hover bg */
-  color: var(--accent-green);
+@media (hover: hover) {
+  .icon-btn:hover {
+    background-color: #f3f4f6;
+    /* Circular gray hover bg */
+    color: var(--accent-green);
+  }
+
+  .icon-btn:hover i {
+    transform: scale(1.1);
+    /* Subtle zoom */
+  }
 }
 
-.icon-btn:hover i {
-  transform: scale(1.1);
-  /* Subtle zoom */
+/* Explicit Active State for Mobile/Touch open state */
+.icon-btn.active,
+.menu-toggle[aria-expanded="true"] {
+  background-color: #f3f4f6;
+  color: var(--accent-green);
 }
 
 .icon-btn:active {
@@ -436,10 +445,13 @@ main {
   transition: filter 0.3s ease;
 }
 
-.fab-btn:hover .icon-kachi,
-.icon-kachi:hover {
-  filter: grayscale(0%) brightness(1);
-  /* Reveal original colors on hover (Desktop) */
+/* Reveal original colors on hover (Desktop only) */
+@media (hover: hover) {
+
+  .fab-btn:hover .icon-kachi,
+  .icon-kachi:hover {
+    filter: grayscale(0%) brightness(1);
+  }
 }
 
 /* On Mobile/Touch: Reveal color immediately when menu is expanded */
@@ -468,13 +480,21 @@ main {
   align-items: center;
 }
 
-.lang-switcher-inline .lang-button:hover {
-  background: transparent;
-  color: var(--accent-green);
-  /* Remove gray box, just colored text */
+@media (hover: hover) {
+  .lang-switcher-inline .lang-button:hover {
+    background: transparent;
+    color: var(--accent-green);
+    /* Remove gray box, just colored text */
+  }
+
+  .lang-switcher-inline .lang-button:hover .active-lang-label {
+    color: var(--accent-green);
+  }
 }
 
-.lang-switcher-inline .lang-button:hover .active-lang-label {
+/* Explicit Active State for Mobile (Open State) */
+.lang-switcher-inline .lang-button.active,
+.lang-switcher-inline .lang-button.active .active-lang-label {
   color: var(--accent-green);
 }
 
