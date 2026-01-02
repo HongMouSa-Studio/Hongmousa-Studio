@@ -123,3 +123,8 @@ a {
   clip: auto;
   white-space: normal;
 }
+
+/* Utility: Hidden */
+.hidden {
+  display: none !important;
+}

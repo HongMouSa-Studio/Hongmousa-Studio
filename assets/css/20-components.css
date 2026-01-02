@@ -2624,3 +2624,29 @@ body:has(#snipcart .snipcart-layout--processing) {
   /* Let layout handle it, but don't double scroll */
   height: 100% !important;
 }
+
+/* FAB Menu Bridge Fix (Only Bridge, No Layout/Position overrides)
+   Ensures the mouse can travel from main button to actions without closing the menu.
+*/
+.fab-actions {
+  /* Ensure it has a layer for ::after */
+  /* If it's already absolute, this re-affirms it but strictly we just need it to be a positioning context */
+  /* We won't force position:absolute if we want to respect existing layout, but usually it is. */
+  /* Assuming it is positioned. If not, position: relative might break layout if it's currently static flow (unlikely for FAB). */
+  /* Safe bet: pointer-events */
+  pointer-events: auto !important;
+}
+
+.fab-actions::after {
+  content: '';
+  position: absolute;
+  bottom: -60px;
+  /* Extend deep down to cover the gap */
+  left: -30px;
+  /* Wide catch area */
+  right: -30px;
+  height: 80px;
+  background: transparent;
+  pointer-events: auto;
+  z-index: -1;
+}
