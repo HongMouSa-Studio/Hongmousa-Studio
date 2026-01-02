@@ -163,6 +163,29 @@ async function loadAccountData(userId) {
       if (displayNameVal) displayNameVal.textContent = profile.display_name || '---';
       if (phoneVal) phoneVal.textContent = profile.phone || '---';
       if (contactEmailVal) contactEmailVal.textContent = profile.contact_email || profile.email || '---';
+
+      // Banner Elements
+      const profileBanner = document.getElementById('profile-banner');
+      // Check for missing data (Name or Phone) to show banner
+      const isMissingInfo = (!profile.display_name || profile.display_name === '---') ||
+        (!profile.phone || profile.phone === '---');
+
+      if (isMissingInfo && profileBanner) {
+        profileBanner.style.display = 'flex';
+        // Add listener to the button inside banner
+        const bannerBtn = document.getElementById('banner-complete-btn');
+        if (bannerBtn) {
+          bannerBtn.addEventListener('click', () => {
+            // Open Profile Modal
+            if (editNameInput) editNameInput.value = displayNameVal.textContent === '---' ? '' : displayNameVal.textContent;
+            if (editPhoneInput) editPhoneInput.value = phoneVal.textContent === '---' ? '' : phoneVal.textContent;
+            if (editContactEmailInput) editContactEmailInput.value = contactEmailVal.textContent === '---' ? '' : contactEmailVal.textContent;
+            if (profileModal) profileModal.classList.remove('hidden');
+          });
+        }
+      } else if (profileBanner) {
+        profileBanner.style.display = 'none';
+      }
     }
 
     // Fetch Address Book

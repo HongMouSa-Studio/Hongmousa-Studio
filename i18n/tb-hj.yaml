@@ -107,7 +107,12 @@ account_login_required: "請先登入。"
 account_go_to_login: "倒返登入頁"
 
 # Account Profile
+account_banner_complete_profile: "完善資料，結賬會較順喔！"
+account_btn_complete_now: "馬上填資料"
 account_section_profile: "口座資料"
+
+# Auth Page
+auth_page_title: "登入 / 註冊"
 account_label_name: "名姓："
 account_label_phone: "電話："
 account_label_contact_email: "聯絡電子批桶："
