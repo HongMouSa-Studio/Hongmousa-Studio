@@ -659,8 +659,8 @@ body.is-auth .auth-only {
 
 .product-info h3 {
   font-family: "Noto Serif TC", serif;
-  font-size: clamp(1.2rem, 4vw, 1.35rem);
-  /* Significantly larger on mobile (min 1.2rem) per request */
+  font-size: clamp(1.4rem, 5vw, 1.6rem);
+  /* Significantly larger on mobile per user request */
   font-weight: 700;
   color: var(--text-dark);
   margin: 0;
@@ -668,8 +668,8 @@ body.is-auth .auth-only {
 }
 
 .product-info p {
-  font-size: clamp(1rem, 3vw, 1.05rem);
-  /* Larger body text on mobile (min 1rem) for readability */
+  font-size: clamp(1.1rem, 3.5vw, 1.15rem);
+  /* Larger body text on mobile for readability */
   color: #6b7280;
   margin: 0;
   opacity: 0.8;

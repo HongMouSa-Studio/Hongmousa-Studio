@@ -174,8 +174,8 @@
 
 .slide-title {
   font-family: var(--font-heading);
-  font-size: clamp(1rem, 2.5vw, 1.25rem);
-  /* Responsive scaling */
+  font-size: clamp(1.35rem, 5vw, 1.5rem);
+  /* Responsive scaling (Updated: Larger on mobile per user request) */
   font-weight: 700;
   color: var(--text-dark);
   margin: 0;
