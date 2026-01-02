@@ -298,91 +298,92 @@
 
 .member-menu {
   position: absolute;
-  top: 100%;
-  margin-top: 35px;
-  /* Increased to clear header bottom */
-
-  /* Align Right */
-  right: 0;
+  top: 50%;
+  right: 100%;
+  /* Pop to the left of the button */
   left: auto;
-  transform: translateY(10px);
-  /* Clean Slide Up Start */
+  margin-right: 12px;
+  /* Spacing from button */
 
-  min-width: 200px;
-  max-width: calc(100vw - 2rem);
+  width: max-content;
+  /* Hug the content */
+  min-width: 0;
+  max-width: calc(100vw - 120px);
+  white-space: nowrap;
+  /* Prevent wrapping */
 
   background: #fff;
   border: 1px solid rgba(0, 0, 0, 0.05);
-  /* Unified border */
-  border-radius: 12px;
-  /* Unified radius */
-  /* Unified shadow */
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  border-radius: 2rem;
+  /* Bubble shape */
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.12);
 
   overflow: hidden;
 
+  /* Sprouting Animation Initial State */
   opacity: 0;
   visibility: hidden;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  transform: translateY(-20px);
-  /* Dropping Down */
-  /* Unified animation */
+  transform: translateY(-50%) scale(0.8);
+  transform-origin: right center;
+  /* Grow from the button side */
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  /* Bouncy sprout */
   z-index: 1000;
-}
-
-@media (max-width: 1024px) {
-  .member-menu {
-    margin-top: 30px;
-  }
-}
-
-@media (max-width: 768px) {
-  .member-menu {
-    margin-top: 15px;
-  }
 }
 
 .member-menu-inner {
   overflow: hidden;
-  border-radius: 0.75rem;
+  border-radius: 2rem;
+  /* Match parent */
 }
 
-/* Robust hover bridge (Extra Tall) */
+/* Side Bridge (Connects Menu to Button) */
 .member-menu::before {
   content: "";
   position: absolute;
-  top: -50px;
-  left: -40px;
-  right: -20px;
-  height: 60px;
-  pointer-events: auto;
-  z-index: 100;
-  /* On top */
+  top: -10px;
+  /* Extend vertical catch area */
+  bottom: -10px;
+  left: 100%;
+  /* Start from right edge */
+  width: 30px;
+  /* Wider bridge to overlap heavily with button */
   background: transparent;
+  pointer-events: auto;
+  z-index: 1200;
+  /* Ensure it sits on top of everything */
 }
 
-/* Relies on JS .show with delay */
+/* Active State */
 .member-menu.show {
   opacity: 1;
   visibility: visible;
-  transform: translateY(0);
+  transform: translateY(-50%) scale(1);
 }
 
-/* Old member-toggle styles removed to avoid conflict with FAB circular buttons */
+.member-menu-title {
+  margin: 0;
+  padding: 12px 20px 8px;
+  /* Top padding */
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  border-bottom: 1px solid #f0f0f0;
+  background: #fafafa;
+  text-align: center;
+}
 
 .member-info {
-  padding: 12px 16px;
-  /* Unified Padding */
+  padding: 8px 20px 12px;
   border-bottom: 1px solid #eee;
+  text-align: center;
 }
 
 .member-email {
   font-size: 0.85rem;
   color: #9ca3af;
-  /* Muted gray (Label style) */
   font-weight: 500;
   cursor: default;
-  /* Non-clickable cursor */
   display: block;
 }
 
@@ -392,43 +393,68 @@
   margin: 0;
 }
 
-.member-link {
+.member-links li {
+  padding: 0;
+  margin: 0;
   display: block;
-  padding: 12px 16px;
-  /* Unified Padding */
+}
+
+/* Member Link (Static List Style - No Movement) */
+.member-link {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 24px !important;
+  /* Force consistency */
+  margin: 0 !important;
+  border: none !important;
+  /* Ensure no border by default */
   text-decoration: none;
   color: #333;
-  width: 100%;
-  text-align: left;
-  font-size: 0.95rem;
-  /* Match Hamburger font size */
-  font-weight: 500;
+  font-weight: 600 !important;
+  font-size: 0.95rem !important;
+  /* Reduced from 1.05rem */
+  line-height: 1.2 !important;
+  transition: color 0.1s ease;
+  /* Fast color only */
+  width: 100% !important;
+  box-sizing: border-box !important;
+  /* Prevent padding growth */
+  background: transparent !important;
+  /* Ensure base is transparent */
 }
 
+/* Hover: ONLY Change Color. Absolutely NO Layout Properties. */
 .member-link:hover {
-  background: #f9fafb;
+  color: var(--accent-green) !important;
+  background: transparent !important;
+  transform: none !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+  padding: 14px 24px !important;
+  border: none !important;
 }
 
-/* Specific styling for Logout to be subtle */
+.member-link:active {
+  transform: none !important;
+  color: var(--accent-green) !important;
+  opacity: 0.8;
+}
+
+/* Specific styling for Logout to be subtle - INHERITS GEOMETRY */
 #logout-btn {
-  background: none;
-  border: none;
+  /* Geometry handled by .member-link above to prevent jump */
   cursor: pointer;
-  width: 100%;
-  text-align: left;
+  text-align: center;
+  /* Force center like others */
   color: #6b7280;
-  /* Neutral Gray */
-  transition: all 0.2s;
-  padding: 12px 16px;
-  /* Unified Padding */
-  font-size: 0.95rem;
-  font-weight: 500;
 }
 
 #logout-btn:hover {
-  color: #ef4444;
-  /* Subtle Red on Hover only */
-  background: #fef2f2;
+  color: #ef4444 !important;
+  /* Red on Hover */
+  background: transparent !important;
+  /* No bg change */
 }
 
 /* Auth state helpers */

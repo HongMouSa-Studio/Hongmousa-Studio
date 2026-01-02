@@ -113,6 +113,8 @@ account_section_profile: "口座資料"
 
 # Auth Page
 auth_page_title: "登入 / 註冊"
+member_login_register: "登入 / 註冊"
+member_center: "會員中心"
 account_label_name: "名姓："
 account_label_phone: "電話："
 account_label_contact_email: "聯絡電子批桶："

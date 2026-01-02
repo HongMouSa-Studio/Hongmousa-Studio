@@ -19,15 +19,13 @@
       
       <div class="member-menu">
         <div class="member-menu-inner">
+          <h4 class="member-menu-title auth-only">{{ i18n "member_center" }}</h4>
           <div class="member-info auth-only">
             <span class="member-email"></span>
           </div>
           <ul class="member-links">
             <li class="login-only">
-              <a href="{{ "login/" | relLangURL }}" class="member-link">{{ i18n "member_login" }}</a>
-            </li>
-            <li class="login-only">
-              <a href="{{ "login/" | relLangURL }}" class="member-link">{{ i18n "member_register" }}</a>
+              <a href="{{ "login/" | relLangURL }}" class="member-link">{{ i18n "member_login_register" }}</a>
             </li>
             <li class="auth-only">
               <a href="{{ "account/" | relLangURL }}" class="member-link">{{ i18n "member_my_account" }}</a>
@@ -95,10 +93,27 @@ document.addEventListener('DOMContentLoaded', function() {
     container.classList.toggle('expanded');
   });
 
-  // Desktop Hover
+  // Desktop Hover with Delay
   if (window.matchMedia('(hover: hover)').matches) {
-    mainBtn.addEventListener('mouseenter', () => toggleFAB(true));
-    container.addEventListener('mouseleave', () => toggleFAB(false));
+    let fabTimer;
+    
+    // Open immediately + Clear any close timer
+    mainBtn.addEventListener('mouseenter', () => {
+      clearTimeout(fabTimer);
+      toggleFAB(true);
+    });
+    
+    // Also keep open if moving directly into container (e.g. from button to menu)
+    container.addEventListener('mouseenter', () => {
+      clearTimeout(fabTimer);
+    });
+
+    // Close with delay
+    container.addEventListener('mouseleave', () => {
+      fabTimer = setTimeout(() => {
+        toggleFAB(false);
+      }, 300); // 300ms delay: Safe for slower users
+    });
   }
 
   // Member Dropdown logic (Adapted for FAB)

@@ -128,3 +128,14 @@ a {
 .hidden {
   display: none !important;
 }
+
+/* Auth Visibility Utilities 
+   Relies on 'is-auth' class on body managed by account.js 
+*/
+body.is-auth .login-only {
+  display: none !important;
+}
+
+body:not(.is-auth) .auth-only {
+  display: none !important;
+}
